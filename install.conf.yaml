@@ -10,6 +10,8 @@
     ~/.config/hypr: hypr
     ~/.config/fish: fish
     ~/.config/kitty: kitty
+    ~/.config/direnv: direnv
+
 
     ~/.config/starship.toml: starship.toml
 
