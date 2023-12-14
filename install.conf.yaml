@@ -6,9 +6,12 @@
 
 - link:
     ~/.bashrc: bash/bashrc
+    
     ~/.config/hypr: hypr
     ~/.config/fish: fish
     ~/.config/kitty: kitty
+
+    ~/.config/starship.toml: starship.toml
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
