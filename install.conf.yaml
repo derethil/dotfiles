@@ -5,8 +5,10 @@
 - clean: ['~']
 
 - link:
-    ~/.bashrc: bashrc
+    ~/.bashrc: bash/bashrc
     ~/.config/hypr: hypr
+    ~/.config/fish: fish
+    ~/.config/kitty: kitty
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

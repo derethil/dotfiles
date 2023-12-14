@@ -85,6 +85,7 @@ _open_files_for_editing() {
 # alias pacdiff=eos-pacdiff
 ###############################################################################
 
+/usr/bin/fish
 
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
