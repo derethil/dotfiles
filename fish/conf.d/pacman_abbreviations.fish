@@ -1,7 +1,7 @@
 # Pacman Abbreviations
 abbr -a pac 'pacman -S'   # install
 abbr -a pacu 'pacman -Syua'    # update
-abbr -a pacr 'pacman -Rs'   # remove
+abbr -a pacr 'pacman -Rns'   # remove
 abbr -a pacs 'pacman -Ss'      # search
 abbr -a paci 'pacman -Si'      # info
 abbr -a paclo 'pacman -Qdt'    # list orphans
