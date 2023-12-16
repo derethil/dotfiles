@@ -14,7 +14,6 @@
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
-export EDITOR=/usr/bin/nvim
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
 /usr/bin/fish
