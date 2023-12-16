@@ -5,3 +5,4 @@ set fish_greeting
 source ~/.asdf/asdf.fish
 direnv hook fish | source
 starship init fish | source
+thefuck --alias | source
