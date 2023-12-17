@@ -11,7 +11,7 @@
     ~/.config/fish: fish
     ~/.config/kitty: kitty
     ~/.config/direnv: direnv
-
+    ~/.config/nvim: nvim
 
     ~/.config/starship.toml: starship.toml
 
