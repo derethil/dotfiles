@@ -1,6 +1,8 @@
 ; Widgets
-(include "./yuck/widgets/workspaces.yuck")
-(include "./yuck/widgets/icon-module.yuck")
+(include "./yuck/widgets/icon.yuck")
+
+; Bar Modules
+(include "./yuck/modules/workspaces.yuck")
 
 ; Main bar
 (include "./yuck/bar.yuck")

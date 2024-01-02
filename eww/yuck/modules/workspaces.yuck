@@ -1,4 +1,4 @@
-(include "./yuck/widgets/icon-module.yuck")
+(include "./yuck/widgets/icon.yuck")
 
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/workspaces/get-workspaces")
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/workspaces/get-active-workspace")
@@ -10,17 +10,16 @@
   (eventbox
     :onscroll "bash ~/.config/eww/scripts/workspaces/change-active-workspace {} ${current_workspace}"
     (box
-      :class "workspaces-widget"
+      :class "workspaces-module"
       (for workspace in workspaces
         (eventbox
           :onclick "hyprctl dispatch workspace ${workspace.id}"
           :cursor "pointer"
           :tooltip "Workspace ${workspace.name}"
           :halign "center"
-          (defvar is_current workspace.id == current_workspace)
           (box
-            :class "workspace-entry ${is_current ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
-            (icon-module :icon "${(is_current) ? workspace_icon : empty_workspace_icon}" )
+            :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (icon :icon "${(workspace.id == current_workspace) ? workspace_icon : empty_workspace_icon}" )
           )
         )
       )

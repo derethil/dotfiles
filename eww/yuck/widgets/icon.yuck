@@ -1,7 +1,7 @@
 
-(defwidget icon-module [icon ?class ?visible]
+(defwidget icon [icon ?class ?visible]
   (box
-    :class "${class} icon-module"
+    :class "${class} icon"
     :orientation "h"
     :halign "start"
     :space-evenly false
