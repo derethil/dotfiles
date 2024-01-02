@@ -1,6 +1,6 @@
 # My Dotfiles
 
-This repository contains my personal dotfiles. They are managed using [Dotbot](https://github.com/anishathalye/dotbot).
+This repository contains my personal dotfiles.
 
 ## Installation
 
