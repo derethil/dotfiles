@@ -29,8 +29,8 @@ These dotfiles are designed around the following packages and tools:
 This dotfiles setup is managed using Dotbot and some additional Dotbot plugins:
 
 - [Dotbot](https://github.com/anishathalye/dotbot) for managing dotfiles
-- [Dotbot-yay](dotbot-yay/README.md) for managing packages
-- [Dotbot-asdf](dotbot-asdf/README.md) for managing asdf plugins and versions
+- [Dotbot-yay](https://github.com/sobolevn/dotbot-asdf) for managing packages
+- [Dotbot-asdf](https://github.com/OxSon/dotbot-yay/) for managing asdf plugins and versions
 
 ## License
 
