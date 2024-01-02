@@ -5,16 +5,26 @@
 - clean: ['~']
 
 - link:
+    # Bash
+
     ~/.bashrc: bash/bashrc
     
+    # Config Dirs
+
     ~/.config/hypr: hypr
     ~/.config/fish: fish
     ~/.config/kitty: kitty
     ~/.config/direnv: direnv
     ~/.config/nvim: nvim
 
+    # Config Files
+    
     ~/.config/starship.toml: starship.toml
     ~/.config/code-flags.conf: code-flags.conf
+
+    # Local Files
+    
+    ~/.local/share/fonts/: fonts
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
