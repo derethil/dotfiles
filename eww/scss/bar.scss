@@ -1,0 +1,9 @@
+.bar {
+  background-color: $colorBackground;
+  color: $colorForeground;
+  font-family: $fontTitle, sans-serif;
+  font-size: 1.15rem;
+  border: 2px solid $colorBorder;
+  border-radius: 8px;
+  padding: 0 10px 0 5px;
+}

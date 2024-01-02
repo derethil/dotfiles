@@ -16,6 +16,7 @@
     ~/.config/kitty: kitty
     ~/.config/direnv: direnv
     ~/.config/nvim: nvim
+    ~/.config/eww: eww
 
     # Config Files
     

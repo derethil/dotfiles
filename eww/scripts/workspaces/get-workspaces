@@ -1,0 +1,13 @@
+#!/bin/bash
+
+spaces (){
+	WORKSPACES=$(hyprctl workspaces -j | jq -Mc 'map({id, windows, name} | select(.id > 0))')
+	MAX_WORKSPACE=$(echo $WORKSPACES | jq -Mc 'map(.id) | max')
+	WORKSPACE_WINDOWS=$(echo $WORKSPACES | jq 'map({key: .id | tostring, value: {"windows": .windows, "name": .name}}) | from_entries')
+	seq 1 $MAX_WORKSPACE | jq --argjson windows "${WORKSPACE_WINDOWS}" --slurp -Mc 'map(tostring) | map({id: ., name: ($windows[.].name//.), windows: ($windows[.].windows//0)})'
+}
+
+spaces
+socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
+	spaces
+done

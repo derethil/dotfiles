@@ -1,0 +1,39 @@
+(defpoll time
+    :interval "1s"
+    `date +"%-I:%M %p"`
+)
+
+(defwidget left []
+    (box
+        :space-evenly false
+        :halign "start"
+        (workspaces)
+    )
+)
+
+(defwidget right []
+    (box
+        :halign "end"
+        time
+    )
+)
+
+
+(defwindow bar
+    :monitor 0
+    :stacking "fg"
+    :exclusive true
+    :geometry (geometry
+        :x "0%"
+        :y "20px"
+        :width "3400px"
+        :height "40px"
+        :anchor "top center"
+    )
+    (centerbox
+        :class "bar"
+        (left)
+        " "
+        (right)
+    )
+)
