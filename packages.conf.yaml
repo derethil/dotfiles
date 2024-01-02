@@ -24,3 +24,6 @@
     - hyprpicker
     - swww
     - xwaylandvideobridge-bin
+
+- shell:
+    - [rm -rf dotbot-yay/__pycache__, Cleaning up dotboy-yay pycache]
