@@ -1,10 +1,10 @@
 - yay:
     # Pacman Packages
     - bottom
-    - cliphist
     - direnv
     - eza
     - fish
+    - cliphist
     - gnome-keyring
     - jq
     - kitty
@@ -17,13 +17,24 @@
     - wl-clipboard
     - wofi
     - yay
-    # Yay Packages
+    # AUR Packages
+    - asdf-vm
     - eww-wayland
     - git-open
     - hyprland-git
     - hyprpicker
     - swww
     - xwaylandvideobridge-bin
+
+- asdf:
+    - plugin: nodejs
+      global: latest
+      versions:
+        - latest
+    - plugin: python
+      global: latest
+      versions:
+        - latest
 
 - shell:
     - [rm -rf dotbot-yay/__pycache__, Cleaning up dotboy-yay pycache]

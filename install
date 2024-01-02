@@ -8,13 +8,21 @@ DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PLUGIN_DIR="dotbot-yay"
+PLUGIN_DIRS=("dotbot-yay" "dotbot-asdf")
 
 cd "${BASE_DIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}" "${PLUGIN_DIR}"
+
+for plugin_dir in ${DOTBOT_DIR} ${PLUGIN_DIRS[@]}; do
+    git -C "${plugin_dir}" submodule sync --quiet --recursive
+    git submodule update --init --recursive "${plugin_dir}"
+done
+
+plugin_dirs_string=""
+
+for plugin_dir in ${PLUGIN_DIRS[@]}; do
+    plugin_dirs_string+="--plugin-dir ${plugin_dir} "
+done
 
 for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
-    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${conf}${CONFIG_SUFFIX}" \
-        --plugin-dir "$PLUGIN_DIR"
+    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${conf}${CONFIG_SUFFIX}" ${plugin_dirs_string}
 done
