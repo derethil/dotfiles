@@ -1,19 +1,27 @@
 (defpoll time
     :interval "1s"
-    `date +"%-I:%M %p"`
+    `date +"%I\\n%M"`
+)
+
+(defwidget section [align]
+    (box
+        :valign align
+        :space-evenly false
+        :halign "center"
+        :spacing "0px"
+        :width "100%"
+        (children)
+    )
 )
 
 (defwidget left []
-    (box
-        :space-evenly false
-        :halign "start"
+    (section :align "start"
         (workspaces)
     )
 )
 
 (defwidget right []
-    (box
-        :halign "end"
+    (section :align "end"
         time
     )
 )
@@ -24,13 +32,14 @@
     :stacking "fg"
     :exclusive true
     :geometry (geometry
-        :x "0%"
-        :y "20px"
-        :width "3400px"
-        :height "40px"
-        :anchor "top center"
+        :x "20px"
+        :y "0px"
+        :width "64px"
+        :height "1400px"
+        :anchor "left center"
     )
     (centerbox
+        :orientation "vertical"
         :class "bar"
         (left)
         " "

@@ -10,6 +10,7 @@
   (eventbox
     :onscroll "bash ~/.config/eww/scripts/workspaces/change-active-workspace {} ${current_workspace}"
     (box
+      :orientation "vertical"
       :class "workspaces-module"
       (for workspace in workspaces
         (eventbox

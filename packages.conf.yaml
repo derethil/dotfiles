@@ -1,15 +1,15 @@
 - yay:
     # Pacman Packages
     - bottom
+    - cliphist
     - direnv
     - eza
     - fish
-    - cliphist
     - gnome-keyring
     - jq
     - kitty
-    - plocate
     - neovim
+    - plocate
     - socat
     - starship
     - thefuck
