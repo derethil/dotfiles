@@ -1,0 +1,26 @@
+- yay:
+    # Pacman Packages
+    - bottom
+    - cliphist
+    - direnv
+    - eza
+    - fish
+    - gnome-keyring
+    - jq
+    - kitty
+    - plocate
+    - neovim
+    - socat
+    - starship
+    - thefuck
+    - tldr
+    - wl-clipboard
+    - wofi
+    - yay
+    # Yay Packages
+    - eww-wayland
+    - git-open
+    - hyprland-git
+    - hyprpicker
+    - swww
+    - xwaylandvideobridge-bin

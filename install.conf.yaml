@@ -1,14 +1,15 @@
 - defaults:
     link:
       relink: true
+      create: false
 
-- clean: ['~']
+- clean: ["~", "~/.local/share/fonts/"]
 
 - link:
     # Bash
 
     ~/.bashrc: bash/bashrc
-    
+
     # Config Dirs
 
     ~/.config/hypr: hypr
@@ -19,13 +20,15 @@
     ~/.config/eww: eww
 
     # Config Files
-    
-    ~/.config/starship.toml: starship.toml
-    ~/.config/code-flags.conf: code-flags.conf
+
+    ~/.config/starship.toml: starship/starship.toml
+    ~/.config/code-flags.conf: vscode/code-flags.conf
 
     # Local Files
-    
-    ~/.local/share/fonts/: fonts
+
+    ~/.local/share/fonts/:
+      path: fonts/*
+      glob: true
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
