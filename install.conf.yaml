@@ -3,31 +3,31 @@
       relink: true
       create: false
 
-- clean: ["~", "~/.local/share/fonts/"]
+- clean: ["~", "~/.config", "~/.local/share/fonts/"]
 
 - link:
     # Bash
 
-    ~/.bashrc: bash/bashrc
+    ~/.bashrc: dots/bash/bashrc
 
     # Config Dirs
 
-    ~/.config/hypr: hypr
-    ~/.config/fish: fish
-    ~/.config/kitty: kitty
-    ~/.config/direnv: direnv
-    ~/.config/nvim: nvim
-    ~/.config/eww: eww
+    ~/.config/hypr: dots/hypr
+    ~/.config/fish: dots/fish
+    ~/.config/kitty: dots/kitty
+    ~/.config/direnv: dots/direnv
+    ~/.config/nvim: dots/nvim
+    ~/.config/eww: dots/eww
 
     # Config Files
 
-    ~/.config/starship.toml: starship/starship.toml
-    ~/.config/code-flags.conf: vscode/code-flags.conf
+    ~/.config/starship.toml: dots/starship.toml
+    ~/.config/code-flags.conf: dots/code-flags.conf
 
     # Local Files
 
     ~/.local/share/fonts/:
-      path: fonts/*
+      path: dots/fonts/*
       glob: true
 
 - shell:
