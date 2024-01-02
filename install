@@ -18,3 +18,6 @@ for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
     "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${conf}${CONFIG_SUFFIX}" \
         --plugin-dir "$PLUGIN_DIR"
 done
+
+# Cleanup
+rm -rf dotbot-yay/__pycache__
