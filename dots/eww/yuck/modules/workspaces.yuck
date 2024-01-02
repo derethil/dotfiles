@@ -11,7 +11,7 @@
     :onscroll "bash ~/.config/eww/scripts/workspaces/change-active-workspace {} ${current_workspace}"
     (box
       :orientation "vertical"
-      :class "workspaces-module"
+      :class "workspaces-widget"
       (for workspace in workspaces
         (eventbox
           :onclick "hyprctl dispatch workspace ${workspace.id}"

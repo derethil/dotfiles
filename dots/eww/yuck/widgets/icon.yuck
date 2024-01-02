@@ -1,9 +1,10 @@
 
 (defwidget icon [icon ?class ?visible]
   (box
-    :class "${class} icon"
+    :class "${class} icon-widget"
     :orientation "h"
-    :halign "start"
+    :halign "center"
+    :width "100%"
     :space-evenly false
     :visible {visible ?: true} ; because the argument is optional
     (label

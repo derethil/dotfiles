@@ -7,3 +7,10 @@
   border-radius: 8px;
   padding: 15px 0 10px 0;
 }
+
+tooltip {
+  background-color: $colorBackgroundDark;
+  font-family: "SF Pro Display", sans-serif;
+  border: 1px solid $colorBorder;
+  border-radius: 4px;
+}

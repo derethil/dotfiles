@@ -1,8 +1,11 @@
-; Widgets
+; Reusable Widgets
 (include "./yuck/widgets/icon.yuck")
 
-; Bar Modules
+; Bar Widgets
+(include "./yuck/widgets/closer.yuck")
 (include "./yuck/modules/workspaces.yuck")
+(include "./yuck/modules/clock.yuck")
+(include "./yuck/modules/calendar.yuck")
 
 ; Main bar
 (include "./yuck/bar.yuck")

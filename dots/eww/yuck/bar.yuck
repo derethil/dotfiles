@@ -14,19 +14,6 @@
     )
 )
 
-(defwidget left []
-    (section :align "start"
-        (workspaces)
-    )
-)
-
-(defwidget right []
-    (section :align "end"
-        time
-    )
-)
-
-
 (defwindow bar
     :monitor 0
     :stacking "fg"
@@ -41,8 +28,12 @@
     (centerbox
         :orientation "vertical"
         :class "bar"
-        (left)
+        (section :align "start"
+            (workspaces)
+        )
         " "
-        (right)
+        (section :align "end"
+            (clock)
+        )
     )
 )
