@@ -2,6 +2,8 @@
 
 set -e
 
+# Helper Variables
+
 CONFIG_SUFFIX=".conf.yaml"
 DEFAULT_CONFIG_PREFIX="install"
 DOTBOT_DIR="dotbot"
@@ -10,6 +12,8 @@ DOTBOT_BIN="bin/dotbot"
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PLUGIN_DIRS=("dotbot-yay" "dotbot-asdf")
 
+# Update Submodules
+
 cd "${BASE_DIR}"
 
 for plugin_dir in ${DOTBOT_DIR} ${PLUGIN_DIRS[@]}; do
@@ -17,11 +21,15 @@ for plugin_dir in ${DOTBOT_DIR} ${PLUGIN_DIRS[@]}; do
     git submodule update --init --recursive "${plugin_dir}"
 done
 
+# Get Plugin Directory Flags
+
 plugin_dirs_string=""
 
 for plugin_dir in ${PLUGIN_DIRS[@]}; do
     plugin_dirs_string+="--plugin-dir ${plugin_dir} "
 done
+
+# Run Dotbot with Specified Configs
 
 for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
     "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${conf}${CONFIG_SUFFIX}" ${plugin_dirs_string}
