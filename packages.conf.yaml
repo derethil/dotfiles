@@ -39,3 +39,6 @@
       global: latest
       versions:
         - latest
+
+- shell:
+    - [updatedb, Updating locate database]
