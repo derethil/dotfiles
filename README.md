@@ -16,13 +16,14 @@ This will create the necessary symbolic links from this repository to the home d
 
 These dotfiles are designed around the following packages and tools:
 
-- [Hyprland](https://github.com/hyprwm/Hyprland) (window manager)
-- [Kitty](https://sw.kovidgoyal.net/kitty/) (terminal emulator)
-- [Eww](https://github.com/elkowar/eww/) (widget library)
-- [Fish](https://fishshell.com/) (shell)
-- [Starship](https://starship.rs/) (prompt)
-- [Asdf](https://asdf-vm.com/) (version manager)
-- [Neovim](https://neovim.io/) (text editor)
+- **Window Manager**: [Hyprland](https://github.com/hyprwm/Hyprland)
+- **Terminal**: [Kitty](https://sw.kovidgoyal.net/kitty/)
+- **Shell**: [Fish](https://fishshell.com/)
+- **Prompt**: [Starship](https://starship.rs/)
+- **Widgets**: [Eww](https://github.com/elkowar/eww/)
+- **Language Version Manager**: [Asdf](https://asdf-vm.com/)
+- **Text Editor**: [Neovim](https://neovim.io/)
+- **Font**: [San Francisco](https://developer.apple.com/fonts/)
 
 ## Dotbot
 
