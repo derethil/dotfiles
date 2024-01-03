@@ -3,7 +3,11 @@
       relink: true
       create: true
 
-- clean: ["~", "~/.config", "~/.local/share/fonts/"]
+- clean:
+    - "~"
+    - "~/.config"
+    - "~/.local/share/fonts/"
+    - "~/.local/share/applications/"
 
 - link:
     # Bashrc

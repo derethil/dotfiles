@@ -9,6 +9,8 @@
     - jq
     - kitty
     - neovim
+    - pactl
+    - playerctl
     - plocate
     - socat
     - starship
