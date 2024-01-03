@@ -16,6 +16,8 @@
 
 (defwindow bar
     :monitor 0
+    :namespace "bar"
+    :windowtype "dock"
     :stacking "fg"
     :exclusive true
     :geometry (geometry
