@@ -6,12 +6,10 @@
 - clean: ["~", "~/.config", "~/.local/share/fonts/"]
 
 - link:
-    # Bash
-
+    # Bashrc
     ~/.bashrc: dots/bash/bashrc
 
     # Config Dirs
-
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
     ~/.config/kitty: dots/kitty
@@ -20,12 +18,14 @@
     ~/.config/eww: dots/eww
 
     # Config Files
-
     ~/.config/starship.toml: dots/starship.toml
-    ~/.config/code-flags.conf: dots/code-flags.conf
+
+    # Flag Files
+    ~/.config/:
+      path: dots/*-flags.conf
+      glob: true
 
     # Local Files
-
     ~/.local/share/fonts/:
       path: dots/fonts/*
       glob: true
