@@ -1,7 +1,7 @@
 - defaults:
     link:
       relink: true
-      create: false
+      create: true
 
 - clean: ["~", "~/.config", "~/.local/share/fonts/"]
 
@@ -30,5 +30,10 @@
       path: dots/fonts/*
       glob: true
 
+    ~/.local/share/applications/:
+      path: dots/applications/*
+      glob: true
+
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
+    - [rm -rf dotbot-yay/__pycache__, Cleaning up dotboy-yay pycache]

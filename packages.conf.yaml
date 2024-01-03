@@ -37,6 +37,3 @@
       global: latest
       versions:
         - latest
-
-- shell:
-    - [rm -rf dotbot-yay/__pycache__, Cleaning up dotboy-yay pycache]
