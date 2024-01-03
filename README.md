@@ -31,7 +31,3 @@ This dotfiles setup is managed using Dotbot and some additional Dotbot plugins:
 - [Dotbot](https://github.com/anishathalye/dotbot) for managing dotfiles
 - [Dotbot-yay](https://github.com/sobolevn/dotbot-asdf) for managing packages
 - [Dotbot-asdf](https://github.com/OxSon/dotbot-yay/) for managing asdf plugins and versions
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
