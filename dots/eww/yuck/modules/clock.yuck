@@ -2,7 +2,7 @@
 (defpoll min	:interval "1s"	"date '+%M'")
 (defpoll ampm :interval "1s" "date '+%p'")
 
-(defpoll short-date :interval "1s" "date '+%a %b %d'")
+(defpoll short-date :interval "1s" "date '+%a %b %d %-I:%M %p'")
 
 (defwidget clock []
   (eventbox

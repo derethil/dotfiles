@@ -1,9 +1,10 @@
 ; Reusable Widgets
 (include "./yuck/widgets/icon.yuck")
+(include "./yuck/widgets/closer.yuck")
 
 ; Bar Widgets
-(include "./yuck/widgets/closer.yuck")
 (include "./yuck/modules/workspaces.yuck")
+(include "./yuck/modules/powermenu.yuck")
 (include "./yuck/modules/clock.yuck")
 (include "./yuck/modules/calendar.yuck")
 

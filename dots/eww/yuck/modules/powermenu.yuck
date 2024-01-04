@@ -1,0 +1,57 @@
+(defvar power false)
+
+(defvar reboot "reboot")
+(defvar logout "hyprctl dispatch exit")
+(defvar lock "notify-send 'not implemented becuase I havent set up a lock screen yet'")
+(defvar shutdown "shutdown -h now")
+
+(defwidget powermenu []
+	(eventbox
+    :onhover "${EWW_CMD} update power=true"
+		:onhoverlost "${EWW_CMD} update power=false"
+    :cursor "pointer"
+
+    (box
+      :orientation "v"
+      :space-evenly "false"
+      :vexpand "false"
+      :class "powermenu"
+
+      (revealer	:transition "slideup"
+        :reveal power
+        :duration "550ms"
+
+	      (box
+          :orientation "v"
+				  :space-evenly "false"
+
+          (button
+            :class "button-reboot"
+            :tooltip "Reboot"
+            :onclick reboot
+            ""
+          )
+	        (button
+            :class "button-quit"
+				    :tooltip "Logout"
+				    :onclick logout
+            ""
+          )
+	        (button
+            :class "button-lock"
+				    :tooltip "Lock Screen"
+				    :onclick lock
+            ""
+          )
+        )
+      )
+
+      (button
+        :class "button-shutdown"
+        :tooltip "Shutdown"
+        :onclick shutdown
+        ""
+      )
+    )
+  )
+)

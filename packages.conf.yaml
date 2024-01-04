@@ -9,6 +9,7 @@
     - jq
     - kitty
     - neovim
+    - otf-font-awesome
     - pactl
     - playerctl
     - plocate
@@ -28,6 +29,8 @@
     - hyprpicker
     - hyprprop
     - swww
+    - ttf-icomoon-feather-git
+    - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
     - xwaylandvideobridge-bin
 
 - asdf:
