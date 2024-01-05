@@ -1,0 +1,10 @@
+.workspaces-widget .workspace-entry {
+  &.empty {
+    color: $colorBorder;
+  }
+
+  &.current,
+  &.occupied {
+    color: $colorForeground;
+  }
+}

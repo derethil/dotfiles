@@ -3,6 +3,7 @@
 (defvar reboot "reboot")
 (defvar logout "hyprctl dispatch exit")
 (defvar lock "notify-send 'not implemented becuase I havent set up a lock screen yet'")
+(defvar suspend "systemctl suspend")
 (defvar shutdown "shutdown -h now")
 
 (defwidget powermenu []
@@ -42,6 +43,13 @@
 				    :tooltip "Lock Screen"
 				    :onclick lock
             ""
+          )
+
+          (button
+            :class "button-suspend"
+            :tooltip "Suspend"
+            :onclick suspend
+            ""
           )
         )
       )

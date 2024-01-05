@@ -1,0 +1,55 @@
+.clock-widget {
+  .button {
+    background-color: $colorBackground;
+    font-weight: bold;
+    font-size: large;
+    font-family: $fontMono;
+  }
+}
+
+.calendar-widget {
+  border: 2px solid $colorBorder;
+  background-color: $colorBackground;
+
+  font-size: 1em;
+  font-weight: bold;
+  font-family: $fontTitle;
+
+  &-inner-box {
+    padding: 0.25rem 1rem 0rem;
+
+    .calendar {
+      background-color: $colorBackground;
+      color: $colorForeground;
+      padding: 0.8rem 0rem 0rem;
+      border: 0;
+
+      &.highlight {
+        padding: 10rem;
+      }
+
+      &:selected {
+        color: $colorAccent2;
+      }
+
+      &.header {
+        color: $colorAccent2;
+        font-weight: bold;
+      }
+
+      &.button {
+        color: $colorForeground;
+        font-weight: bold;
+      }
+
+      &.highlight {
+        color: $colorAccent1;
+        font-weight: bold;
+      }
+
+      &:indeterminate {
+        color: $colorBackground;
+      }
+    }
+  }
+}

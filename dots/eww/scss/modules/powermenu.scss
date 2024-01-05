@@ -1,0 +1,35 @@
+.powermenu {
+  font-family: feather;
+  font-size: 1.4em;
+  font-weight: bold;
+
+  .button-lock,
+  .button-reboot,
+  .button-quit,
+  .button-suspend,
+  .button-shutdown {
+    padding: 0.5rem 0.2rem 0.3rem 0.2rem;
+  }
+
+  .button-shutdown {
+    margin-bottom: 0.5rem;
+    color: $colorAccent1;
+  }
+
+  .button-suspend {
+    color: $colorAccent2;
+  }
+
+  .button-reboot {
+    margin-top: 0.5rem;
+    color: $colorAccent3;
+  }
+
+  .button-quit {
+    color: $colorAccent4;
+  }
+
+  .button-lock {
+    color: $colorAccent5;
+  }
+}
