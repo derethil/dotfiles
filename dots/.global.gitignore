@@ -1,0 +1,10 @@
+#!/ignore
+
+# Ignore all .venv/ virtual environment folders
+.venv/
+
+# Ignore ASDF tool-versions file
+.tool-versions
+
+# Local Folder for random stuff that doesn't need to be tracked
+.local/

@@ -10,8 +10,9 @@
     - "~/.local/share/applications/"
 
 - link:
-    # Bashrc
+    # Home Files
     ~/.bashrc: dots/bash/bashrc
+    ~/.global.gitignore: dots/.global.gitignore
 
     # Config Dirs
     ~/.config/hypr: dots/hypr
@@ -39,5 +40,11 @@
       glob: true
 
 - shell:
-    - [git submodule update --init --recursive, Installing submodules]
-    - [rm -rf dotbot-yay/__pycache__, Cleaning up dotboy-yay pycache]
+    - command: git submodule update --init --recursive
+      description: Installing submodules
+
+    - command: rm -rf dotbot-yay/__pycache__
+      description: Cleaning up dotboy-yay pycache
+
+    - command: git config --global core.excludesfile ~/.global.gitignore
+      description: Setting global gitignore
