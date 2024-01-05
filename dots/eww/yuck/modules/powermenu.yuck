@@ -30,26 +30,26 @@
             :class "button-reboot"
             :tooltip "Reboot"
             :onclick reboot
-            ""
+            (icon :icon "")
           )
 	        (button
             :class "button-quit"
 				    :tooltip "Logout"
 				    :onclick logout
-            ""
+            (icon :icon "")
           )
 	        (button
             :class "button-lock"
 				    :tooltip "Lock Screen"
 				    :onclick lock
-            ""
+            (icon :icon "")
           )
 
           (button
             :class "button-suspend"
             :tooltip "Suspend"
             :onclick suspend
-            ""
+            (icon :icon "")
           )
         )
       )
@@ -58,7 +58,7 @@
         :class "button-shutdown"
         :tooltip "Shutdown"
         :onclick shutdown
-        ""
+        (icon :icon "")
       )
     )
   )

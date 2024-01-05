@@ -1,10 +1,20 @@
 .workspaces-widget .workspace-entry {
-  &.empty {
-    color: $colorBorder;
+  font-family: "Font Awesome 6 Free Solid";
+  color: $colorBorder;
+
+  .icon-module__icon {
+    font-size: large;
   }
 
-  &.current,
   &.occupied {
     color: $colorForeground;
+  }
+
+  &.current {
+    color: $colorAccent3;
+  }
+
+  &.current.empty {
+    color: rgba($color: $colorAccent3, $alpha: 0.65);
   }
 }

@@ -8,11 +8,11 @@
   .button-quit,
   .button-suspend,
   .button-shutdown {
-    padding: 0.5rem 0.2rem 0.3rem 0.2rem;
+    padding: 0rem 0.2rem 0rem 0.2rem;
   }
 
   .button-shutdown {
-    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
     color: $colorAccent1;
   }
 
@@ -21,7 +21,7 @@
   }
 
   .button-reboot {
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
     color: $colorAccent3;
   }
 

@@ -3,8 +3,8 @@
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/workspaces/get-workspaces")
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/workspaces/get-active-workspace")
 
-(defvar workspace_icon "")
-(defvar empty_workspace_icon "")
+(defvar workspace_icon "")
+; (defvar empty_workspace_icon "")
 
 (defwidget workspaces []
   (eventbox
@@ -20,7 +20,7 @@
           :halign "center"
           (box
             :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
-            (icon :icon "${(workspace.id == current_workspace) ? workspace_icon : empty_workspace_icon}" )
+            (icon :icon "${(workspace.id == current_workspace) ? workspace_icon : workspace_icon}" )
           )
         )
       )
