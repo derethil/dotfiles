@@ -14,3 +14,8 @@ $colorAccent5: #98bb6c;
 $fontTitle: SF Pro Display;
 $fontNumber: Comic Mono;
 $fontMono: SF Mono;
+
+@function transparentize($color, $amount: 0.35) {
+  $color: rgba($color, $amount);
+  @return $color;
+}

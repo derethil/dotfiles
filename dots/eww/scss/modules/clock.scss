@@ -9,7 +9,9 @@
 
 .calendar-widget {
   border: 2px solid $colorBorder;
-  background-color: $colorBackground;
+  background-color: transparentize($colorBackground);
+
+  border-radius: 8px;
 
   font-size: 1em;
   font-weight: bold;
@@ -19,7 +21,6 @@
     padding: 0.25rem 1rem 0rem;
 
     .calendar {
-      background-color: $colorBackground;
       color: $colorForeground;
       padding: 0.8rem 0rem 0rem;
       border: 0;
@@ -48,7 +49,7 @@
       }
 
       &:indeterminate {
-        color: $colorBackground;
+        color: transparentize($colorBackground);
       }
     }
   }

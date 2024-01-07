@@ -1,4 +1,5 @@
 .powermenu {
+  margin-top: 0.5rem;
   font-family: feather;
   font-size: 1.4em;
   font-weight: bold;
@@ -12,7 +13,6 @@
   }
 
   .button-shutdown {
-    margin-top: 0.5rem;
     color: $colorAccent1;
   }
 
@@ -21,7 +21,7 @@
   }
 
   .button-reboot {
-    margin-top: 0.8rem;
+    margin-top: 0.3rem;
     color: $colorAccent3;
   }
 

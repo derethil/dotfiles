@@ -1,5 +1,5 @@
 .bar {
-  background-color: $colorBackground;
+  background-color: transparentize($colorBackground);
   color: $colorForeground;
   font-family: $fontTitle, sans-serif;
   font-size: 1.15rem;
@@ -9,7 +9,7 @@
 }
 
 tooltip {
-  background-color: $colorBackgroundDark;
+  background-color: transparentize($colorBackgroundDark, 0.5);
   font-family: "SF Pro Display", sans-serif;
   border: 1px solid $colorBorder;
   border-radius: 4px;
