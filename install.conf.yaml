@@ -14,6 +14,11 @@
     ~/.bashrc: dots/bash/bashrc
     ~/.global.gitignore: dots/.global.gitignore
 
+    ~/.icons:
+      path: dots/icons/*
+      glob: true
+      force: true
+
     # Config Dirs
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
@@ -25,7 +30,12 @@
     # Config Files
     ~/.config/starship.toml: dots/starship.toml
 
-    # Flag Files
+    ~/.config/gtk-3.0/:
+      path: dots/gtk-3.0/*
+      glob: true
+      force: true
+
+    # Electron App Flag Files
     ~/.config/:
       path: dots/*-flags.conf
       glob: true

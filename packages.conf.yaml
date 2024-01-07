@@ -3,6 +3,7 @@
     - bottom
     - cliphist
     - direnv
+    - downgrade
     - eza
     - fish
     - gnome-keyring
@@ -19,6 +20,8 @@
     - tldr
     - wl-clipboard
     - wofi
+    - xdg-desktop-portal-gtk
+    - xdg-desktop-portal-hyprland
     - yay
     # AUR Packages
     - asdf-vm
@@ -27,7 +30,8 @@
     - hyprcwd-git
     - hyprland-git
     - hyprpicker
-    - hyprprop
+    - hyprprop-git
+    - kanagawa-gtk-theme-git
     - swww
     - ttf-icomoon-feather-git
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
