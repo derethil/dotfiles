@@ -1,0 +1,43 @@
+# This file contains my personal list of
+# both GUI and CLI applications that I use
+# that aren't necessarily dependencies of my dotfiles
+
+- yay:
+    # CLI Applications
+    - bottom
+    - cloc
+    - docker
+    - docker-compose
+    - downgrade
+    - duf
+    - gamemode
+    - hwinfo
+    - mangohud
+    - ncdu
+    - neofetch
+    - plocate
+    - proton-ge-custom-bin
+    - thefuck
+    - tldr
+    - unrar
+    - unzip
+    - xorg-xwayland-explicit-sync-git # Temporary until this gets merged into the official repos
+    - zip
+    # GUI Applications
+    - discord
+    - discord-ptb
+    - firefox
+    - firefox-profile-switcher-connector
+    - mattermost-desktop-bin
+    - nwg-look-bin
+    - obs-studio
+    - qt5ct
+    - spotify
+    - steam
+    - visual-studio-code-bin
+    - xwaylandvideobridge-bin
+    - yuzu
+    - zoom
+
+- shell:
+    - [updatedb, Updating locate database]

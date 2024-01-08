@@ -1,28 +1,29 @@
+# This file contains the necessary packages to install
+# for my dotfiles to work properly.
+
 - yay:
     # Pacman Packages
-    - bottom
     - cliphist
     - direnv
-    - downgrade
     - eza
     - fish
     - gnome-keyring
+    - inotify-tools
     - jq
     - kitty
     - neovim
+    - netctl
     - otf-font-awesome
     - pactl
     - playerctl
-    - plocate
+    - sassc
+    - slurp
     - socat
     - starship
-    - thefuck
-    - tldr
     - wl-clipboard
     - wofi
     - xdg-desktop-portal-gtk
     - xdg-desktop-portal-hyprland
-    - yay
     # AUR Packages
     - asdf-vm
     - aylurs-gtk-shell
@@ -36,7 +37,6 @@
     - swww
     - ttf-icomoon-feather-git
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
-    - xwaylandvideobridge-bin
 
 - asdf:
     - plugin: nodejs
@@ -47,6 +47,3 @@
       global: latest
       versions:
         - latest
-
-- shell:
-    - [updatedb, Updating locate database]
