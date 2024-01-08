@@ -25,8 +25,8 @@
     - yay
     # AUR Packages
     - asdf-vm
+    - aylurs-gtk-shell
     - bibata-cursor-theme-bin
-    - eww-wayland
     - git-open
     - hyprcwd-git
     - hyprland-git

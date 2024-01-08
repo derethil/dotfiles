@@ -1,0 +1,175 @@
+$bar-spacing: $spacing / 2;
+$button-radius: if(
+  $bar-style == "floating",
+  max(0, $radii - $bar-spacing),
+  $radii
+);
+
+@mixin panel-button($flat: $bar-flat-buttons, $reactive: true) {
+  @include unset;
+
+  @if $bar-style == "separated" {
+    transition: $transition;
+
+    > * {
+      @include floating-widget;
+      border-radius: $radii;
+      margin: $wm-gaps $bar-spacing;
+      transition: $transition;
+    }
+
+    &:hover > * {
+      color: $hover-foreground;
+
+      @if $drop-shadow {
+        box-shadow: 0 0 min(6px, $spacing/2) 0 $shadow, inset 0 0 0 99px $hover;
+      } @else {
+        box-shadow: inset 0 0 0 99px $hover;
+      }
+    }
+
+    &:active > *,
+    &.active > * {
+      label,
+      image {
+        color: $accent-foreground;
+      }
+      background-image: $active-gradient;
+      background-color: $accent;
+    }
+  } @else {
+    @include accs-button($flat, $reactive);
+
+    > * {
+      border-radius: $button-radius;
+      margin: $bar-spacing;
+    }
+  }
+
+  label,
+  image {
+    font-weight: bold;
+  }
+
+  > * {
+    padding: $padding * 0.4 $padding * 0.8;
+  }
+}
+
+.panel {
+  // General
+
+  @include unset;
+
+  @if $bar-style == "floating" {
+    @include floating-widget;
+    border-radius: $radii;
+    margin: $wm-gaps;
+    padding: 0;
+  }
+
+  @if $bar-style == "separated" {
+    > .end > button:last-child > * {
+      margin-bottom: $wm-gaps;
+    }
+
+    > .start > button:first-child > * {
+      margin-top: $wm-gaps;
+    }
+  }
+
+  .panel-button {
+    @include panel-button($flat: $bar-flat-buttons, $reactive: false);
+  }
+
+  // Start Widgets
+
+  .workspaces button {
+    background: none;
+    border: none;
+    font-family: "Font Awesome 6 Free Solid";
+    box-shadow: none;
+    text-shadow: none;
+
+    .indicator {
+      font-size: $font-size * 1.05;
+      min-width: 8px;
+      min-height: 8px;
+      border-radius: $radii * 0.6;
+      box-shadow: inset 0 0 0 $border-width $border-color;
+      margin: 0 $padding/2;
+      transition: $transition;
+    }
+
+    &.empty {
+      &:hover .indicator {
+        color: rgba($accent, 0.35);
+      }
+    }
+
+    &.occupied {
+      &:hover .indicator {
+        color: $accent;
+      }
+
+      .indicator {
+        color: $foreground;
+        min-width: 10px;
+        min-height: 10px;
+      }
+    }
+
+    &.active {
+      &:hover .indicator {
+        color: $accent;
+      }
+
+      .indicator {
+        color: $accent;
+        min-width: 24px;
+        min-height: 16px;
+      }
+
+      &.empty {
+        .indicator {
+          color: rgba($accent, 0.35);
+        }
+      }
+    }
+  }
+
+  // End Widgets
+  .clock {
+    // @include panel-button($flat: $bar-flat-buttons, $reactive: false);
+    font-family: $mono-font;
+    font-size: $font-size;
+  }
+
+  .powermenu {
+    &-button .font-icon {
+      font-family: "feather";
+      font-size: $font-size * 1.5;
+      margin-bottom: $bar-spacing * 2;
+    }
+
+    & .shutdown {
+      color: $red;
+    }
+
+    & .reboot {
+      color: $yellow;
+    }
+
+    & .suspend {
+      color: $green;
+    }
+
+    & .logout {
+      color: $blue;
+    }
+
+    & .lock {
+      color: $magenta;
+    }
+  }
+}

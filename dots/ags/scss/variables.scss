@@ -1,0 +1,28 @@
+// variables are defined in options.js
+// these ones derive from the options
+
+$hover: transparentize($_widget-bg, ($widget-transparency * 0.9) / 100);
+$widget-background: transparentize($_widget-bg, $widget-transparency / 100);
+$active-gradient: linear-gradient($accent-gradient);
+
+$hover-foreground: if(
+  $color-scheme == "dark",
+  lighten($foreground, 10%),
+  darken($foreground, 8%)
+);
+
+$border-color: transparentize($_border-color, $border-opacity / 100);
+$border: $border-width solid $border-color;
+
+$popover-border-color: transparentize(
+  $_border-color,
+  max(($border-opacity - 1) / 100, 0)
+);
+$popover-padding: $padding * $popover-padding-multiplier;
+$popover-radius: if($radii == 0, 0, $radii + $popover-padding);
+
+$text-shadow: 2px 2px 2px $shadow;
+
+$wm-gaps: floor($spacing * $wm-gaps-multiplier);
+
+$shader-foreground: #fff;

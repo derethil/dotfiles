@@ -37,7 +37,7 @@
     ~/.config/kitty: dots/kitty
     ~/.config/direnv: dots/direnv
     ~/.config/nvim: dots/nvim
-    ~/.config/eww: dots/eww
+    ~/.config/ags: dots/ags
 
     # Config Files
     ~/.config/starship.toml: dots/starship.toml

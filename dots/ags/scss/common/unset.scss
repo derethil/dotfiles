@@ -1,0 +1,9 @@
+@mixin unset($recursive: false) {
+  all: unset;
+
+  @if $recursive {
+    * {
+      @include unset(true);
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import "/tmp/ags/scss/options";
+@import "./variables";
+
+// Common
+@import "./common/unset";
+@import "./common/widget";
+@import "./common/floating-widget";
+@import "./common/button";
+@import "./common/a11y-button";
+
+// Widgets
+@import "./widgets/bar";
