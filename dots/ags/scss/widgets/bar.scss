@@ -152,24 +152,26 @@ $button-radius: if(
       margin-bottom: $bar-spacing * 2;
     }
 
-    & .shutdown {
-      color: $red;
-    }
+    &-revealer {
+      // Indicator color
+      & > box > :last-child {
+        color: $red;
+      }
 
-    & .reboot {
-      color: $yellow;
-    }
-
-    & .suspend {
-      color: $green;
-    }
-
-    & .logout {
-      color: $blue;
-    }
-
-    & .lock {
-      color: $magenta;
+      & revealer .panel-button {
+        &:nth-child(1) {
+          color: $magenta;
+        }
+        &:nth-child(2) {
+          color: $blue;
+        }
+        &:nth-child(3) {
+          color: $green;
+        }
+        &:nth-child(4) {
+          color: $yellow;
+        }
+      }
     }
   }
 }

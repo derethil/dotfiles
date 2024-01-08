@@ -22,7 +22,6 @@ export default ({
     class_name: `panel-button ${class_name}`,
     child: Widget.Box({ children: [content] }),
     hpack: "center",
-    cursor: "pointer",
     setup: (self) => {
       let open = false;
 

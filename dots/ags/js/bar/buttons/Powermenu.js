@@ -1,3 +1,4 @@
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import icons from "../../icons.js";
 import PanelButton from "../PanelButton.js";
@@ -8,24 +9,25 @@ const actions = {
   default: {
     class_name: "shutdown",
     icon: icons.powermenu.shutdown,
-    action: () => console.log("shutdown"),
+    action: () => Utils.execAsync("shutdown -h now"),
   },
   hidden: {
     lock: {
       icon: icons.powermenu.lock,
+      // TODO: Implement lock screen
       action: () => console.log("lock"),
-    },
-    logout: {
-      icon: icons.powermenu.logout,
-      action: () => console.log("logout"),
     },
     suspend: {
       icon: icons.powermenu.suspend,
-      action: () => console.log("suspend"),
+      action: () => Utils.execAsync("systemctl suspend"),
+    },
+    logout: {
+      icon: icons.powermenu.logout,
+      action: () => Utils.execAsync("hyprctl dispatch exit"),
     },
     reboot: {
       icon: icons.powermenu.reboot,
-      action: () => console.log("reboot"),
+      action: () => Utils.execAsync("shutdown -r now"),
     },
   },
 };
@@ -34,8 +36,10 @@ export default () =>
   Widget.EventBox({
     class_name: "powermenu",
     hpack: "center",
+    cursor: "pointer",
     child: HoverRevealer({
       direction: "up",
+      class_name: "powermenu-revealer",
       indicator: PanelButton({
         class_name: `powermenu-button ${actions.default.class_name}`,
         content: FontIcon(actions.default.icon),
