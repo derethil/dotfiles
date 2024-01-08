@@ -9,7 +9,7 @@ import { globals } from "./globals.js";
 export default function init() {
   notificationBlacklist();
   globals();
-  gsettigsColorScheme();
+  gsettingsColorScheme();
   gtkFontSettings();
   scssWatcher();
   dependandOptions();
@@ -51,7 +51,7 @@ function gtkFontSettings() {
   options.font.size.connect("notify::value", callback);
 }
 
-function gsettigsColorScheme() {
+function gsettingsColorScheme() {
   if (!Utils.exec("which gsettings")) return;
 
   options.theme.scheme.connect("changed", ({ value }) => {

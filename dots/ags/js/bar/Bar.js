@@ -5,6 +5,7 @@ import options from "../options.js";
 import Workspaces from "./buttons/Workspaces.js";
 import Clock from "./buttons/Clock.js";
 import Powermenu from "./buttons/Powermenu.js";
+import Weather from "./buttons/Weather.js";
 
 const Start = () =>
   Widget.Box({
@@ -30,7 +31,7 @@ const End = () =>
     vpack: "end",
     hpack: "center",
     vertical: true,
-    children: [Clock(), Powermenu()],
+    children: [Weather(), Clock(), Powermenu()],
   });
 
 /** @param {number} monitor */

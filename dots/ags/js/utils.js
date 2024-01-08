@@ -44,3 +44,18 @@ export function dependencies(bins) {
 
   return deps.every((has) => has);
 }
+/**
+ * Returns wttr.in weather data in JSON format.
+ * @param {string} location
+ */
+export function wttr(location) {
+  const url = `wttr.in/${location}?0&format=j1`;
+  const response = Utils.exec(`curl -s '${url}'`);
+
+  try {
+    return JSON.parse(response);
+  } catch (err) {
+    console.error(`wttr.in returned invalid JSON`);
+    return null;
+  }
+}

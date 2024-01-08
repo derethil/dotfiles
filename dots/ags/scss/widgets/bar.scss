@@ -139,6 +139,19 @@ $button-radius: if(
   }
 
   // End Widgets
+  .weather {
+    &-temperature {
+      font-size: $font-size;
+      font-family: $mono-font;
+      font-weight: bold;
+      margin-bottom: $bar-spacing;
+    }
+
+    & .font-icon {
+      font-size: $font-size * 1.35;
+    }
+  }
+
   .clock {
     // @include panel-button($flat: $bar-flat-buttons, $reactive: false);
     font-family: $mono-font;

@@ -189,9 +189,21 @@ export default {
     unit: "",
   }),
 
-  workspaces: Option(10, {
+  workspaces: Option(5, {
     category: "Bar",
     title: "No. workspaces on bar and overview",
     note: "Set it to 0 to make it dynamic (not working yet)",
   }),
+
+  weather: {
+    location: Option("Washington+DC", {
+      note: "See wttr.in/:help for more info",
+      scss: "exclude",
+    }),
+    units: Option("imperial", {
+      enums: ["metric", "imperial"],
+      type: "enum",
+      scss: "exclude",
+    }),
+  },
 };
