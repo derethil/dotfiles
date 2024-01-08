@@ -20,7 +20,7 @@ These dotfiles are designed around the following packages and tools:
 - **Terminal**: [Kitty](https://sw.kovidgoyal.net/kitty/)
 - **Shell**: [Fish](https://fishshell.com/)
 - **Prompt**: [Starship](https://starship.rs/)
-- **Widgets**: [Eww](https://github.com/elkowar/eww/)
+- **Widgets**: [Aylur's Gtk Shell](https://github.com/Aylur/ags)
 - **Language Version Manager**: [Asdf](https://asdf-vm.com/)
 - **Text Editor**: [Neovim](https://neovim.io/)
 - **Font**: [San Francisco](https://developer.apple.com/fonts/)
