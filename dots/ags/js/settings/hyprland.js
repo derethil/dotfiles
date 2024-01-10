@@ -42,7 +42,6 @@ export async function setupHyprland() {
   const border_width = options.border.width.value;
   const radii = options.radii.value;
   const drop_shadow = options.desktop.drop_shadow.value;
-  const bar_style = options.bar.style.value;
   const bar_pos = options.bar.position.value;
   const inactive_border = options.hypr.inactive_border.value;
   const accent = getColor(options.theme.accent.accent.value);
@@ -51,8 +50,7 @@ export async function setupHyprland() {
 
   JSON.parse(await Hyprland.sendMessage("j/monitors")).forEach(({ name }) => {
     const v = bar_pos === "left" ? `0,0,-${wm_gaps},0` : `0,0,0,-${wm_gaps}`;
-    if (bar_style !== "normal") batch.push(`monitor ${name},addreserved,${v}`);
-    else batch.push(`monitor ${name},addreserved,0,0,0,0`);
+    batch.push(`monitor ${name},addreserved,${v}`);
   });
 
   batch.push(

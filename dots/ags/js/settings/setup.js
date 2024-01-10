@@ -12,18 +12,10 @@ export default function init() {
   gsettingsColorScheme();
   gtkFontSettings();
   scssWatcher();
-  dependandOptions();
 
   reloadScss();
   hyprlandInit();
   setupHyprland();
-}
-
-function dependandOptions() {
-  options.bar.style.connect("changed", ({ value }) => {
-    if (value !== "normal")
-      options.desktop.screen_corners.setValue(false, true);
-  });
 }
 
 function notificationBlacklist() {

@@ -14,6 +14,8 @@ export default ({
 } = {}) =>
   Widget.Label({
     class_name: "clock",
+    hexpand: true,
+    hpack: "center",
     ...rest,
     setup: (self) =>
       self.poll(interval, () => {

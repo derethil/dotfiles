@@ -4,5 +4,6 @@ import PanelButton from "../PanelButton.js";
 
 export default ({ format = "%I\n%M\n%p" } = {}) =>
   PanelButton({
+    class_name: "clock",
     content: Clock({ format }),
   });

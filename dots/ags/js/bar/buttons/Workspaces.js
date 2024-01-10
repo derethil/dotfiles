@@ -20,7 +20,6 @@ const Workspaces = () => {
         child: FontIcon({
           icon: icons.workspace,
           class_name: "indicator",
-          vpack: "center",
         }),
         on_clicked: () => dispatch(i),
         setup: (self) =>
@@ -42,8 +41,10 @@ const Workspaces = () => {
 
 export default () =>
   Widget.EventBox({
-    class_name: "workspaces panel-button",
+    class_names: ["panel-button", "workspaces"],
+    cursor: "pointer",
     child: Widget.Box({
+      vertical: true,
       child: Widget.EventBox({
         on_scroll_up: () => dispatch("e-1"),
         on_scroll_down: () => dispatch("e+1"),

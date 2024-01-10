@@ -3,7 +3,7 @@
 
   @if $recursive {
     * {
-      @include unset(true);
+      @include unset(false);
     }
   }
 }

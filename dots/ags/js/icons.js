@@ -9,6 +9,8 @@ export default {
     logout: "",
   },
 
+  dashboard: "",
+
   weather: {
     Unknown: "✨",
     Cloudy: "☁️",

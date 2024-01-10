@@ -5,6 +5,7 @@ import App from "resource:///com/github/Aylur/ags/app.js";
  * @typedef {Object} PanelButtonProps
  * @property {any} content
  * @property {string=} window
+ * @property {import('types/widgets/box').BoxProps=} boxProps
  */
 
 /**
@@ -13,6 +14,7 @@ import App from "resource:///com/github/Aylur/ags/app.js";
 export default ({
   class_name,
   class_names,
+  boxProps,
   content,
   window = "",
   setup,
@@ -20,8 +22,12 @@ export default ({
 }) => {
   return Widget.Button({
     class_name: `panel-button ${class_name}`,
-    child: Widget.Box({ children: [content] }),
-    hpack: "center",
+    child: Widget.Box({
+      hpack: "center",
+      vpack: "center",
+      children: Array.isArray(content) ? content : [content],
+      ...boxProps,
+    }),
     setup: (self) => {
       let open = false;
 

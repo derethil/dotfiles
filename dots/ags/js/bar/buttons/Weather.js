@@ -47,33 +47,27 @@ const weatherInfo = Variable(
 );
 
 export default () =>
-  Widget.EventBox({
-    hpack: "center",
+  PanelButton({
     class_name: "weather",
-    child: HoverRevealer({
-      direction: "up",
-      hpack: "center",
-      indicator: PanelButton({
-        content: FontIcon({
-          class_name: "weather-icon",
-          hpack: "center",
-          setup: (self) =>
-            self.hook(weatherInfo, () => {
-              // @ts-ignore
-              self.icon = weatherInfo.value.weatherIcon;
-            }),
-        }),
+    boxProps: {
+      vertical: true,
+    },
+    content: [
+      FontIcon({
+        icon: weatherInfo.value.weatherIcon,
+        setup: (self) =>
+          self.hook(weatherInfo, () => {
+            // @ts-expect-error
+            self.icon = weatherInfo.value.weatherIcon;
+          }),
       }),
-      child: Widget.Box({
+      Widget.Label({
+        class_name: "temperature",
         hpack: "center",
-        child: Widget.Label({
-          class_name: "weather-temperature",
-          hpack: "center",
-          setup: (self) =>
-            self.hook(weatherInfo, () => {
-              self.label = `${weatherInfo.value.temperature}°`;
-            }),
-        }),
+        setup: (self) =>
+          self.hook(weatherInfo, () => {
+            self.label = `${weatherInfo.value.temperature}°`;
+          }),
       }),
-    }),
+    ],
   });

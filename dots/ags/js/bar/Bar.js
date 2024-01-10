@@ -6,22 +6,24 @@ import Workspaces from "./buttons/Workspaces.js";
 import Clock from "./buttons/Clock.js";
 import Powermenu from "./buttons/Powermenu.js";
 import Weather from "./buttons/Weather.js";
+import DashboardButton from "./buttons/DashboardButton.js";
 
 const Start = () =>
   Widget.Box({
     class_name: "start",
     vpack: "start",
-    hpack: "center",
+    hexpand: true,
     vertical: true,
-    children: [Workspaces()],
+    children: [DashboardButton(), Workspaces()],
   });
 
 const Center = () =>
   Widget.Box({
     class_name: "center",
     vpack: "center",
-    hpack: "center",
+    hexpand: true,
     vertical: true,
+    width_request: options.bar.width.value,
     children: [],
   });
 
@@ -29,7 +31,7 @@ const End = () =>
   Widget.Box({
     class_name: "end",
     vpack: "end",
-    hpack: "center",
+    hexpand: true,
     vertical: true,
     children: [Weather(), Clock(), Powermenu()],
   });

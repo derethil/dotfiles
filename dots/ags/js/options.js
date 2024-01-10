@@ -132,15 +132,15 @@ export default {
       type: "enum",
     }),
 
-    style: Option("floating", {
-      enums: ["floating", "separated", "normal"],
-      type: "enum",
-    }),
-
     flat_buttons: Option(true, { scss: "bar-flat-buttons" }),
 
     icon: Option("distro-icon", {
       note: '"distro-icon" or a single font',
+    }),
+
+    width: Option(64, {
+      scss: "bar-width",
+      note: "units are 'px'",
     }),
   },
 
@@ -168,7 +168,8 @@ export default {
     }),
     opacity: Option(100, {
       category: "Border",
-      title: "Border Opacity",
+      title: "Border Transparency",
+      scss: "border-transparency",
       unit: "",
     }),
     width: Option(2, {
@@ -196,8 +197,8 @@ export default {
   }),
 
   weather: {
-    location: Option("Washington+DC", {
-      note: "See wttr.in/:help for more info",
+    location: Option("", {
+      note: "See wttr.in/:help for more info, leave blank for auto",
       scss: "exclude",
     }),
     units: Option("imperial", {

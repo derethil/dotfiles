@@ -56,7 +56,5 @@ export default ({
     }),
   });
 
-  return Widget.Box({
-    children: [eventbox],
-  });
+  return eventbox;
 };
