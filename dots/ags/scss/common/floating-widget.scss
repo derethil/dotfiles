@@ -1,4 +1,4 @@
-@mixin floating-widget {
+@mixin _floating-widget {
   @if $drop-shadow {
     box-shadow: 0 0 5px 0 $shadow;
   }
@@ -6,7 +6,18 @@
   border: $border-width solid $popover-border-color;
   background-color: $widget-background;
   color: $foreground;
-  border-radius: $popover-radius;
+  border-radius: $radii;
   padding: $popover-padding * 0.66 0;
   margin: $bar-spacing $wm-gaps;
+}
+
+@mixin floating-widget($children: false) {
+  @if $children {
+    @include unset;
+    & > * {
+      @include _floating-widget;
+    }
+  } @else {
+    @include _floating-widget;
+  }
 }
