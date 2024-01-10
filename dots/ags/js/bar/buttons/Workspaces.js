@@ -43,6 +43,7 @@ export default () =>
   Widget.EventBox({
     class_names: ["panel-button", "workspaces"],
     cursor: "pointer",
+    // Nested to keep this consistent with the panel buttons
     child: Widget.Box({
       vertical: true,
       child: Widget.EventBox({

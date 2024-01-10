@@ -1,6 +1,16 @@
 $bar-spacing: $spacing / 2;
 $button-radius: $radii;
 
+@mixin floating-widget-child {
+  // Eventbox doesn't work with some styles so we need to unset them
+  // and apply them to the children instead
+  all: unset;
+  > * {
+    @include floating-widget;
+    border-radius: $radii;
+  }
+}
+
 @mixin panel-button($flat: $bar-flat-buttons, $reactive: true) {
   @include unset;
   @include floating-widget;
@@ -66,13 +76,7 @@ $button-radius: $radii;
   }
 
   .workspaces {
-    // Eventbox doesn't work with some styles so we need to unset them
-    // and apply them to the children instead
-    all: unset;
-    > * {
-      @include floating-widget;
-      border-radius: $radii;
-    }
+    @include floating-widget-child();
 
     button {
       font-family: "Font Awesome 6 Free Solid";
@@ -135,10 +139,15 @@ $button-radius: $radii;
   }
 
   .powermenu {
-    &-button .font-icon {
-      font-family: "feather";
-      font-size: $font-size * 1.25;
-      font-weight: bold;
+    @include floating-widget-child();
+
+    &-button {
+      padding: $padding * 0.8 0;
+      & .font-icon {
+        font-family: "feather";
+        font-size: $font-size * 1.35;
+        font-weight: bold;
+      }
     }
 
     &-revealer {
@@ -146,16 +155,19 @@ $button-radius: $radii;
         color: $red;
       }
 
-      & revealer .panel-button {
+      & revealer button {
         &:nth-child(1) {
           color: $magenta;
         }
+
         &:nth-child(2) {
           color: $blue;
         }
+
         &:nth-child(3) {
           color: $green;
         }
+
         &:nth-child(4) {
           color: $yellow;
         }
