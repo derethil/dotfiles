@@ -3,6 +3,7 @@
 
 - yay:
     # Pacman Packages
+    - bc
     - cliphist
     - direnv
     - eza

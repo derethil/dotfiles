@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# This script is used to automatically float and center windows when
+# they are the only window on a workspace. It is meant to be used
+# with ultrawide monitors, where a single window can be too wide to
+# be comfortable to look at.
+
+# Constants
+
+WINDOW_WIDTH=$1
+
+TEMP_DIR=/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE
+
+HYPRLAND_SOCKET_PATH=$TEMP_DIR/.socket2.sock
+HANDLED_LIST_PATH=$TEMP_DIR/handled_single_workspaces
+
+if [ -z "$WINDOW_WIDTH" ]; then
+  echo "No reserved size provided"
+  exit 1
+fi
+
+# Extracting AGS Options from AGS Config
+
+extract_ags_opt() {
+  cat /tmp/ags/scss/options.scss | awk "/$1/ { print substr(\$2, 1, length(\$2)-1) }"
+}
+
+extract_wm_gaps() {
+  spacing=$(extract_ags_opt "spacing" | tr -d -c 0-9)
+  wm_gaps_multiplier=$(extract_ags_opt "wm-gaps-multiplier")
+  echo "$spacing * $wm_gaps_multiplier" | bc | cut -d '.' -f 1
+}
+
+# Handling of Single Windows List
+
+ensure_list_exists() {
+  if [ ! -f "$HANDLED_LIST_PATH" ]; then
+    mkdir -p /tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE
+    touch "$HANDLED_LIST_PATH"
+  fi
+}
+
+add_handled() {
+  workspace_id=$1
+  window_id=$2
+  echo "$workspace_id: $window_id" >> "$HANDLED_LIST_PATH"
+}
+
+remove_handled() {
+  workspace_id=$1
+  sed -i "/$workspace_id:/d" "$HANDLED_LIST_PATH"
+}
+
+check_handled() {
+  workspace_id=$1
+  grep "$workspace_id:" "$HANDLED_LIST_PATH"
+}
+
+# Handling of Hyprland Events
+
+handle() {
+  # Ensure Single Windows List Exists
+  ensure_list_exists
+
+  # Get General Information
+  workspace_info=$(hyprctl activeworkspace -j);
+  workspace_id=$(echo "$workspace_info" | jq .id)
+
+  num_windows=$(echo $workspace_info | jq .windows)
+  lastwindow_id=$(echo $workspace_info | jq --raw-output .lastwindow)
+
+  case $1 in (destroyworkspace* | closewindow* | createworkspace* | openwindow*)
+
+    # Fires if the workspace is empty
+    if [ "$num_windows" -eq 0 ]; then
+      # Remove Window from Single Windows List
+      remove_handled "$workspace_id"
+      return;
+    fi
+
+    id_in_list=$(check_handled "$workspace_id" | awk '{ print $2 }')
+
+    # Fires if the workspace has a single window that is not in the list
+    if [ "$num_windows" -eq 1 ] && [ -z "$id_in_list"]; then
+      # Get Information for Floating Window
+      active_monitor=$(echo "$workspace_info" | jq .monitorID);
+      monitor_info=$(hyprctl monitors -j | jq ".[] | select(.id == $active_monitor)");
+      monitor_height=$(echo $monitor_info | jq .height)
+      border_width=$(extract_ags_opt "border-width" | tr -d -c 0-9)
+      wm_gaps=$(extract_wm_gaps)
+
+      # Calculate Floating Window Height
+      window_height=$(echo "$monitor_height - (($border_width * 2) + ($wm_gaps * 2))" | bc)
+
+      # Float, Resize, and Center Window
+      hyprctl --batch "dispatch togglefloating address:$lastwindow_id; dispatch resizewindowpixel exact $WINDOW_WIDTH $window_height,address:$lastwindow_id; dispatch centerwindow 1";
+
+      # Add Window to Single Windows List
+      add_handled "$workspace_id" "$lastwindow_id"
+      return;
+    fi
+
+    # Fires if the workspace has multiples windows, and one of them is in the list
+    if [ "$num_windows" -gt 1 ] && [ -n "$id_in_list" ]; then
+      # Remove Window from Single Windows List
+      remove_handled "$workspace_id"
+
+      # Unfloat
+      hyprctl --batch "dispatch togglefloating address:$id_in_list; dispatch layoutmsg swapwithmaster child";
+      return;
+    fi
+
+  esac
+}
+
+# Main Loop
+
+socat -U - UNIX-CONNECT:$HYPRLAND_SOCKET_PATH | while read -r line; do
+  handle "$line"
+done
