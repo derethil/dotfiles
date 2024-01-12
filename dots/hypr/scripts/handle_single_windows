@@ -14,6 +14,9 @@ TEMP_DIR=/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE
 HYPRLAND_SOCKET_PATH=$TEMP_DIR/.socket2.sock
 HANDLED_LIST_PATH=$TEMP_DIR/handled_single_workspaces
 
+# List of window classes to ignore
+NO_HANDLE_LIST=(steam)
+
 if [ -z "$WINDOW_WIDTH" ]; then
   echo "No reserved size provided"
   exit 1
@@ -69,7 +72,13 @@ handle() {
   num_windows=$(echo $workspace_info | jq .windows)
   lastwindow_id=$(echo $workspace_info | jq --raw-output .lastwindow)
 
-  case $1 in (destroyworkspace* | closewindow* | createworkspace* | openwindow*)
+  case $1 in (workspace* | destroyworkspace* | closewindow* | createworkspace* | openwindow*)
+
+    # Ignore if Last Window Id's Class is in No Handle List
+    lastwindow_class=$(hyprctl clients -j | jq --raw-output ".[] | select(.address == \"$lastwindow_id\") | .class")
+    if [[ $(echo ${NO_HANDLE_LIST[@]} | grep -Fw "$lastwindow_class") ]]; then
+      return;
+    fi
 
     # Fires if the workspace is empty
     if [ "$num_windows" -eq 0 ]; then
