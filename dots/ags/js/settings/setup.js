@@ -3,7 +3,12 @@ import Notifications from "resource:///com/github/Aylur/ags/service/notification
 import Gtk from "gi://Gtk";
 import options from "../options.js";
 import { reloadScss, scssWatcher } from "./scss.js";
-import { hyprlandInit, setupHyprland } from "./hyprland.js";
+import {
+  centerSingleWindows,
+  centerWindowsInit,
+  hyprlandInit,
+  setupHyprland,
+} from "./hyprland.js";
 import { globals } from "./globals.js";
 
 export default function init() {
@@ -16,6 +21,9 @@ export default function init() {
   reloadScss();
   hyprlandInit();
   setupHyprland();
+
+  centerWindowsInit();
+  centerSingleWindows();
 }
 
 function notificationBlacklist() {

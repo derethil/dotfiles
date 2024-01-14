@@ -1,7 +1,11 @@
 import App from "resource:///com/github/Aylur/ags/app.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import options from "../options.js";
-import { readFile, writeFile } from "resource:///com/github/Aylur/ags/utils.js";
+import {
+  readFile,
+  writeFile,
+  subprocess,
+} from "resource:///com/github/Aylur/ags/utils.js";
 
 /** @param {Array<string>} batch */
 function sendBatch(batch) {
@@ -28,9 +32,9 @@ function getColor(scss) {
 export function hyprlandInit() {
   if (readFile("/tmp/ags/hyprland-init")) return;
 
-//  sendBatch(
-//    Array.from(App.windows).flatMap(([name]) => [`layerrule blur, ${name}`])
-//  );
+  //  sendBatch(
+  //    Array.from(App.windows).flatMap(([name]) => [`layerrule blur, ${name}`])
+  //  );
 
   writeFile("init", "/tmp/ags/hyprland-init");
 }
@@ -64,4 +68,32 @@ export async function setupHyprland() {
   );
 
   sendBatch(batch);
+}
+
+export function centerWindowsInit() {
+  options.hypr.single_window_width.connect("changed", centerSingleWindows);
+}
+
+export async function centerSingleWindows() {
+  const script_name = "center_single_windows";
+  const script_path = `~/.config/hypr/scripts/${script_name}`;
+
+  const window_width = options.hypr.single_window_width.value;
+
+  console.log(`${window_width}`);
+
+  if (window_width === 0) return;
+
+  // TODO: Support multiple monitors
+  const monitor = JSON.parse(await Hyprland.sendMessage("j/monitors"))[0];
+  const wm_gaps = options.hypr.wm_gaps_multiplier.value * options.spacing.value;
+  const border_width = options.border.width.value;
+  const window_height =
+    monitor.height - Math.floor(wm_gaps) * 2 - border_width * 2;
+
+  subprocess(
+    ["bash", "-c", `${script_path} ${window_width} ${window_height}`],
+    (stdout) => console.log(stdout),
+    (stderr) => console.error(stderr)
+  );
 }

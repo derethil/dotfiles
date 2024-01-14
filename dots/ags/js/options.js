@@ -158,6 +158,13 @@ export default {
       type: "float",
       unit: "",
     }),
+
+    single_window_width: Option(2400, {
+      category: "General",
+      scss: "exclude",
+      note: "Window width when only one window is open (set to 0 to disable)",
+      type: "float",
+    }),
   },
 
   border: {
