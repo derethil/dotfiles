@@ -43,39 +43,53 @@ ensure_list_exists() {
   fi
 }
 
+# Expects workspace_id and window_id
 add_handled() {
   workspace_id=$1
-  window_id=$2
-  echo "$workspace_id: $window_id" >> "$HANDLED_LIST_PATH"
+  window_address=$2
+  echo "$workspace_id: $window_address" >> "$HANDLED_LIST_PATH"
 }
 
+# Expects either workspace_id= or window_address=
 remove_handled() {
-  workspace_id=$1
-  sed -i "/$workspace_id:/d" "$HANDLED_LIST_PATH"
+  field=$(echo $1 | cut -d '=' -f 1)
+  value=$(echo $1 | cut -d '=' -f 2)
+
+  if [ "$field" = "workspace_id" ]; then
+    sed -i "/$value:/d" "$HANDLED_LIST_PATH"
+  elif [ "$field" = "window_address" ]; then
+    sed -i "/: $value/d" "$HANDLED_LIST_PATH"
+  fi
 }
 
+# Expects either workspace_id= or window_address=
 check_handled() {
-  workspace_id=$1
-  grep "$workspace_id:" "$HANDLED_LIST_PATH"
+  field=$(echo $1 | cut -d '=' -f 1)
+  value=$(echo $1 | cut -d '=' -f 2)
+
+  if [ "$field" = "workspace_id" ]; then
+    grep "$value:" "$HANDLED_LIST_PATH"
+  elif [ "$field" = "window_address" ]; then
+    grep ": $value" "$HANDLED_LIST_PATH"
+  fi
 }
 
 # Handling of Hyprland Events
 
 handle() {
-  # Ensure Single Windows List Exists
-  ensure_list_exists
-
-  # Get General Information
-  workspace_info=$(hyprctl activeworkspace -j);
-  workspace_id=$(echo "$workspace_info" | jq .id)
-
-  num_windows=$(echo $workspace_info | jq .windows)
-  lastwindow_id=$(echo $workspace_info | jq --raw-output .lastwindow)
-
   case $1 in (workspace* | destroyworkspace* | closewindow* | createworkspace* | openwindow*)
+    # Ensure Single Windows List Exists
+    ensure_list_exists
+
+    # Get General Information
+    workspace_info=$(hyprctl activeworkspace -j);
+    workspace_id=$(echo "$workspace_info" | jq .id)
+
+    num_windows=$(echo $workspace_info | jq .windows)
+    lastwindow_addr=$(echo $workspace_info | jq --raw-output .lastwindow)
 
     # Ignore if Last Window Id's Class is in No Handle List
-    lastwindow_class=$(hyprctl clients -j | jq --raw-output ".[] | select(.address == \"$lastwindow_id\") | .class")
+    lastwindow_class=$(hyprctl clients -j | jq --raw-output ".[] | select(.address == \"$lastwindow_addr\") | .class")
     if [[ $(echo ${NO_HANDLE_LIST[@]} | grep -Fw "$lastwindow_class") ]]; then
       return;
     fi
@@ -83,14 +97,18 @@ handle() {
     # Fires if the workspace is empty
     if [ "$num_windows" -eq 0 ]; then
       # Remove Window from Single Windows List
-      remove_handled "$workspace_id"
+      remove_handled "workspace_id=$workspace_id"
       return;
     fi
 
-    id_in_list=$(check_handled "$workspace_id" | awk '{ print $2 }')
+    # Note: I was lazy so this is kind of confusing;
+    # we check if the workspace id is in the list by ensuring window_address_in_list is not empty
+    # and vice versa for window_address_in_list
+    window_address_in_list=$(check_handled "workspace_id=$workspace_id" | awk '{ print $2 }')
+    workspace_id_in_list=$(check_handled "window_address=$lastwindow_addr" | awk '{ print $1 }')
 
     # Fires if the workspace has a single window that is not in the list
-    if [ "$num_windows" -eq 1 ] && [ -z "$id_in_list"]; then
+    if [ "$num_windows" -eq 1 ] && [ -z "$window_address_in_list" ]; then
       # Get Information for Floating Window
       active_monitor=$(echo "$workspace_info" | jq .monitorID);
       monitor_info=$(hyprctl monitors -j | jq ".[] | select(.id == $active_monitor)");
@@ -102,23 +120,32 @@ handle() {
       window_height=$(echo "$monitor_height - (($border_width * 2) + ($wm_gaps * 2))" | bc)
 
       # Float, Resize, and Center Window
-      hyprctl --batch "dispatch togglefloating address:$lastwindow_id; dispatch resizewindowpixel exact $WINDOW_WIDTH $window_height,address:$lastwindow_id; dispatch centerwindow 1";
+      hyprctl --batch "dispatch togglefloating address:$lastwindow_addr; dispatch resizewindowpixel exact $WINDOW_WIDTH $window_height,address:$lastwindow_addr; dispatch centerwindow 1";
 
       # Add Window to Single Windows List
-      add_handled "$workspace_id" "$lastwindow_id"
+      add_handled "$workspace_id" "$lastwindow_addr"
       return;
     fi
 
-    # Fires if the workspace has multiples windows, and one of them is in the list
-    if [ "$num_windows" -gt 1 ] && [ -n "$id_in_list" ]; then
+    # Fires if the workspace has multiples windows and workspace id is in the list
+    if [ "$num_windows" -gt 1 ] && [ ! -z "$window_address_in_list" ]; then
       # Remove Window from Single Windows List
-      remove_handled "$workspace_id"
+      remove_handled "workspace_id=$workspace_id"
 
       # Unfloat
-      hyprctl --batch "dispatch togglefloating address:$id_in_list; dispatch layoutmsg swapwithmaster child";
+      hyprctl --batch "dispatch togglefloating address:$window_address_in_list; dispatch layoutmsg swapwithmaster child";
       return;
     fi
 
+    # Fires if the workspace has multiples windows and window address is in the list
+    if [ "$num_windows" -gt 1 ] && [ ! -z "$workspace_id_in_list" ]; then
+      # Remove Window from Single Windows List
+      remove_handled "window_address=$lastwindow_addr"
+
+      # Unfloat
+      hyprctl --batch "dispatch togglefloating address:$lastwindow_addr";
+      return;
+    fi
   esac
 }
 
