@@ -130,7 +130,6 @@ $button-radius: $radii;
 
   .powermenu {
     @include floating-widget($children: true);
-
     &-button {
       padding: $padding * 0.8 0;
       & .font-icon {
@@ -140,26 +139,33 @@ $button-radius: $radii;
       }
     }
 
+    @mixin powermenu-color($color) {
+      color: $color;
+      &:hover {
+        color: hover-color($color);
+      }
+    }
+
     &-revealer {
       & > box > :last-child {
-        color: $red;
+        @include powermenu-color($red);
       }
 
       & revealer button {
         &:nth-child(1) {
-          color: $magenta;
+          @include powermenu-color($magenta);
         }
 
         &:nth-child(2) {
-          color: $blue;
+          @include powermenu-color($blue);
         }
 
         &:nth-child(3) {
-          color: $green;
+          @include powermenu-color($green);
         }
 
         &:nth-child(4) {
-          color: $yellow;
+          @include powermenu-color($yellow);
         }
       }
     }

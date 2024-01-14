@@ -28,9 +28,9 @@ function getColor(scss) {
 export function hyprlandInit() {
   if (readFile("/tmp/ags/hyprland-init")) return;
 
-  sendBatch(
-    Array.from(App.windows).flatMap(([name]) => [`layerrule blur, ${name}`])
-  );
+//  sendBatch(
+//    Array.from(App.windows).flatMap(([name]) => [`layerrule blur, ${name}`])
+//  );
 
   writeFile("init", "/tmp/ags/hyprland-init");
 }
