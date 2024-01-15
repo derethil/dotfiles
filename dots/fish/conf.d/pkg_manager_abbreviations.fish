@@ -11,7 +11,7 @@ abbr -a paclf 'pacman -Ql'   # list files
 
 # Yay Abbreviations
 abbr -a yaya 'yay -S'        # install
-abbr -a pacr 'yay -Rns'     # remove
+abbr -a yayr 'yay -Rns'     # remove
 abbr -a yays 'yay -Ss'     # search
 abbr -a yayi 'yay -Si'     # info
 abbr -a yaylo 'yay -Qdt'    # list orphans
