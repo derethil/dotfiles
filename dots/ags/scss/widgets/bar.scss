@@ -16,6 +16,8 @@ $button-radius: $radii;
   // Start Widgets
 
   .dashboard-button {
+    font-family: "Noto Sans Serif";
+
     label {
       transition: $transition;
       color: transparentize($accent, $amount: 0.2);

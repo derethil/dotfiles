@@ -14,7 +14,7 @@ const Start = () =>
     vpack: "start",
     hexpand: true,
     vertical: true,
-    children: [DashboardButton(), Workspaces()],
+    children: [Workspaces()],
   });
 
 const Center = () =>

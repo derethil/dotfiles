@@ -10,7 +10,7 @@ abbr -a pacc 'sudo pacman -Scc'    # clean cache
 abbr -a paclf 'pacman -Ql'   # list files
 
 # Yay Abbreviations
-abbr -a yayu 'yay -S'        # install
+abbr -a yaya 'yay -S'        # install
 abbr -a pacr 'yay -Rns'     # remove
 abbr -a yays 'yay -Ss'     # search
 abbr -a yayi 'yay -Si'     # info

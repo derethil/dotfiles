@@ -5,6 +5,7 @@
 - yay:
     # CLI Applications
     - bottom
+    - broot
     - cloc
     - docker
     - docker-compose
@@ -12,6 +13,7 @@
     - duf
     - gamemode
     - hwinfo
+    - lf
     - mangohud
     - ncdu
     - neofetch
@@ -19,6 +21,7 @@
     - proton-ge-custom-bin
     - thefuck
     - tldr
+    - trash-cli
     - unrar
     - unzip
     - xorg-xwayland-explicit-sync-git # Temporary until this gets merged into the official repos

@@ -38,6 +38,7 @@
     ~/.config/direnv: dots/direnv
     ~/.config/nvim: dots/nvim
     ~/.config/ags: dots/ags
+    ~/.config/lf: dots/lf
 
     # Config Files
     ~/.config/starship.toml: dots/starship.toml
