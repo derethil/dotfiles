@@ -23,7 +23,6 @@ const Center = () =>
     vpack: "center",
     hexpand: true,
     vertical: true,
-    width_request: options.bar.width.value,
     children: [],
   });
 
@@ -33,7 +32,7 @@ const End = () =>
     vpack: "end",
     hexpand: true,
     vertical: true,
-    children: [Weather(), Clock(), Powermenu()],
+    children: [Weather(), Clock(false), Powermenu()],
   });
 
 /** @param {number} monitor */
@@ -42,6 +41,7 @@ export default (monitor) =>
     name: `bar${monitor}`,
     exclusivity: "exclusive",
     class_name: "transparent",
+    width_request: options.bar.width.value,
     monitor,
     anchor: [
       "top",

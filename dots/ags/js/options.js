@@ -138,7 +138,7 @@ export default {
       note: '"distro-icon" or a single font',
     }),
 
-    width: Option(64, {
+    width: Option(72, {
       scss: "bar-width",
       note: "units are 'px'",
     }),

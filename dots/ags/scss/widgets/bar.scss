@@ -1,46 +1,7 @@
 $bar-spacing: $spacing / 2;
 $button-radius: $radii;
 
-@mixin panel-button($flat: $bar-flat-buttons, $reactive: true) {
-  @include unset;
-  @include floating-widget;
-
-  transition: $transition;
-  border-radius: $radii;
-
-  & > * {
-    padding: $padding;
-  }
-
-  &:hover {
-    @if $reactive {
-      color: $hover-accent;
-
-      @if $drop-shadow {
-        box-shadow: 0 0 min(6px, $spacing/2) 0 $shadow, inset 0 0 0 99px $hover;
-      } @else {
-        box-shadow: inset 0 0 0 99px $hover;
-      }
-    }
-  }
-
-  @if $reactive {
-    &:active > *,
-    &.active > * {
-      label,
-      image {
-        color: $hover-accent;
-      }
-      background-image: $active-gradient;
-      background-color: $accent;
-    }
-
-    label,
-    image {
-      font-weight: bold;
-    }
-  }
-}
+@import "./panel-button.scss";
 
 .panel {
   @include unset($recursive: true);

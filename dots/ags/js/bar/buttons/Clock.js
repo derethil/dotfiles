@@ -1,9 +1,14 @@
 import App from "resource:///com/github/Aylur/ags/app.js";
 import Clock from "../../misc/Clock.js";
 import PanelButton from "../PanelButton.js";
+import FontIcon from "../../misc/FontIcon.js";
+import icons from "../../icons.js";
 
-export default ({ format = "%I\n%M\n%p" } = {}) =>
+/** @param {boolean} ampm */
+export default (ampm) =>
   PanelButton({
     class_name: "clock",
-    content: Clock({ format }),
+    color: "yellow",
+    content: Clock({ format: `%I\n%M${ampm ? "\n%p" : ""}` }),
+    icon: FontIcon({ icon: icons.clock }),
   });

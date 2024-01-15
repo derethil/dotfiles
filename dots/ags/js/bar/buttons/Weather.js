@@ -7,8 +7,7 @@ import { wttr } from "../..//utils.js";
 import icons from "../..//icons.js";
 
 import FontIcon from "../../misc/FontIcon.js";
-import HoverRevealer from "../../misc/HoverRevealer.js";
-import PanelButton from "../PanelButton.js";
+import PanelButton2 from "../PanelButton.js";
 
 const unitsSuffix = options.weather.units.value === "metric" ? "C" : "F";
 
@@ -47,27 +46,23 @@ const weatherInfo = Variable(
 );
 
 export default () =>
-  PanelButton({
+  PanelButton2({
     class_name: "weather",
-    boxProps: {
-      vertical: true,
-    },
-    content: [
-      FontIcon({
-        icon: weatherInfo.value.weatherIcon,
-        setup: (self) =>
-          self.hook(weatherInfo, () => {
-            // @ts-expect-error
-            self.icon = weatherInfo.value.weatherIcon;
-          }),
-      }),
-      Widget.Label({
-        class_name: "temperature",
-        hpack: "center",
-        setup: (self) =>
-          self.hook(weatherInfo, () => {
-            self.label = `${weatherInfo.value.temperature}°`;
-          }),
-      }),
-    ],
+    color: "blue",
+    icon: FontIcon({
+      icon: weatherInfo.value.weatherIcon,
+      setup: (self) =>
+        self.hook(weatherInfo, () => {
+          // @ts-expect-error
+          self.icon = weatherInfo.value.weatherIcon;
+        }),
+    }),
+    content: Widget.Label({
+      class_name: "temperature",
+      hpack: "center",
+      setup: (self) =>
+        self.hook(weatherInfo, () => {
+          self.label = `${weatherInfo.value.temperature}`;
+        }),
+    }),
   });

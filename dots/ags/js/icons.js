@@ -11,6 +11,8 @@ export default {
 
   dashboard: "",
 
+  clock: "",
+
   weather: {
     Unknown: "✨",
     Cloudy: "☁️",

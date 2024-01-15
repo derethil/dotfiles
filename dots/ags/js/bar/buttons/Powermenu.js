@@ -1,7 +1,6 @@
 import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Widget, { EventBox } from "resource:///com/github/Aylur/ags/widget.js";
 import icons from "../../icons.js";
-import PanelButton from "../PanelButton.js";
 import FontIcon from "../../misc/FontIcon.js";
 import HoverRevealer from "../../misc/HoverRevealer.js";
 

@@ -1,4 +1,3 @@
-import App from "resource:///com/github/Aylur/ags/app.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import options from "../options.js";
 import {
@@ -79,8 +78,6 @@ export async function centerSingleWindows() {
   const script_path = `~/.config/hypr/scripts/${script_name}`;
 
   const window_width = options.hypr.single_window_width.value;
-
-  console.log(`${window_width}`);
 
   if (window_width === 0) return;
 
