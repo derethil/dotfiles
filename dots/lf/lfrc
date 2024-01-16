@@ -106,6 +106,7 @@ map z $view "$f"
 # Archive Mappings
 map az zip
 map at tar
+map au unarchive
 
 # Trash Mappings
 map dd trash
