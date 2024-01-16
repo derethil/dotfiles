@@ -204,10 +204,16 @@ export default {
   }),
 
   weather: {
-    location: Option("", {
-      note: "See wttr.in/:help for more info, leave blank for auto",
-      scss: "exclude",
-    }),
+    location: {
+      lat: Option(38.9202, {
+        title: "Latitude",
+        scss: "exclude",
+      }),
+      lon: Option(-77.0375, {
+        title: "Longitude",
+        scss: "exclude",
+      }),
+    },
     units: Option("imperial", {
       enums: ["metric", "imperial"],
       type: "enum",

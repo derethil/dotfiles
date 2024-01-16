@@ -65,8 +65,7 @@ $button-radius: $radii;
         &:hover .indicator {
           color: $accent;
         }
-
-        .indicator {
+        & .indicator {
           color: $accent;
         }
 
@@ -80,6 +79,11 @@ $button-radius: $radii;
   // End Widgets
 
   .weather {
+    & .font-icon {
+      font-family: "Weather Icons";
+      font-size: $font-size * 1.15;
+      font-weight: bold;
+    }
     & .temperature {
       font-family: $mono-font;
       font-weight: bold;
