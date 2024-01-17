@@ -18,3 +18,15 @@ function mkdir -d "Create a directory and set CWD"
         end
     end
 end
+
+# Always cd after git clone
+function git
+    command git $argv
+    if test $status = 0
+        switch $argv[1]
+            case 'clone'
+                cd $argv[(count $argv)]
+                return
+        end
+    end
+end

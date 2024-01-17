@@ -16,8 +16,6 @@ $button-radius: $radii;
   // Start Widgets
 
   .dashboard-button {
-    font-family: "Noto Sans Serif";
-
     label {
       transition: $transition;
       color: transparentize($accent, $amount: 0.2);
@@ -93,6 +91,12 @@ $button-radius: $radii;
   .clock {
     font-family: $mono-font;
     font-weight: bold;
+  }
+
+  .system-tray {
+    .tray-item {
+      margin: $bar-spacing * 0.75 0;
+    }
   }
 
   .powermenu {

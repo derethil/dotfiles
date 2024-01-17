@@ -13,7 +13,10 @@ export default {
 
   clock: "",
 
+  tray: "󱊗",
+
   weather: {
+    init: "?",
     "day-200": "",
     "day-201": "",
     "day-202": "",

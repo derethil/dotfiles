@@ -83,7 +83,7 @@ export class OpenWeatherMapAPI {
       console.error(`${error}`);
       return {
         temperature: "0",
-        icon: icons.weather["day-800"],
+        icon: icons.weather.init,
       };
     }
   }

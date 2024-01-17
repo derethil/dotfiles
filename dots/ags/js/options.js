@@ -114,7 +114,7 @@ export default {
       scss: "font",
     }),
 
-    mono: Option("SF Mono", {
+    mono: Option("Liga SFMono Nerd Font", {
       type: "font",
       title: "Monospaced Font",
       scss: "mono-font",
@@ -217,6 +217,21 @@ export default {
     units: Option("imperial", {
       enums: ["metric", "imperial"],
       type: "enum",
+      scss: "exclude",
+    }),
+  },
+
+  tray: {
+    showModuleIcon: Option(false, {
+      category: "exclude",
+      note: "Show the module icon in the bar",
+      scss: "exclude",
+    }),
+
+    exclude: Option(["Wayland to X11 Video bridge"], {
+      category: "exclude",
+      type: "string",
+      note: "List of apps to exclude from the tray (based on their title)",
       scss: "exclude",
     }),
   },

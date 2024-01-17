@@ -2,11 +2,11 @@ import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import options from "../options.js";
 
 // Bar Widgets
-import Workspaces from "./buttons/Workspaces.js";
-import Clock from "./buttons/Clock.js";
-import Powermenu from "./buttons/Powermenu.js";
-import Weather from "./buttons/Weather.js";
-import DashboardButton from "./buttons/DashboardButton.js";
+import Workspaces from "./modules/Workspaces.js";
+import Clock from "./modules/Clock.js";
+import Powermenu from "./modules/Powermenu.js";
+import Weather from "./modules/Weather.js";
+import SystemTray from "./modules/SystemTray.js";
 
 const Start = () =>
   Widget.Box({
@@ -32,7 +32,7 @@ const End = () =>
     vpack: "end",
     hexpand: true,
     vertical: true,
-    children: [Weather(), Clock(false), Powermenu()],
+    children: [Weather(), Clock(false), SystemTray(), Powermenu()],
   });
 
 /** @param {number} monitor */

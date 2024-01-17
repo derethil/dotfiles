@@ -13,7 +13,7 @@ export default () =>
   PanelButton2({
     class_name: "weather",
     color: "blue",
-    icon: FontIcon(icons.weather["day-800"]).poll(msBetweenPoll, (fontIcon) => {
+    icon: FontIcon(icons.weather.init).poll(msBetweenPoll, (fontIcon) => {
       const getIcon = async () => {
         const response = await api.fetchWeatherInfo();
         fontIcon.icon = response.icon;
