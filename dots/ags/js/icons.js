@@ -15,6 +15,12 @@ export default {
 
   tray: "󱊗",
 
+  audio: {
+    muted: "",
+    low: "",
+    high: "",
+  },
+
   weather: {
     init: "?",
     "day-200": "",

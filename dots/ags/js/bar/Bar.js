@@ -7,6 +7,7 @@ import Clock from "./modules/Clock.js";
 import Powermenu from "./modules/Powermenu.js";
 import Weather from "./modules/Weather.js";
 import SystemTray from "./modules/SystemTray.js";
+import Volume from "./modules/Volume.js";
 
 const Start = () =>
   Widget.Box({
@@ -32,7 +33,7 @@ const End = () =>
     vpack: "end",
     hexpand: true,
     vertical: true,
-    children: [Weather(), Clock(false), SystemTray(), Powermenu()],
+    children: [Weather(), Volume(), Clock(false), SystemTray(), Powermenu()],
   });
 
 /** @param {number} monitor */

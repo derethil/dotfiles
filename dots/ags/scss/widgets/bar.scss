@@ -11,6 +11,11 @@ $button-radius: $radii;
 
   .panel-button {
     @include panel-button($flat: $bar-flat-buttons, $reactive: false);
+
+    & > box > box:last-child {
+      font-family: $mono-font;
+      font-weight: bold;
+    }
   }
 
   // Start Widgets
@@ -79,18 +84,16 @@ $button-radius: $radii;
   .weather {
     & .font-icon {
       font-family: "Weather Icons";
-      font-size: $font-size * 1.15;
-      font-weight: bold;
-    }
-    & .temperature {
-      font-family: $mono-font;
+      font-size: $font-size * 1.05;
       font-weight: bold;
     }
   }
 
-  .clock {
-    font-family: $mono-font;
-    font-weight: bold;
+  .audio {
+    .font-icon {
+      font-family: "Font Awesome 6 Free Solid";
+      font-size: $font-size * 1.05;
+    }
   }
 
   .system-tray {
