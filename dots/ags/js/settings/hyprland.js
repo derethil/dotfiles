@@ -90,7 +90,7 @@ export async function centerSingleWindows() {
 
   subprocess(
     ["bash", "-c", `${script_path} ${window_width} ${window_height}`],
-    (stdout) => console.log(stdout),
-    (stderr) => console.error(stderr)
+    () => {},
+    (sterr) => console.error(sterr)
   );
 }

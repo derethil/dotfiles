@@ -197,10 +197,9 @@ export default {
     unit: "",
   }),
 
-  workspaces: Option(5, {
+  min_workspaces: Option(5, {
     category: "Bar",
-    title: "No. workspaces on bar and overview",
-    note: "Set it to 0 to make it dynamic (not working yet)",
+    title: "Minimum workspaces on bar and overview",
   }),
 
   weather: {
