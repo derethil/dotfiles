@@ -38,7 +38,7 @@ export default () => {
         vertical: true,
         setup: (self) => {
           self.hook(options.mpris.preferred, update);
-          self.hook(Mpris, update, "notify::players");
+          self.hook(Mpris, update, "changed");
         },
       }),
     }),
