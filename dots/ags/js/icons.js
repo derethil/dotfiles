@@ -15,10 +15,29 @@ export default {
 
   tray: "󱊗",
 
+  mediaControls: "",
+
   audio: {
     muted: "",
     low: "",
     high: "",
+  },
+
+  mpris: {
+    shuffle: {
+      enabled: "󰒟",
+      disabled: "󰒟",
+    },
+    loop: {
+      none: "󰓦",
+      track: "󰓦",
+      playlist: "󰑐",
+    },
+    playing: "",
+    paused: "",
+    stopped: "",
+    next: "",
+    prev: "",
   },
 
   weather: {

@@ -8,6 +8,8 @@ import Powermenu from "./modules/Powermenu.js";
 import Weather from "./modules/Weather.js";
 import SystemTray from "./modules/SystemTray.js";
 import Volume from "./modules/Volume.js";
+import MediaControls from "./modules/MediaControls.js";
+import DashboardButton from "./modules/DashboardButton.js";
 
 const Start = () =>
   Widget.Box({
@@ -15,7 +17,7 @@ const Start = () =>
     vpack: "start",
     hexpand: true,
     vertical: true,
-    children: [Workspaces()],
+    children: [DashboardButton(), Workspaces(), MediaControls()],
   });
 
 const Center = () =>

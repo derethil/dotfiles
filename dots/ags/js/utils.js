@@ -69,3 +69,21 @@ export function env(key) {
   const env = dotenv();
   return env[key];
 }
+
+/** @param {string} img - path to an img file */
+export function blurImg(img) {
+  const cache = Utils.CACHE_DIR + "/media";
+  return new Promise((resolve) => {
+    if (!img) resolve("");
+
+    const dir = cache + "/blurred";
+    const blurred = dir + img.substring(cache.length);
+
+    if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) return resolve(blurred);
+
+    Utils.ensureDirectory(dir);
+    Utils.execAsync(["convert", img, "-blur", "0x22", blurred])
+      .then(() => resolve(blurred))
+      .catch(() => resolve(""));
+  });
+}

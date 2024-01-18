@@ -21,13 +21,14 @@ $button-radius: $radii;
   // Start Widgets
 
   .dashboard-button {
-    label {
+    .font-icon {
+      font-size: $font-size * 1.1;
       transition: $transition;
-      color: transparentize($accent, $amount: 0.2);
+      color: transparentize($blue, $amount: 0.2);
     }
 
-    &:hover label {
-      color: $accent;
+    &:hover .font-icon {
+      color: $blue;
     }
   }
 
@@ -54,26 +55,51 @@ $button-radius: $radii;
 
       // Occupied Workspace
       &.occupied {
-        &:hover .indicator {
-          color: $accent;
-        }
-
         .indicator {
           color: $foreground;
+        }
+        &:hover .indicator {
+          color: $hover-foreground;
         }
       }
 
       // Active Workspace
       &.active {
-        &:hover .indicator {
-          color: $accent;
-        }
         & .indicator {
           color: $accent;
         }
 
         &.empty .indicator {
           color: rgba($accent, $empty-accent-transparency);
+        }
+
+        &:hover .indicator {
+          color: $accent;
+        }
+      }
+    }
+  }
+
+  .mpris {
+    .font-icon {
+      font-family: "Font Awesome 6 Free Solid";
+    }
+
+    .mpris-label-icon {
+      font-size: $font-size * 1.05;
+    }
+
+    .controls {
+      button {
+        padding: $padding * 0.55 0;
+
+        .font-icon {
+          transition: $transition;
+          font-size: $font-size * 1.3;
+        }
+
+        &:hover .font-icon {
+          color: $hover-foreground;
         }
       }
     }

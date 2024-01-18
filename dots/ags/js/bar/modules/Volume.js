@@ -45,8 +45,12 @@ export default () =>
       self.icon = chooseIcon();
     }),
     color: "magenta",
-    content: Widget.Label().hook(Audio, (self) => {
-      if (!Audio["speaker"]) return;
-      self.label = formatVolume(Audio["speaker"].volume);
-    }),
+    content: Widget.Label().hook(
+      Audio,
+      (self) => {
+        if (!Audio["speaker"]) return;
+        self.label = formatVolume(Audio["speaker"].volume);
+      },
+      "speaker-changed"
+    ),
   });

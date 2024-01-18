@@ -13,7 +13,6 @@ function SystemTrayItem(item) {
     class_name: "tray-item",
     child: Widget.Icon().bind("icon", item, "icon"),
     on_primary_click: (_, event) => {
-      console.log(event);
       item.activate(event);
     },
     on_secondary_click: (_, event) => item.openMenu(event),

@@ -223,15 +223,23 @@ export default {
 
   tray: {
     showModuleIcon: Option(false, {
-      category: "exclude",
+      category: "bar",
       note: "Show the module icon in the bar",
       scss: "exclude",
     }),
 
     exclude: Option(["Wayland to X11 Video bridge"], {
-      category: "exclude",
+      category: "bar",
       type: "string",
       note: "List of apps to exclude from the tray (based on their title)",
+      scss: "exclude",
+    }),
+  },
+
+  mpris: {
+    preferred: Option("spotify", {
+      category: "bar",
+      note: "Preferred player to show in the bar",
       scss: "exclude",
     }),
   },
