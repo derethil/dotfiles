@@ -10,7 +10,7 @@
 # Constants
 
 WINDOW_WIDTH=$1
-WINDOW_HEIGHT=$2
+OTHER_HEIGHT=$2
 
 TEMP_DIR=/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE
 
@@ -20,8 +20,8 @@ HANDLED_LIST_PATH=$TEMP_DIR/handled_single_workspaces
 # List of window classes to ignore
 NO_HANDLE_LIST=(steam)
 
-if ([ -z "$WINDOW_WIDTH" ] || [ -z "$WINDOW_HEIGHT" ]); then
-  echo "Usage: $0 <window_width> <window_height>"
+if ([ -z "$WINDOW_WIDTH" ] || [ -z "$OTHER_HEIGHT" ]); then
+  echo "Usage: $0 <window_width> <OTHER_HEIGHT>"
   exit 1
 fi
 
@@ -101,7 +101,9 @@ handle() {
     # Fires if the workspace has a single window that is not in the list
     if [ "$num_windows" -eq 1 ] && [ -z "$window_address_in_list" ]; then
       # Float, Resize, and Center Window
-      hyprctl --batch "dispatch togglefloating address:$lastwindow_addr; dispatch resizewindowpixel exact $WINDOW_WIDTH $WINDOW_HEIGHT,address:$lastwindow_addr; dispatch centerwindow 1";
+      monitor_height=$(hyprctl monitors -j | jq ".[] | select(.id == $(hyprctl activeworkspace -j | jq .monitorID)).height")
+      window_height=$(echo "$monitor_height - $OTHER_HEIGHT" | bc)
+      hyprctl --batch "dispatch togglefloating address:$lastwindow_addr; dispatch resizewindowpixel exact $WINDOW_WIDTH $window_height,address:$lastwindow_addr; dispatch centerwindow 1";
 
       # Add Window to Single Windows List
       add_handled "$workspace_id" "$lastwindow_addr"

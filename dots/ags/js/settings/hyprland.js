@@ -82,14 +82,12 @@ export async function centerSingleWindows() {
   if (window_width === 0) return;
 
   // TODO: Support multiple monitors
-  const monitor = JSON.parse(await Hyprland.sendMessage("j/monitors"))[0];
   const wm_gaps = options.hypr.wm_gaps_multiplier.value * options.spacing.value;
   const border_width = options.border.width.value;
-  const window_height =
-    monitor.height - Math.floor(wm_gaps) * 2 - border_width * 2;
+  const other_height = Math.floor(wm_gaps) * 2 - border_width * 2;
 
   subprocess(
-    ["bash", "-c", `${script_path} ${window_width} ${window_height}`],
+    ["bash", "-c", `${script_path} ${window_width} ${other_height}`],
     () => {},
     (sterr) => console.error(sterr)
   );

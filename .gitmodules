@@ -10,3 +10,4 @@
 [submodule "dots/fonts/SFMono-Nerd-Font-Ligaturized"]
 	path = dots/fonts/SFMono-Nerd-Font-Ligaturized
 	url = https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized
+	ignore = untracked
