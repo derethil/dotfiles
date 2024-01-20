@@ -1,8 +1,9 @@
 import { forMonitors } from "./utils.js";
 import init from "./settings/setup.js";
 import Bar from "./bar/Bar.js";
+import Overview from "./overview/Overview.js";
 
-const windows = () => [forMonitors(Bar)];
+const windows = () => [forMonitors(Bar), Overview()];
 
 export default {
   onConfigParsed: init,

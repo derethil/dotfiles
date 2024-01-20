@@ -1,6 +1,7 @@
 import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Gdk from "gi://Gdk";
 import GLib from "gi://GLib";
+import cairo from "cairo";
 
 /**
  * Generate an array of numbers.
@@ -46,7 +47,32 @@ export function dependencies(bins) {
   return deps.every((has) => has);
 }
 
-function dotenv(key) {
+/**
+ * Creates a cairo surface from a widget.
+ * @param {import('gi://Gtk').Gtk.Widget} widget
+ * @returns {any} - missing cairo type
+ */
+export function createSurfaceFromWidget(widget) {
+  const alloc = widget.get_allocation();
+  const surface = new cairo.ImageSurface(
+    cairo.Format.ARGB32,
+    alloc.width,
+    alloc.height
+  );
+  const cr = new cairo.Context(surface);
+  cr.setSourceRGBA(255, 255, 255, 0);
+  cr.rectangle(0, 0, alloc.width, alloc.height);
+  cr.fill();
+  widget.draw(cr);
+
+  return surface;
+}
+
+/**
+ * Returns the .env file as an object.
+ * @returns {Record<string, string>}
+ * */
+function dotenv() {
   const HOME = GLib.getenv("HOME");
   const contents = Utils.readFile(`${HOME}/.config/ags/.env`);
 
@@ -65,6 +91,11 @@ function dotenv(key) {
   return env;
 }
 
+/**
+ * Returns the value of a key in the .env file.
+ * @param {string} key
+ * @returns {string}
+ */
 export function env(key) {
   const env = dotenv();
   return env[key];

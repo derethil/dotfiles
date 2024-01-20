@@ -242,4 +242,8 @@ export default {
       scss: "exclude",
     }),
   },
+
+  substitutions: {
+    icons: [["code-url-handler", "code"]],
+  },
 };
