@@ -221,6 +221,11 @@ export default {
   },
 
   tray: {
+    disable: Option(true, {
+      category: "bar",
+      note: "Disable the tray",
+      scss: "exclude",
+    }),
     showModuleIcon: Option(false, {
       category: "bar",
       note: "Show the module icon in the bar",

@@ -32,14 +32,16 @@ export default () =>
     transition_duration: options.transition.value,
     transition: "slide_up",
     class_name: "system-tray",
-    setup: (self) =>
+    setup: (self) => {
       self.hook(SystemTray, (self) => {
+        if (options.tray.disable.value) return;
         if (SystemTray.items.filter(filterItems).length > 0) {
           self.reveal_child = true;
         } else {
           self.reveal_child = false;
         }
-      }),
+      });
+    },
     child: PanelButton({
       class_name: "system-tray",
       icon: options.tray.showModuleIcon.value ? FontIcon(icons.tray) : null,
