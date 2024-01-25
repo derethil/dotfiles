@@ -17,7 +17,7 @@ This will create the necessary symbolic links from this repository to the home d
 These dotfiles are designed around the following packages and tools:
 
 - **Window Manager**: [Hyprland](https://github.com/hyprwm/Hyprland)
-- **Terminal**: [Kitty](https://sw.kovidgoyal.net/kitty/)
+- **Terminal**: [Foot](https://codeberg.org/dnkl/foot/)
 - **Shell**: [Fish](https://fishshell.com/)
 - **Prompt**: [Starship](https://starship.rs/)
 - **Widgets**: [Aylur's Gtk Shell](https://github.com/Aylur/ags)

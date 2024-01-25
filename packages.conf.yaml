@@ -8,10 +8,10 @@
     - direnv
     - eza
     - fish
+    - foot
     - gnome-keyring
     - inotify-tools
     - jq
-    - kitty
     - neovim
     - netctl
     - otf-font-awesome

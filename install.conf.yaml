@@ -34,11 +34,11 @@
     # Config Dirs
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
-    ~/.config/kitty: dots/kitty
     ~/.config/direnv: dots/direnv
     ~/.config/nvim: dots/nvim
     ~/.config/ags: dots/ags
     ~/.config/lf: dots/lf
+    ~/.config/foot: dots/foot
 
     # Config Files
     ~/.config/starship.toml: dots/starship.toml
