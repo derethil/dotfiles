@@ -23,8 +23,6 @@ read_only_style = "blue"
 
 [cmd_duration]
 min_time = 1_000
-min_time_to_notify = 30_000
-show_notifications = true
 
 [fill]
 symbol = " "
@@ -40,6 +38,9 @@ style = "bold green"
 
 [package]
 disabled = true
+
+[python]
+symbol = " "
 
 [status]
 disabled = false

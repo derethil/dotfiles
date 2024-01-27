@@ -20,7 +20,7 @@ move_to_tv() {
   current_info=$(hyprctl activewindow -j | jq "[.address, .workspace.id]" --raw-output)
   tv_window_address=$(echo $current_info | jq .[0] --raw-output)
   tv_was_on=$(echo $current_info | jq .[1] --raw-output)
-  hyprctl --batch "keyword monitor $TV_MONITOR_NAME, $TV_MONITOR_SETTINGS; keyword workspace $TV_WORKSPACE, monitor:$TV_MONITOR_NAME"
+  hyprctl --batch "keyword monitor $TV_MONITOR_NAME,$TV_MONITOR_SETTINGS; keyword workspace $TV_WORKSPACE, monitor:$TV_MONITOR_NAME"
   # This doesn't work when in the batch
   hyprctl dispatch movetoworkspace $TV_WORKSPACE,address:$tv_window_address
   echo "$tv_was_on,$tv_window_address" > $TEMP_FILE
@@ -34,8 +34,8 @@ move_away_tv() {
   hyprctl --batch "dispatch movetoworkspace $tv_was_on,address:$tv_window_address; keyword monitor $TV_MONITOR_NAME, disable;"
 }
 
-if [ -f $TEMP_FILE ]; then
-  move_away_tv
-else
+if [ ! -f $TEMP_FILE ]; then
   move_to_tv
+else
+  move_away_tv
 fi
