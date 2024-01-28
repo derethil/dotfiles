@@ -38,6 +38,7 @@
     ~/.config/nvim: dots/nvim
     ~/.config/ags: dots/ags
     ~/.config/lf: dots/lf
+    ~/.config/ctpv: dots/ctpv
     ~/.config/foot: dots/foot
 
     # Config Files
@@ -55,6 +56,11 @@
 
     ~/.local/share/applications/:
       path: dots/applications/*
+      glob: true
+
+    # Miscellaneous
+    ~/Pictures/wallpapers/:
+      path: dots/wallpapers/*
       glob: true
 
 - shell:

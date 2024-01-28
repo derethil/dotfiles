@@ -1,8 +1,16 @@
 # Basic Settings
+set sixel true
 set hidden true
 set drawbox true
 set icons true
 set ignorecase true
+set dirpreviews
+
+# Previewer
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
 
 # Custom Functions
 cmd open ${{
