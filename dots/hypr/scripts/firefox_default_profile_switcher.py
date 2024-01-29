@@ -4,6 +4,7 @@ from os import path, scandir
 from enum import Enum, unique
 
 import hyprland
+from hyprland.info import Info as hyprInfo
 
 FF_PATH = path.expanduser("~/.mozilla/firefox/")
 
@@ -29,6 +30,12 @@ class ProfileEnum(Enum):
             if member.value in value:
                 return member
         raise ValueError(f"Invalid profile key: {value}")
+
+    @classmethod
+    def after(cls, value: "Profile") -> "Profile":
+        members = list(cls)
+        index = members.index(value)
+        return members[(index + 1) % len(members)]
 
 Profile = ProfileEnum('Profile', {value.upper(): value for value in profile_values})
 
@@ -62,21 +69,24 @@ class Profiles:
                 else:
                     f.write(line)
 
+        print(f"Set default profile to {profile.value}")
+
 
 class Handler(hyprland.Events):
     def __init__(self):
         self.c = hyprland.Config()
         self.profiles = Profiles()
+        self.firefox_addresses = {}
         super().__init__()
 
-    async def on_activewindow(self, window_class, window_title, *_):
-        if window_class != "firefox":
+    # Helper methods
+
+    def label_from_window(self, win_class, title) -> str:
+        if win_class != "firefox":
             # Skip if the window isn't Firefox
             return
 
-        matched = re.search(r"profile-label-(\S+?)\]", window_title)
-
-        if not matched:
+        if not (matched := re.search(r"profile-label-(\S+?)\]", title)):
             # Skip if the window title doesn't contain the profile label
             return
 
@@ -85,8 +95,36 @@ class Handler(hyprland.Events):
             # Skip if the profile label isn't in the list of profiles or if it's already the default
             return
 
-        self.profiles.default = Profile(label)
-        print(f"Switched default to {self.profiles.default} profile")
+        return label
+
+    # Hyprland event handlers
+
+    async def on_activewindowv2(self, address, *_):
+        active = await hyprInfo.active_window()
+        label = self.label_from_window(active["class"], active["title"])
+        if label:
+            active_profile = Profile(label)
+            self.firefox_addresses[address] = active_profile
+            self.profiles.default = active_profile
+
+
+    async def on_openwindow(self, address, _, win_class, title):
+        label = self.label_from_window(win_class, title)
+        if label:
+            self.firefox_addresses[address] = Profile(label)
+
+    async def on_closewindow(self, address):
+        if address not in self.firefox_addresses.keys():
+            return
+
+        clients = await hyprInfo.clients()
+        num_firefox_windows = len([c for c in clients if c["class"] == "firefox"])
+
+        closed_profile = self.firefox_addresses[address]
+        del self.firefox_addresses[address]
+
+        if num_firefox_windows > 0:
+            self.profiles.default = Profile.after(closed_profile)
 
 
 h = Handler()
