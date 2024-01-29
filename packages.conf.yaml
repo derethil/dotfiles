@@ -17,6 +17,7 @@
     - otf-font-awesome
     - pactl
     - playerctl
+    - python-pipx
     - sassc
     - slurp
     - socat
@@ -51,3 +52,10 @@
       global: latest
       versions:
         - latest
+
+- shell:
+    - command: pipx install poetry
+      description: Installing poetry
+
+    - command: cd ~/.config/hypr/scripts/ && python -m venv ~/.config/hypr/scripts/.venv && source ~/.config/hypr/scripts/.venv/bin/activate && ~/.local/bin/poetry install --no-root
+      description: Creating virtual environment for hypr scripts
