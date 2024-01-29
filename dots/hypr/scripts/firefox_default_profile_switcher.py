@@ -1,6 +1,7 @@
+from argparse import ArgumentParser
 import re
 from os import path, scandir
-from enum import Enum
+from enum import Enum, unique
 
 import hyprland
 
@@ -12,10 +13,12 @@ FF_PATH = path.expanduser("~/.mozilla/firefox/")
 # And that you added the profile name to the window title with this format: profile-label-<Profile>
 
 
-class Profile(Enum):
-    WORK = "Work"
-    PERSONAL = "Personal"
+parser = ArgumentParser(description="Switch the default Firefox profile based on the active window's title.")
+parser.add_argument("profiles", nargs="+", help="The profiles to switch the default between")
+profile_values = parser.parse_args().profiles
 
+@unique
+class ProfileEnum(Enum):
     @classmethod
     def within(cls, value: str) -> bool:
         return any(p.value in value for p in Profile)
@@ -27,6 +30,7 @@ class Profile(Enum):
                 return member
         raise ValueError(f"Invalid profile key: {value}")
 
+Profile = ProfileEnum('Profile', {value.upper(): value for value in profile_values})
 
 class Profiles:
     def __init__(self):
@@ -46,7 +50,8 @@ class Profiles:
                     return Profile(line.split("=")[1].strip())
         raise ValueError("No default profile found")
 
-    def set_default(self, profile: Profile) -> None:
+    @default.setter
+    def default(self, profile: Profile) -> None:
         with open(self.ini_file, "r") as f:
             lines = f.readlines()
 
@@ -65,17 +70,22 @@ class Handler(hyprland.Events):
         super().__init__()
 
     async def on_activewindow(self, window_class, window_title, *_):
-        # Don't do anything if the window is not firefox
         if window_class != "firefox":
+            # Skip if the window isn't Firefox
             return
 
         matched = re.search(r"profile-label-(\S+?)\]", window_title)
 
-        # Don't do anything if the window doesn't have a profile label or if the profile is already the default
-        if not matched or Profile(matched.group(1)) == self.profiles.default:
+        if not matched:
+            # Skip if the window title doesn't contain the profile label
             return
 
-        self.profiles.set_default(Profile(matched.group(1)))
+        label = matched.group(1)
+        if label not in profile_values or label == self.profiles.default.value:
+            # Skip if the profile label isn't in the list of profiles or if it's already the default
+            return
+
+        self.profiles.default = Profile(label)
         print(f"Switched default to {self.profiles.default} profile")
 
 
