@@ -1,16 +1,16 @@
 import Gtk from "gi://Gtk";
-import { createCtor } from "resource:///com/github/Aylur/ags/widget.js";
+import { subclass } from "resource:///com/github/Aylur/ags/widget.js";
+import { register } from "resource:///com/github/Aylur/ags/widgets/widget.js";
 import AgsLabel from "resource:///com/github/Aylur/ags/widgets/label.js";
-import GObject from "gi://GObject";
 
 class FontIcon extends AgsLabel {
   static {
-    GObject.registerClass(this);
+    register(this);
   }
 
-  /** @param {string | import('types/widgets/label').Props & { icon?: string }} params */
+  /** @param {string | (import('types/widgets/label').Props & { icon?: string })} params */
   constructor(params = "") {
-    // @ts-expect-error
+    // @ts-expect-errord
     const { icon = "", ...rest } = params;
 
     super(typeof params === "string" ? {} : rest);
@@ -50,4 +50,4 @@ class FontIcon extends AgsLabel {
   }
 }
 
-export default createCtor(FontIcon);
+export default subclass(FontIcon);

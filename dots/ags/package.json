@@ -1,6 +1,6 @@
 {
   "name": "ags-config",
-  "version": "1.6.3",
+  "version": "1.7.4",
   "description": "AGS Configuration",
   "main": "config.js",
   "repository": {

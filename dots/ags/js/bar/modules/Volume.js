@@ -1,6 +1,6 @@
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import icons from "../../icons.js";
 import FontIcon from "../../misc/FontIcon.js";
 import PanelButton from "../PanelButton.js";
@@ -10,8 +10,11 @@ function formatVolume(volume) {
   return String(Math.round(volume * 100));
 }
 
+/**
+ * @returns {string}
+ */
 function chooseIcon() {
-  if (!Audio["speaker"]) return;
+  if (!Audio["speaker"]) return "";
 
   const volume = Audio["speaker"].volume * 100;
 
@@ -40,7 +43,7 @@ export default () =>
       Audio["speaker"].is_muted = !Audio["speaker"].is_muted;
     },
     class_name: "audio",
-    icon: FontIcon().hook(Audio, (self) => {
+    icon: FontIcon({}).hook(Audio, (self) => {
       if (!Audio["speaker"]) return;
       self.icon = chooseIcon();
     }),

@@ -7,7 +7,7 @@ import App from "resource:///com/github/Aylur/ags/app.js";
  * @property {any=} icon
  * @property {string=} window
  * @property {string=} color
- * @property {import('types/widgets/box').BoxProps=} boxProps
+ * @property {import('types/widgets/box.js').BoxProps<any>=} boxProps
  */
 
 /** @param {string=} color */
@@ -17,7 +17,7 @@ function backgroundColorClass(color) {
 }
 
 /**
- * @param {import('types/widgets/button').ButtonProps & PanelButtonProps} o
+ * @param {import('types/widgets/button').ButtonProps<any> & PanelButtonProps} o
  */
 export default ({
   class_name,

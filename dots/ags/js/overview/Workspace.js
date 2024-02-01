@@ -1,6 +1,6 @@
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk";
 import Client from "./Client.js";
@@ -43,7 +43,7 @@ export default (index) => {
       child: fixed,
     }),
 
-    /** @param {Array<import('types/service/hyprland').Client>} clients */
+    /** @param {Array<import('types/service/hyprland.js').Client>} clients */
     attribute: (clients) => {
       fixed.get_children().forEach((ch) => ch.destroy());
       clients

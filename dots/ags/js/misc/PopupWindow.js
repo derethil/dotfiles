@@ -1,20 +1,21 @@
 import AgsWindow from "resource:///com/github/Aylur/ags/widgets/window.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Widget, { subclass } from "resource:///com/github/Aylur/ags/widget.js";
 import options from "../options.js";
 import GObject from "gi://GObject";
+import { register } from "resource:///com/github/Aylur/ags/widgets/widget.js";
 
-// @ts-expect-error
-export class PopupWindow extends AgsWindow {
+// @ts-ignore
+class PopupWindow extends AgsWindow {
   static {
     GObject.registerClass(this);
   }
 
   /**
-   * @param {import('types/widgets/window').WindowProps & {
+   * @param {import('types/widgets/window').WindowProps<any> & {
    *      name: string
-   *      child: import('types/widgets/box').default
-   *      transition?: import('types/widgets/revealer').RevealerProps['transition']
+   *      child: import('types/widgets/box.js').default
+   *      transition?: import('types/widgets/revealer.js').RevealerProps<any>['transition']
    *  }} config
    */
   constructor({ name, child, transition = "none", visible = false, ...rest }) {
@@ -54,11 +55,12 @@ export class PopupWindow extends AgsWindow {
   }
 }
 
+
 /**
- * @param {import('types/widgets/window').WindowProps & {
+ * @param {import('types/widgets/window.js').WindowProps<any> & {
  *      name: string
- *      child: import('types/widgets/box').default
- *      transition?: import('types/widgets/revealer').RevealerProps['transition']
+ *      child: import('types/widgets/box.js').default
+ *      transition?: import('types/widgets/revealer.js').RevealerProps<any>['transition']
  *  }} config
  */
 export default (config) => new PopupWindow(config);

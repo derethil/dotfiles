@@ -1,8 +1,8 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Utils from "resource:///com/github/Aylur/ags/utils.js";
 
 /**
- * @typedef {import('types/widgets/eventbox').EventBoxProps & {
+ * @typedef {import('types/widgets/eventbox').EventBoxProps<any> & {
  *    indicator?: any
  *    direction?: 'left' | 'right' | 'down' | 'up'
  *    duration?: number
@@ -29,6 +29,7 @@ export default ({
   const posEnd = direction === "up" || direction === "left";
 
   const revealer = Widget.Revealer({
+    // @ts-ignore
     transition: `slide_${direction}`,
     setup: setupRevealer,
     transition_duration: duration,

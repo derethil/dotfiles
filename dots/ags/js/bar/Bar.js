@@ -10,6 +10,7 @@ import SystemTray from "./modules/SystemTray.js";
 import Volume from "./modules/Volume.js";
 import MediaControls from "./modules/MediaControls.js";
 import DashboardButton from "./modules/DashboardButton.js";
+import Battery from "./modules/Battery.js";
 
 const Start = () =>
   Widget.Box({
@@ -35,7 +36,14 @@ const End = () =>
     vpack: "end",
     hexpand: true,
     vertical: true,
-    children: [Weather(), Volume(), Clock(false), SystemTray(), Powermenu()],
+    children: [
+      Weather(),
+      Volume(),
+      Battery(),
+      Clock(false),
+      SystemTray(),
+      Powermenu(),
+    ],
   });
 
 /** @param {number} monitor */
@@ -52,7 +60,6 @@ export default (monitor) =>
       "bottom",
     ],
     child: Widget.CenterBox({
-      // @ts-expect-error this isn't typed as a subclass of box for some reason
       vertical: true,
       class_name: `panel`,
       start_widget: Start(),

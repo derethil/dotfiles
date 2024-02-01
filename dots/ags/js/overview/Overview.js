@@ -8,22 +8,22 @@ import { range } from "../utils.js";
 
 const ws = options.min_workspaces;
 
-/** @param {import('types/widgets/box').default} box */
+/** @param {import('types/widgets/box.js').default} box */
 const update = (box) => {
-  if (App.windows.has("overview") && !App.getWindow("overview")?.visible)
-    return;
+  return;
+  // if (App.windows.has("overview") && !App.getWindow("overview")?.visible)
+  //   return;
 
   Hyprland.sendMessage("j/clients")
     .then((clients) => {
       box.children.forEach((ws) => {
-        // @ts-expect-error
         ws.attribute(JSON.parse(clients));
       });
     })
     .catch(console.error);
 };
 
-/** @param {import('types/widgets/box').default} box */
+/** @param {import('types/widgets/box.js').default} box */
 const children = (box) => {
   if (ws.value === 0) {
     box.children = Hyprland.workspaces

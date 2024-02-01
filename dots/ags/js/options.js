@@ -23,6 +23,12 @@ export default {
   apply: apply,
   list: getOptions,
 
+  mode: Option("laptop", {
+    category: "exclude",
+    enums: ["desktop", "laptop"],
+    type: "enum",
+  }),
+
   spacing: Option(9, {
     note: "Spacing between windows and widgets",
   }),
@@ -221,7 +227,7 @@ export default {
   },
 
   tray: {
-    disable: Option(true, {
+    disable: Option(false, {
       category: "bar",
       note: "Disable the tray",
       scss: "exclude",

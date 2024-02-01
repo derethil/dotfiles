@@ -1,4 +1,4 @@
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
 import Gtk from "gi://Gtk";
 import options from "../options.js";
@@ -16,12 +16,12 @@ export default function init() {
   globals();
   gsettingsColorScheme();
   gtkFontSettings();
-  scssWatcher();
 
+  scssWatcher();
   reloadScss();
   hyprlandInit();
-  setupHyprland();
 
+  setupHyprland();
   centerWindowsInit();
   centerSingleWindows();
 }

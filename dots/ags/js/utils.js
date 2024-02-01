@@ -1,7 +1,9 @@
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Utils, { CACHE_DIR } from "resource:///com/github/Aylur/ags/utils.js";
 import Gdk from "gi://Gdk";
 import GLib from "gi://GLib";
 import cairo from "cairo";
+import { Battery } from "resource:///com/github/Aylur/ags/service/battery.js";
+import icons from "./icons.js";
 
 /**
  * Generate an array of numbers.
@@ -26,7 +28,7 @@ export function substitute(collection, item) {
 /**
  * Passes the default monitor number to the widget function.
  * @param {(monitor: number) => any} widget
- * @returns {Array<import('types/widgets/window').default>}
+ * @returns {Array<import('types/widgets/window.js').default>}
  */
 export function forMonitors(widget) {
   const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
@@ -49,7 +51,7 @@ export function dependencies(bins) {
 
 /**
  * Creates a cairo surface from a widget.
- * @param {import('gi://Gtk').Gtk.Widget} widget
+ * @param {import('gi://Gtk').default.Widget} widget
  * @returns {any} - missing cairo type
  */
 export function createSurfaceFromWidget(widget) {
@@ -103,7 +105,7 @@ export function env(key) {
 
 /** @param {string} img - path to an img file */
 export function blurImg(img) {
-  const cache = Utils.CACHE_DIR + "/media";
+  const cache = CACHE_DIR + "/media";
   return new Promise((resolve) => {
     if (!img) resolve("");
 
@@ -117,4 +119,16 @@ export function blurImg(img) {
       .then(() => resolve(blurred))
       .catch(() => resolve(""));
   });
+}
+
+/**
+ * Returns the icon for the battery.
+ * @param {Battery} battery
+ */
+export function batteryIcon(battery) {
+  if (!battery.available) return icons.battery.none;
+  if (battery.charged) return icons.battery.chargingFull;
+  if (battery.charging) return icons.battery.charging;
+  const ceilingTen = Math.ceil(battery.percent / 10) * 10;
+  return icons.battery[ceilingTen];
 }

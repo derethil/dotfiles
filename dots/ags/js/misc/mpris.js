@@ -6,7 +6,7 @@ import FontIcon from "./FontIcon.js";
 
 /**
  * @param {import('types/service/mpris').MprisPlayer} player
- * @param {import('types/widgets/box').BoxProps=} props
+ * @param {import('types/widgets/window').WindowProps} props
  */
 export const CoverArt = (player, props) =>
   Widget.Box({
@@ -18,8 +18,8 @@ export const CoverArt = (player, props) =>
   });
 
 /**
- * @param {import('types/service/mpris').MprisPlayer} player
- * @param {import('types/widgets/box').BoxProps=} props
+ * @param {import('types/service/mpris.js').MprisPlayer} player
+ * @param {import('types/widgets/box.js').BoxProps=} props
  */
 export const BlurredCoverArt = (player, props) =>
   Widget.Box({
@@ -37,8 +37,8 @@ export const BlurredCoverArt = (player, props) =>
   });
 
 /**
- * @param {import('types/service/mpris').MprisPlayer} player
- * @param {import('types/widgets/label').Props=} props
+ * @param {import('types/service/mpris.js').MprisPlayer} player
+ * @param {import('types/widgets/label.js').Props=} props
  */
 export const TitleLabel = (player, props) =>
   Widget.Label({
@@ -48,8 +48,8 @@ export const TitleLabel = (player, props) =>
   });
 
 /**
- * @param {import('types/service/mpris').MprisPlayer} player
- * @param {import('types/widgets/label').Props=} props
+ * @param {import('types/service/mpris.js').MprisPlayer} player
+ * @param {import('types/widgets/label.js').Props=} props
  */
 export const ArtistLabel = (player, props) =>
   Widget.Label({
@@ -59,8 +59,8 @@ export const ArtistLabel = (player, props) =>
   });
 
 /**
- * @param {import('types/service/mpris').MprisPlayer} player
- * @param {import('types/widgets/icon').Props & { symbolic?: boolean }=} props
+ * @param {import('types/service/mpris.js').MprisPlayer} player
+ * @param {import('types/widgets/icon.js').Props & { symbolic?: boolean }=} props
  */
 export const PlayerIcon = (player, { symbolic = true, ...props } = {}) =>
   Widget.Icon({
@@ -77,8 +77,8 @@ export const PlayerIcon = (player, { symbolic = true, ...props } = {}) =>
   });
 
 /**
- * @param {import('types/service/mpris').MprisPlayer} player
- * @param {import('types/widgets/slider').SliderProps=} props
+ * @param {import('types/service/mpris.js').MprisPlayer} player
+ * @param {import('types/widgets/slider.js').SliderProps=} props
  */
 export const PositionSlider = (player, props) =>
   Widget.Slider({
@@ -107,7 +107,7 @@ function lengthStr(length) {
   return `${min}:${sec0}${sec}`;
 }
 
-/** @param {import('types/service/mpris').MprisPlayer} player */
+/** @param {import('types/service/mpris.js').MprisPlayer} player */
 export const PositionLabel = (player) =>
   Widget.Label({
     setup: (self) => {
@@ -121,14 +121,14 @@ export const PositionLabel = (player) =>
     },
   });
 
-/** @param {import('types/service/mpris').MprisPlayer} player */
+/** @param {import('types/service/mpris.js').MprisPlayer} player */
 export const LengthLabel = (player) =>
   Widget.Label({
     label: player.bind("length").transform((l) => lengthStr(l)),
     visible: player.bind("length").transform((l) => l > 0),
   });
 
-/** @param {import('types/service/mpris').MprisPlayer} player */
+/** @param {import('types/service/mpris.js').MprisPlayer} player */
 export const Slash = (player) =>
   Widget.Label({
     label: "/",
@@ -141,8 +141,8 @@ export const Slash = (player) =>
 
 /**
  * @param {Object} o
- * @param {import('types/service/mpris').MprisPlayer} o.player
- * @param {import('types/widgets/stack').StackProps['items']} o.items
+ * @param {import('types/service/mpris.js').MprisPlayer} o.player
+ * @param {import('types/widgets/stack.js').StackProps['items']} o.items
  * @param {'shuffle' | 'loop' | 'playPause' | 'previous' | 'next'} o.onClick
  * @param {MprisPlayerProp} o.prop
  * @param {MprisPlayerProp} o.canProp
@@ -157,7 +157,7 @@ const PlayerButton = ({ player, items, onClick, prop, canProp, cantValue }) => {
   });
 };
 
-/** @param {import('types/service/mpris').MprisPlayer} player */
+/** @param {import('types/service/mpris.js').MprisPlayer} player */
 export const ShuffleButton = (player) =>
   PlayerButton({
     player,
@@ -183,7 +183,7 @@ export const ShuffleButton = (player) =>
     cantValue: null,
   });
 
-/** @param {import('types/service/mpris').MprisPlayer} player */
+/** @param {import('types/service/mpris.js').MprisPlayer} player */
 export const LoopButton = (player) =>
   PlayerButton({
     player,
@@ -216,7 +216,7 @@ export const LoopButton = (player) =>
     cantValue: null,
   });
 
-/** @param {import('types/service/mpris').MprisPlayer} player */
+/** @param {import('types/service/mpris.js').MprisPlayer} player */
 export const PlayPauseButton = (player) =>
   PlayerButton({
     player,
@@ -249,7 +249,7 @@ export const PlayPauseButton = (player) =>
     cantValue: false,
   });
 
-/** @param {import('types/service/mpris').MprisPlayer} player */
+/** @param {import('types/service/mpris.js').MprisPlayer} player */
 export const PreviousButton = (player) =>
   PlayerButton({
     player,
@@ -268,7 +268,7 @@ export const PreviousButton = (player) =>
     cantValue: false,
   });
 
-/** @param {import('types/service/mpris').MprisPlayer} player */
+/** @param {import('types/service/mpris.js').MprisPlayer} player */
 export const NextButton = (player) =>
   PlayerButton({
     player,
