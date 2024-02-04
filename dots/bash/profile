@@ -1,0 +1,4 @@
+if [ "$(tty)" = "/dev/tty1" ] ; then
+    exec Hyprland > hyprland.log.txt 2> hyprland.errors.txt
+fi
+

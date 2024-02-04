@@ -12,6 +12,7 @@
 - link:
     # Home Files
     ~/.bashrc: dots/bash/bashrc
+    ~/.profile: dots/bash/profile
     ~/.global.gitignore: dots/.global.gitignore
 
     # GTK Settings
