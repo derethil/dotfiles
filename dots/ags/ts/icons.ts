@@ -23,6 +23,10 @@ export default {
     high: "",
   },
 
+  brightness: {
+    screen: "",
+  },
+
   mpris: {
     fallback: "audio-x-generic-symbolic",
     shuffle: {

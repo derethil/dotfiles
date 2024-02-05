@@ -2,11 +2,13 @@ import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
 import { MprisPlayer } from "resource:///com/github/Aylur/ags/service/mpris.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
+import Brightness from "ts/services/brightness";
 import Options from "../options";
 
 declare global {
   var audio: typeof Audio;
   var app: typeof App;
+  var brightness: typeof Brightness;
   var mpris: MprisPlayer;
   var options: typeof Options;
 }
@@ -22,6 +24,7 @@ export async function globals() {
     globalThis.app = (
       await import("resource:///com/github/Aylur/ags/app.js")
     ).default;
+    globalThis.brightness = (await import("ts/services/brightness")).default;
 
     // Sync Services
     Mpris.players.forEach((player) => {

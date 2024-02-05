@@ -11,6 +11,7 @@ import Audio from "./modules/Audio";
 import MprisControls from "./modules/MprisControls";
 import DashboardButton from "./modules/DashboardButton";
 import Battery from "./modules/Battery";
+import Backlight from "./modules/Backlight";
 
 const Start = () =>
   Widget.Box({
@@ -36,7 +37,15 @@ const End = () =>
     vpack: "end",
     hexpand: true,
     vertical: true,
-    children: [Weather(), Audio(), Battery(), Clock(), SystemTray(), Powermenu()],
+    children: [
+      Backlight(),
+      Weather(),
+      Audio(),
+      Battery(),
+      Clock(),
+      SystemTray(),
+      Powermenu(),
+    ],
   });
 
 export default (monitor: number) =>

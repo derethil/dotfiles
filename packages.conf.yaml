@@ -15,7 +15,6 @@
     - neovim
     - netctl
     - otf-font-awesome
-    - pactl
     - playerctl
     - python-pipx
     - sassc
