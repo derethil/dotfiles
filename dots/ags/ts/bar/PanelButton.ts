@@ -1,18 +1,20 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
+import { BoxProps } from "types/widgets/box";
+import { ButtonProps } from "types/widgets/button";
 
 function backgroundColorClass(color?: string) {
   if (!color) return "";
   return `panel-button-icon-bg-${color}`;
 }
 
-type PanelButtonProps = import("types/widgets/button").ButtonProps<any> & {
+interface PanelButtonProps extends ButtonProps<any> {
   content: any;
   icon?: any;
   window?: string;
   color?: string;
-  boxProps?: import("types/widgets/box").BoxProps<any>;
-};
+  boxProps?: BoxProps<any>;
+}
 
 /**
  * @param {s} o
@@ -26,7 +28,6 @@ export default ({
   color,
   window = "",
   setup,
-  attribute,
   ...rest
 }: PanelButtonProps) => {
   const icon_class = icon

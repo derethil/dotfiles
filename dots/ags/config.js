@@ -1,7 +1,6 @@
 import { readFile } from "resource:///com/github/Aylur/ags/utils.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
 import Utils from "resource:///com/github/Aylur/ags/utils.js";
-import { dependencies } from "./js/utils.js";
 
 const pkgjson = JSON.parse(readFile(App.configDir + "/package.json"));
 
@@ -22,7 +21,6 @@ const entry = `${App.configDir}/ts/main.ts`;
 const output = "/tmp/ags/js";
 
 async function compileAgs() {
-  if (!dependencies(["bun"])) return {};
 
   try {
     // prettier-ignore
