@@ -1,5 +1,5 @@
 // import Notifications from "types/service/notifications";
-import Gtk from "gi://Gtk";
+import Gtk from "gi://Gtk?version=3.0";
 import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import { globals } from "./globals";
 import { dependencies } from "ts/lib/utils";
@@ -14,18 +14,24 @@ import {
 } from "./hyprland";
 
 export function init() {
+  // Environment
   loadDotenv();
 
+  // Settings
   notificationsBlacklist();
   globals();
   gsettingsColorScheme();
   gtkFontSettings();
 
+  // Scss
   scssWatcher();
   reloadScss();
-  hyprlandInit();
 
+  // Hyprland Settings
+  hyprlandInit();
   setupHyprland();
+
+  // Start Scripts
   centerWindowsInit();
   centerSingleWindows();
 }

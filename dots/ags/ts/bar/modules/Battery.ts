@@ -1,11 +1,10 @@
 const battery = await Service.import("battery");
+import { Battery } from "types/service/battery";
 
 import PanelButton from "../PanelButton";
 import FontIcon from "../../misc/FontIcon";
 import icons from "../../icons";
-import { Battery } from "types/service/battery";
-import { Variable } from "resource:///com/github/Aylur/ags/variable.js";
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
+import options from "ts/options";
 
 function batteryIcon(battery: Battery): string {
   const { available, charging, charged, percent } = battery;
@@ -18,7 +17,7 @@ function batteryIcon(battery: Battery): string {
   return icons.battery.none;
 }
 
-export default () =>
+const BatteryModule = () =>
   PanelButton({
     color: "green",
     class_name: "clock",
@@ -29,3 +28,8 @@ export default () =>
       self.icon = batteryIcon(battery);
     }),
   });
+
+export default () => {
+  if (options.mode.value === "laptop") return BatteryModule();
+  return Widget.Box();
+};

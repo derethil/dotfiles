@@ -67,14 +67,23 @@ export async function setupHyprland() {
     `decoration:drop_shadow ${drop_shadow ? "yes" : "no"}`
   );
 
+  if (options.mode.value === "laptop") {
+    batch.push("decoration:blur:enabled false");
+    batch.push("decoration:drop_shadow false");
+    batch.push("misc:vfr true");
+  }
+
   sendBatch(batch);
 }
 
 export function centerWindowsInit() {
+  if (options.mode.value === "laptop") return;
   options.hypr.single_window_width.connect("changed", centerSingleWindows);
 }
 
 export async function centerSingleWindows() {
+  if (options.mode.value === "laptop") return;
+
   const script_name = "center_single_windows";
   const script_path = `~/.config/hypr/scripts/${script_name}`;
 
