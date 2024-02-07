@@ -21,8 +21,6 @@ These dotfiles are designed around the following packages and tools:
 - **Shell**: [Fish](https://fishshell.com/)
 - **Prompt**: [Starship](https://starship.rs/)
 - **Widgets**: [Aylur's Gtk Shell](https://github.com/Aylur/ags)
-- **Language Version Manager**: [Asdf](https://asdf-vm.com/)
-- **Text Editor**: [Neovim](https://neovim.io/)
 - **Font**: [San Francisco](https://developer.apple.com/fonts/)
 
 ## Dotbot
