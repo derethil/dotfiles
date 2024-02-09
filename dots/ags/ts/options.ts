@@ -23,7 +23,7 @@ export default {
   apply: apply,
   list: getOptions,
 
-  mode: Option("laptop", {
+  mode: Option("desktop", {
     category: "exclude",
     enums: ["desktop", "laptop"],
     type: "enum",

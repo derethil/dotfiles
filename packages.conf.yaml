@@ -39,6 +39,7 @@
     - hyprshot
     - hyprshot-gui-git
     - kanagawa-gtk-theme-git
+    - poppler
     - swww
     - ttf-icomoon-feather-git
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
