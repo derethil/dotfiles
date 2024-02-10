@@ -3,7 +3,7 @@ import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import icons from "../icons.js";
 import { blurImg } from "ts/lib/utils";
 import FontIcon from "./FontIcon.js";
-import { Mpris, MprisPlayer } from "types/service/mpris.js";
+import { MprisPlayer } from "types/service/mpris.js";
 import { WindowProps } from "types/widgets/window.js";
 import { Props as LabelProps } from "types/widgets/label.js";
 import { Props as IconProps } from "types/widgets/icon.js";

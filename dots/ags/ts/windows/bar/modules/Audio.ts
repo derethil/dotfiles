@@ -1,7 +1,7 @@
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
-import icons from "../../icons.js";
-import FontIcon from "../../misc/FontIcon.js";
+import icons from "ts/icons.js";
+import FontIcon from "ts/widgets/FontIcon.js";
 import PanelButton from "../PanelButton.js";
 
 function formatVolume(volume: number) {

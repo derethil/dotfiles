@@ -6,7 +6,7 @@ import {
 } from "resource:///com/github/Aylur/ags/utils.js";
 import Service from "resource:///com/github/Aylur/ags/service.js";
 
-import options from "../options.js";
+import options from "ts/options.js";
 import { reloadScss } from "./scss.js";
 import { setupHyprland } from "./hyprland.js";
 

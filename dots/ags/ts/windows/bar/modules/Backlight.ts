@@ -1,7 +1,7 @@
 import Brightness from "ts/services/brightness";
 import PanelButton from "../PanelButton";
 import icons from "ts/icons";
-import FontIcon from "ts/misc/FontIcon";
+import FontIcon from "ts/widgets/FontIcon";
 import options from "ts/options";
 import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
 

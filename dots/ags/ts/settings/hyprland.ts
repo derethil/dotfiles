@@ -1,5 +1,5 @@
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
-import options from "../options.js";
+import options from "ts/options.js";
 import { Opt } from "./option.js";
 import {
   readFile,

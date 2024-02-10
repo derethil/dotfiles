@@ -1,12 +1,11 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import Utils from "resource:///com/github/Aylur/ags/utils.js";
-import options from "../../options.js";
-import FontIcon from "../../misc/FontIcon.js";
-import icons from "../..//icons.js";
-import { range } from "../../lib/utils.js";
+import options from "ts/options.js";
+import FontIcon from "ts/widgets/FontIcon.js";
+import icons from "ts/icons.js";
+import { range } from "ts/lib/utils.js";
 import { Workspace } from "types/service/hyprland.js";
-import Box from "types/widgets/box.js";
 
 const dispatch = (arg: any) =>
   Utils.execAsync(`hyprctl dispatch workspace ${arg}`);

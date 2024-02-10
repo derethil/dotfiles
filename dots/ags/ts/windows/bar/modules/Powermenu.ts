@@ -1,9 +1,9 @@
 import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import Widget, { EventBox } from "resource:///com/github/Aylur/ags/widget.js";
 
-import icons from "../../icons.js";
-import FontIcon from "../../misc/FontIcon.js";
-import HoverRevealer from "../../misc/HoverRevealer.js";
+import icons from "ts/icons.js";
+import FontIcon from "ts/widgets/FontIcon.js";
+import HoverRevealer from "ts/widgets/HoverRevealer.js";
 
 const actions = {
   default: {

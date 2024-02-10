@@ -3,7 +3,7 @@ import { MprisPlayer } from "resource:///com/github/Aylur/ags/service/mpris.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
 import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import Brightness from "ts/services/brightness";
-import Options from "../options";
+import Options from "ts/options";
 
 declare global {
   var audio: typeof Audio;

@@ -2,8 +2,8 @@ const battery = await Service.import("battery");
 import { Battery } from "types/service/battery";
 
 import PanelButton from "../PanelButton";
-import FontIcon from "../../misc/FontIcon";
-import icons from "../../icons";
+import FontIcon from "ts/widgets/FontIcon";
+import icons from "ts/icons";
 import options from "ts/options";
 
 function batteryIcon(battery: Battery): string {

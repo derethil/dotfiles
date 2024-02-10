@@ -3,9 +3,9 @@ import SystemTray from "resource:///com/github/Aylur/ags/service/systemtray.js";
 import { TrayItem } from "resource:///com/github/Aylur/ags/service/systemtray.js";
 
 import PanelButton from "../PanelButton.js";
-import FontIcon from "../../misc/FontIcon.js";
-import options from "../../options.js";
-import icons from "../../icons.js";
+import FontIcon from "ts/widgets/FontIcon.js";
+import options from "ts/options.js";
+import icons from "ts/icons.js";
 
 function SystemTrayItem(item: TrayItem) {
   return Widget.Button({

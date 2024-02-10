@@ -1,6 +1,6 @@
 import App from "resource:///com/github/Aylur/ags/app.js";
-import options from "../options";
-import themes from "../themes";
+import options from "ts/options";
+import themes from "ts/themes";
 import { reloadScss } from "./scss";
 import { setupHyprland } from "./hyprland";
 

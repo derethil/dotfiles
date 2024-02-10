@@ -1,11 +1,10 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import PanelButton from "../PanelButton";
-import * as mpris from "../../misc/Mpris";
-import FontIcon from "../../misc/FontIcon";
-import options from "../../options";
-import icons from "../../icons";
+import * as mpris from "ts/widgets/Mpris";
+import FontIcon from "ts/widgets/FontIcon";
+import options from "ts/options";
+import icons from "ts/icons";
 import Box from "types/widgets/box";
 
 const getPlayer = (name = options.mpris.preferred.value) =>

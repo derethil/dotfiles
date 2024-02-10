@@ -1,5 +1,5 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import options from "../options.js";
+import options from "ts/options.js";
 
 // Bar Widgets
 import Workspaces from "./modules/Workspaces";

@@ -1,7 +1,7 @@
-import Clock from "../../misc/Clock";
+import Clock from "ts/widgets/Clock";
 import PanelButton from "../PanelButton";
-import FontIcon from "../../misc/FontIcon";
-import icons from "../../icons";
+import FontIcon from "ts/widgets/FontIcon";
+import icons from "ts/icons";
 
 export default () =>
   PanelButton({

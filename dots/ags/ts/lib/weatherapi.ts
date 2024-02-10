@@ -1,7 +1,7 @@
 import { fetch } from "resource:///com/github/Aylur/ags/utils.js";
 
-import options from "../options";
-import icons from "../icons";
+import options from "ts/options";
+import icons from "ts/icons";
 
 export interface OpenWeatherMapAPI {
   apiKey: string;
