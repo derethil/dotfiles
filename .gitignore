@@ -1,3 +1,5 @@
 .vscode/
 
 dots/fonts/*/.uuid
+
+.envrc

@@ -13,9 +13,14 @@ FF_PATH = path.expanduser("~/.mozilla/firefox/")
 # And that you added the profile name to the window title with this format: profile-label-<Profile>
 
 
-parser = ArgumentParser(description="Switch the default Firefox profile based on the active window's title.")
-parser.add_argument("profiles", nargs="+", help="The profiles to switch the default between")
+parser = ArgumentParser(
+    description="Switch the default Firefox profile based on the active window's title."
+)
+parser.add_argument(
+    "profiles", nargs="+", help="The profiles to switch the default between"
+)
 profile_values = parser.parse_args().profiles
+
 
 @unique
 class ProfileEnum(Enum):
@@ -24,26 +29,28 @@ class ProfileEnum(Enum):
         return any(p.value in value for p in Profile)
 
     @classmethod
-    def _missing_(cls, value: str) -> "Profile":
+    def _missing_(cls, value: str) -> "ProfileEnum":
         for member in cls:
             if member.value in value:
                 return member
         raise ValueError(f"Invalid profile key: {value}")
 
-Profile = ProfileEnum('Profile', {value.upper(): value for value in profile_values})
+
+Profile = ProfileEnum("Profile", {value.upper(): value for value in profile_values})
+
 
 class Profiles:
     def __init__(self):
         self.ini_file = path.join(FF_PATH, "profiles.ini")
 
     @property
-    def directories(self) -> dict[Profile, str]:
+    def directories(self) -> dict[ProfileEnum, str]:
         dirs = [entry.name for entry in scandir(FF_PATH) if entry.is_dir()]
         profile_dirs = [dir for dir in dirs if Profile.within(dir)]
         return {Profile(dir): dir for dir in profile_dirs}
 
     @property
-    def default(self) -> Profile:
+    def default(self) -> ProfileEnum:
         with open(self.ini_file, "r") as f:
             for line in f:
                 if line.startswith("Default="):
@@ -51,7 +58,7 @@ class Profiles:
         raise ValueError("No default profile found")
 
     @default.setter
-    def default(self, profile: Profile) -> None:
+    def default(self, profile: ProfileEnum) -> None:
         with open(self.ini_file, "r") as f:
             lines = f.readlines()
 
