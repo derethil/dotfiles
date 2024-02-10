@@ -23,7 +23,7 @@ export default {
   apply: apply,
   list: getOptions,
 
-  mode: Option("desktop", {
+  mode: Option<"desktop" | "laptop">("desktop", {
     category: "exclude",
     enums: ["desktop", "laptop"],
     type: "enum",
@@ -62,7 +62,7 @@ export default {
       note: "Icon to show as active in quicktoggles",
     }),
 
-    scheme: Option("dark", {
+    scheme: Option<"dark" | "light">("dark", {
       enums: ["dark", "light"],
       type: "enum",
       note: 'Color scheme to set on Gtk apps: "light" or "dark"',
@@ -133,7 +133,7 @@ export default {
   },
 
   bar: {
-    position: Option("left", {
+    position: Option<"left" | "right">("left", {
       enums: ["left", "right"],
       type: "enum",
     }),
@@ -225,7 +225,7 @@ export default {
         scss: "exclude",
       }),
     },
-    units: Option("imperial", {
+    units: Option<"metric" | "imperial">("imperial", {
       enums: ["metric", "imperial"],
       type: "enum",
       scss: "exclude",

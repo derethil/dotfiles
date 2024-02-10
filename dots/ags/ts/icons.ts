@@ -9,7 +9,7 @@ export default {
     logout: "",
   },
 
-  dashboard: "",
+  dashboard: "",
 
   clock: "",
 

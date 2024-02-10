@@ -5,7 +5,7 @@ import icons from "ts/icons";
 
 export interface OpenWeatherMapAPI {
   apiKey: string;
-  units: string;
+  units: "metric" | "imperial";
   lat: number;
   lon: number;
   baseUrl: string;

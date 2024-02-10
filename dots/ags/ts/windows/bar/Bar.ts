@@ -55,11 +55,7 @@ export default (monitor: number) =>
     class_name: "transparent",
     width_request: options.bar.width.value,
     monitor,
-    anchor: [
-      "top",
-      options.bar.position.value === "left" ? "left" : "right",
-      "bottom",
-    ],
+    anchor: ["top", options.bar.position.value, "bottom"],
     child: Widget.CenterBox({
       vertical: true,
       class_name: `panel`,
