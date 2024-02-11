@@ -1,16 +1,5 @@
 add_newline = false
 
-format = """
-$all\
-$fill\
-$time\
-$line_break\
-$jobs\
-$status\
-$container\
-$character
-"""
-
 [character]
 success_symbol = "[╰─λ](bold blue)"
 error_symbol = ""
@@ -52,10 +41,3 @@ sigint_symbol = "󰂭"
 signal_symbol = "󱑽"
 success_symbol = ""
 format = "[╰─](bold blue)[$symbol](bold red) "
-
-[time]
-disabled = false
-use_12hr = true
-style = "bold bright-black"
-format = "[$time]($style) "
-time_format = "%l:%M%P"
