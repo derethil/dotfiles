@@ -19,7 +19,7 @@ const Start = () =>
     vpack: "start",
     hexpand: true,
     vertical: true,
-    children: [DashboardButton(), Workspaces(), MprisControls()],
+    children: [DashboardButton(), Workspaces(), SystemTray(), MprisControls()],
   });
 
 const Center = () =>
@@ -43,7 +43,6 @@ const End = () =>
       Audio(),
       Battery(),
       Clock(),
-      SystemTray(),
       Powermenu(),
     ],
   });
