@@ -5,16 +5,16 @@ from enum import Enum, unique
 
 import hyprland
 
-FF_PATH = path.expanduser("~/.mozilla/firefox/")
+BROWSER_PATH = path.expanduser("~/.floorp/")
 
 # NOTE:
-# This script assumes that you have this Firefox extension installed:
+# This script assumes that you have this extension installed:
 # https://github.com/tpamula/webextension-window-titler
 # And that you added the profile name to the window title with this format: profile-label-<Profile>
 
 
 parser = ArgumentParser(
-    description="Switch the default Firefox profile based on the active window's title."
+    description="Switch the default profile based on the active window's title."
 )
 parser.add_argument(
     "profiles", nargs="+", help="The profiles to switch the default between"
@@ -41,11 +41,11 @@ Profile = ProfileEnum("Profile", {value.upper(): value for value in profile_valu
 
 class Profiles:
     def __init__(self):
-        self.ini_file = path.join(FF_PATH, "profiles.ini")
+        self.ini_file = path.join(BROWSER_PATH, "profiles.ini")
 
     @property
     def directories(self) -> dict[ProfileEnum, str]:
-        dirs = [entry.name for entry in scandir(FF_PATH) if entry.is_dir()]
+        dirs = [entry.name for entry in scandir(BROWSER_PATH) if entry.is_dir()]
         profile_dirs = [dir for dir in dirs if Profile.within(dir)]
         return {Profile(dir): dir for dir in profile_dirs}
 
@@ -77,8 +77,8 @@ class Handler(hyprland.Events):
         super().__init__()
 
     async def on_activewindow(self, window_class, window_title, *_):
-        if window_class != "firefox":
-            # Skip if the window isn't Firefox
+        if window_class != "floorp":
+            # Skip if the window isn't the browser
             return
 
         matched = re.search(r"profile-label-(\S+?)\]", window_title)

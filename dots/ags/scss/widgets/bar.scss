@@ -123,6 +123,7 @@ $button-radius: $radii;
   }
 
   .system-tray {
+     padding: $bar-spacing * 0.25 0;
     .tray-item {
       margin: $bar-spacing * 0.75 0;
     }
