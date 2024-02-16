@@ -10,6 +10,10 @@
 @import "./common/spacing";
 @import "./common/hidden";
 
-// // Widgets
-@import "./widgets/bar";
-@import "./widgets/overview";
+
+// Widgets
+@import "./widgets/panel-button";
+
+// Windows
+@import "./windows/bar";
+@import "./windows/dashboard";

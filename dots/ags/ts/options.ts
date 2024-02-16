@@ -171,6 +171,9 @@ export default {
       note: "Window width when only one window is open (set to 0 to disable)",
       type: "float",
     }),
+
+    blur: Option<"*" | Array<string>>(["dashboard"]),
+    alpha: Option(0.3),
   },
 
   notifications: {

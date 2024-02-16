@@ -9,6 +9,11 @@ export default {
     logout: "",
   },
 
+  tools: {
+    colorPicker: "",
+    screenshot: "",
+  },
+
   dashboard: "",
 
   clock: "",

@@ -1,11 +1,7 @@
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import options from "ts/options.js";
 import { Opt } from "./option.js";
-import {
-  readFile,
-  writeFile,
-  subprocess,
-} from "resource:///com/github/Aylur/ags/utils.js";
+import { subprocess } from "resource:///com/github/Aylur/ags/utils.js";
 
 function sendBatch(batch: string[]) {
   const cmd = batch
@@ -27,14 +23,15 @@ function getColor(scss: string) {
   }
 }
 
-export function hyprlandInit() {
-  if (readFile("/tmp/ags/hyprland-init")) return;
+export function blur(name: string): string[] {
+  const blur = options.hypr.blur.value;
+  const alpha = options.hypr.alpha.value;
+  const rules = [`layerrule unset, ${name}`, `layerrule blur, ${name}`];
+  if (blur === "*" || blur.some((w) => name.includes(w))) {
+    return [...rules, `layerrule ignorealpha ${alpha}, ${name}`];
+  }
 
-  //  sendBatch(
-  //    Array.from(App.windows).flatMap(([name]) => [`layerrule blur, ${name}`])
-  //  );
-
-  writeFile("init", "/tmp/ags/hyprland-init");
+  return [];
 }
 
 export async function setupHyprland() {
@@ -74,6 +71,7 @@ export async function setupHyprland() {
   }
 
   sendBatch(batch);
+  sendBatch(App.windows.flatMap(({ name }) => blur(name!)));
 }
 
 export function centerWindowsInit() {

@@ -1,7 +1,7 @@
 $bar-spacing: $spacing / 2;
 $button-radius: $radii;
 
-@import "./panel-button.scss";
+@import "../widgets/panel-button";
 
 .panel {
   @include unset($recursive: true);
@@ -21,15 +21,8 @@ $button-radius: $radii;
   // Start Widgets
 
   .dashboard-button {
-    .font-icon {
-      font-size: $font-size * 1.1;
-      transition: $transition;
-      color: transparentize($blue, $amount: 0.2);
-    }
-
-    &:hover .font-icon {
-      color: $blue;
-    }
+    @include unset($recursive: true);
+    @include panel-button($flat: $bar-flat-buttons, $reactive: true);
   }
 
   .workspaces {

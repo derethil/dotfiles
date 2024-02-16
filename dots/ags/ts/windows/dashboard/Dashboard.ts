@@ -1,9 +1,7 @@
 import { Label, Widget } from "resource:///com/github/Aylur/ags/widget.js";
 import options from "ts/options";
-import PopupWindow, {
-  PopupWindow as PopupWindowClass,
-  PopupWindowProps,
-} from "ts/widgets/PopupWindow";
+import PopupWindow from "ts/widgets/PopupWindow";
+import ToolsBar from "./modules/ToolsBar";
 
 export default () =>
   PopupWindow({
@@ -16,8 +14,9 @@ export default () =>
           options.bar.position.value === "left" ? "slide_right" : "slide_left";
       }),
     child: Widget.Box({
-      child: Label({
-        label: "Dashboard",
-      }),
+      vertical: true,
+      vpack: "start",
+      hexpand: true,
+      children: [ToolsBar()],
     }),
   });

@@ -9,7 +9,6 @@ import { loadDotenv } from "ts/lib/dotenv";
 import {
   centerSingleWindows,
   centerWindowsInit,
-  hyprlandInit,
   setupHyprland,
 } from "./hyprland";
 
@@ -28,7 +27,6 @@ export function init() {
   reloadScss();
 
   // Hyprland Settings
-  hyprlandInit();
   setupHyprland();
 
   // Start Scripts
