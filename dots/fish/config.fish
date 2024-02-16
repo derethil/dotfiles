@@ -6,6 +6,7 @@ source ~/.asdf/asdf.fish
 direnv hook fish | source
 starship init fish | source
 thefuck --alias | source
+zoxide init fish | source
 
 # Modifying the Path
 fish_add_path ~/.local/bin/

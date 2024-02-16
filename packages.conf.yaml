@@ -8,6 +8,7 @@
     - direnv
     - eza
     - fish
+    - fzf
     - foot
     - gnome-keyring
     - inotify-tools
@@ -25,6 +26,7 @@
     - wofi
     - xdg-desktop-portal-gtk
     - xdg-desktop-portal-hyprland
+    - zoxide
     # AUR Packages
     - asdf-vm
     - aylurs-gtk-shell

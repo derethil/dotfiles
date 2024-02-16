@@ -1,6 +1,7 @@
 # Git abbreviations (source: https://gist.github.com/james2doyle/6e8a120e31dbaa806a2f91478507314c#file-git-fish-L49)
 abbr -a gd "git diff -M"
 abbr -a ga "git add"
+abbr -a gf "git fetch"
 abbr -a gaa "git add --all ."
 abbr -a gbd "git branch -D"
 abbr -a gs "git status"
