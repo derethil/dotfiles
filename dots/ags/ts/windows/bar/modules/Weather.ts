@@ -3,7 +3,7 @@ import options from "ts/options.js";
 import { OpenWeatherMapAPI } from "ts/lib/weatherapi";
 import icons from "ts/icons.js";
 import FontIcon from "ts/widgets/FontIcon.js";
-import PanelButton from "../PanelButton.js";
+import PanelButton from "../../../widgets/PanelButton.js";
 import Label from "types/widgets/label.js";
 import { getEnv } from "ts/lib/dotenv.js";
 

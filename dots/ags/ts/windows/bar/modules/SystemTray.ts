@@ -2,7 +2,7 @@ import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
 import SystemTray from "resource:///com/github/Aylur/ags/service/systemtray.js";
 import { TrayItem } from "resource:///com/github/Aylur/ags/service/systemtray.js";
 
-import PanelButton from "../PanelButton.js";
+import PanelButton from "../../../widgets/PanelButton.js";
 import FontIcon from "ts/widgets/FontIcon.js";
 import options from "ts/options.js";
 import icons from "ts/icons.js";

@@ -2,7 +2,7 @@ import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
 import icons from "ts/icons.js";
 import FontIcon from "ts/widgets/FontIcon.js";
-import PanelButton from "../PanelButton.js";
+import PanelButton from "../../../widgets/PanelButton.js";
 
 function formatVolume(volume: number) {
   return String(Math.round(volume * 100));

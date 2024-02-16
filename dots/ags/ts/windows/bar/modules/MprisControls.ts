@@ -1,6 +1,6 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
-import PanelButton from "../PanelButton";
+import PanelButton from "../../../widgets/PanelButton";
 import * as mpris from "ts/widgets/Mpris";
 import FontIcon from "ts/widgets/FontIcon";
 import options from "ts/options";
