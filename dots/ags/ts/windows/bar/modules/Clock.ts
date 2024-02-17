@@ -1,14 +1,15 @@
-import Clock from "ts/widgets/Clock";
-import PanelButton from "../../../widgets/PanelButton";
-import FontIcon from "ts/widgets/FontIcon";
 import icons from "ts/icons";
+import Clock from "ts/widgets/Clock";
+import FontIcon from "ts/widgets/FontIcon";
+import IconModule from "../IconModule";
+
 
 export default () =>
-  PanelButton({
+  IconModule({
     class_name: "clock",
-    color: "yellow",
-    content: Clock({ format: `%I\n%M` }),
+    child: Clock({ format: `%I\n%M` }),
     icon: FontIcon({
-      icon: icons.clock,
+      label: icons.clock,
     }),
+    labelColor: "yellow",
   });

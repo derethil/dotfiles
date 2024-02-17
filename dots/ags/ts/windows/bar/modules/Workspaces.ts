@@ -1,7 +1,4 @@
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
-import options from "ts/options.js";
 import FontIcon from "ts/widgets/FontIcon.js";
 import icons from "ts/icons.js";
 import { range } from "ts/lib/utils.js";
@@ -22,7 +19,7 @@ const Workspaces = ({ min_workspaces }: { min_workspaces: number }) => {
       return Widget.Button({
         class_name: "workspace",
         child: FontIcon({
-          icon: icons.workspace,
+          label: icons.workspace,
           class_name: "indicator",
         }),
         on_clicked: () => dispatch(i),

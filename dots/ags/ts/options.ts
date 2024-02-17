@@ -17,7 +17,7 @@ import {
 } from "./settings/option";
 import themes from "./themes";
 
-export default {
+const options =  {
   reset: resetOptions,
   values: getValues,
   apply: apply,
@@ -138,7 +138,7 @@ export default {
       type: "enum",
     }),
 
-    flat_buttons: Option(true, { scss: "bar-flat-buttons" }),
+    flatButtons: Option(true, { scss: "bar-flat-buttons" }),
 
     icon: Option("distro-icon", {
       note: '"distro-icon" or a single font',
@@ -241,11 +241,6 @@ export default {
       note: "Disable the tray",
       scss: "exclude",
     }),
-    showModuleIcon: Option(false, {
-      category: "bar",
-      note: "Show the module icon in the bar",
-      scss: "exclude",
-    }),
 
     exclude: Option(["Wayland to X11 Video bridge"], {
       category: "bar",
@@ -267,3 +262,6 @@ export default {
     icons: [["code-url-handler", "code"]],
   },
 };
+
+globalThis.options = options;
+export default options;

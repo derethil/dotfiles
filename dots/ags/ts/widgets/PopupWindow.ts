@@ -1,7 +1,6 @@
 import AgsWindow from "resource:///com/github/Aylur/ags/widgets/window.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
 import Widget, { subclass } from "resource:///com/github/Aylur/ags/widget.js";
-import options from "ts/options";
 import GObject from "gi://GObject";
 import Revealer, { RevealerProps } from "types/widgets/revealer";
 import Box from "types/widgets/box";

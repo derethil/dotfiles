@@ -1,8 +1,4 @@
-import { readFile } from "resource:///com/github/Aylur/ags/utils.js";
-import App from "resource:///com/github/Aylur/ags/app.js";
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
-
-const pkgjson = JSON.parse(readFile(App.configDir + "/package.json"));
+const pkgjson = JSON.parse(Utils.readFile(App.configDir + "/package.json"));
 
 const v = {
   ags: `v${pkg.version}`,
@@ -21,7 +17,6 @@ const entry = `${App.configDir}/ts/main.ts`;
 const output = "/tmp/ags/js";
 
 async function compileAgs() {
-
   try {
     // prettier-ignore
     await Utils.execAsync([

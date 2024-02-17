@@ -1,6 +1,3 @@
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
-import Widget, { EventBox } from "resource:///com/github/Aylur/ags/widget.js";
-
 import icons from "ts/icons.js";
 import FontIcon from "ts/widgets/FontIcon.js";
 import HoverRevealer from "ts/widgets/HoverRevealer.js";
@@ -33,7 +30,7 @@ const actions = {
 };
 
 export default () =>
-  EventBox({
+  Widget.EventBox({
     class_name: "panel-button powermenu",
     child: Widget.Box({
       vpack: "center",
@@ -44,7 +41,7 @@ export default () =>
         class_name: "powermenu-revealer",
         indicator: Widget.Button({
           class_name: `powermenu-button ${actions.default.class_name}`,
-          child: FontIcon({ icon: actions.default.icon }),
+          child: FontIcon({ label: actions.default.icon }),
           on_clicked: actions.default.action,
         }),
         child: Widget.Box({
@@ -54,7 +51,7 @@ export default () =>
               Widget.Button({
                 vpack: "center",
                 class_name: `powermenu-button ${name}`,
-                child: FontIcon({ icon }),
+                child: FontIcon({ label: icon }),
                 on_clicked: action,
               })
           ),

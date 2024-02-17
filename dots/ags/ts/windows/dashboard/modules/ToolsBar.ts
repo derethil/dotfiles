@@ -1,9 +1,6 @@
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
 import FontIcon from "ts/widgets/FontIcon";
 import PanelButton from "ts/widgets/PanelButton";
 import icons from "ts/icons";
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
-import App from "resource:///com/github/Aylur/ags/app.js";
 
 interface ToolProps {
   command: string | string[];
@@ -19,8 +16,8 @@ const ToolButton = ({ class_name, command, icon }: ToolProps) =>
       Utils.execAsync(command);
       App.toggleWindow("dashboard");
     },
-    content: FontIcon({
-      icon,
+    child: FontIcon({
+      label: icon,
     }),
   });
 

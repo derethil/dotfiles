@@ -3,13 +3,13 @@
     padding: 0;
   }
 
-  & > * > box:first-child {
+  & > * > * > box:first-child {
     background-color: $color;
     color: $widget-background;
     padding: $popover-padding 0;
   }
 
-  & > * > box:last-child {
+  & > * > * > box:last-child{
     background-color: $widget-background;
     padding: $popover-padding 0;
   }
@@ -22,14 +22,14 @@
     border: unset;
   }
 
-  & > * > box:first-child {
+   & > * > * > box:first-child {
     font-weight: bold;
     border-radius: $button-radius $button-radius 0 0;
     border: $border-width solid $popover-border-color;
     padding-bottom: $popover-padding * 0.33;
   }
 
-  & > * > box:last-child {
+  & > * > * > box:last-child{
     background-color: $widget-background;
     border-radius: 0 0 $button-radius $button-radius;
     border: $border-width solid $popover-border-color;

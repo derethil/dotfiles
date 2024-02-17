@@ -1,5 +1,3 @@
-import { Label, Widget } from "resource:///com/github/Aylur/ags/widget.js";
-import options from "ts/options";
 import PopupWindow from "ts/widgets/PopupWindow";
 import ToolsBar from "./modules/ToolsBar";
 

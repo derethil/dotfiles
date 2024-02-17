@@ -1,5 +1,3 @@
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import { EventBoxProps } from "types/widgets/eventbox";
 
 type HoverRevealProps = EventBoxProps<any> & {

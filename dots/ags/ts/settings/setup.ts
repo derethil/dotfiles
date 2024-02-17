@@ -1,9 +1,7 @@
 // import Notifications from "types/service/notifications";
 import Gtk from "gi://Gtk?version=3.0";
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import { globals } from "./globals";
 import { dependencies } from "ts/lib/utils";
-import options from "ts/options";
 import { reloadScss, scssWatcher } from "./scss";
 import { loadDotenv } from "ts/lib/dotenv";
 import {

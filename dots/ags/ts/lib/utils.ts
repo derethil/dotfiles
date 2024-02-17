@@ -1,4 +1,3 @@
-import { CACHE_DIR } from "resource:///com/github/Aylur/ags/utils.js";
 import Window from "types/widgets/window";
 import Gdk from "gi://Gdk?version=3.0";
 import GLib from "gi://GLib?version=2.0";
@@ -32,14 +31,12 @@ export function forMonitors(
 
 /** Blurs an image */
 export function blurImg(img: string) {
-  const cache = CACHE_DIR + "/media";
+  const cache = Utils.CACHE_DIR + "/media";
   return new Promise((resolve) => {
     if (!img) resolve("");
 
     const dir = cache + "/blurred";
     const blurred = dir + img.substring(cache.length);
-
-    if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) return resolve(blurred);
 
     Utils.ensureDirectory(dir);
     Utils.execAsync(["convert", img, "-blur", "0x22", blurred])

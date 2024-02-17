@@ -1,5 +1,3 @@
-import App from "resource:///com/github/Aylur/ags/app.js";
-import Utils from "resource:///com/github/Aylur/ags/utils.js";
 import { getOptions } from "./option";
 import { dependencies } from "ts/lib/utils";
 

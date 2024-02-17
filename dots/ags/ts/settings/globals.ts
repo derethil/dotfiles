@@ -1,9 +1,9 @@
-import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
 import { MprisPlayer } from "resource:///com/github/Aylur/ags/service/mpris.js";
-import App from "resource:///com/github/Aylur/ags/app.js";
-import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
 import Brightness from "ts/services/brightness";
 import Options from "ts/options";
+
+const Mpris = await Service.import("mpris");
+const Audio = await Service.import("audio");
 
 declare global {
   var audio: typeof Audio;
@@ -16,7 +16,6 @@ declare global {
 export async function globals() {
   try {
     // Options
-    globalThis.options = (await import("../options")).default;
     // Service Globals
     globalThis.audio = (
       await import("resource:///com/github/Aylur/ags/service/audio.js")
@@ -25,20 +24,17 @@ export async function globals() {
       await import("resource:///com/github/Aylur/ags/app.js")
     ).default;
     globalThis.brightness = (await import("ts/services/brightness")).default;
-
     // Sync Services
     Mpris.players.forEach((player) => {
       player.connect("changed", (player) => {
         globalThis.mpris = player || Mpris.players[0];
       });
     });
-
     Mpris.connect("player-added", (mpris, bus) => {
       mpris.getPlayer(bus)?.connect("changed", (player) => {
         globalThis.mpris = player || Mpris.players[0];
       });
     });
-
     Mpris.connect("player-closed", () => {
       globalThis.mpris = Mpris.players[0];
     });

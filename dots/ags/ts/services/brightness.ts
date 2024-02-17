@@ -49,5 +49,5 @@ class BrightnessService extends Service {
 }
 
 const service = new BrightnessService();
-
+globalThis["brightness"] = service;
 export default service;

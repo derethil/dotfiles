@@ -1,6 +1,3 @@
-import { fetch } from "resource:///com/github/Aylur/ags/utils.js";
-
-import options from "ts/options";
 import icons from "ts/icons";
 
 export interface OpenWeatherMapAPI {
@@ -68,7 +65,7 @@ export class OpenWeatherMapAPI {
 
   async fetchWeatherInfo() {
     try {
-      const response = await fetch(this.baseUrl, {
+      const response = await Utils.fetch(this.baseUrl, {
         params: {
           lat: this.lat,
           lon: this.lon,

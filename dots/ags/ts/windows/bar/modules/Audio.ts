@@ -1,8 +1,7 @@
-import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+const Audio = await Service.import("audio");
 import icons from "ts/icons.js";
 import FontIcon from "ts/widgets/FontIcon.js";
-import PanelButton from "../../../widgets/PanelButton.js";
+import IconModule from "../IconModule.js";
 
 function formatVolume(volume: number) {
   return String(Math.round(volume * 100));
@@ -34,24 +33,20 @@ function chooseIcon() {
 }
 
 export default () =>
-  PanelButton({
+  IconModule({
     cursor: "pointer",
+    class_name: "audio",
+    labelColor: "magenta",
     on_clicked: () => {
       if (!Audio["speaker"]) return;
       Audio["speaker"].is_muted = !Audio["speaker"].is_muted;
     },
-    class_name: "audio",
-    icon: FontIcon({ icon: chooseIcon() }).hook(Audio, (self) => {
-      if (!Audio["speaker"]) return;
-      self.icon = chooseIcon();
+    icon: FontIcon().hook(Audio, (self) => {
+      self.label = chooseIcon();
     }),
-    color: "magenta",
-    content: Widget.Label().hook(
+    child: Widget.Label({ expand: true }).hook(
       Audio,
-      (self) => {
-        if (!Audio["speaker"]) return;
-        self.label = formatVolume(Audio["speaker"].volume);
-      },
+      (self) => (self.label = formatVolume(Audio["speaker"].volume)),
       "speaker-changed"
     ),
   });

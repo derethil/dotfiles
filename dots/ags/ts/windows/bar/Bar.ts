@@ -1,6 +1,3 @@
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import options from "ts/options.js";
-
 // Bar Widgets
 import Workspaces from "./modules/Workspaces";
 import Clock from "./modules/Clock";
@@ -52,7 +49,7 @@ export default (monitor: number) =>
     name: `bar${monitor}`,
     exclusivity: "exclusive",
     class_name: "transparent",
-    width_request: options.bar.width.value,
+    width_request: options.bar.width.bind("value"),
     monitor,
     anchor: options.bar.position
       .bind("value")

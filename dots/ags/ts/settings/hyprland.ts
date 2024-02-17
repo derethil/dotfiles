@@ -1,7 +1,6 @@
-import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
-import options from "ts/options.js";
+import Hyprland  from "resource:///com/github/Aylur/ags/service/hyprland.js"; // await import syntax broken here?
 import { Opt } from "./option.js";
-import { subprocess } from "resource:///com/github/Aylur/ags/utils.js";
+import options from "ts/options.js";
 
 function sendBatch(batch: string[]) {
   const cmd = batch
@@ -9,7 +8,7 @@ function sendBatch(batch: string[]) {
     .map((x) => `keyword ${x}`)
     .join("; ");
 
-  Hyprland.sendMessage(`[[BATCH]]/${cmd}`);
+  Hyprland.messageAsync(`[[BATCH]]/${cmd}`);
 }
 
 function getColor(scss: string) {
@@ -47,7 +46,7 @@ export async function setupHyprland() {
 
   const batch = [];
 
-  JSON.parse(await Hyprland.sendMessage("j/monitors")).forEach(
+  JSON.parse(await Hyprland.messageAsync("j/monitors")).forEach(
     ({ name }: { name: string }) => {
       const v = bar_pos === "left" ? `0,0,-${wm_gaps},0` : `0,0,0,-${wm_gaps}`;
       batch.push(`monitor ${name},addreserved,${v}`);
@@ -94,7 +93,7 @@ export async function centerSingleWindows() {
   const border_width = options.border.width.value;
   const other_height = Math.floor(wm_gaps) * 2 - border_width * 2;
 
-  subprocess(
+  Utils.subprocess(
     ["bash", "-c", `${script_path} ${window_width} ${other_height}`],
     () => {},
     (sterr) => console.error(sterr)

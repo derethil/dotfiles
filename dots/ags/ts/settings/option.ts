@@ -1,18 +1,11 @@
-import {
-  CACHE_DIR,
-  readFile,
-  writeFile,
-  exec,
-} from "resource:///com/github/Aylur/ags/utils.js";
 import Service from "resource:///com/github/Aylur/ags/service.js";
 
-import options from "ts/options.js";
 import { reloadScss } from "./scss.js";
 import { setupHyprland } from "./hyprland.js";
 
-const CACHE_FILE = `${CACHE_DIR}/options.json`;
+const CACHE_FILE = `${Utils.CACHE_DIR}/options.json`;
 
-let cacheObj = JSON.parse(readFile(CACHE_FILE) || "{}");
+let cacheObj = JSON.parse(Utils.readFile(CACHE_FILE) || "{}");
 
 export interface Opt<T> {
   defaultValue: T;
@@ -106,7 +99,7 @@ export class Opt<T> extends Service {
 
     this.connect("changed", () => {
       cacheObj[this.id] = this.value;
-      writeFile(JSON.stringify(cacheObj, null, 2), CACHE_FILE);
+      Utils.writeFile(JSON.stringify(cacheObj, null, 2), CACHE_FILE);
     });
   }
 
@@ -163,7 +156,7 @@ export function Option<T>(value: T, config: OptionConfig<T> = {}): Opt<T> {
 
 /** Resets all options to their default values */
 export function resetOptions() {
-  exec(`rm -rf ${CACHE_FILE}`);
+  Utils.exec(`rm -rf ${CACHE_FILE}`);
   cacheObj = {};
   getOptions().forEach((opt) => opt.reset());
 }

@@ -1,57 +1,35 @@
-import Gtk from "gi://Gtk";
-import { subclass } from "resource:///com/github/Aylur/ags/widget.js";
-import { register } from "resource:///com/github/Aylur/ags/widgets/widget.js";
-import AgsLabel from "resource:///com/github/Aylur/ags/widgets/label.js";
+import Gtk from "gi://Gtk?version=3.0";
+import { type Props as LabelProps } from "types/widgets/label";
 
-type FontIconProps =
-  | (import("types/widgets/label").Props & {
-      icon: string;
-    })
-  | undefined;
-
-class FontIcon extends AgsLabel<any> {
-  static {
-    register(this);
-  }
-
-  constructor(params: FontIconProps) {
-    const { icon = "", ...rest } = params || {};
-
-    super(rest as Exclude<FontIconProps, "icon">);
-    this.toggleClassName("font-icon");
-
-    if (typeof params === "object") this.icon = icon;
-
-    if (typeof params === "string") this.icon = params;
-
-    // Default to centering the icon
+export default <Attr extends { size: number }>(
+  props: LabelProps<Attr> = {}
+) => {
+  const { setup, ...rest } = props;
+  return Widget.Label<Attr>({
     // @ts-ignore
-    this.hpack = rest.hpack || "center";
-    // @ts-ignore
-    this.vpack = rest.vpack || "center";
-  }
+    attribute: { size: 0 },
+    hpack: "center",
+    vpack: "center",
+    setup: (self) => {
+      // Class
+      self.toggleClassName("font-icon");
 
-  get icon() {
-    return this.label;
-  }
-  set icon(icon) {
-    this.label = icon;
-  }
+      // Gtk Settings
+      self.attribute.size = self
+        .get_style_context()
+        .get_property("font-size", Gtk.StateFlags.NORMAL);
 
-  get size() {
-    return this.get_style_context().get_property(
-      "font-size",
-      Gtk.StateFlags.NORMAL
-    );
-  }
+      self.vfunc_get_preferred_height = () => [
+        self.attribute.size,
+        self.attribute.size,
+      ];
+      self.vfunc_get_preferred_width = () => [
+        self.attribute.size,
+        self.attribute.size,
+      ];
 
-  vfunc_get_preferred_height(): [number, number] {
-    return [this.size, this.size];
-  }
-
-  vfunc_get_preferred_width(): [number, number] {
-    return [this.size, this.size];
-  }
-}
-
-export default subclass<typeof FontIcon, FontIconProps>(FontIcon);
+      setup?.(self);
+    },
+    ...rest,
+  });
+};

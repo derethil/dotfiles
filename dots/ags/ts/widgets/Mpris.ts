@@ -1,5 +1,3 @@
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import icons from "../icons.js";
 import { blurImg } from "ts/lib/utils";
 import FontIcon from "./FontIcon.js";
@@ -9,6 +7,7 @@ import { Props as LabelProps } from "types/widgets/label.js";
 import { Props as IconProps } from "types/widgets/icon.js";
 import { SliderProps } from "types/widgets/slider.js";
 import StackProps from "types/widgets/stack.js";
+import Gtk from "gi://Gtk?version=3.0";
 
 export const CoverArt = (
   player: MprisPlayer,
@@ -122,23 +121,9 @@ export const Slash = (player: MprisPlayer) =>
     visible: player.bind("length").transform((l) => l > 0),
   });
 
-/**
- * @typedef {"name" | "length" | "bus_name" | "entry" | "identity" | "trackid" | "track_artists" | "track_title" | "track_cover_url" | "cover_path" | "play_back_status" | "can_go_next" | "can_go_prev" | "can_play" | "shuffle_status" | "loop_status" | "length" | "position" | "volume" } MprisPlayerProp
- */
-
-/**
- * @param {Object} o
- * @param {import('types/service/mpris.js').MprisPlayer} o.player
- * @param {import('types/widgets/stack.js').StackProps['items']} o.items
- * @param {'shuffle' | 'loop' | 'playPause' | 'previous' | 'next'} o.onClick
- * @param {MprisPlayerProp} o.prop
- * @param {MprisPlayerProp} o.canProp
- * @param {any} o.cantValue
- */
-
 interface PlayerButtonProps {
   player: MprisPlayer;
-  items: StackProps<any, any>["items"];
+  children: StackProps<{ [name: string]: Gtk.Widget }, any>["children"];
   onClick: "shuffle" | "loop" | "playPause" | "previous" | "next";
   prop: string;
   canProp: string;
@@ -147,7 +132,7 @@ interface PlayerButtonProps {
 
 const PlayerButton = ({
   player,
-  items,
+  children,
   onClick,
   prop,
   canProp,
@@ -155,7 +140,7 @@ const PlayerButton = ({
 }: PlayerButtonProps) => {
   return Widget.Button({
     cursor: "pointer",
-    child: Widget.Stack({ items }).bind(
+    child: Widget.Stack({ children }).bind(
       "shown",
       player,
       prop as any,
@@ -169,22 +154,16 @@ const PlayerButton = ({
 export const ShuffleButton = (player: MprisPlayer) =>
   PlayerButton({
     player,
-    items: [
-      [
-        "true",
-        FontIcon({
-          class_name: "shuffle enabled",
-          icon: icons.mpris.shuffle.enabled,
-        }),
-      ],
-      [
-        "false",
-        FontIcon({
-          class_name: "shuffle disabled",
-          icon: icons.mpris.shuffle.disabled,
-        }),
-      ],
-    ],
+    children: {
+      true: FontIcon({
+        class_name: "shuffle enabled",
+        label: icons.mpris.shuffle.enabled,
+      }),
+      false: FontIcon({
+        class_name: "shuffle disabled",
+        label: icons.mpris.shuffle.disabled,
+      }),
+    },
     onClick: "shuffle",
     prop: "shuffle_status",
     canProp: "shuffle_status",
@@ -194,29 +173,20 @@ export const ShuffleButton = (player: MprisPlayer) =>
 export const LoopButton = (player: MprisPlayer) =>
   PlayerButton({
     player,
-    items: [
-      [
-        "None",
-        FontIcon({
-          class_name: "loop none",
-          icon: icons.mpris.loop.none,
-        }),
-      ],
-      [
-        "Track",
-        FontIcon({
-          class_name: "loop track",
-          icon: icons.mpris.loop.track,
-        }),
-      ],
-      [
-        "Playlist",
-        FontIcon({
-          class_name: "loop playlist",
-          icon: icons.mpris.loop.playlist,
-        }),
-      ],
-    ],
+    children: {
+      None: FontIcon({
+        class_name: "loop none",
+        label: icons.mpris.loop.none,
+      }),
+      Track: FontIcon({
+        class_name: "loop track",
+        label: icons.mpris.loop.track,
+      }),
+      Playlist: FontIcon({
+        class_name: "loop playlist",
+        label: icons.mpris.loop.playlist,
+      }),
+    },
     onClick: "loop",
     prop: "loop_status",
     canProp: "loop_status",
@@ -226,29 +196,20 @@ export const LoopButton = (player: MprisPlayer) =>
 export const PlayPauseButton = (player: MprisPlayer) =>
   PlayerButton({
     player,
-    items: [
-      [
-        "Playing",
-        FontIcon({
-          class_name: "playing",
-          icon: icons.mpris.playing,
-        }),
-      ],
-      [
-        "Paused",
-        FontIcon({
-          class_name: "paused",
-          icon: icons.mpris.paused,
-        }),
-      ],
-      [
-        "Stopped",
-        FontIcon({
-          class_name: "stopped",
-          icon: icons.mpris.stopped,
-        }),
-      ],
-    ],
+    children: {
+      Playing: FontIcon({
+        class_name: "playing",
+        label: icons.mpris.playing,
+      }),
+      Paused: FontIcon({
+        class_name: "paused",
+        label: icons.mpris.paused,
+      }),
+      Stopped: FontIcon({
+        class_name: "stopped",
+        label: icons.mpris.stopped,
+      }),
+    },
     onClick: "playPause",
     prop: "play_back_status",
     canProp: "can_play",
@@ -258,15 +219,12 @@ export const PlayPauseButton = (player: MprisPlayer) =>
 export const PreviousButton = (player: MprisPlayer) =>
   PlayerButton({
     player,
-    items: [
-      [
-        "true",
-        FontIcon({
-          class_name: "previous",
-          icon: icons.mpris.prev,
-        }),
-      ],
-    ],
+    children: {
+      true: FontIcon({
+        class_name: "previous",
+        label: icons.mpris.prev,
+      }),
+    },
     onClick: "previous",
     prop: "can_go_prev",
     canProp: "can_go_prev",
@@ -276,15 +234,12 @@ export const PreviousButton = (player: MprisPlayer) =>
 export const NextButton = (player: MprisPlayer) =>
   PlayerButton({
     player,
-    items: [
-      [
-        "true",
-        FontIcon({
-          class_name: "next",
-          icon: icons.mpris.next,
-        }),
-      ],
-    ],
+    children: {
+      true: FontIcon({
+        class_name: "next",
+        label: icons.mpris.next,
+      }),
+    },
     onClick: "next",
     prop: "can_go_next",
     canProp: "can_go_next",

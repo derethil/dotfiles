@@ -1,11 +1,9 @@
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
-import PanelButton from "../../../widgets/PanelButton";
-import * as mpris from "ts/widgets/Mpris";
+import Mpris  from "resource:///com/github/Aylur/ags/service/mpris.js";
+import * as mprisWidgets from "ts/widgets/Mpris";
 import FontIcon from "ts/widgets/FontIcon";
-import options from "ts/options";
 import icons from "ts/icons";
 import Box from "types/widgets/box";
+import IconModule from "../IconModule";
 
 const getPlayer = (name = options.mpris.preferred.value) =>
   Mpris.getPlayer(name) || Mpris.players[0] || null;
@@ -15,25 +13,25 @@ export default () => {
     const player = getPlayer();
     if (!player) return;
 
-    const playPauseButton = mpris.PlayPauseButton(player);
-    const nextButton = mpris.NextButton(player);
-    const prevButton = mpris.PreviousButton(player);
+    const playPauseButton = mprisWidgets.PlayPauseButton(player);
+    const nextButton = mprisWidgets.NextButton(player);
+    const prevButton = mprisWidgets.PreviousButton(player);
 
     self.children = [prevButton, playPauseButton, nextButton];
   };
 
   return Widget.Revealer({
     reveal_child: false,
-    transition_duration: options.transition.value,
+    transition_duration: options.transition.bind("value"),
     transition: "slide_down",
     class_name: "mpris",
-    child: PanelButton({
+    child: IconModule({
       icon: FontIcon({
-        icon: icons.mediaControls,
+        label: icons.mediaControls,
         class_name: "mpris-label-icon",
       }),
-      color: "green",
-      content: Widget.Box({
+      labelColor: "green",
+      child: Widget.Box({
         class_name: "controls",
         vertical: true,
         setup: (self) => {

@@ -1,18 +1,15 @@
-import Brightness from "ts/services/brightness";
-import PanelButton from "../../../widgets/PanelButton";
 import icons from "ts/icons";
 import FontIcon from "ts/widgets/FontIcon";
-import options from "ts/options";
-import { Widget } from "resource:///com/github/Aylur/ags/widget.js";
+import IconModule from "../IconModule";
 
 const BrightnessModule = () =>
-  PanelButton({
-    color: "red",
+  IconModule({
+    labelColor: "red",
     icon: FontIcon({
-      icon: icons.brightness.screen,
+      label: icons.brightness.screen,
     }),
-    content: Widget.Label({
-      label: Brightness.bind("backlit").transform((v) => {
+    child: Widget.Label({
+      label: brightness.bind("backlit").transform((v) => {
         return Math.round(v * 100).toString();
       }),
     }),
