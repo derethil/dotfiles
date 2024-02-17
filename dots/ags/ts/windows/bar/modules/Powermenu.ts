@@ -1,6 +1,7 @@
 import icons from "ts/icons.js";
 import FontIcon from "ts/widgets/FontIcon.js";
 import HoverRevealer from "ts/widgets/HoverRevealer.js";
+import PanelModule from "ts/widgets/PanelModule";
 
 const actions = {
   default: {
@@ -30,32 +31,28 @@ const actions = {
 };
 
 export default () =>
-  Widget.EventBox({
-    class_name: "panel-button powermenu",
-    child: Widget.Box({
-      vpack: "center",
-      vertical: true,
-      child: HoverRevealer({
-        direction: "up",
-        cursor: "pointer",
-        class_name: "powermenu-revealer",
-        indicator: Widget.Button({
-          class_name: `powermenu-button ${actions.default.class_name}`,
-          child: FontIcon({ label: actions.default.icon }),
-          on_clicked: actions.default.action,
-        }),
-        child: Widget.Box({
-          vertical: true,
-          children: Object.entries(actions.hidden).map(
-            ([name, { icon, action }]) =>
-              Widget.Button({
-                vpack: "center",
-                class_name: `powermenu-button ${name}`,
-                child: FontIcon({ label: icon }),
-                on_clicked: action,
-              })
-          ),
-        }),
+  PanelModule({
+    class_name: "powermenu",
+    child: HoverRevealer({
+      hexpand: true,
+      direction: "up",
+      cursor: "pointer",
+      class_name: "powermenu-revealer",
+      indicator: Widget.Button({
+        class_name: "powermenu-button",
+        child: FontIcon({ label: actions.default.icon }),
+      }),
+      child: Widget.Box({
+        vertical: true,
+        children: Object.entries(actions.hidden).map(
+          ([name, { icon, action }]) =>
+            Widget.Button({
+              vpack: "center",
+              class_name: `powermenu-button ${name}`,
+              child: FontIcon({ label: icon }),
+              on_clicked: action,
+            })
+        ),
       }),
     }),
   });

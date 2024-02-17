@@ -3,6 +3,8 @@ import FontIcon from "ts/widgets/FontIcon.js";
 import icons from "ts/icons.js";
 import { range } from "ts/lib/utils.js";
 import { Workspace } from "types/service/hyprland.js";
+import PanelButton from "ts/widgets/PanelButton";
+import PanelModule from "ts/widgets/PanelModule";
 
 const dispatch = (arg: any) =>
   Utils.execAsync(`hyprctl dispatch workspace ${arg}`);
@@ -15,6 +17,7 @@ const Workspaces = ({ min_workspaces }: { min_workspaces: number }) => {
 
   return Widget.Box({
     vertical: true,
+    hexpand: true,
     children: range(10).map((i) => {
       return Widget.Button({
         class_name: "workspace",
@@ -48,20 +51,13 @@ const Workspaces = ({ min_workspaces }: { min_workspaces: number }) => {
 };
 
 export default () =>
-  Widget.EventBox({
-    class_names: ["panel-button", "workspaces"],
+  PanelModule({
+    class_name: "workspaces",
     cursor: "pointer",
-    // Nested to keep this consistent with the panel buttons
-    child: Widget.Box({
-      vertical: true,
-      child: Widget.EventBox({
-        on_scroll_up: () => dispatch("e-1"),
-        on_scroll_down: () => dispatch("e+1"),
-        class_name: "eventbox",
-        child: Workspaces({
-          min_workspaces: options.min_workspaces.value,
-          // @ts-expect-error - .bind() is not typed to accept custom properties
-        }).bind("min_workspaces", options.min_workspaces),
-      }),
-    }),
+    on_scroll_up: () => dispatch("e-1"),
+    on_scroll_down: () => dispatch("e+1"),
+    child: Workspaces({
+      min_workspaces: options.min_workspaces.value,
+      // @ts-expect-error - .bind() is not typed to accept custom properties
+    }).bind("min_workspaces", options.min_workspaces),
   });
