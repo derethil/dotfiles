@@ -118,7 +118,7 @@ export class Opt<T> extends Service {
     }
 
     if (this.value !== value) {
-      this.#value = this.format(value);
+      this.#value = this.format?.(value) ?? value;
       this.changed("value");
 
       if (reload && !this.noReload) {
