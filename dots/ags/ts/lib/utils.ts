@@ -1,6 +1,7 @@
 import Window from "types/widgets/window";
 import Gdk from "gi://Gdk?version=3.0";
 import GLib from "gi://GLib?version=2.0";
+import { substitutes } from "ts/icons";
 
 /** Generate an array of numbers */
 export function range(length: number, start = 1) {
@@ -43,4 +44,16 @@ export function blurImg(img: string) {
       .then(() => resolve(blurred))
       .catch(() => resolve(""));
   });
+}
+/** Get substitute icon || name || fallback icon */
+export function icon(name: string | null, fallback = name): string {
+  if (!name) return fallback || "";
+
+  if (GLib.file_test(name, GLib.FileTest.EXISTS)) return name;
+
+  const icon = substitutes[name] || name;
+  if (Utils.lookUpIcon(icon)) return icon;
+
+  print(`no icon substitute "${icon}" for "${name}", fallback: "${fallback}"`);
+  return fallback!;
 }

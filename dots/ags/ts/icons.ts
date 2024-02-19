@@ -1,3 +1,8 @@
+export const substitutes: Record<string, string> = {
+  "audio-card-analog-pci": "audio-speakers-symbolic",
+  "audio-headset-analog-usb": "audio-headset-symbolic",
+};
+
 export default {
   workspace: "",
 
@@ -26,6 +31,12 @@ export default {
     muted: "",
     low: "",
     high: "",
+
+    type: {
+      headset: "󰋋",
+      speaker: "󰓃",
+      tv: "",
+    },
   },
 
   brightness: {
@@ -64,6 +75,10 @@ export default {
     30: "󰁼",
     20: "󰁻",
     10: "󰂃",
+  },
+
+  ui: {
+    tick: "object-select-symbolic",
   },
 
   weather: {

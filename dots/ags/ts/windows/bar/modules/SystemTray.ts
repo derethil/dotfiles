@@ -2,27 +2,28 @@ import SystemTray from "resource:///com/github/Aylur/ags/service/systemtray.js";
 import { TrayItem } from "resource:///com/github/Aylur/ags/service/systemtray.js";
 import PanelButton from "../../../widgets/PanelButton.js";
 import options from "ts/options.js";
+import Gdk from "gi://Gdk";
 
 function SystemTrayItem(item: TrayItem) {
   return Widget.Button({
     class_name: "tray-item",
     child: Widget.Icon().bind("icon", item, "icon"),
-    on_primary_click: (_, event) => {
-      item.activate(event);
-    },
-    on_secondary_click: (_, event) => item.openMenu(event),
+    on_clicked: (btn) =>
+      item.menu?.popup_at_widget(btn, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null),
+    on_secondary_click: (btn) =>
+      item.menu?.popup_at_widget(btn, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null),
   });
 }
 
-const excludeSet = new Set(options.tray.exclude.value);
 function filterItems(item: TrayItem) {
+  const excludeSet = new Set(options.tray.exclude.value);
   return !excludeSet.has(item.title);
 }
 
 export default () =>
   Widget.Revealer({
     reveal_child: false,
-    transition_duration: options.transition.value,
+    transition_duration: options.transition.bind("value"),
     transition: "slide_up",
     class_name: "system-tray",
     setup: (self) => {

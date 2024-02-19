@@ -1,11 +1,12 @@
 @import "../widgets/panel-button";
 
 .dashboard {
-  margin-top: $wm-gaps;
+  margin: $wm-gaps;
   background-color: $widget-background;
   .tool-bar .panel-button {
     @include panel-button($flat: $bar-flat-buttons, $reactive: true);
     padding-left: $padding;
     padding-right: $padding;
+    margin: $padding;
   }
 }
