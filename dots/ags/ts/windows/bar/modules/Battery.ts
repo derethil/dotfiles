@@ -4,6 +4,16 @@ import FontIcon from "ts/widgets/FontIcon";
 import icons from "ts/icons";
 import IconModule from "../IconModule";
 
+function formatTime(seconds: number): string {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  const formattedHours = String(hours).padStart(2, "0");
+  const formattedMinutes = String(minutes).padStart(2, "0");
+
+  return `${formattedHours}:${formattedMinutes}`;
+}
+
 function batteryIcon(battery: typeof Battery): string {
   const { available, charging, charged, percent } = battery;
   if (!available) return icons.battery.none;
@@ -21,11 +31,17 @@ Battery.connect("changed", () => {
   if (Battery.percent < 15) labelColor.value = "red";
   else if (Battery.percent < 30) labelColor.value = "yellow";
   else labelColor.value = "green";
-})
+});
 
 const BatteryModule = () =>
   IconModule({
     labelColor,
+    tooltip_text: Battery.bind("time_remaining").as((seconds) => {
+      const formatted = formatTime(seconds);
+      return `${formatted} until ${
+        Battery.charging ? "fully charged" : "empty"
+      }`;
+    }),
     class_name: "clock",
     child: Widget.Label({
       label: Battery.bind("percent").transform((p) => p.toString()),
