@@ -4,6 +4,7 @@ import { sh, dependencies } from "./utils";
 export function matugenWallpaperMonitor() {
   options.wallpaper.connect("changed", () => matugen());
   options.autotheme.connect("changed", () => matugen());
+  matugen();
 }
 
 function animate(...setters: Array<() => void>) {
@@ -39,20 +40,20 @@ export async function matugen(
       light.fg.value = c.light.on_surface;
     },
     () => {
-      dark.primary.bg.value = c.dark.primary;
-      light.primary.bg.value = c.light.primary;
+      dark.primary.bg.value = c.dark.primary_container;
+      light.primary.bg.value = c.light.primary_container;
     },
     () => {
-      dark.primary.fg.value = c.dark.on_primary;
-      light.primary.fg.value = c.light.on_primary;
+      dark.primary.fg.value = c.dark.primary;
+      light.primary.fg.value = c.light.primary;
     },
     () => {
-      dark.error.bg.value = c.dark.error;
-      light.error.bg.value = c.light.error;
+      dark.error.bg.value = c.dark.error_container;
+      light.error.bg.value = c.light.error_container;
     },
     () => {
-      dark.error.fg.value = c.dark.on_error;
-      light.error.fg.value = c.light.on_error;
+      dark.error.fg.value = c.dark.error;
+      light.error.fg.value = c.light.error;
     }
   );
 }

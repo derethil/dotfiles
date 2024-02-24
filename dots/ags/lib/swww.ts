@@ -16,7 +16,7 @@ async function wallpaper() {
   ]);
 }
 
-export default async function init() {
+export async function wallpaperMonitor() {
   if (!dependencies("swww")) return;
 
   Utils.monitorFile(WP, () => options.wallpaper.setValue(WP));

@@ -32,6 +32,7 @@ export default (monitor: number) =>
   Widget.Window({
     name: `bar${monitor}`,
     exclusivity: "exclusive",
+    monitor,
     class_name: "bar",
     anchor: position.bind().as((v) => ["top", v, "bottom"]),
     child: Widget.CenterBox({
