@@ -1,7 +1,7 @@
 const Audio = await Service.import("audio");
-import icons from "lib/icons";
-import FontIcon from "widgets/FontIcon";
-import IconModule from "../IconModule";
+import { icons } from "lib/icons";
+import { FontIcon } from "widgets/FontIcon";
+import { IconModule } from "../IconModule";
 
 function formatVolume(volume: number) {
   return String(Math.round(volume * 100));
@@ -32,8 +32,8 @@ function chooseIcon() {
   return icon;
 }
 
-export default () =>
-  IconModule({
+export function AudioModule() {
+  return IconModule({
     cursor: "pointer",
     class_name: "audio",
     labelColor: "magenta",
@@ -50,3 +50,4 @@ export default () =>
       "speaker-changed"
     ),
   });
+}

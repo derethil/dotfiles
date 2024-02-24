@@ -1,19 +1,19 @@
 // Bar Widgets
-import Workspaces from "./modules/Workspaces";
-import Clock from "./modules/Clock";
-import Powermenu from "./modules/Powermenu";
-import Weather from "./modules/Weather";
-import SystemTray from "./modules/SystemTray";
-import Audio from "./modules/Audio";
-import MprisControls from "./modules/MprisControls";
-import DashboardButton from "./modules/DashboardButton";
-import Battery from "./modules/Battery";
-import Backlight from "./modules/Backlight";
+import { Workspaces } from "./modules/Workspaces";
+import { Clock } from "./modules/Clock";
+import { Powermenu } from "./modules/Powermenu";
+import { Weather } from "./modules/Weather";
+import { SystemTray } from "./modules/SystemTray";
+import { AudioModule } from "./modules/Audio";
+import { MediaControls } from "./modules/MediaControls";
+import { DashboardButton } from "./modules/DashboardButton";
+import { BatteryModule } from "./modules/Battery";
+import { Backlight } from "./modules/Backlight";
 
 export type BarWidget = keyof typeof widgets;
 
 const widgets = {
-  battery: Battery,
+  battery: BatteryModule,
   backlight: Backlight,
   clock: Clock,
   dashboard: DashboardButton,
@@ -21,15 +21,15 @@ const widgets = {
   systemTray: SystemTray,
   weather: Weather,
   workspaces: Workspaces,
-  audio: Audio,
-  media: MprisControls,
+  audio: AudioModule,
+  media: MediaControls,
   expander: () => Widget.Box({ expand: true }),
 };
 
 const { start, center, end } = options.bar.layout;
 const { position } = options.bar;
-export default (monitor: number) =>
-  Widget.Window({
+export function Bar(monitor: number) {
+  return Widget.Window({
     name: `bar${monitor}`,
     exclusivity: "exclusive",
     monitor,
@@ -59,3 +59,4 @@ export default (monitor: number) =>
       }),
     }),
   });
+}

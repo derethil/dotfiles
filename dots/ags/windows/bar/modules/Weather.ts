@@ -1,9 +1,9 @@
 import { OpenWeatherMapAPI } from "lib/weatherapi";
-import icons from "lib/icons";
-import FontIcon from "widgets/FontIcon";
+import { icons } from "lib/icons";
+import { FontIcon } from "widgets/FontIcon";
 import Label from "types/widgets/label";
 import { getEnv } from "lib/dotenv";
-import IconModule from "../IconModule";
+import { IconModule } from "../IconModule";
 
 const msBetweenPoll = 1000 * 60 * 5;
 const api = new OpenWeatherMapAPI(getEnv("OPENWEATHERMAP_API_KEY") ?? "");
@@ -18,8 +18,8 @@ const setIcon = async (fontIcon: any) => {
   fontIcon.label = response.icon;
 };
 
-export default () =>
-  IconModule({
+export function Weather() {
+  return IconModule({
     class_name: "weather",
     labelColor: "blue",
     icon: FontIcon({ label: icons.weather.init }).poll(msBetweenPoll, setIcon),
@@ -27,3 +27,4 @@ export default () =>
       class_name: "temperature",
     }).poll(msBetweenPoll, setTemperature),
   });
+}

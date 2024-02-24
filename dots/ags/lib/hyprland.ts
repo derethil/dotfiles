@@ -8,10 +8,10 @@ const {
   blur,
   hyprland: { shadows, ...hyprland },
   dark: {
-    primary: { bg: darkActive },
+    primary: { fg: darkActive },
   },
   light: {
-    primary: { bg: lightActive },
+    primary: { fg: lightActive },
   },
   scheme,
 } = options.theme;
@@ -28,7 +28,7 @@ const deps = [
   scheme.id,
 ];
 
-export default function init() {
+export function hyprlandOptions() {
   options.handler(deps, setupHyprland);
   setupHyprland();
 }

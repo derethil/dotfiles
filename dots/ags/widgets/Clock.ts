@@ -6,8 +6,8 @@ interface ClockProps extends LabelProps {
   interval?: number;
 }
 
-export default ({ format, interval = 1000, ...rest }: ClockProps) =>
-  Widget.Label({
+export function Clock({ format, interval = 1000, ...rest }: ClockProps) {
+  return Widget.Label({
     label: GLib.DateTime.new_now_local().format(format) || "wrong format",
     class_name: "clock",
     hpack: "center",
@@ -18,3 +18,4 @@ export default ({ format, interval = 1000, ...rest }: ClockProps) =>
           GLib.DateTime.new_now_local().format(format) || "wrong format";
       }),
   });
+}

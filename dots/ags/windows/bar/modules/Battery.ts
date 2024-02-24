@@ -1,8 +1,8 @@
 const Battery = await Service.import("battery");
 
-import FontIcon from "widgets/FontIcon";
-import icons from "lib/icons";
-import IconModule from "../IconModule";
+import { FontIcon } from "widgets/FontIcon";
+import { icons } from "lib/icons";
+import { IconModule } from "../IconModule";
 
 function formatTime(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
@@ -33,7 +33,7 @@ Battery.connect("changed", () => {
   else labelColor.value = "green";
 });
 
-const BatteryModule = () =>
+export const BatteryModule = () =>
   IconModule({
     labelColor,
     tooltip_text: Battery.bind("time_remaining").as((seconds) => {
@@ -50,8 +50,3 @@ const BatteryModule = () =>
       self.label = batteryIcon(Battery);
     }),
   });
-
-export default () => {
-  if (options.mode.value === "laptop") return BatteryModule();
-  return Widget.Box();
-};

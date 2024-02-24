@@ -1,9 +1,9 @@
-import PopupWindow from "widgets/PopupWindow";
-import ToolsBar from "./modules/ToolsBar";
-import AudioManager from "./modules/AudioManager";
+import { PopupWindow } from "widgets/PopupWindow";
+import { ToolsBar } from "./modules/ToolsBar";
+import { AudioManager } from "./modules/AudioManager";
 
-export default () =>
-  PopupWindow({
+export function Dashboard() {
+  return PopupWindow({
     name: "dashboard",
     setup: (self: any) =>
       self.hook(options.bar.position, () => {
@@ -19,3 +19,4 @@ export default () =>
       children: [ToolsBar(), AudioManager()],
     }),
   });
+}

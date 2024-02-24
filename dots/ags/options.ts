@@ -63,7 +63,7 @@ const optionsConfig = mkOptions(OPTIONS, {
 
     hyprland: {
       shadows: opt(true),
-      gaps: opt(2.4),
+      gaps: opt(1.3333),
       inactiveBorder: opt("#000000"),
     },
   },
@@ -94,14 +94,7 @@ const optionsConfig = mkOptions(OPTIONS, {
         "media",
       ]),
       center: opt<BarWidget[]>([]),
-      end: opt<BarWidget[]>([
-        "backlight",
-        "weather",
-        "audio",
-        "battery",
-        "clock",
-        "powermenu",
-      ]),
+      end: opt<BarWidget[]>(["weather", "audio", "clock", "powermenu"]),
     },
 
     date: {
@@ -140,8 +133,11 @@ const optionsConfig = mkOptions(OPTIONS, {
 });
 
 declare global {
-  var options: typeof optionsConfig;
+  const options: typeof optionsConfig;
 }
 
 export const options = optionsConfig;
-globalThis["options"] = options;
+
+Object.assign(globalThis, {
+  options,
+});

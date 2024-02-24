@@ -15,8 +15,8 @@ interface MenuProps {
   content: Gtk.Widget[];
 }
 
-export const Menu = ({ name, icon, title, content }: MenuProps) =>
-  Widget.Revealer({
+export function Menu({ name, icon, title, content }: MenuProps) {
+  return Widget.Revealer({
     transition: "slide_down",
     reveal_child: openedMenu.bind().as((menu) => menu === name),
     child: Widget.Box({
@@ -32,3 +32,4 @@ export const Menu = ({ name, icon, title, content }: MenuProps) =>
       ],
     }),
   });
+}

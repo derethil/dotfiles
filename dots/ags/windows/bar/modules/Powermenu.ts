@@ -1,7 +1,7 @@
-import icons from "lib/icons";
-import FontIcon from "widgets/FontIcon";
-import HoverRevealer from "widgets/HoverRevealer";
-import PanelModule from "widgets/PanelModule";
+import { icons } from "lib/icons";
+import { FontIcon } from "widgets/FontIcon";
+import { HoverRevealer } from "widgets/HoverRevealer";
+import { PanelModule } from "widgets/PanelModule";
 
 const actions = {
   default: {
@@ -30,8 +30,8 @@ const actions = {
   },
 };
 
-export default () =>
-  PanelModule({
+export function Powermenu() {
+  return PanelModule({
     class_name: "powermenu",
     child: HoverRevealer({
       hexpand: true,
@@ -41,6 +41,7 @@ export default () =>
       indicator: Widget.Button({
         class_name: "powermenu-button",
         child: FontIcon({ label: actions.default.icon }),
+        on_clicked: () => actions.default.action(),
       }),
       child: Widget.Box({
         vertical: true,
@@ -56,3 +57,4 @@ export default () =>
       }),
     }),
   });
+}

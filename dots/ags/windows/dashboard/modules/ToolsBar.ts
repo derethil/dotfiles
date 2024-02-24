@@ -1,6 +1,6 @@
-import FontIcon from "widgets/FontIcon";
-import PanelButton from "widgets/PanelButton";
-import icons from "lib/icons";
+import { FontIcon } from "widgets/FontIcon";
+import { PanelButton } from "widgets/PanelButton";
+import { icons } from "lib/icons";
 
 interface ToolProps {
   command: string | string[];
@@ -21,8 +21,8 @@ const ToolButton = ({ class_name, command, icon }: ToolProps) =>
     }),
   });
 
-export default () =>
-  Widget.Box({
+export function ToolsBar() {
+  return Widget.Box({
     class_name: "tool-bar",
     hexpand: true,
     children: [
@@ -38,3 +38,4 @@ export default () =>
       }),
     ],
   });
+}

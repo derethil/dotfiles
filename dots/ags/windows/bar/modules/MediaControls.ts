@@ -1,14 +1,14 @@
 const Mpris = await Service.import("mpris");
 import * as mprisWidgets from "widgets/Mpris";
-import FontIcon from "widgets/FontIcon";
-import icons from "lib/icons";
+import { FontIcon } from "widgets/FontIcon";
+import { icons } from "lib/icons";
 import Box from "types/widgets/box";
-import IconModule from "../IconModule";
+import { IconModule } from "../IconModule";
 
 const getPlayer = (name = options.bar.media.preferred.value) =>
   Mpris.getPlayer(name) || Mpris.players[0] || null;
 
-export default () => {
+export function MediaControls() {
   const update = (self: Box<any, any>) => {
     const player = getPlayer();
     if (!player) return;
@@ -46,4 +46,4 @@ export default () => {
       });
     },
   });
-};
+}

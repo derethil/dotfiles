@@ -1,6 +1,6 @@
-const SystemTray = await Service.import("systemtray");
+const SystemTrayService = await Service.import("systemtray");
 import { type TrayItem } from "types/service/systemtray";
-import PanelButton from "../../../widgets/PanelButton";
+import { PanelButton } from "../../../widgets/PanelButton";
 import Gdk from "gi://Gdk";
 
 function SystemTrayItem(item: TrayItem) {
@@ -19,15 +19,15 @@ function filterItems(item: TrayItem) {
   return !excludeSet.has(item.title);
 }
 
-export default () =>
-  Widget.Revealer({
+export function SystemTray() {
+  return Widget.Revealer({
     reveal_child: false,
     transition_duration: options.transition.bind(),
     transition: "slide_up",
     class_name: "system-tray",
     setup: (self) => {
-      self.hook(SystemTray, (self) => {
-        if (SystemTray.items.filter(filterItems).length > 0) {
+      self.hook(SystemTrayService, (self) => {
+        if (SystemTrayService.items.filter(filterItems).length > 0) {
           self.reveal_child = true;
         } else {
           self.reveal_child = false;
@@ -39,8 +39,9 @@ export default () =>
       child: Widget.Box({
         hexpand: true,
         vertical: true,
-      }).bind("children", SystemTray, "items", (i) =>
+      }).bind("children", SystemTrayService, "items", (i) =>
         i.filter(filterItems).map(SystemTrayItem)
       ),
     }),
   });
+}

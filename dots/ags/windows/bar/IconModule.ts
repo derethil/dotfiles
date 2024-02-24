@@ -1,5 +1,5 @@
 import { Variable } from "resource:///com/github/Aylur/ags/variable.js";
-import PanelButton from "widgets/PanelButton";
+import { PanelButton } from "widgets/PanelButton";
 
 type PanelButtonProps = Parameters<typeof PanelButton>[0];
 
@@ -8,7 +8,7 @@ interface IconModuleProps extends PanelButtonProps {
   labelColor?: string | Variable<string>;
 }
 
-export default (props: IconModuleProps) => {
+export function IconModule(props: IconModuleProps) {
   const { icon, labelColor, ...rest } = props;
   return PanelButton({
     ...rest,

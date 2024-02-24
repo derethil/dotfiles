@@ -1,11 +1,11 @@
-import icons from "lib/icons";
-import FontIcon from "widgets/FontIcon";
-import IconModule from "../IconModule";
+import { icons } from "lib/icons";
+import { FontIcon } from "widgets/FontIcon";
+import { IconModule } from "../IconModule";
 
-import Brightness from "services/brightness";
+import { Brightness } from "services/brightness";
 
-const BrightnessModule = () =>
-  IconModule({
+export function Backlight() {
+  return IconModule({
     labelColor: "red",
     icon: FontIcon({
       label: icons.brightness.screen,
@@ -16,6 +16,4 @@ const BrightnessModule = () =>
       }),
     }),
   });
-
-export default () =>
-  options.mode.value === "laptop" ? BrightnessModule() : Widget.Box();
+}

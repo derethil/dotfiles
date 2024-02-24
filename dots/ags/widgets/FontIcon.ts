@@ -1,9 +1,9 @@
 import Gtk from "gi://Gtk?version=3.0";
 import { type Props as LabelProps } from "types/widgets/label";
 
-export default <Attr extends { size: number }>(
+export function FontIcon<Attr extends { size: number }>(
   props: LabelProps<Attr> = {}
-) => {
+) {
   const { setup, ...rest } = props;
   return Widget.Label<Attr>({
     // @ts-ignore

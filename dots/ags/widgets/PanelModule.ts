@@ -1,12 +1,11 @@
-import { BoxProps } from "types/widgets/box";
 import { EventBoxProps } from "types/widgets/eventbox";
 
 type PanelModuleProps = EventBoxProps & {
   flat?: boolean;
 };
 
-export default ({ flat, child, setup, ...rest }: PanelModuleProps) =>
-  Widget.EventBox({
+export function PanelModule({ flat, child, setup, ...rest }: PanelModuleProps) {
+  return Widget.EventBox({
     child: Widget.Box({ child }),
     setup: (self) => {
       self.toggleClassName("panel-button");
@@ -19,3 +18,4 @@ export default ({ flat, child, setup, ...rest }: PanelModuleProps) =>
     },
     ...rest,
   });
+}

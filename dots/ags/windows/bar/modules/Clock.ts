@@ -1,14 +1,15 @@
-import icons from "lib/icons";
-import Clock from "widgets/Clock";
-import FontIcon from "widgets/FontIcon";
-import IconModule from "../IconModule";
+import { icons } from "lib/icons";
+import { Clock as ClockWidget } from "widgets/Clock";
+import { FontIcon } from "widgets/FontIcon";
+import { IconModule } from "../IconModule";
 
-export default () =>
-  IconModule({
+export function Clock() {
+  return IconModule({
     class_name: "clock",
-    child: Clock({ format: `%I\n%M` }),
+    child: ClockWidget({ format: `%I\n%M` }),
     icon: FontIcon({
       label: icons.clock,
     }),
     labelColor: "yellow",
   });
+}

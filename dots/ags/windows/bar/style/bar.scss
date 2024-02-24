@@ -27,7 +27,9 @@ $bar-spacing: $spacing / 2;
   .dashboard-button {
     @include unset($rec: true);
     @include panel-button($flat: true, $reactive: true);
-    color: $primary-fg
+    color: $primary-fg;
+    padding-top: $padding * 0.5;
+    padding-bottom: $padding * 0.5;
   }
 
   .workspaces {

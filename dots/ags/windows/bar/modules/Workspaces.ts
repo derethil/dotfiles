@@ -1,14 +1,14 @@
 const Hyprland = await Service.import("hyprland");
-import FontIcon from "widgets/FontIcon";
-import icons from "lib/icons";
+import { FontIcon } from "widgets/FontIcon";
+import { icons } from "lib/icons";
 import { range } from "lib/utils";
 import { Workspace } from "types/service/hyprland";
-import PanelModule from "widgets/PanelModule";
+import { PanelModule } from "widgets/PanelModule";
 
 const dispatch = (arg: any) =>
   Utils.execAsync(`hyprctl dispatch workspace ${arg}`);
 
-const Workspaces = ({ minimum }: { minimum: number }) => {
+const WorkspacesContainer = ({ minimum }: { minimum: number }) => {
   const isVisible = (i: number, workspaces: Workspace[]) => {
     const max_used = workspaces.reduce((acc, cur) => Math.max(acc, cur.id), 0);
     return i <= Math.max(minimum, max_used);
@@ -49,14 +49,15 @@ const Workspaces = ({ minimum }: { minimum: number }) => {
   });
 };
 
-export default () =>
-  PanelModule({
+export function Workspaces() {
+  return PanelModule({
     class_name: "workspaces",
     cursor: "pointer",
     on_scroll_up: () => dispatch("e-1"),
     on_scroll_down: () => dispatch("e+1"),
-    child: Workspaces({
+    child: WorkspacesContainer({
       minimum: options.bar.workspaces.minimum.value,
       // @ts-expect-error - .bind() is not typed to accept custom properties
     }).bind("minimum", options.bar.workspaces.minimum),
   });
+}

@@ -1,6 +1,6 @@
-import icons from "../lib/icons";
+import { icons } from "../lib/icons";
 import { blurImg } from "lib/utils";
-import FontIcon from "./FontIcon";
+import { FontIcon } from "./FontIcon";
 import { MprisPlayer } from "types/service/mpris";
 import { WindowProps } from "types/widgets/window";
 import { Props as LabelProps } from "types/widgets/label";

@@ -1,4 +1,4 @@
-import icons from "lib/icons";
+import { icons } from "lib/icons";
 import { options } from "options";
 
 export async function batteryMonitor() {

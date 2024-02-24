@@ -8,7 +8,7 @@ type HoverRevealProps = EventBoxProps<any> & {
   setupEventBox?: (rev: ReturnType<typeof Widget.EventBox>) => void;
 };
 
-export default ({
+export function HoverRevealer({
   indicator,
   child,
   direction = "left",
@@ -16,7 +16,7 @@ export default ({
   setupEventBox,
   setupRevealer,
   ...rest
-}: HoverRevealProps) => {
+}: HoverRevealProps) {
   let open = false;
   const vertical = direction === "down" || direction === "up";
   const posStart = direction === "down" || direction === "right";

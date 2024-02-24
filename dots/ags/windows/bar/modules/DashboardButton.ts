@@ -1,9 +1,9 @@
-import PanelButton from "../../../widgets/PanelButton";
-import FontIcon from "widgets/FontIcon";
-import icons from "lib/icons";
+import { PanelButton } from "../../../widgets/PanelButton";
+import { FontIcon } from "widgets/FontIcon";
+import { icons } from "lib/icons";
 
-export default () =>
-  PanelButton({
+export function DashboardButton() {
+  return PanelButton({
     cursor: "pointer",
     window: "dashboard",
     on_clicked: () => App.toggleWindow("dashboard"),
@@ -13,3 +13,4 @@ export default () =>
       label: icons.dashboard,
     }),
   });
+}

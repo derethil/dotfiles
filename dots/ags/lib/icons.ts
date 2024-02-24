@@ -3,7 +3,7 @@ export const substitutes: Record<string, string> = {
   "audio-headset-analog-usb": "audio-headset-symbolic",
 };
 
-export default {
+export const icons = {
   workspace: "",
 
   powermenu: {

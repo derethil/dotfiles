@@ -1,6 +1,6 @@
-import icons from "lib/icons";
+import { icons } from "lib/icons";
 import { Menu } from "../widgets/Menu";
-import FontIcon from "widgets/FontIcon";
+import { FontIcon } from "widgets/FontIcon";
 import { icon } from "lib/utils";
 import { Stream } from "types/service/audio";
 
@@ -42,7 +42,9 @@ export const SinkSelector = () =>
     ],
   });
 
-export default () => SinkSelector();
+export function AudioManager() {
+  return SinkSelector();
+}
 // Widget.Button({
 //   class_name: "audio-manager",
 //   child: SinkSelector(),

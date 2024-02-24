@@ -7,14 +7,14 @@ type PanelButtonProps = ButtonProps & {
   flat?: boolean;
 };
 
-export default ({
+export function PanelButton({
   window = "",
   flat,
   child,
   setup,
   ...rest
-}: PanelButtonProps) =>
-  Widget.Button({
+}: PanelButtonProps) {
+  return Widget.Button({
     child: Widget.Box({ child }),
     setup: (self) => {
       let open = false;
@@ -44,3 +44,4 @@ export default ({
     },
     ...rest,
   });
+}

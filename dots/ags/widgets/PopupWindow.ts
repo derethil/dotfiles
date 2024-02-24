@@ -37,7 +37,7 @@ export interface PopupWindowProps extends WindowProps<Box<any, any>, any> {
   transition?: RevealerProps<any>["transition"];
 }
 
-export class PopupWindow extends AgsWindow<any, any> {
+class PopupWindowCls extends AgsWindow<any, any> {
   revealer: Revealer<any, any>;
   static {
     GObject.registerClass(this);
@@ -93,4 +93,6 @@ export class PopupWindow extends AgsWindow<any, any> {
   }
 }
 
-export default subclass<typeof PopupWindow, PopupWindowProps>(PopupWindow);
+export const PopupWindow = subclass<typeof PopupWindowCls, PopupWindowProps>(
+  PopupWindowCls
+);

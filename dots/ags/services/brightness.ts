@@ -48,6 +48,12 @@ class BrightnessService extends Service {
   }
 }
 
-const service = new BrightnessService();
-globalThis["brightness"] = service;
-export default service;
+declare global {
+  const brightness: BrightnessService;
+}
+
+export const Brightness = new BrightnessService();
+
+Object.assign(globalThis, {
+  brightness: Brightness,
+});

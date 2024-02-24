@@ -38,4 +38,3 @@ const loadDotenv = () => env.loadDotenv();
 const getEnv = (key: string) => env.getEnv(key);
 
 export { loadDotenv, getEnv };
-export default env;
