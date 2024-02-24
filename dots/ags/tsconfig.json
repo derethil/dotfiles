@@ -9,7 +9,7 @@
     "strict": true,
     "noImplicitAny": true,
     "baseUrl": ".",
-    "typeRoots": ["./types"],
+    "typeRoots": ["./types", "./node_modules/@girs"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   }

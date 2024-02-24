@@ -1,0 +1,161 @@
+$bar-spacing: $spacing / 2;
+
+@import "./bar-margin.scss";
+@import "./panel-button.scss";
+
+.bar {
+  @include unset($rec: true);
+
+  font-size: $font-ui-size;
+
+  .panel-button {
+    @include panel-button($flat: true, $reactive: false);
+
+    & > box > box:last-child {
+      font-family: $font-mono-name;
+      font-weight: bold;
+    }
+  }
+
+  & > box {
+    margin-top: $bar-spacing;
+    margin-bottom: $bar-spacing;
+  }
+
+  // Start Widgets
+
+  .dashboard-button {
+    @include unset($rec: true);
+    @include panel-button($flat: true, $reactive: true);
+    color: $primary-fg
+  }
+
+  .workspaces {
+    @include floating-widget($children: true);
+    @include bar-margin($children: true);
+
+    button {
+      font-family: "Font Awesome 6 Free Solid";
+      padding: $padding * 0.65 0;
+
+      // Default Indicator (Empty Workspace)
+      .indicator {
+        box-shadow: inset 0 0 0 $border-width $border-color;
+        transition: $transition;
+        color: transparentize($fg, 0.5);
+      }
+
+
+      // Hovering Empty Workspace
+      &.empty:hover .indicator {
+        color: $primary-fg;
+      }
+
+      // Occupied Workspace
+      &.occupied {
+        .indicator {
+          color: $fg;
+        }
+        &:hover .indicator {
+          color: $primary-fg;
+        }
+      }
+
+      // Active Workspace
+      &.active {
+        & .indicator {
+          color: $primary-fg;
+        }
+
+        &.empty .indicator {
+          color: $primary-fg
+        }
+
+        &:hover .indicator {
+          color: $primary-fg;
+        }
+      }
+    }
+  }
+
+  .mpris {
+    .font-icon {
+      font-family: "Font Awesome 6 Free Solid";
+    }
+
+    .controls {
+      button {
+        padding: $padding * 0.55 0;
+
+        &:hover .font-icon {
+          color: $hover-fg;
+        }
+      }
+    }
+  }
+
+  // End Widgets
+
+  .weather {
+    & .font-icon {
+      font-family: "Weather Icons";
+    }
+  }
+
+  .audio {
+    .font-icon {
+      font-family: "Font Awesome 6 Free Solid";
+    }
+  }
+
+  .system-tray {
+     padding: $spacing * 0.125 0;
+    .tray-item {
+      margin: $spacing * 0.375 0;
+    }
+  }
+
+  .powermenu {
+    @include floating-widget($children: true);
+    @include bar-margin($children: true);
+
+    &-button {
+      padding: $padding * 0.8 0;
+      & .font-icon {
+        font-family: "feather";
+        font-weight: bold;
+      }
+    }
+
+    @mixin powermenu-color($color) {
+      color: $color;
+      &:hover {
+        color: lighten($color, 10%);
+      }
+    }
+
+    &-revealer {
+      & > box > :last-child {
+        @include powermenu-color($red);
+      }
+
+      & revealer button {
+        &:nth-child(1) {
+          @include powermenu-color($magenta);
+        }
+
+        &:nth-child(2) {
+          @include powermenu-color($blue);
+        }
+
+        &:nth-child(3) {
+          @include powermenu-color($green);
+        }
+
+        &:nth-child(4) {
+          @include powermenu-color($yellow);
+        }
+      }
+    }
+  }
+}

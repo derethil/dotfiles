@@ -1,0 +1,11 @@
+
+
+.dashboard {
+  background-color: $widget-bg;
+  .tool-bar .panel-button {
+    @include accs-button($flat: true, $reactive: true);
+    padding-left: $padding;
+    padding-right: $padding;
+    margin: $padding;
+  }
+}

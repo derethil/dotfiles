@@ -1,0 +1,81 @@
+@import "./bar-margin.scss";
+
+@mixin icon-bg-color($color) {
+  & > box {
+    padding: 0;
+  }
+
+  & > * > * > box:first-child {
+    background-color: $color;
+    color: $bg;
+  }
+
+  & > * > * > box:last-child {
+    background-color: $widget-bg;
+  }
+}
+
+@mixin panel-button-icon {
+  @include unset;
+  & > box {
+    @include floating-widget;
+    @include bar-margin;
+    border: unset;
+  }
+
+  & > * > * > box {
+    padding: $padding * 1.25 0;
+
+    &:first-child {
+      border-radius: $radius $radius 0 0;
+    }
+
+    &:last-child {
+      background-color: $widget-bg;
+      border-radius: 0 0 $radius $radius;
+    }
+  }
+
+  &.panel-button-icon-bg-red {
+    @include icon-bg-color($red);
+  }
+
+  &.panel-button-icon-bg-magenta {
+    @include icon-bg-color($magenta);
+  }
+
+  &.panel-button-icon-bg-blue {
+    @include icon-bg-color($blue);
+  }
+
+  &.panel-button-icon-bg-green {
+    @include icon-bg-color($green);
+  }
+
+  &.panel-button-icon-bg-yellow {
+    @include icon-bg-color($yellow);
+  }
+}
+
+@mixin panel-button($flat: false, $reactive: true) {
+  @include unset;
+  @include floating-widget;
+
+  &.panel-button-icon {
+    @include panel-button-icon;
+  }
+
+  transition: $transition;
+  border-radius: $radius;
+
+  @include bar-margin;
+
+  & > * {
+    padding: $padding $padding * 1.5;
+  }
+
+  & .font-icon {
+    font-size: $font-ui-size * 1.08;
+    font-weight: bold;
+  }
+}
