@@ -15,3 +15,6 @@ bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+
+PATH=~/.local/bin:$PATH
+PATH=~/.cargo/bin:$PATH
