@@ -1,7 +1,5 @@
 # Simple Aliases
 alias la="eza -la --icons"
-alias kitty-reload="kill -SIGUSR1 (pgrep kitty)"
-alias icat="kitty +kitten icat"
 alias btm="btm --enable_gpu_memory"
 alias del="trash"
 alias nv="nvim"

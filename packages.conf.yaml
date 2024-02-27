@@ -1,12 +1,14 @@
 # This file contains the necessary packages to install
 # for my dotfiles to work properly.
 
-- yay:
-    # Pacman Packages
+- pacman:
     - bc
+    - brightnessctl
     - cliphist
+    - dart-sass
     - direnv
     - eza
+    - fd
     - fish
     - fzf
     - foot
@@ -18,17 +20,16 @@
     - otf-font-awesome
     - playerctl
     - python-pipx
-    - sassc
     - slurp
     - socat
     - starship
     - wl-clipboard
     - wofi
+    - wtype
     - xdg-desktop-portal-gtk
     - xdg-desktop-portal-hyprland
     - zoxide
-    # AUR Packages
-    - asdf-vm
+- yay:
     - aylurs-gtk-shell
     - bibata-cursor-theme-bin
     - bun-bin

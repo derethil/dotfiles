@@ -4,6 +4,7 @@
 
 - yay:
     # CLI Applications
+    - arch-update
     - bottom
     - broot
     - cloc
