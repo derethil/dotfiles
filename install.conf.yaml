@@ -59,6 +59,10 @@
       path: dots/applications/*
       glob: true
 
+    ~/.local/bin/:
+      path: dots/bin/*
+      glob: true
+
     # Miscellaneous
     ~/Pictures/wallpapers/:
       path: dots/wallpapers/*

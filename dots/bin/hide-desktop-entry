@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Check if the argument is provided
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <list_of_names>"
+    exit 1
+fi
+
+# Function to confirm action
+confirm_action() {
+    read -p "Are you sure you want to continue? (Y/N): " choice
+    case "$choice" in
+        y|Y ) ;;
+        * ) exit 0;;
+    esac
+}
+
+# Loop through each provided name
+for name in "$@"; do
+    # Find the .desktop file corresponding to the name
+    desktop_file=$(locate -b -r "\b${name}\.desktop$")
+    
+    # Check if the desktop file exists
+    if [ -z "$desktop_file" ]; then
+        echo "Desktop file for '$name' not found."
+    else
+        # Get the filename without the directory
+        filename=$(basename "$desktop_file")
+        
+        # Ask for confirmation before proceeding
+        echo "Found desktop file for '$name': $desktop_file"
+        confirm_action
+
+        # Copy the desktop file to ~/.local/share/applications
+        cp "$desktop_file" ~/.local/share/applications/
+        
+        # Add NoDisplay=true to the desktop file
+        echo "NoDisplay=true" >> ~/.local/share/applications/"$filename"
+        
+        echo "Desktop file for '$name' copied and disabled."
+    fi
+done
+
