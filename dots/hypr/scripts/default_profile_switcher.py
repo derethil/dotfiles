@@ -5,7 +5,7 @@ from enum import Enum, unique
 
 import hyprland
 
-BROWSER_PATH = path.expanduser("~/.floorp/")
+BROWSER_PATH = path.expanduser("~/.mozilla/")
 
 # NOTE:
 # This script assumes that you have this extension installed:
@@ -77,7 +77,7 @@ class Handler(hyprland.Events):
         super().__init__()
 
     async def on_activewindow(self, window_class, window_title, *_):
-        if window_class != "floorp":
+        if window_class != "firefox":
             # Skip if the window isn't the browser
             return
 
