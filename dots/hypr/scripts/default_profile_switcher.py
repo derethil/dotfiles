@@ -5,7 +5,7 @@ from enum import Enum, unique
 
 import hyprland
 
-BROWSER_PATH = path.expanduser("~/.mozilla/")
+BROWSER_PATH = path.expanduser("~/.mozilla/firefox")
 
 # NOTE:
 # This script assumes that you have this extension installed:
