@@ -4,7 +4,8 @@ import { BarWidget } from "windows/bar/Bar";
 const optionsConfig = mkOptions(OPTIONS, {
   mode: opt<"desktop" | "laptop">("desktop"),
   autotheme: opt(true),
-  wallpaper: opt(`/home/${USER}/Pictures/wallpapers/catMachup.png`, {
+
+  wallpaper: opt(`/home/${Utils.USER}/Pictures/wallpapers/catMachup.png`, {
     persistent: true,
   }),
 
@@ -51,10 +52,10 @@ const optionsConfig = mkOptions(OPTIONS, {
 
     blur: opt(0),
     scheme: opt<"dark" | "light">("dark"),
-    widget: { opacity: opt(94) },
+    widget: { transparency: opt(94) },
     border: {
-      width: opt(1),
-      opacity: opt(96),
+      width: opt(2),
+      transparency: opt(96),
     },
 
     padding: opt(7),
@@ -87,12 +88,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     corners: opt(false),
 
     layout: {
-      start: opt<BarWidget[]>([
-        "dashboard",
-        "workspaces",
-        "systemTray",
-        "media",
-      ]),
+      start: opt<BarWidget[]>(["dashboard", "workspaces", "systemTray", "media"]),
       center: opt<BarWidget[]>([]),
       end: opt<BarWidget[]>(["weather", "audio", "clock", "powermenu"]),
     },
@@ -125,6 +121,10 @@ const optionsConfig = mkOptions(OPTIONS, {
     tray: {
       hidden: opt(["Wayland to X11 Video bridge"]),
     },
+  },
+
+  dashboard: {
+    avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
   },
 
   notifications: {

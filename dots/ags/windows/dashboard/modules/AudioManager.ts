@@ -43,7 +43,10 @@ export const SinkSelector = () =>
   });
 
 export function AudioManager() {
-  return SinkSelector();
+  return Widget.Box({
+    class_name: "audio-manager",
+    children: [SinkSelector()],
+  });
 }
 // Widget.Button({
 //   className: "audio-manager",

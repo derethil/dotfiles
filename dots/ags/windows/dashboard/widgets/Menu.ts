@@ -20,7 +20,7 @@ export function Menu({ name, icon, title, content }: MenuProps) {
     transition: "slide_down",
     revealChild: openedMenu.bind().as((menu) => menu === name),
     child: Widget.Box({
-      classNames: ["menu", name],
+      class_names: [name],
       vertical: true,
       children: [
         Widget.Box({

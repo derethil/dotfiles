@@ -1,0 +1,14 @@
+* {
+  font-size: $font-ui-size;
+  font-family: $font-ui-name;
+}
+
+separator {
+  &.horizontal {
+    min-height: $border-width;
+  }
+
+  &.vertical {
+    min-width: $border-width;
+  }
+}

@@ -28,11 +28,15 @@
 
     &:first-child {
       border-radius: $radius $radius 0 0;
+      border: $border;
+      border-bottom-width: 0;
     }
 
     &:last-child {
-      background-color: $widget-bg;
       border-radius: 0 0 $radius $radius;
+      border: $border;
+      font-weight: bold;
+      font-family: $font-mono-name;
     }
   }
 

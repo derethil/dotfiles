@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { type Opt } from "lib/option";
 import { options } from "options";
 import { bash, dependencies, sh } from "lib/utils";
@@ -33,8 +32,16 @@ const t = (dark: Opt<any> | string, light: Opt<any> | string) =>
 
 const $ = (name: string, value: string | Opt<any>) => `$${name}: ${value};`;
 
-// prettier-ignore
 const variables = () => [
+  // Before
+  $("red", accents.red),
+  $("green", accents.green),
+  $("yellow", accents.yellow),
+  $("blue", accents.blue),
+  $("magenta", accents.magenta),
+  $("teal", accents.teal),
+  $("orange", accents.orange),
+
   $("bg", blur.value ? `transparentize(${t(dark.bg, light.bg)}, ${blur.value / 100})` : t(dark.bg, light.bg)),
   $("fg", t(dark.fg, light.fg)),
 
@@ -44,14 +51,6 @@ const variables = () => [
   $("error-bg", t(dark.error.bg, light.error.bg)),
   $("error-fg", t(dark.error.fg, light.error.fg)),
 
-  $("red", accents.red),
-  $("green", accents.green),
-  $("yellow", accents.yellow),
-  $("blue", accents.blue),
-  $("magenta", accents.magenta),
-  $("teal", accents.teal),
-  $("orange", accents.orange),
-
   $("scheme", scheme),
   $("padding", `${padding}pt`),
   $("spacing", `${spacing}pt`),
@@ -60,20 +59,20 @@ const variables = () => [
 
   $("shadows", `${shadows}`),
 
-  $("widget-bg", `transparentize(${t(dark.widget, light.widget)}, ${widget.opacity.value / 100})`),
+  $("widget-bg", `transparentize(${t(dark.widget, light.widget)}, ${widget.transparency.value / 100})`),
 
-  $("hover-bg", `transparentize(${t(dark.widget, light.widget)}, ${(widget.opacity.value * 0.9) / 100})`),
+  $("hover-bg", `transparentize(${t(dark.widget, light.widget)}, ${(widget.transparency.value * 0.9) / 100})`),
   $("hover-fg", `lighten(${t(dark.fg, light.fg)}, 8%)`),
 
   $("border-width", `${border.width}px`),
-  $("border-color", `transparentize(${t(dark.border, light.border)}, ${border.opacity.value / 100})`),
+  $("border-color", `transparentize(${t(dark.border, light.border)}, ${border.transparency.value / 100})`),
   $("border", "$border-width solid $border-color"),
 
   $("active-gradient", `linear-gradient(to right, ${t(dark.primary.bg, light.primary.bg)}, darken(${t(dark.primary.bg, light.primary.bg)}, 4%))`),
   $("shadow-color", t("rgba(0,0,0,.6)", "rgba(0,0,0,.4)")),
   $("text-shadow", t("2pt 2pt 2pt $shadow-color", "none")),
 
-  $("popover-border-color", `transparentize(${t(dark.border, light.border)}, ${Math.max((border.opacity.value - 1) / 100, 0)})`),
+  $("popover-border-color", `transparentize(${t(dark.border, light.border)}, ${Math.max((border.transparency.value - 1) / 100, 0)})`),
   $("popover-padding", `$padding * ${popoverPaddingMultiplier}`),
   $("popover-radius", radius.value === 0 ? "0" : "$radius + $popover-padding"),
 
@@ -86,6 +85,20 @@ const variables = () => [
   $("bar-position", options.bar.position),
   $("hyprland-gaps-multiplier", options.theme.hyprland.gaps),
 ];
+
+const variables2 = {
+  // Accents
+  "red": accents.red,
+  "green": accents.green,
+  "yellow": accents.yellow,
+  "blue": accents.blue,
+  "magenta": accents.magenta,
+  "teal": accents.teal,
+  "orange": accents.orange,
+
+  // Material
+  "primary": t(dark.primary.bg, light.primary.bg),
+}
 
 async function resetCss() {
   if (!dependencies(["sass", "fd"])) return;

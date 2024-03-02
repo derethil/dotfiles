@@ -43,6 +43,12 @@ export const icons = {
     screen: "",
   },
 
+  searches: {
+    applications: "window-new-symbolic",
+    clipboard: "edit-paste-symbolic",
+    projects: "repository-symbolic",
+  },
+
   mpris: {
     fallback: "audio-x-generic-symbolic",
     shuffle: {

@@ -5,16 +5,11 @@ $bar-spacing: $spacing / 2;
 
 .bar {
   @include unset($rec: true);
-
   font-size: $font-ui-size;
+  font-family: $font-ui-name;
 
   .panel-button {
     @include panel-button($flat: true, $reactive: false);
-
-    & > box > box:last-child {
-      font-family: $font-mono-name;
-      font-weight: bold;
-    }
   }
 
   & > box {
@@ -39,14 +34,15 @@ $bar-spacing: $spacing / 2;
     button {
       font-family: "Font Awesome 6 Free Solid";
       padding: $padding * 0.65 0;
+      border-color: transparent;
 
       // Default Indicator (Empty Workspace)
       .indicator {
         box-shadow: inset 0 0 0 $border-width $border-color;
         transition: $transition;
         color: transparentize($fg, 0.5);
+        border-color: transparent;
       }
-
 
       // Hovering Empty Workspace
       &.empty:hover .indicator {
@@ -70,7 +66,7 @@ $bar-spacing: $spacing / 2;
         }
 
         &.empty .indicator {
-          color: $primary-fg
+          color: $primary-fg;
         }
 
         &:hover .indicator {
@@ -111,7 +107,7 @@ $bar-spacing: $spacing / 2;
   }
 
   .system-tray {
-     padding: $spacing * 0.125 0;
+    padding: $spacing * 0.125 0;
     .tray-item {
       margin: $spacing * 0.375 0;
     }

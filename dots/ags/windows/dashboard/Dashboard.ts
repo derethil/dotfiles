@@ -1,6 +1,5 @@
 import { PopupWindow } from "widgets/PopupWindow";
-import { ToolsBar } from "./modules/ToolsBar";
-import { AudioManager } from "./modules/AudioManager";
+import { Header } from "./modules/header/Header";
 
 export function Dashboard() {
   return PopupWindow({
@@ -12,7 +11,7 @@ export function Dashboard() {
       vertical: true,
       vpack: "start",
       hexpand: true,
-      children: [ToolsBar(), AudioManager()],
+      children: [Header(), Widget.Button({ label: "Hello, World!" })],
     }),
   });
 }

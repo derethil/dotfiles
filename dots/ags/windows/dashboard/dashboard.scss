@@ -1,11 +1,38 @@
+#dashboard .window-content {
+  @include unset($rec: true);
+  @include floating-widget;
+  padding: $popover-padding;
 
+  .header {
+    margin-bottom: 50px;
 
-.dashboard {
-  background-color: $widget-bg;
-  .tool-bar .panel-button {
-    @include accs-button($flat: true, $reactive: true);
-    padding-left: $padding;
-    padding-right: $padding;
-    margin: $padding;
+    .user-info {
+      @include widget;
+      font-weight: bold;
+      padding: $spacing;
+      margin-right: $spacing;
+
+      .separator {
+        color: $primary-fg;
+        padding: 2px;
+      }
+    }
+
+    .text-entry {
+      @include widget;
+
+      stack {
+        padding: $spacing;
+      }
+
+      separator {
+        border: $border;
+      }
+
+      entry {
+        padding: $spacing;
+        background-color: transparent;
+      }
+    }
   }
 }
