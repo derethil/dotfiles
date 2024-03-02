@@ -21,6 +21,7 @@ abbr -a gl2 "git log --pretty='format:%Cgreen%h%Creset %an - %s' --graph"
 abbr -a glv "git log --stat"
 abbr -a gpom "git pull origin master"
 abbr -a gcd 'cd "`git rev-parse --show-toplevel`"'
+abbr -a gw 'git switch'
 
 # remove files that are not under version control
 abbr -a gcf "git clean -fd"
