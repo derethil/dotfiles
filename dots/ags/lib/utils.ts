@@ -1,13 +1,8 @@
-import { type Config } from "types/app";
 import Window from "types/widgets/window";
 import Gdk from "gi://Gdk?version=3.0";
 import GLib from "gi://GLib?version=2.0";
-import Gtk from "gi://Gtk?version=3.0";
 import { substitutes } from "lib/icons";
 
-export function config<T extends Gtk.Window>(config: Config<T>) {
-  return config;
-}
 /** Generate an array of numbers */
 export function range(length: number, start = 1) {
   return Array.from({ length }, (_, i) => i + start);

@@ -2,46 +2,32 @@ const Hyprland = await Service.import("hyprland");
 import { FontIcon } from "widgets/FontIcon";
 import { icons } from "lib/icons";
 import { range } from "lib/utils";
-import { Workspace } from "types/service/hyprland";
 import { PanelModule } from "widgets/PanelModule";
 
-const dispatch = (arg: any) =>
+const swapToWorkspace = (arg: string | number) =>
   Utils.execAsync(`hyprctl dispatch workspace ${arg}`);
 
-const WorkspacesContainer = ({ minimum }: { minimum: number }) => {
-  const isVisible = (i: number, workspaces: Workspace[]) => {
-    const max_used = workspaces.reduce((acc, cur) => Math.max(acc, cur.id), 0);
-    return i <= Math.max(minimum, max_used);
-  };
-
+const Container = (hideAfter: number) => {
   return Widget.Box({
     vertical: true,
     hexpand: true,
     children: range(10).map((i) => {
       return Widget.Button({
-        class_name: "workspace",
+        className: "workspace",
         child: FontIcon({
           label: icons.workspace,
-          class_name: "indicator",
+          className: "indicator",
         }),
-        on_clicked: () => dispatch(i),
+        onClicked: () => swapToWorkspace(i),
+        visible: Hyprland.bind("workspaces").as((workspaces) => {
+          return i <= Math.max(hideAfter, ...workspaces.map((w) => w.id));
+        }),
         setup: (self) => {
-          // Hide unused workspaces above the minimum
-          self.bind("visible", Hyprland, "workspaces", (workspaces) => {
-            return isVisible(i, workspaces);
-          });
-
-          // Update the active workspace indicator
           self.hook(Hyprland, () => {
+            const windows = Hyprland.getWorkspace(i)?.windows || 0;
             self.toggleClassName("active", Hyprland.active.workspace.id === i);
-            self.toggleClassName(
-              "occupied",
-              (Hyprland.getWorkspace(i)?.windows || 0) > 0
-            );
-            self.toggleClassName(
-              "empty",
-              (Hyprland.getWorkspace(i)?.windows || 0) === 0
-            );
+            self.toggleClassName("occupied", windows > 0);
+            self.toggleClassName("empty", windows === 0);
           });
         },
       });
@@ -51,13 +37,10 @@ const WorkspacesContainer = ({ minimum }: { minimum: number }) => {
 
 export function Workspaces() {
   return PanelModule({
-    class_name: "workspaces",
+    className: "workspaces",
     cursor: "pointer",
-    on_scroll_up: () => dispatch("e-1"),
-    on_scroll_down: () => dispatch("e+1"),
-    child: WorkspacesContainer({
-      minimum: options.bar.workspaces.minimum.value,
-      // @ts-expect-error - .bind() is not typed to accept custom properties
-    }).bind("minimum", options.bar.workspaces.minimum),
+    onScrollUp: () => swapToWorkspace("e-1"),
+    onScrollDown: () => swapToWorkspace("e+1"),
+    child: options.bar.workspaces.minimum.bind().as(Container),
   });
 }

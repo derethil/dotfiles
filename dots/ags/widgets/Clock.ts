@@ -1,5 +1,5 @@
 import GLib from "gi://GLib";
-import { Props as LabelProps } from "types/widgets/label";
+import { LabelProps } from "types/widgets/label";
 
 interface ClockProps extends LabelProps {
   format: string;

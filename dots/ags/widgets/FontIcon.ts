@@ -1,5 +1,5 @@
 import Gtk from "gi://Gtk?version=3.0";
-import { type Props as LabelProps } from "types/widgets/label";
+import { LabelProps } from "types/widgets/label";
 
 export function FontIcon<Attr extends { size: number }>(
   props: LabelProps<Attr> = {}
@@ -32,4 +32,4 @@ export function FontIcon<Attr extends { size: number }>(
     },
     ...rest,
   });
-};
+}

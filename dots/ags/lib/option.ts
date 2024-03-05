@@ -69,6 +69,8 @@ function getOptions(object: object, path = ""): Opt[] {
 export function mkOptions<T extends object>(cacheFile: string, object: T) {
   for (const opt of getOptions(object)) opt.init(cacheFile);
 
+  Utils.ensureDirectory(cacheFile.split("/").slice(0, -1).join("/"));
+
   const configFile = `${TMP}/config.json`;
   const values = getOptions(object).reduce(
     (obj, { id, value }) => ({ [id]: value, ...obj }),
