@@ -36,13 +36,13 @@ Battery.connect("changed", () => {
 export const BatteryModule = () =>
   IconModule({
     labelColor,
-    tooltip_text: Battery.bind("time_remaining").as((seconds) => {
+    tooltipText: Battery.bind("time_remaining").as((seconds) => {
       const formatted = formatTime(seconds);
       return `${formatted} until ${
         Battery.charging ? "fully charged" : "empty"
       }`;
     }),
-    class_name: "clock",
+    className: "clock",
     child: Widget.Label({
       label: Battery.bind("percent").transform((p) => p.toString()),
     }),

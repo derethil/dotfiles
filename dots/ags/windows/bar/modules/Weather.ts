@@ -20,11 +20,11 @@ const setIcon = async (fontIcon: any) => {
 
 export function Weather() {
   return IconModule({
-    class_name: "weather",
+    className: "weather",
     labelColor: "blue",
     icon: FontIcon({ label: icons.weather.init }).poll(msBetweenPoll, setIcon),
     child: Widget.Label({
-      class_name: "temperature",
+      className: "temperature",
     }).poll(msBetweenPoll, setTemperature),
   });
 }

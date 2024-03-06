@@ -9,12 +9,12 @@ const Audio = await Service.import("audio");
 const SinkItem = (stream: Stream) =>
   Widget.Button({
     hexpand: true,
-    on_clicked: () => (Audio.speaker = stream),
+    onClicked: () => (Audio.speaker = stream),
     child: Widget.Box({
       children: [
         Widget.Icon({
           icon: icon(stream.icon_name || "", icons.audio.type.headset),
-          tooltip_text: stream.icon_name || "",
+          tooltipText: stream.icon_name || "",
         }),
         Widget.Label(
           (stream.description || "").split(" ").slice(0, 4).join(" ")
@@ -46,17 +46,17 @@ export function AudioManager() {
   return SinkSelector();
 }
 // Widget.Button({
-//   class_name: "audio-manager",
+//   className: "audio-manager",
 //   child: SinkSelector(),
 // child: Widget.Label({
 //   label: Audio.bind("speaker").as((speaker) => speaker.description ?? ""),
 // }),
-// on_primary_click: (_, event) => {
+// onPrimaryClick: (_, event) => {
 //   return Widget.Menu({
 //     children: Audio.speakers.map((speaker) =>
 //       Widget.MenuItem({
 //         child: Widget.Label(speaker.description ?? ""),
-//         on_activate: () => {
+//         onActivate: () => {
 //           Audio.speaker = speaker;
 //         },
 //       })

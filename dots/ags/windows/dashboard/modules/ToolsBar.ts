@@ -5,14 +5,14 @@ import { icons } from "lib/icons";
 interface ToolProps {
   command: string | string[];
   icon: string;
-  class_name: string;
+  className: string;
 }
 
-const ToolButton = ({ class_name, command, icon }: ToolProps) =>
+const ToolButton = ({ className, command, icon }: ToolProps) =>
   PanelButton({
-    class_name,
+    className: className,
     cursor: "pointer",
-    on_clicked: () => {
+    onClicked: () => {
       Utils.execAsync(command);
       App.toggleWindow("dashboard");
     },
@@ -23,16 +23,16 @@ const ToolButton = ({ class_name, command, icon }: ToolProps) =>
 
 export function ToolsBar() {
   return Widget.Box({
-    class_name: "tool-bar",
+    className: "tool-bar",
     hexpand: true,
     children: [
       ToolButton({
-        class_name: "color-picker",
+        className: "color-picker",
         command: "hyprpicker -a",
         icon: icons.tools.colorPicker,
       }),
       ToolButton({
-        class_name: "screenshot",
+        className: "screenshot",
         command: "hyprshot -m region --clipboard-only",
         icon: icons.tools.screenshot,
       }),

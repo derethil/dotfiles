@@ -28,30 +28,31 @@ const widgets = {
 
 const { start, center, end } = options.bar.layout;
 const { position } = options.bar;
+
 export function Bar(monitor: number) {
   return Widget.Window({
     name: `bar${monitor}`,
     exclusivity: "exclusive",
     monitor,
-    class_name: "bar",
+    className: "bar",
     anchor: position.bind().as((v) => ["top", v, "bottom"]),
     child: Widget.CenterBox({
       css: "min-width: 2px; min-height: 2px;",
       vertical: true,
-      start_widget: Widget.Box({
+      startWidget: Widget.Box({
         vertical: true,
         vpack: "start",
         expand: true,
         children: start.bind().as((v) => v.map((w) => widgets[w]())),
       }),
 
-      center_widget: Widget.Box({
+      centerWidget: Widget.Box({
         vertical: true,
         vpack: "center",
         children: center.bind().as((v) => v.map((w) => widgets[w]())),
       }),
 
-      end_widget: Widget.Box({
+      endWidget: Widget.Box({
         vertical: true,
         vpack: "end",
         expand: true,

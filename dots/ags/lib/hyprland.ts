@@ -49,12 +49,12 @@ function sendBatch(batch: string[]) {
 }
 
 async function setupHyprland() {
-  const wm_gaps = Math.floor(hyprland.gaps.value * spacing.value);
+  const wmGaps = Math.floor(hyprland.gaps.value * spacing.value);
 
   sendBatch([
     `general:border_size ${width.value}`,
-    `general:gaps_out ${wm_gaps}`,
-    `general:gaps_in ${Math.floor(wm_gaps / 2)}`,
+    `general:gaps_out ${wmGaps}`,
+    `general:gaps_in ${Math.floor(wmGaps / 2)}`,
     `general:col.active_border rgba(${activeBorder()}ff)`,
     `general:col.inactive_border rgba(${hyprland.inactiveBorder.value})`,
     `decoration:rounding ${radius.value}`,

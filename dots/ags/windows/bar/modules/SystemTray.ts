@@ -5,11 +5,11 @@ import Gdk from "gi://Gdk";
 
 function SystemTrayItem(item: TrayItem) {
   return Widget.Button({
-    class_name: "tray-item",
+    className: "tray-item",
     child: Widget.Icon().bind("icon", item, "icon"),
-    on_clicked: (btn) =>
+    onClicked: (btn) =>
       item.menu?.popup_at_widget(btn, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null),
-    on_secondary_click: (btn) =>
+    onSecondaryClick: (btn) =>
       item.menu?.popup_at_widget(btn, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null),
   });
 }
@@ -21,10 +21,10 @@ function filterItems(item: TrayItem) {
 
 export function SystemTray() {
   return Widget.Revealer({
-    reveal_child: false,
-    transition_duration: options.transition.bind(),
+    revealChild: false,
+    transitionDuration: options.transition.bind(),
     transition: "slide_up",
-    class_name: "system-tray",
+    className: "system-tray",
     setup: (self) => {
       self.hook(SystemTrayService, (self) => {
         if (SystemTrayService.items.filter(filterItems).length > 0) {
@@ -35,7 +35,7 @@ export function SystemTray() {
       });
     },
     child: PanelButton({
-      class_name: "system-tray",
+      className: "system-tray",
       child: Widget.Box({
         hexpand: true,
         vertical: true,

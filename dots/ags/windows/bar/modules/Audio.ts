@@ -35,9 +35,9 @@ function chooseIcon() {
 export function AudioModule() {
   return IconModule({
     cursor: "pointer",
-    class_name: "audio",
+    className: "audio",
     labelColor: "magenta",
-    on_clicked: () => {
+    onClicked: () => {
       if (!Audio["speaker"]) return;
       Audio["speaker"].is_muted = !Audio["speaker"].is_muted;
     },

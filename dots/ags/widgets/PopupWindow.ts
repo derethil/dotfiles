@@ -55,14 +55,14 @@ class PopupWindowCls extends AgsWindow<any, any> {
       name,
       keymode: "exclusive",
       layer: "overlay",
-      class_names: ["popup-window", name],
+      classNames: ["popup-window", name],
     });
 
     child.toggleClassName("window-content");
     this.revealer = Widget.Revealer({
       transition,
       child,
-      transition_duration: options.transition.value,
+      transitionDuration: options.transition.value,
       setup: (self) =>
         self.hook(App, (_, wname, visible) => {
           if (wname === name) this.revealer.reveal_child = visible;

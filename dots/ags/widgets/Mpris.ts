@@ -15,7 +15,7 @@ export const CoverArt = (
 ) =>
   Widget.Box({
     ...props,
-    class_name: "cover",
+    className: "cover",
     css: player
       .bind("cover_path")
       .transform((p) => `background-image: url("${p}")`),
@@ -27,7 +27,7 @@ export const BlurredCoverArt = (
 ) =>
   Widget.Box({
     ...props,
-    class_name: "blurred-cover",
+    className: "blurred-cover",
     setup: (self) =>
       self.hook(
         player,
@@ -42,14 +42,14 @@ export const BlurredCoverArt = (
 export const TitleLabel = (player: MprisPlayer, props: LabelProps = {}) =>
   Widget.Label({
     ...props,
-    class_name: "title",
+    className: "title",
     label: player.bind("track_title"),
   });
 
 export const ArtistLabel = (player: MprisPlayer, props: LabelProps = {}) =>
   Widget.Label({
     ...props,
-    class_name: "artist",
+    className: "artist",
     label: player.bind("track_artists").transform((a) => a.join(", ") || ""),
   });
 
@@ -59,8 +59,8 @@ export const PlayerIcon = (
 ) =>
   Widget.Icon({
     ...props,
-    class_name: "player-icon",
-    tooltip_text: player.identity || "",
+    className: "player-icon",
+    tooltipText: player.identity || "",
     setup: (self) =>
       self.hook(player, (icon) => {
         const name = `${player.entry}${symbolic ? "-symbolic" : ""}`;
@@ -73,9 +73,9 @@ export const PlayerIcon = (
 export const PositionSlider = (player: MprisPlayer, props: SliderProps = {}) =>
   Widget.Slider({
     ...props,
-    class_name: "position-slider",
-    draw_value: false,
-    on_change: ({ value }) => (player.position = player.length * value),
+    className: "position-slider",
+    drawValue: false,
+    onChange: ({ value }) => (player.position = player.length * value),
     setup: (self) => {
       const update = () => {
         if (self.dragging) return;
@@ -146,7 +146,7 @@ const PlayerButton = ({
       prop as any,
       (p) => `${p}`
     ),
-    on_clicked: () => player[onClick](),
+    onClicked: () => player[onClick](),
     visible: player.bind(canProp as any).transform((c) => c !== cantValue),
   });
 };
@@ -156,11 +156,11 @@ export const ShuffleButton = (player: MprisPlayer) =>
     player,
     children: {
       true: FontIcon({
-        class_name: "shuffle enabled",
+        className: "shuffle enabled",
         label: icons.mpris.shuffle.enabled,
       }),
       false: FontIcon({
-        class_name: "shuffle disabled",
+        className: "shuffle disabled",
         label: icons.mpris.shuffle.disabled,
       }),
     },
@@ -175,15 +175,15 @@ export const LoopButton = (player: MprisPlayer) =>
     player,
     children: {
       None: FontIcon({
-        class_name: "loop none",
+        className: "loop none",
         label: icons.mpris.loop.none,
       }),
       Track: FontIcon({
-        class_name: "loop track",
+        className: "loop track",
         label: icons.mpris.loop.track,
       }),
       Playlist: FontIcon({
-        class_name: "loop playlist",
+        className: "loop playlist",
         label: icons.mpris.loop.playlist,
       }),
     },
@@ -198,15 +198,15 @@ export const PlayPauseButton = (player: MprisPlayer) =>
     player,
     children: {
       Playing: FontIcon({
-        class_name: "playing",
+        className: "playing",
         label: icons.mpris.playing,
       }),
       Paused: FontIcon({
-        class_name: "paused",
+        className: "paused",
         label: icons.mpris.paused,
       }),
       Stopped: FontIcon({
-        class_name: "stopped",
+        className: "stopped",
         label: icons.mpris.stopped,
       }),
     },
@@ -221,7 +221,7 @@ export const PreviousButton = (player: MprisPlayer) =>
     player,
     children: {
       true: FontIcon({
-        class_name: "previous",
+        className: "previous",
         label: icons.mpris.prev,
       }),
     },
@@ -236,7 +236,7 @@ export const NextButton = (player: MprisPlayer) =>
     player,
     children: {
       true: FontIcon({
-        class_name: "next",
+        className: "next",
         label: icons.mpris.next,
       }),
     },

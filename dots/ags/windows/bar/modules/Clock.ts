@@ -5,7 +5,7 @@ import { IconModule } from "../IconModule";
 
 export function Clock() {
   return IconModule({
-    class_name: "clock",
+    className: "clock",
     child: ClockWidget({ format: `%I\n%M` }),
     icon: FontIcon({
       label: icons.clock,

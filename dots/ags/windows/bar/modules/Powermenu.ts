@@ -5,7 +5,7 @@ import { PanelModule } from "widgets/PanelModule";
 
 const actions = {
   default: {
-    class_name: "shutdown",
+    className: "shutdown",
     icon: icons.powermenu.shutdown,
     action: () => Utils.execAsync("shutdown -h now"),
   },
@@ -32,16 +32,16 @@ const actions = {
 
 export function Powermenu() {
   return PanelModule({
-    class_name: "powermenu",
+    className: "powermenu",
     child: HoverRevealer({
       hexpand: true,
       direction: "up",
       cursor: "pointer",
-      class_name: "powermenu-revealer",
+      className: "powermenu-revealer",
       indicator: Widget.Button({
-        class_name: "powermenu-button",
+        classNames: ["powermenu-button", actions.default.className],
         child: FontIcon({ label: actions.default.icon }),
-        on_clicked: () => actions.default.action(),
+        onClicked: () => actions.default.action(),
       }),
       child: Widget.Box({
         vertical: true,
@@ -49,9 +49,9 @@ export function Powermenu() {
           ([name, { icon, action }]) =>
             Widget.Button({
               vpack: "center",
-              class_name: `powermenu-button ${name}`,
+              className: `powermenu-button ${name}`,
               child: FontIcon({ label: icon }),
-              on_clicked: action,
+              onClicked: action,
             })
         ),
       }),

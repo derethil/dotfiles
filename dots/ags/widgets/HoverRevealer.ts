@@ -24,7 +24,7 @@ export function HoverRevealer({
   const revealer = Widget.Revealer({
     transition: `slide_${direction}`,
     setup: setupRevealer,
-    transition_duration: duration,
+    transitionDuration: duration,
     child,
   });
 
@@ -46,4 +46,4 @@ export function HoverRevealer({
   });
 
   return eventbox;
-};
+}

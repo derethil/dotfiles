@@ -12,7 +12,7 @@ export function Dashboard() {
           options.bar.position.value === "left" ? "slide_right" : "slide_left";
       }),
     child: Widget.Box({
-      class_name: "dashboard",
+      className: "dashboard",
       vertical: true,
       vpack: "start",
       hexpand: true,

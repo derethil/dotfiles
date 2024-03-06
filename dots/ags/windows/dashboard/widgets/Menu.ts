@@ -18,13 +18,13 @@ interface MenuProps {
 export function Menu({ name, icon, title, content }: MenuProps) {
   return Widget.Revealer({
     transition: "slide_down",
-    reveal_child: openedMenu.bind().as((menu) => menu === name),
+    revealChild: openedMenu.bind().as((menu) => menu === name),
     child: Widget.Box({
-      class_names: ["menu", name],
+      classNames: ["menu", name],
       vertical: true,
       children: [
         Widget.Box({
-          class_name: "title horizontal",
+          className: "title horizontal",
           children: [icon, title],
         }),
         Widget.Separator(),

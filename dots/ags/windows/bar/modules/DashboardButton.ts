@@ -6,8 +6,8 @@ export function DashboardButton() {
   return PanelButton({
     cursor: "pointer",
     window: "dashboard",
-    on_clicked: () => App.toggleWindow("dashboard"),
-    class_name: "dashboard-button",
+    onClicked: () => App.toggleWindow("dashboard"),
+    className: "dashboard-button",
     child: FontIcon({
       hexpand: true,
       label: icons.dashboard,

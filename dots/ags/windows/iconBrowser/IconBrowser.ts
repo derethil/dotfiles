@@ -11,9 +11,9 @@ const IconPicker = () => {
   });
 
   const flowbox = Widget.FlowBox({
-    min_children_per_line: 7,
-    row_spacing: 12,
-    column_spacing: 12,
+    minChildrenPerLine: 7,
+    rowSpacing: 12,
+    columnSpacing: 12,
     vpack: "start",
     hpack: "start",
     setup: (self) => {
@@ -32,7 +32,7 @@ const IconPicker = () => {
                 icon,
                 size: 38,
               }),
-              -1,
+              -1
             );
         });
 
@@ -41,9 +41,9 @@ const IconPicker = () => {
   });
 
   const entry = Widget.Entry({
-    placeholder_text: "Type to seach...",
-    primary_icon_name: "system-search-symbolic",
-    on_change: ({ text }) =>
+    placeholderText: "Type to seach...",
+    primaryIconName: "system-search-symbolic",
+    onChange: ({ text }) =>
       flowbox.get_children().forEach((child) => {
         // @ts-expect-error
         child.visible = child.get_child().iconName.includes(text);

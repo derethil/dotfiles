@@ -21,18 +21,18 @@ export function MediaControls() {
   };
 
   return Widget.Revealer({
-    reveal_child: false,
-    transition_duration: options.transition.bind("value"),
+    revealChild: false,
+    transitionDuration: options.transition.bind("value"),
     transition: "slide_down",
-    class_name: "mpris",
+    className: "mpris",
     child: IconModule({
       icon: FontIcon({
         label: icons.mediaControls,
-        class_name: "mpris-label-icon",
+        className: "mpris-label-icon",
       }),
       labelColor: "green",
       child: Widget.Box({
-        class_name: "controls",
+        className: "controls",
         vertical: true,
         setup: (self) => {
           self.hook(options.bar.media.preferred, update);
