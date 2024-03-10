@@ -27,7 +27,6 @@
     - wofi
     - wtype
     - xdg-desktop-portal-gtk
-    - xdg-desktop-portal-hyprland
     - zoxide
 - yay:
     - aylurs-gtk-shell
@@ -36,7 +35,10 @@
     - ctpv-git
     - git-open
     - hyprcwd-git
+    - hyprcursor-git
+    - hyprevents-git
     - hyprland-git
+    - hyprlang-git
     - hyprpicker
     - hyprprop-git
     - hyprshot
@@ -45,6 +47,7 @@
     - swww
     - ttf-icomoon-feather-git
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
+    - xdg-desktop-portal-hyprland-git
 
 - asdf:
     - plugin: nodejs
