@@ -19,7 +19,7 @@ $bar-spacing: $spacing / 2;
 
   // Start Widgets
 
-  .dashboard-button {
+  .window-button {
     @include unset($rec: true);
     @include panel-button($flat: true, $reactive: true);
     color: $primary-fg;

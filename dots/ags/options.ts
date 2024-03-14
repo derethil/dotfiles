@@ -69,7 +69,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     },
   },
 
-  transition: opt(200),
+  transition: opt(150),
 
   font: {
     ui: {
@@ -87,8 +87,10 @@ const optionsConfig = mkOptions(OPTIONS, {
     position: opt<"left" | "right">("left"),
     corners: opt(false),
 
+    windowButtonOpens: opt("overview"),
+
     layout: {
-      start: opt<BarWidget[]>(["dashboard", "workspaces", "systemTray", "media"]),
+      start: opt<BarWidget[]>(["window", "workspaces", "systemTray", "media"]),
       center: opt<BarWidget[]>([]),
       end: opt<BarWidget[]>(["weather", "audio", "clock", "powermenu"]),
     },
@@ -125,6 +127,13 @@ const optionsConfig = mkOptions(OPTIONS, {
 
   dashboard: {
     avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
+  },
+
+  overview: {
+    scale: opt(8),
+    iconSize: opt(32),
+    minWorkspaces: opt(5),
+    monochromeIcon: opt(false),
   },
 
   notifications: {

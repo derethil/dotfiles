@@ -2,12 +2,12 @@ import { PanelButton } from "../../../widgets/PanelButton";
 import { FontIcon } from "widgets/FontIcon";
 import { icons } from "lib/icons";
 
-export function DashboardButton() {
+export function WindowButton() {
   return PanelButton({
     cursor: "pointer",
-    window: "dashboard",
-    onClicked: () => App.toggleWindow("dashboard"),
-    className: "dashboard-button",
+    window: options.bar.windowButtonOpens.value,
+    onClicked: () => App.toggleWindow(options.bar.windowButtonOpens.value),
+    className: "window-button",
     child: FontIcon({
       hexpand: true,
       label: icons.dashboard,

@@ -6,9 +6,9 @@ import { Weather } from "./modules/Weather";
 import { SystemTray } from "./modules/SystemTray";
 import { AudioModule } from "./modules/Audio";
 import { MediaControls } from "./modules/MediaControls";
-import { DashboardButton } from "./modules/DashboardButton";
 import { BatteryModule } from "./modules/Battery";
 import { Backlight } from "./modules/Backlight";
+import { WindowButton } from "./modules/WindowButton";
 
 export type BarWidget = keyof typeof widgets;
 
@@ -16,7 +16,7 @@ const widgets = {
   battery: BatteryModule,
   backlight: Backlight,
   clock: Clock,
-  dashboard: DashboardButton,
+  window: WindowButton,
   powermenu: Powermenu,
   systemTray: SystemTray,
   weather: Weather,
