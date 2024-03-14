@@ -4,6 +4,10 @@ export const substitutes: Record<string, string> = {
 };
 
 export const icons = {
+  fallback: {
+    executable: "application-x-executable-symbolic",
+  },
+
   workspace: "",
 
   powermenu: {

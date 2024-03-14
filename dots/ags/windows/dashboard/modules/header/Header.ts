@@ -1,5 +1,5 @@
 import GLib from "gi://GLib";
-import { TextEntry } from "./TextEntry";
+import { SearchMenu } from "./SearchMenu";
 
 const Avatar = () =>
   Widget.Box({
@@ -29,6 +29,6 @@ export function Header() {
   return Widget.Box({
     class_name: "header",
     hpack: "fill",
-    children: [UserInfo(), TextEntry()],
+    children: [UserInfo(), SearchMenu()],
   });
 }

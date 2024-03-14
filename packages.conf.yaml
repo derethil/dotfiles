@@ -2,6 +2,7 @@
 # for my dotfiles to work properly.
 
 - pacman:
+    - adwaita-icon-theme
     - bc
     - brightnessctl
     - cliphist
@@ -43,6 +44,7 @@
     - hyprprop-git
     - hyprshot
     - kanagawa-gtk-theme-git
+    - morewaita
     - poppler
     - swww
     - ttf-icomoon-feather-git
@@ -65,3 +67,6 @@
 
     - command: cd ~/.config/hypr/scripts/ && python -m venv ~/.config/hypr/scripts/.venv && source ~/.config/hypr/scripts/.venv/bin/activate && ~/.local/bin/poetry install --no-root
       description: Creating virtual environment for hypr scripts
+
+    - command: gsettings set org.gnome.desktop.interface icon-theme 'MoreWaita'
+      description: Setting icon theme to Adwaita/MoreWaita

@@ -27,15 +27,12 @@ export function wait<T>(ms: number, callback: () => T): Promise<T> {
   return new Promise((resolve) =>
     Utils.timeout(ms, () => {
       resolve(callback());
-    })
+    }),
   );
 }
 
 /** Executes bash command(s) */
-export async function bash(
-  strings: TemplateStringsArray | string,
-  ...values: unknown[]
-) {
+export async function bash(strings: TemplateStringsArray | string, ...values: unknown[]) {
   const cmd =
     typeof strings === "string"
       ? strings
@@ -56,9 +53,7 @@ export async function sh(cmd: string | string[]) {
 }
 
 /** Creates the given widget on all monitors. */
-export function forMonitors(
-  widget: (monitor: number) => any
-): Window<any, any>[] {
+export function forMonitors(widget: (monitor: number) => any): Window<any, any>[] {
   const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
   return range(n, 0).map(widget).flat(1);
 }
@@ -89,4 +84,19 @@ export function icon(name: string | null, fallback = name): string {
 
   print(`no icon substitute "${icon}" for "${name}", fallback: "${fallback}"`);
   return fallback!;
+}
+
+/** Convert to title case */
+export function toTitleCase(input: string): string {
+  if (!input) return "";
+
+  return input
+    .replace(/[-_]/g, " ")
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .split(" ")
+    .map((word) => {
+      if (word.length === 0) return "";
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
 }

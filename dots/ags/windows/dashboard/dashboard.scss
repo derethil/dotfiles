@@ -35,4 +35,27 @@
       }
     }
   }
+
+  .overlay {
+    .app-item {
+      border-radius: $radius;
+      border: $border;
+
+      background-color: $widget-bg;
+
+      &.active {
+        background-color: $primary-bg;
+        color: $primary-fg;
+      }
+
+      & > box {
+        margin: $spacing;
+
+        .icon {
+          padding-right: $spacing;
+          -gtk-icon-transform: scale(1.5);
+        }
+      }
+    }
+  }
 }

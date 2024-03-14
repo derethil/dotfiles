@@ -27,8 +27,8 @@ export function SelectIconMenu(props: SelectIconMenuProps) {
 
   return PopupMenu({
     className: `select-icon-menu ${props.className}`,
-    content: stack,
     contentAnchor: Gdk.Gravity.SOUTH,
+    content: stack,
     optionsAnchor: Gdk.Gravity.NORTH,
     options: Object.entries(stack.children).map(([label, _]) =>
       Widget.MenuItem({
