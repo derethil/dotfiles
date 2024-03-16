@@ -54,7 +54,6 @@ export function Workspace(id: number) {
             .forEach((c) => {
               const x = c.at[0] - (hyprland.getMonitor(c.monitor)?.x || 0);
               const y = c.at[1] - (hyprland.getMonitor(c.monitor)?.y || 0);
-              if (c.class === "footclient") console.log(c.class, c.size[0], c.size[1]);
               c.mapped && fixed.put(Window(c), scale(x), scale(y));
             });
           fixed.show_all();

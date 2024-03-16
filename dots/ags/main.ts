@@ -1,4 +1,5 @@
 import "lib/session";
+import "style/style";
 import { init } from "./lib/init";
 import { forMonitors } from "./lib/utils";
 import { Bar } from "./windows/bar/Bar";

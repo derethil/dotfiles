@@ -17,21 +17,7 @@ export function OverlayRevaler(props: OverlayRevealerProps) {
 
   const overlay = Widget.Overlay({
     ...revealerProps,
-    overlays: [
-      Widget.Revealer({
-        revealChild: false,
-        transitionDuration: transitionDuration ?? options.transition.value,
-        transition: transition,
-        child: Widget.Box({
-          children: Overlay.bind().as((overlay) => (overlay ? [overlay] : [])),
-        }),
-        setup: (self) => {
-          self.hook(Overlay, () => {
-            self.reveal_child = !!Overlay.value;
-          });
-        },
-      }),
-    ],
+    overlays: Overlay.bind().as((overlay) => (overlay === null ? [] : [overlay])),
   });
 
   return Object.assign(overlay, {

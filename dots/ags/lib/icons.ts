@@ -50,7 +50,7 @@ export const icons = {
   searches: {
     applications: "window-new-symbolic",
     clipboard: "edit-paste-symbolic",
-    projects: "repository-symbolic",
+    projects: "document-open-symbolic",
   },
 
   mpris: {

@@ -2,7 +2,6 @@ const Applications = await Service.import("applications");
 
 import Gtk from "gi://Gtk?version=3.0";
 import { icons } from "lib/icons";
-import { toTitleCase } from "lib/utils";
 import { Variable as VariableType } from "types/variable";
 import { SelectIconMenu } from "widgets/SelectIconMenu";
 import { DashboardOverlay } from "windows/dashboard/Dashboard";
@@ -22,9 +21,9 @@ interface SearchFunctionsProps {
   onClick?: () => void;
 }
 
-type SearchHandlersType = Record<keyof typeof icons.searches, (query: string) => Gtk.Widget>;
+type SearchHandlersType = Record<string, (query: string) => Gtk.Widget>;
 const createSearchFns = (props: SearchFunctionsProps): SearchHandlersType => ({
-  applications: (query) => {
+  Applications: (query) => {
     const results = Applications.query(query);
 
     props.searchState.setItems(results);
@@ -45,14 +44,14 @@ const createSearchFns = (props: SearchFunctionsProps): SearchHandlersType => ({
       children: items,
     });
   },
-  clipboard: () => Widget.Box(),
-  projects: () => Widget.Box(),
+  Clipboard: () => Widget.Box(),
+  Projects: () => Widget.Box(),
 });
 
 // Widget;
 
 interface SearchTextEntryProps {
-  active: VariableType<keyof typeof icons.searches>;
+  active: VariableType<string>;
 }
 
 function SearchTextEntry(props: SearchTextEntryProps) {
@@ -83,6 +82,7 @@ function SearchTextEntry(props: SearchTextEntryProps) {
       }
 
       // Get Overlay Results
+      console.log(props.active.value);
       const overlay = SearchHandlers[props.active.value](self.text);
 
       // Position Overlay (I tried to use the allocation but it wasn't right. Magic numbers it is.)
@@ -138,17 +138,18 @@ function SearchTextEntry(props: SearchTextEntryProps) {
 }
 
 export function SearchMenu() {
-  const active = Variable<keyof typeof icons.searches>("applications");
+  const active = Variable<string>("Applications");
 
   return Widget.Box({
     class_name: "text-entry",
     children: [
       SelectIconMenu({
         active: active as VariableType<string>,
-        options: Object.entries(icons.searches).reduce(
-          (acc, [label, icon]) => ({ ...acc, [toTitleCase(label)]: icon }),
-          {} as Record<string, string>,
-        ),
+        options: {
+          Applications: icons.searches.applications,
+          Clipboard: icons.searches.clipboard,
+          Projects: icons.searches.projects,
+        },
       }),
       Widget.Separator({ class_name: "vertical" }),
       SearchTextEntry({ active }),
