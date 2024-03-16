@@ -1,0 +1,9 @@
+
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=GTK3 Icon Browser
+Comment=
+Exec=gtk3-icon-browser
+Icon=system-search-symbolic
+Terminal=True
