@@ -52,7 +52,7 @@ const optionsConfig = mkOptions(OPTIONS, {
 
     blur: opt(0),
     scheme: opt<"dark" | "light">("dark"),
-    widget: { transparency: opt(94) },
+    widget: { transparency: opt(97) },
     border: {
       width: opt(2),
       transparency: opt(96),

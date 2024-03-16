@@ -5,7 +5,7 @@ import { icons } from "lib/icons";
 import { toTitleCase } from "lib/utils";
 import { Variable as VariableType } from "types/variable";
 import { SelectIconMenu } from "widgets/SelectIconMenu";
-import { DashboardOverlays as Overlay } from "windows/dashboard/Dashboard";
+import { DashboardOverlay } from "windows/dashboard/Dashboard";
 import { AppItem } from "./AppItem";
 import { Application } from "types/service/applications";
 import Gdk from "gi://Gdk";
@@ -14,7 +14,6 @@ import { StackState, StackStateType } from "lib/stackState";
 // Constants and helpers
 
 const WINDOW_NAME = "dashboard";
-const setOverlay = (child: Gtk.Widget) => (Overlay.value = [child]);
 
 // Handlers
 
@@ -56,14 +55,13 @@ interface SearchTextEntryProps {
 }
 
 function SearchTextEntry(props: SearchTextEntryProps) {
-  const resetOverlay = () => setOverlay(Widget.Box());
   const searchState = new StackState<Application | null>(null);
 
   const SearchHandlers = createSearchFns({
     searchState: searchState,
     onClick: () => {
       App.toggleWindow(WINDOW_NAME);
-      resetOverlay();
+      DashboardOverlay.resetOverlay();
     },
   });
 
@@ -73,13 +71,13 @@ function SearchTextEntry(props: SearchTextEntryProps) {
       if (searchState.items.length === 0) return;
       searchState.value?.launch();
       App.toggleWindow(WINDOW_NAME);
-      resetOverlay();
+      DashboardOverlay.resetOverlay();
     },
     onChange: (self) => {
       if (self.text === null) return;
 
       if (self.text === "") {
-        resetOverlay();
+        DashboardOverlay.resetOverlay();
         return;
       }
 
@@ -94,7 +92,14 @@ function SearchTextEntry(props: SearchTextEntryProps) {
       overlay.set_margin_left((parent?.x ?? 0) - 15 - options.theme.spacing.value * 1.333);
 
       // Open Overlay
-      setOverlay(overlay);
+      DashboardOverlay.setOverlay(
+        Widget.Scrollable({
+          hexpand: true,
+          child: overlay,
+          hscroll: "never",
+          vscroll: "always",
+        }),
+      );
     },
     setup: (self) => {
       // Handle Opening Dashboard
@@ -102,14 +107,14 @@ function SearchTextEntry(props: SearchTextEntryProps) {
         if (windowName !== WINDOW_NAME || !visible) return;
         entry.text = "";
         entry.grab_focus();
-        resetOverlay();
+        DashboardOverlay.resetOverlay();
       });
 
       // Handle Changing Search Type
       props.active.connect("changed", () => {
         self.grab_focus();
         self.set_text("");
-        resetOverlay();
+        DashboardOverlay.resetOverlay();
       });
 
       // Handle Keyboard Navigation
