@@ -1,12 +1,12 @@
-$bar-spacing: $spacing / 2;
+$bar-spacing: calc($spacing / 2);
 
 @mixin _bar-margin {
-    @if $bar-position == "left" {
-      margin: $bar-spacing 0 $bar-spacing $spacing;
-    } @else {
-      margin: $bar-spacing $spacing $bar-spacing 0;
-    }
+  @if $bar-position == "left" {
+    margin: $bar-spacing 0 $bar-spacing $spacing;
+  } @else {
+    margin: $bar-spacing $spacing $bar-spacing 0;
   }
+}
 
 @mixin bar-margin($children: false) {
   @if $children {

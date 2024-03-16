@@ -7,11 +7,11 @@
 
   & > * > * > box:first-child {
     background-color: $color;
-    color: $bg;
+    color: $surface;
   }
 
   & > * > * > box:last-child {
-    background-color: $widget-bg;
+    background-color: $surface;
   }
 }
 

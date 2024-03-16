@@ -7,12 +7,8 @@ const {
   border: { width },
   blur,
   hyprland: { shadows, ...hyprland },
-  dark: {
-    primary: { fg: darkActive },
-  },
-  light: {
-    primary: { fg: lightActive },
-  },
+  dark: { primary: darkActive },
+  light: { primary: lightActive },
   scheme,
 } = options.theme;
 
@@ -69,7 +65,7 @@ async function setupHyprland() {
         `layerrule unset, ${name}`,
         `layerrule blur, ${name}`,
         `layerrule ignorealpha ${/* based on shadow color */ 0.29}, ${name}`,
-      ])
+      ]),
     );
   }
 }

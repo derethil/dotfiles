@@ -1,4 +1,4 @@
-$bar-spacing: $spacing / 2;
+$bar-spacing: calc($spacing / 2);
 
 @import "./bar-margin.scss";
 @import "./panel-button.scss";
@@ -22,7 +22,7 @@ $bar-spacing: $spacing / 2;
   .window-button {
     @include unset($rec: true);
     @include panel-button($flat: true, $reactive: true);
-    color: $primary-fg;
+    color: $primary;
     padding-top: $padding * 0.5;
     padding-bottom: $padding * 0.5;
   }
@@ -40,37 +40,34 @@ $bar-spacing: $spacing / 2;
       .indicator {
         box-shadow: inset 0 0 0 $border-width $border-color;
         transition: $transition;
-        color: transparentize($fg, 0.5);
+        color: transparentize($outline, 0.5);
         border-color: transparent;
       }
 
       // Hovering Empty Workspace
       &.empty:hover .indicator {
-        color: $primary-fg;
+        color: $primary;
       }
 
       // Occupied Workspace
       &.occupied {
         .indicator {
-          color: $fg;
+          color: $on-surface;
         }
         &:hover .indicator {
-          color: $primary-fg;
+          color: $primary;
         }
       }
 
       // Active Workspace
       &.active {
-        & .indicator {
-          color: $primary-fg;
-        }
-
+        & .indicator,
         &.empty .indicator {
-          color: $primary-fg;
+          color: $primary;
         }
 
         &:hover .indicator {
-          color: $primary-fg;
+          color: lighten($primary, 8%);
         }
       }
     }
@@ -86,7 +83,7 @@ $bar-spacing: $spacing / 2;
         padding: $padding * 0.55 0;
 
         &:hover .font-icon {
-          color: $hover-fg;
+          color: lighten($on-surface, 10%);
         }
       }
     }

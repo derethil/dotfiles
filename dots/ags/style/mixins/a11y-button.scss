@@ -3,7 +3,7 @@
 
 @mixin accs-button($flat: false, $reactive: true) {
   @include unset;
-  color: $fg;
+  color: $primary-fg;
 
   > * {
     border-radius: $radius;
@@ -13,7 +13,7 @@
       background-color: transparent;
       box-shadow: none;
     } @else {
-      background-color: $widget-bg;
+      background-color: $primary-bg;
       box-shadow: inset 0 0 0 $border-width $border-color;
     }
   }
@@ -37,7 +37,9 @@
       }
 
       &:hover > * {
-        box-shadow: inset 0 0 0 $border-width $border-color, inset 0 0 0 99px $hover-bg;
+        box-shadow:
+          inset 0 0 0 $border-width $border-color,
+          inset 0 0 0 99px $primary-on-bg;
       }
     }
   }

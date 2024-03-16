@@ -40,6 +40,7 @@ const createSearchFns = (props: SearchFunctionsProps): SearchHandlersType => ({
 
     return Widget.Box({
       className: "overlay",
+      hexpand: true,
       vertical: true,
       children: items,
     });
@@ -92,14 +93,7 @@ function SearchTextEntry(props: SearchTextEntryProps) {
       overlay.set_margin_left((parent?.x ?? 0) - 15 - options.theme.spacing.value * 1.333);
 
       // Open Overlay
-      DashboardOverlay.setOverlay(
-        Widget.Scrollable({
-          hexpand: true,
-          child: overlay,
-          hscroll: "never",
-          vscroll: "always",
-        }),
-      );
+      DashboardOverlay.setOverlay(overlay);
     },
     setup: (self) => {
       // Handle Opening Dashboard

@@ -4,11 +4,11 @@
   }
 
   margin: max($spacing, 0px);
-  border: $border-width solid $popover-border-color;
-  background-color: $bg;
-  color: $fg;
+  border: $border;
+  background-color: $surface;
+  color: $on-surface;
   border-radius: $radius;
-  padding: $popover-padding * 0.66 0;
+  padding: calc($padding / 2);
 }
 
 @mixin floating-widget($children: false) {

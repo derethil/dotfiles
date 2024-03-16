@@ -12,28 +12,25 @@ const deps = [
 ];
 
 const {
-  dark,
-  light,
-  blur,
+  dark: dark3,
+  light: light3,
   scheme,
   padding,
   spacing,
   radius,
-  widget,
   border,
   accents,
   hyprland: { shadows },
 } = options.theme;
 
-const popoverPaddingMultiplier = 1.6;
-
-const t = (dark: Opt<any> | string, light: Opt<any> | string) =>
-  scheme.value === "dark" ? `${dark}` : `${light}`;
-
+type ColorOptions = Record<string, Opt<string>> | string | Opt<string>;
+const t = <T extends ColorOptions>(dark: T, light: T) => (scheme.value === "dark" ? dark : light);
 const $ = (name: string, value: string | Opt<any>) => `$${name}: ${value};`;
+const underToDash = (s: string) => s.replace(/_/g, "-");
 
+// prettier-ignore
 const variables = () => [
-  // Before
+  // Static Accents
   $("red", accents.red),
   $("green", accents.green),
   $("yellow", accents.yellow),
@@ -42,83 +39,38 @@ const variables = () => [
   $("teal", accents.teal),
   $("orange", accents.orange),
 
-  $(
-    "bg",
-    blur.value
-      ? `transparentize(${t(dark.bg, light.bg)}, ${blur.value / 100})`
-      : t(dark.bg, light.bg),
-  ),
-  $("fg", t(dark.fg, light.fg)),
+  ...Object.entries(t(dark3, light3)).map(([k, v]) => $(underToDash(k), v.value)),
 
-  $("primary-bg", t(dark.primary.bg, light.primary.bg)),
-  $("primary-fg", t(dark.primary.fg, light.primary.fg)),
+  // Border
+  $("border-width", `${border.width}px`),
+  $("border-color", `transparentize(${t(dark3.outline, light3.outline)}, ${border.transparency.value})`),
+  $("border", "$border-width solid $border-color"),
 
-  $("error-bg", t(dark.error.bg, light.error.bg)),
-  $("error-fg", t(dark.error.fg, light.error.fg)),
+  // Other Color Variables
+  $("active-gradient", `linear-gradient(to right, ${t(dark3, light3).primary_container}, darken(${t(dark3, light3).primary_container}, 4%))`),
+  $("shadow-color", t(`${t(dark3, light3).shadow}99`, `${t(dark3, light3).shadow}66`)),
+  $("text-shadow", t("2pt 2pt 2pt $shadow-color", "none")),
 
-  $("scheme", scheme),
-  $("padding", `${padding}pt`),
-  $("spacing", `${spacing}pt`),
-  $("radius", `${radius}px`),
-  $("transition", `${options.transition}ms`),
+  // Layout and Transition
+  $("scheme", scheme.value),
+  $("padding", `${padding.value}pt`),
+  $("spacing", `${spacing.value}pt`),
+  $("radius", `${radius.value}px`),
+  $("transition", `${options.transition.value}ms`),
 
   $("shadows", `${shadows}`),
 
-  $(
-    "widget-bg",
-    `transparentize(${t(dark.widget, light.widget)}, ${widget.transparency.value / 100})`,
-  ),
+  // Fonts
+  $("font-ui-size", `${options.font.ui.size.value}pt`),
+  $("font-ui-name", options.font.ui.name.value),
 
-  $(
-    "hover-bg",
-    `transparentize(${t(dark.widget, light.widget)}, ${(widget.transparency.value * 0.9) / 100})`,
-  ),
-  $("hover-fg", `lighten(${t(dark.fg, light.fg)}, 8%)`),
+  $("font-mono-size", `${options.font.mono.size.value}pt`),
+  $("font-mono-name", options.font.mono.name.value),
 
-  $("border-width", `${border.width}px`),
-  $(
-    "border-color",
-    `transparentize(${t(dark.border, light.border)}, ${border.transparency.value / 100})`,
-  ),
-  $("border", "$border-width solid $border-color"),
-
-  $(
-    "active-gradient",
-    `linear-gradient(to right, ${t(dark.primary.bg, light.primary.bg)}, darken(${t(dark.primary.bg, light.primary.bg)}, 4%))`,
-  ),
-  $("shadow-color", t("rgba(0,0,0,.6)", "rgba(0,0,0,.4)")),
-  $("text-shadow", t("2pt 2pt 2pt $shadow-color", "none")),
-
-  $(
-    "popover-border-color",
-    `transparentize(${t(dark.border, light.border)}, ${Math.max((border.transparency.value - 1) / 100, 0)})`,
-  ),
-  $("popover-padding", `$padding * ${popoverPaddingMultiplier}`),
-  $("popover-radius", radius.value === 0 ? "0" : "$radius + $popover-padding"),
-
-  $("font-ui-size", `${options.font.ui.size}pt`),
-  $("font-ui-name", options.font.ui.name),
-
-  $("font-mono-size", `${options.font.mono.size}pt`),
-  $("font-mono-name", options.font.mono.name),
-
-  $("bar-position", options.bar.position),
+  // System
+  $("bar-position", options.bar.position.value),
   $("hyprland-gaps-multiplier", options.theme.hyprland.gaps),
 ];
-
-const variables2 = {
-  // Accents
-  red: accents.red,
-  green: accents.green,
-  yellow: accents.yellow,
-  blue: accents.blue,
-  magenta: accents.magenta,
-  teal: accents.teal,
-  orange: accents.orange,
-
-  // Material
-  primary: t(dark.primary.bg, light.primary.bg),
-};
 
 async function resetCss() {
   if (!dependencies(["sass", "fd"])) return;

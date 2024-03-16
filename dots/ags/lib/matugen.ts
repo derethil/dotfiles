@@ -7,58 +7,18 @@ export function matugenWallpaperMonitor() {
   matugen();
 }
 
-function animate(...setters: Array<() => void>) {
-  const delay = options.transition.value / 2;
-  setters.forEach((fn, i) => Utils.timeout(delay * i, fn));
-}
-
-export async function matugen(
-  type: "image" | "color" = "image",
-  arg = options.wallpaper.value
-) {
+export async function matugen(type: "image" | "color" = "image", arg = options.wallpaper.value) {
   if (!options.autotheme.value || !dependencies("matugen")) return;
 
   const colors = await sh(`matugen --dry-run -j hex ${type} ${arg}`);
   const c = JSON.parse(colors).colors as { light: Colors; dark: Colors };
-  const { dark, light } = options.theme;
+  const { dark: dark3, light: light3 } = options.theme;
 
-  animate(
-    () => {
-      dark.widget.value = c.dark.on_surface;
-      light.widget.value = c.light.on_surface;
-    },
-    () => {
-      dark.border.value = c.dark.outline;
-      light.border.value = c.light.outline;
-    },
-    () => {
-      dark.bg.value = c.dark.surface;
-      light.bg.value = c.light.surface;
-    },
-    () => {
-      dark.fg.value = c.dark.on_surface;
-      light.fg.value = c.light.on_surface;
-    },
-    () => {
-      dark.primary.bg.value = c.dark.primary_container;
-      light.primary.bg.value = c.light.primary_container;
-    },
-    () => {
-      dark.primary.fg.value = c.dark.primary;
-      light.primary.fg.value = c.light.primary;
-    },
-    () => {
-      dark.error.bg.value = c.dark.error_container;
-      light.error.bg.value = c.light.error_container;
-    },
-    () => {
-      dark.error.fg.value = c.dark.error;
-      light.error.fg.value = c.light.error;
-    }
-  );
+  Object.assign(dark3, c.dark);
+  Object.assign(light3, c.light);
 }
 
-type Colors = {
+export type Colors = {
   background: string;
   error: string;
   error_container: string;

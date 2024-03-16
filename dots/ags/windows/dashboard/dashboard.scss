@@ -1,7 +1,7 @@
 #dashboard .window-content {
   @include unset($rec: true);
   @include floating-widget;
-  padding: $popover-padding;
+  padding: $padding;
 
   .header {
     margin-bottom: 50px;
@@ -13,7 +13,7 @@
       margin-right: $spacing;
 
       .separator {
-        color: $primary-fg;
+        color: $primary;
         padding: 2px;
       }
     }
@@ -41,11 +41,11 @@
       border-radius: $radius;
       border: $border;
 
-      background-color: $widget-bg;
+      background-color: $surface-container-high;
 
       &.active {
-        background-color: $primary-bg;
-        color: $primary-fg;
+        background-color: $secondary-container;
+        color: $on-secondary;
       }
 
       & > box {
