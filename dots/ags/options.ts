@@ -200,6 +200,15 @@ const optionsConfig = mkOptions(OPTIONS, {
 
   dashboard: {
     avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
+
+    projects: {
+      dynamic: opt([
+        "~/development/personal",
+        "~/development/personal/school/*",
+        "~/development/dragonarmy",
+      ]),
+      static: opt(["~/.dotfiles/"]),
+    },
   },
 
   overview: {

@@ -17,8 +17,7 @@ const IconPicker = () => {
     vpack: "start",
     hpack: "start",
     setup: (self) => {
-      self.connect("child-activated", (_, child) => {
-        // @ts-expect-error
+      self.on("child-activated", (_, child) => {
         selected.label = child.get_child()?.iconName || "";
       });
 
@@ -32,7 +31,7 @@ const IconPicker = () => {
                 icon,
                 size: 38,
               }),
-              -1
+              -1,
             );
         });
 

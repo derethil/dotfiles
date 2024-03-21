@@ -11,6 +11,7 @@ interface SelectIconMenuProps {
 
 export function SelectIconMenu(props: SelectIconMenuProps) {
   const stack = Widget.Stack({
+    shown: props.active.bind(),
     children: Object.entries(props.options).reduce(
       (acc, [label, icon]) => {
         acc[label] = Widget.Icon({ icon });
@@ -21,7 +22,6 @@ export function SelectIconMenu(props: SelectIconMenuProps) {
   });
 
   const handleActivate = (label: string) => {
-    stack.shown = label;
     props.active.setValue(label);
   };
 

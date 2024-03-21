@@ -1,75 +1,33 @@
-const Applications = await Service.import("applications");
-
-import Gtk from "gi://Gtk?version=3.0";
 import { icons } from "lib/icons";
 import { Variable as VariableType } from "types/variable";
 import { SelectIconMenu } from "widgets/SelectIconMenu";
 import { DashboardOverlay } from "windows/dashboard/Dashboard";
-import { AppItem } from "./AppItem";
-import { Application } from "types/service/applications";
 import Gdk from "gi://Gdk";
+import { ApplicationSearch, ProjectsSearch, type Search } from "./Search";
 import { StackState, StackStateType } from "lib/stackState";
 
 // Constants and helpers
 
-const WINDOW_NAME = "dashboard";
-
-// Handlers
-
-interface SearchFunctionsProps {
-  searchState: StackStateType<Application | null>;
-  onClick?: () => void;
-}
-
-type SearchHandlersType = Record<string, (query: string) => Gtk.Widget>;
-const createSearchFns = (props: SearchFunctionsProps): SearchHandlersType => ({
-  Applications: (query) => {
-    const results = Applications.query(query);
-
-    props.searchState.setItems(results);
-    props.searchState.setIndex(0);
-
-    const items = results.map((app) =>
-      AppItem({
-        app,
-        searchState: props.searchState,
-        onClick: props?.onClick,
-      }),
-    );
-
-    return Widget.Box({
-      className: "overlay",
-      hexpand: true,
-      vertical: true,
-      children: items,
-    });
-  },
-  Clipboard: () => Widget.Box(),
-  Projects: () => Widget.Box(),
-});
+export const WINDOW_NAME = "dashboard";
 
 // Widget;
 
 interface SearchTextEntryProps {
-  active: VariableType<string>;
+  active: StackStateType<string>;
 }
 
-function SearchTextEntry(props: SearchTextEntryProps) {
-  const searchState = new StackState<Application | null>(null);
+type Handlers = Record<string, Search>;
 
-  const SearchHandlers = createSearchFns({
-    searchState: searchState,
-    onClick: () => {
-      App.toggleWindow(WINDOW_NAME);
-      DashboardOverlay.resetOverlay();
-    },
-  });
+function SearchTextEntry(props: SearchTextEntryProps) {
+  const searchers: Handlers = {
+    Applications: new ApplicationSearch(),
+    Projects: new ProjectsSearch(),
+  };
 
   const entry = Widget.Entry({
     hexpand: true,
     onAccept: () => {
-      if (searchState.items.length === 0) return;
-      searchState.value?.launch();
+      searchers[props.active.value].onAccept();
       App.toggleWindow(WINDOW_NAME);
       DashboardOverlay.resetOverlay();
     },
@@ -81,9 +39,7 @@ function SearchTextEntry(props: SearchTextEntryProps) {
         return;
       }
 
-      // Get Overlay Results
-      console.log(props.active.value);
-      const overlay = SearchHandlers[props.active.value](self.text);
+      const overlay = searchers[props.active.value].handleChange(self.text);
 
       // Position Overlay (I tried to use the allocation but it wasn't right. Magic numbers it is.)
       const { height } = self.get_allocation();
@@ -112,24 +68,14 @@ function SearchTextEntry(props: SearchTextEntryProps) {
       });
 
       // Handle Keyboard Navigation
-      self.on("key-press-event", (_, event) => {
-        if (searchState.items.length === 0) return;
-
+      self.on("key-press-event", (_, event: Gdk.Event) => {
         const keyval = event.get_keyval()[1];
-        if (event.get_state()[1] !== Gdk.ModifierType.CONTROL_MASK) return;
-
-        switch (keyval) {
-          case Gdk.KEY_n:
-          case Gdk.KEY_Tab:
-            searchState.next();
-            break;
-          case Gdk.KEY_p:
-            searchState.prev();
-            break;
-          case Gdk.KEY_0:
-            searchState.setIndex(0);
-            break;
+        const state = event.get_state()[1];
+        if (state !== Gdk.ModifierType.CONTROL_MASK) return; // Only handle control key events
+        if (keyval === Gdk.KEY_space) {
+          props.active.next();
         }
+        searchers[props.active.value].handleKeyVal(keyval);
       });
     },
   });
@@ -138,7 +84,7 @@ function SearchTextEntry(props: SearchTextEntryProps) {
 }
 
 export function SearchMenu() {
-  const active = Variable<string>("Applications");
+  const active = new StackState(["Applications", "Projects"]);
 
   return Widget.Box({
     class_name: "text-entry",

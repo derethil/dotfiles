@@ -44,8 +44,8 @@
       background-color: $surface-container-high;
 
       &.active {
-        background-color: $secondary-container;
-        color: $on-secondary;
+        background-color: $tertiary-container;
+        color: $on-tertiary-container;
       }
 
       & > box {

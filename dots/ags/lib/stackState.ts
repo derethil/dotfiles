@@ -8,8 +8,16 @@ export class StackState<T> extends Variable<T> {
 
   items: T[] = [];
 
-  constructor(value: T) {
-    super(value);
+  constructor(value: T | T[]) {
+    if (!Array.isArray(value)) {
+      super(value);
+      this.items = [];
+    } else if (value.length > 0) {
+      super(value[0]);
+      this.items = value;
+    } else {
+      throw new Error("StackState must have at least one item");
+    }
   }
 
   public setIndex(idx: number) {

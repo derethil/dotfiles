@@ -5,11 +5,12 @@
     "module": "ES2022",
     "lib": ["ES2022"],
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "strict": true,
     "noImplicitAny": true,
     "baseUrl": ".",
-    "typeRoots": ["./types", "./node_modules/@girs"],
+    "paths": { "fzf": ["./node_modules/fzf/dist/types"] },
+    "typeRoots": ["./types", "./node_modules/@girs", "./node_modules"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   }
