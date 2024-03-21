@@ -3,7 +3,7 @@ import { Variable as VariableType } from "types/variable";
 import { SelectIconMenu } from "widgets/SelectIconMenu";
 import { DashboardOverlay } from "windows/dashboard/Dashboard";
 import Gdk from "gi://Gdk";
-import { ApplicationSearch, ProjectsSearch, type Search } from "./Search";
+import { ApplicationSearch, ClipboardSearch, ProjectsSearch, type Search } from "./Search";
 import { StackState, StackStateType } from "lib/stackState";
 
 // Constants and helpers
@@ -22,6 +22,7 @@ function SearchTextEntry(props: SearchTextEntryProps) {
   const searchers: Handlers = {
     Applications: new ApplicationSearch(),
     Projects: new ProjectsSearch(),
+    Clipboard: new ClipboardSearch(props.active),
   };
 
   const entry = Widget.Entry({
@@ -82,7 +83,7 @@ function SearchTextEntry(props: SearchTextEntryProps) {
 
   return entry;
 }
-const activeSearch = new StackState(["Applications", "Projects"]);
+const activeSearch = new StackState(["Applications", "Projects", "Clipboard"]);
 
 export function SearchMenu() {
   return Widget.Box({
