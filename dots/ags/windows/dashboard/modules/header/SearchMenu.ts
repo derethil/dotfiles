@@ -82,15 +82,14 @@ function SearchTextEntry(props: SearchTextEntryProps) {
 
   return entry;
 }
+const activeSearch = new StackState(["Applications", "Projects"]);
 
 export function SearchMenu() {
-  const active = new StackState(["Applications", "Projects"]);
-
   return Widget.Box({
     class_name: "text-entry",
     children: [
       SelectIconMenu({
-        active: active as VariableType<string>,
+        active: activeSearch as VariableType<string>,
         options: {
           Applications: icons.searches.applications,
           Clipboard: icons.searches.clipboard,
@@ -98,7 +97,13 @@ export function SearchMenu() {
         },
       }),
       Widget.Separator({ class_name: "vertical" }),
-      SearchTextEntry({ active }),
+      SearchTextEntry({ active: activeSearch }),
     ],
   });
 }
+
+declare global {
+  const ACTIVE_SEARCH: typeof activeSearch;
+}
+
+Object.assign(globalThis, { ACTIVE_SEARCH: activeSearch });
