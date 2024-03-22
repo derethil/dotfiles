@@ -35,7 +35,7 @@
     # Config Dirs
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
-    ~/.config/direnv: dots/direnv
+    ~/.config/direnv/direnvrc: dots/direnvrc
     ~/.config/nvim: dots/nvim
     ~/.config/ags: dots/ags
     ~/.config/foot: dots/foot
