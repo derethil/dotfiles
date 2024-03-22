@@ -1,5 +1,0 @@
-set chafasixel
-
-preview directories inode/directory {{
-  tree -c "$f" -L 2
-}}

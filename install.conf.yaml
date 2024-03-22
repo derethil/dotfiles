@@ -38,9 +38,11 @@
     ~/.config/direnv: dots/direnv
     ~/.config/nvim: dots/nvim
     ~/.config/ags: dots/ags
-    ~/.config/lf: dots/lf
-    ~/.config/ctpv: dots/ctpv
     ~/.config/foot: dots/foot
+    ~/.config/ctpv/config: dots/lf/ctpv.config
+    ~/.config/lf:
+      path: dots/lf
+      exclude: [ctpv]
 
     # Config Files
     ~/.config/starship.toml: dots/starship.toml
