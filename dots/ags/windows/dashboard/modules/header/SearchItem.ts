@@ -16,7 +16,7 @@ export function SearchItem<T>(props: SearchItemProps<T>) {
     class_name: "title",
     label: props.formatLabel ? props.formatLabel(props.label) : props.label,
     xalign: 0,
-    truncate: "start",
+    truncate: "end",
   });
 
   const iconWidget = props.icon
