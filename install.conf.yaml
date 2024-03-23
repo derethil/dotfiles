@@ -13,7 +13,6 @@
     # Home Files
     ~/.bashrc: dots/bash/bashrc
     ~/.profile: dots/bash/profile
-    ~/.global.gitignore: dots/.global.gitignore
 
     # GTK Settings
     ~/.config/gtk-3.0/:
@@ -24,7 +23,7 @@
       path: dots/gtk/xsettingsd/*
       force: true
       glob: true
-    ~/.icons/default/:
+    ~/.local/share/icons/default/:
       path: dots/gtk/icons/default/*
       force: true
       glob: true
@@ -33,6 +32,7 @@
       force: true
 
     # Config Dirs
+    ~/.config/git/ignore: dots/.global.gitignore
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
     ~/.config/direnv/direnvrc: dots/direnvrc
@@ -76,6 +76,3 @@
 
     - command: rm -rf dotbot-yay/__pycache__
       description: Cleaning up dotboy-yay pycache
-
-    - command: git config --global core.excludesfile ~/.global.gitignore
-      description: Setting global gitignore

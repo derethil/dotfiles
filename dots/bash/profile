@@ -1,4 +1,9 @@
-if [ "$(tty)" = "/dev/tty1" ] ; then
-    exec Hyprland > hyprland.log.txt 2> hyprland.errors.txt
-fi
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_RUNTIME_DIR=/run/user/1000
 
+if [ "$(tty)" = "/dev/tty1" ] ; then
+    exec Hyprland > ~/.local/share/hyprland.log.txt 2> ~/.local/share/hyprland.errors.txt
+fi
