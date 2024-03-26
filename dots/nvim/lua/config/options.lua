@@ -1,65 +1,120 @@
--- leader Keys
+-- Leader Keys
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
+-- Neovide Options
+if vim.g.neovide then
+  vim.o.neovide_refresh_rate = 144
+
+  vim.o.guifont = 'Liga SFMono Nerd Font,Source Code Pro:h12'
+
+  local padding = 8
+  vim.g.neovide_padding_top = padding
+  vim.g.neovide_padding_bottom = padding
+  vim.g.neovide_padding_right = padding
+  vim.g.neovide_padding_left = padding
+
+  vim.g.neovide_scroll_animation_length = 0.2
+  vim.g.neovide_scroll_animation_far_lines = 6
+
+  vim.g.neovide_hide_mouse_when_typing = true
+
+  vim.g.neovide_cursor_trail_size = 0.4
+end
+
+local opt = vim.opt
+
 -- Line Numbering
-vim.opt.number = true
-vim.opt.relativenumber = true
+opt.number = true
+opt.relativenumber = true
 
--- Tab Widths
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+-- Minimum Window Height
+opt.winminwidth = 5
 
--- Mouse Mode
-vim.opt.mouse = 'a'
-
--- Use System Clipboard
-vim.opt.clipboard = 'unnamedplus'
-
--- Hightlight on Search
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
-
--- 24-Bit Colors
-vim.opt.termguicolors = true
-
--- Hide Vim Modeline
-vim.opt.showmode = false
+-- Indent Options
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.shiftround = true
+opt.expandtab = true
+opt.smartindent = true
 
 -- Disable Wrap
-vim.opt.wrap = false
+opt.wrap = false
+opt.sidescrolloff = 8
+
+-- Mouse Mode
+opt.mouse = 'a'
+
+-- Use System Clipboard
+opt.clipboard = 'unnamedplus'
+
+-- Hightlight on Search
+opt.hlsearch = false
+opt.incsearch = true
+
+-- 24-Bit Colors
+opt.termguicolors = true
+
+-- Hide Vim Modeline
+opt.showmode = true
+
+-- Global Statusline
+opt.laststatus = 3
 
 -- Undo History
-vim.opt.undofile = true
+opt.undofile = true
+opt.undolevels = 10000
 
 -- Smart Searching
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+opt.ignorecase = true
+opt.smartcase = true
 
 -- Always Show Signcolumn
-vim.opt.signcolumn = 'yes:1'
+opt.signcolumn = 'yes:1'
 
 -- Decrease Update Time
-vim.opt.updatetime = 250
+opt.updatetime = 250
 
 -- Decrease Mapped Sequence Timeout (Show which-key sooner)
-vim.opt.timeoutlen = 300
+opt.timeoutlen = 300
 
 -- Default Split Behavior
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+opt.splitright = true
+opt.splitbelow = true
 
 -- Whitespace Character Icons
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+opt.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview Substitutions Live
-vim.opt.inccommand = 'split'
+opt.inccommand = 'split'
 
 -- Highlight Cursor Line
-vim.opt.cursorline = true
+opt.cursorline = true
 
 -- Minimum Lines Above/Below Cursor
-vim.opt.scrolloff = 8
+opt.scrolloff = 8
+
+-- Insert Mode Completions
+opt.completeopt = 'menu,menuone,noselect'
+
+-- Confirm Changes on Exit
+opt.confirm = true
+
+-- Grep
+opt.grepformat = '%f:%l:%c:%m'
+opt.grepprg = 'rg --vimgrep'
+
+-- Popup Options
+opt.pumblend = 10
+opt.pumheight = 10
+
+-- Spell Checking
+opt.spelllang = { 'en' }
+
+-- Allow Visual Selection of No Text
+opt.virtualedit = 'block'
+
+-- Command Autocompletion
+opt.wildmode = 'longest:full,full'
