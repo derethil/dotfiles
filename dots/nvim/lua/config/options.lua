@@ -115,6 +115,8 @@ opt.spelllang = { 'en' }
 
 -- Allow Visual Selection of No Text
 opt.virtualedit = 'block'
-
 -- Command Autocompletion
 opt.wildmode = 'longest:full,full'
+
+-- Disable Swapfile
+opt.swapfile = false

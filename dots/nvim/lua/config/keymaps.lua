@@ -1,6 +1,8 @@
 -- Remove Default Keymaps
 vim.keymap.set('n', 'Q', '<nop>')
 
+vim.keymap.set('n', '<leader>q', ':bd<CR>', { desc = 'Close current buffer' })
+
 -- Diagnostic Keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })

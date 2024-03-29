@@ -77,7 +77,7 @@ return {
     keys = {
       { '<leader>sh', Util.telescope 'help_tags', desc = '[S]earch [H]elp' },
       { '<leader>sk', Util.telescope 'keymaps', desc = '[S]earch [K]eymaps' },
-      { '<leader>sf', Util.telescope 'find_files', desc = '[S]earch [F]iles' },
+      { '<leader>sf', Util.telescope 'files', desc = '[S]earch [F]iles' },
       { '<leader>ss', Util.telescope 'builtin', desc = '[S]earch [S]elect Telescope' },
       { '<leader>sw', Util.telescope 'grep_string', desc = '[S]earch current [W]ord' },
       { '<leader>sg', Util.telescope 'live_grep', desc = '[S]earch by [G]rep' },
