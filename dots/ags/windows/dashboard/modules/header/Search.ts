@@ -2,7 +2,7 @@ import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk?version=3.0";
 import { Fzf } from "fzf";
 import { StackState, StackStateType } from "lib/stackState";
-import { bash, sh } from "lib/utils";
+import { bash } from "lib/utils";
 import { Application } from "types/service/applications";
 import { SearchItem } from "./SearchItem";
 import { DashboardOverlay } from "windows/dashboard/Dashboard";
@@ -33,7 +33,7 @@ export class Search<T = any> {
     });
   }
 
-  public handleChange(query: string): Gtk.Widget {
+  public handleChange(_: string): Gtk.Widget {
     throw new Error("Method not implemented.");
   }
   public onAccept() {
@@ -122,7 +122,7 @@ export class ProjectsSearch extends Search<string> {
           return pathList.pop() ?? label;
         },
         onClick: () => {
-          bash(`code -r ${project}`);
+          bash(options.dashboard.projects.command.value.replace('%d', project))
           App.toggleWindow(WINDOW_NAME);
           DashboardOverlay.resetOverlay();
         },
@@ -134,7 +134,7 @@ export class ProjectsSearch extends Search<string> {
 
   public onAccept() {
     if (this.state.items.length === 0) return;
-    bash(`code -r ${this.state.value}`);
+    bash(options.dashboard.projects.command.value.replace('%d', this.state.value ?? ""))
   }
 }
 

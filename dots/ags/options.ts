@@ -136,6 +136,10 @@ const optionsConfig = mkOptions(OPTIONS, {
     radius: opt(8),
 
     hyprland: {
+      singleTiledGaps: opt<{ left?: number; right?: number; top?: number; bottom?: number }>({
+        left: 500,
+        right: 500,
+      }),
       shadows: opt(true),
       gaps: opt(1.3333),
       inactiveBorder: opt("#000000"),
@@ -202,6 +206,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
 
     projects: {
+      command: opt("neovide -- --cmd cd %d"),
       dynamic: opt([
         "~/development/personal",
         "~/development/personal/school/*",

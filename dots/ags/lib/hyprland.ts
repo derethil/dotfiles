@@ -35,6 +35,16 @@ function activeBorder() {
   return color.replace("#", "");
 }
 
+function singleTiledGaps(wmGaps: number) {
+  const {
+    left = wmGaps,
+    right = wmGaps,
+    top = wmGaps,
+    bottom = wmGaps,
+  } = hyprland.singleTiledGaps.value;
+  return `${top} ${right} ${bottom} ${left}`;
+}
+
 function sendBatch(batch: string[]) {
   const cmd = batch
     .filter((x) => !!x)
@@ -55,6 +65,7 @@ async function setupHyprland() {
     `general:col.inactive_border rgba(${hyprland.inactiveBorder.value})`,
     `decoration:rounding ${radius.value}`,
     `decoration:drop_shadow ${shadows.value ? "yes" : "no"}`,
+    `workspace w[t1], gapsout:${singleTiledGaps(wmGaps)}`,
   ]);
 
   await sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`));
