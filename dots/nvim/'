@@ -1,0 +1,11 @@
+return {
+  -- Install Colorschemes
+  { "rebelot/kanagawa.nvim" },
+  -- Default Colorscheme
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "kanagawa",
+    },
+  },
+}
