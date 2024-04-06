@@ -4,10 +4,19 @@ return {
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
+    opts = {
+      colors = {
+        theme = {
+          all = {
+            ui = { bg_gutter = "none" },
+          },
+        },
+      },
+    },
   },
   {
     "catppuccin/nvim",
-    lazy = false,
+    lazy = true,
     name = "catppuccin",
     opts = {
       integrations = {
@@ -50,8 +59,8 @@ return {
   -- Default Colorscheme
   {
     "LazyVim/LazyVim",
-    -- opts = {
-    --   colorscheme = { "kanagawa" },
-    -- },
+    opts = {
+      colorscheme = { "kanagawa" },
+    },
   },
 }
