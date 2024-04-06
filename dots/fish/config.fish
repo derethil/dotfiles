@@ -1,6 +1,3 @@
-# Removes fish greeting
-set fish_greeting
-
 # Sources
 source $ASDF_DATA_DIR/asdf.fish
 direnv hook fish | source

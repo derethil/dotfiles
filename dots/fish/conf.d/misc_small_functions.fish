@@ -12,10 +12,10 @@ function yay
         if test (count $argv) != 2
             return
         end
-        
+
         # Get AUR URL 
         set -l url (command yay -Si $argv[2] | grep 'AUR URL' | awk '{ print $4 }')
-        
+
         if test -z $url
             # Exit if no URL is found
             command echo 'yay: no AUR URL Found'
@@ -44,7 +44,7 @@ end
 
 
 function git
-    if test $argv[1] = "clone"
+    if test $argv[1] = clone
         # Store the output of the original git clone command
         set -l output (command git $argv)
 
@@ -62,4 +62,14 @@ function git
         # For any other git command, execute it as usual
         command git $argv
     end
+end
+
+function fish_greeting
+    echo "from zoya
+  🌷🌸🌷🌸
+  🌸🌷🌸🌷🌸
+ /ᐠ🌷🌸🌷🌸🌷
+(˶ᵔᵕᵔ🌷🌸🌷
+ \ つ\  /
+  U U/🎀\\"
 end
