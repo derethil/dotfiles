@@ -164,6 +164,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     flatButtons: opt(true),
     position: opt<"left" | "right">("left"),
     corners: opt(false),
+    onlyPrimary: opt(true),
 
     windowButtonOpens: opt("overview"),
 

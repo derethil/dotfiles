@@ -123,6 +123,10 @@ $bar-spacing: calc($spacing / 2);
     }
 
     @mixin powermenu-color($color) {
+      @if ($bar-only-primary) {
+        $color: $primary;
+      }
+
       color: $color;
       &:hover {
         color: lighten($color, 10%);

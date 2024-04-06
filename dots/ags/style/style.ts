@@ -12,8 +12,8 @@ const deps = [
 ];
 
 const {
-  dark: dark3,
-  light: light3,
+  dark,
+  light,
   scheme,
   padding,
   spacing,
@@ -39,16 +39,17 @@ const variables = () => [
   $("teal", accents.teal),
   $("orange", accents.orange),
 
-  ...Object.entries(t(dark3, light3)).map(([k, v]) => $(underToDash(k), v.value)),
+  ...Object.entries(t(dark, light)).map(([k, v]) => $(underToDash(k), v.value)),
 
   // Border
   $("border-width", `${border.width}px`),
-  $("border-color", `transparentize(${t(dark3.outline, light3.outline)}, ${border.transparency.value})`),
+  $("border-color", `transparentize(${t(dark.outline, light.outline)}, ${border.transparency.value})`),
   $("border", "$border-width solid $border-color"),
 
   // Other Color Variables
-  $("active-gradient", `linear-gradient(to right, ${t(dark3, light3).primary_container}, darken(${t(dark3, light3).primary_container}, 4%))`),
-  $("shadow-color", t(`${t(dark3, light3).shadow}99`, `${t(dark3, light3).shadow}66`)),
+  $("bar-only-primary", options.bar.onlyPrimary),
+  $("active-gradient", `linear-gradient(to right, ${t(dark, light).primary_container}, darken(${t(dark, light).primary_container}, 4%))`),
+  $("shadow-color", t(`${t(dark, light).shadow}99`, `${t(dark, light).shadow}66`)),
   $("text-shadow", t("2pt 2pt 2pt $shadow-color", "none")),
 
   // Layout and Transition
