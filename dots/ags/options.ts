@@ -1,4 +1,5 @@
-import { opt, mkOptions } from "lib/option";
+import { Colors } from "lib/matugen";
+import { opt, mkOptions, Opt } from "lib/option";
 import { BarWidget } from "windows/bar/Bar";
 
 const optionsConfig = mkOptions(OPTIONS, {
@@ -59,7 +60,7 @@ const optionsConfig = mkOptions(OPTIONS, {
       tertiary_container: opt("#563e5c"),
       tertiary_fixed: opt("#f9d8fd"),
       tertiary_fixed_dim: opt("#dcbce1"),
-    },
+    } as Colors<Opt<string>>,
 
     light: {
       background: opt("#f9f9ff"),
@@ -111,7 +112,7 @@ const optionsConfig = mkOptions(OPTIONS, {
       tertiary_container: opt("#f9d8fd"),
       tertiary_fixed: opt("#f9d8fd"),
       tertiary_fixed_dim: opt("#dcbce1"),
-    },
+    } as Colors<Opt<string>>,
 
     accents: {
       red: opt("#ff5d62"),
