@@ -56,8 +56,10 @@ function sendBatch(batch: string[]) {
 
 async function setupHyprland() {
   const wmGaps = Math.floor(hyprland.gaps.value * spacing.value);
+  const theme = options.theme.scheme.value === "dark" ? options.theme.dark : options.theme.light;
 
   sendBatch([
+    // Theming
     `general:border_size ${width.value}`,
     `general:gaps_out ${wmGaps}`,
     `general:gaps_in ${Math.floor(wmGaps / 2)}`,
@@ -65,6 +67,9 @@ async function setupHyprland() {
     `general:col.inactive_border rgba(${hyprland.inactiveBorder.value})`,
     `decoration:rounding ${radius.value}`,
     `decoration:drop_shadow ${shadows.value ? "yes" : "no"}`,
+    `plugin:hyprexpo:bg_color ${theme.surface.value}`,
+    `plugin:hyprexpo:gap_size ${wmGaps}`,
+    // Windows do not fill the entire width when alone in a workspace
     `workspace w[t1], gapsout:${singleTiledGaps(wmGaps)}`,
   ]);
 
