@@ -1,16 +1,6 @@
 # My Dotfiles
 
-This repository contains my personal dotfiles.
-
-## Installation
-
-To install these dotfiles on a new system, follow these steps:
-
-1. Clone this repository: `git clone https://github.com/jarenglenn/dotfiles.git`
-2. Change to the cloned directory: `cd dotfiles`
-3. Run the install script: `./install`, or `./install packages` to additionally install needed packages.
-
-This will create the necessary symbolic links from this repository to the home directory (as well as install the needed packages if the `packages` argument was provided).
+This repository contains my personal dotfiles. They are highly personalized and I do not recommend installing the whole thing outright (if you are not me :)). 
 
 ## Tooling
 
