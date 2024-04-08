@@ -204,6 +204,22 @@ const optionsConfig = mkOptions(OPTIONS, {
     },
   },
 
+  osd: {
+    progress: {
+      vertical: opt(false),
+      pack: {
+        h: opt<"start" | "center" | "end">("center"),
+        v: opt<"start" | "center" | "end">("end"),
+      },
+    },
+    microphone: {
+      pack: {
+        h: opt<"start" | "center" | "end">("center"),
+        v: opt<"start" | "center" | "end">("end"),
+      },
+    },
+  },
+
   dashboard: {
     avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
 

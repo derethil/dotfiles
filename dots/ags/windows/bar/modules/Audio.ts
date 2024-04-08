@@ -7,27 +7,22 @@ function formatVolume(volume: number) {
   return String(Math.round(volume * 100));
 }
 
-/**
- * @returns {string}
- */
-function chooseIcon() {
+function chooseIcon(): string {
   if (!Audio["speaker"]) return "";
 
   const volume = Audio["speaker"].volume * 100;
 
   const iconThresholds = {
-    0: icons.audio.muted,
-    1: icons.audio.low,
-    50: icons.audio.high,
+    0: icons.audio.volume.muted,
+    1: icons.audio.volume.low,
+    33: icons.audio.volume.medium,
+    66: icons.audio.volume.high,
   };
 
-  const icon = Object.entries(iconThresholds).reduce(
-    (prev, [threshold, name]) => {
-      if (volume >= Number(threshold)) return name;
-      return prev;
-    },
-    iconThresholds[0]
-  );
+  const icon = Object.entries(iconThresholds).reduce((prev, [threshold, name]) => {
+    if (volume >= Number(threshold)) return name;
+    return prev;
+  }, iconThresholds[0]);
 
   return icon;
 }
@@ -41,13 +36,13 @@ export function AudioModule() {
       if (!Audio["speaker"]) return;
       Audio["speaker"].is_muted = !Audio["speaker"].is_muted;
     },
-    icon: FontIcon().hook(Audio, (self) => {
-      self.label = chooseIcon();
+    icon: Widget.Icon().hook(Audio, (self) => {
+      self.icon = chooseIcon();
     }),
     child: Widget.Label({ expand: true }).hook(
       Audio,
       (self) => (self.label = formatVolume(Audio["speaker"].volume)),
-      "speaker-changed"
+      "speaker-changed",
     ),
   });
 }

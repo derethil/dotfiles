@@ -32,14 +32,24 @@ export const icons = {
   mediaControls: "",
 
   audio: {
-    muted: "",
-    low: "",
-    high: "",
+    mic: {
+      muted: "microphone-disabled-symbolic",
+      low: "microphone-sensitivity-low-symbolic",
+      medium: "microphone-sensitivity-medium-symbolic",
+      high: "microphone-sensitivity-high-symbolic",
+    },
+
+    volume: {
+      muted: "audio-volume-muted-symbolic",
+      low: "audio-volume-low-symbolic",
+      medium: "audio-volume-medium-symbolic",
+      high: "audio-volume-high-symbolic",
+    },
 
     type: {
-      headset: "󰋋",
-      speaker: "󰓃",
-      tv: "",
+      headset: "audio-headset-symbolic",
+      tv: "audio-tv-symbolic",
+      speaker: "audio-speaker-symbolic",
     },
   },
 

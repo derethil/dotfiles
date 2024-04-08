@@ -1,50 +1,48 @@
+import { bash, dependencies, sh } from "lib/utils";
+
+if (!dependencies("brightnessctl")) App.quit();
+
+const get = (args: string) => Number(Utils.exec(`brightnessctl ${args}`));
+const screen = await bash`ls -w1 /sys/class/backlight | head -1`;
+
 class BrightnessService extends Service {
   static {
     Service.register(
       this,
+      {},
       {
-        "screen-changed": ["float"],
+        screen: ["float", "rw"],
       },
-      {
-        backlit: ["float", "rw"],
-      }
     );
   }
 
-  #interface = Utils.exec("sh -c 'ls -w1 /sys/class/backlight | head -1'");
-  #screenValue = 0;
-  #max = Number(Utils.exec("brightnessctl max"));
+  #screenMax = get("max");
+  #screen = get("get") / get("max");
 
-  get backlit() {
-    return this.#screenValue;
+  get screen() {
+    return this.#screen;
   }
 
-  set backlit(percent) {
+  set screen(percent) {
     if (percent < 0) percent = 0;
-
     if (percent > 1) percent = 1;
 
-    Utils.execAsync(`brightnessctl set ${percent * 100}% -q`);
+    sh(`brightnessctl set ${Math.floor(percent * 100)}% -q`).then(() => {
+      this.#screen = percent;
+      this.changed("screen");
+    });
   }
 
   constructor() {
     super();
-    const brightness = `/sys/class/backlight/${this.#interface}/brightness`;
-    Utils.monitorFile(brightness, () => this.#onChange());
-    this.#onChange();
-  }
 
-  #onChange() {
-    this.#screenValue = Number(Utils.exec("brightnessctl get")) / this.#max;
-    this.changed("backlit");
-    this.emit("screen-changed", this.#screenValue);
-  }
+    const screenPath = `/sys/class/backlight/${screen}/brightness`;
 
-  connect(
-    event = "screen-changed",
-    callback: (this: this, ...args: any[]) => void
-  ) {
-    return super.connect(event, callback);
+    Utils.monitorFile(screenPath, async () => {
+      const value = await Utils.readFileAsync(screenPath);
+      this.#screen = Number(value) / this.#screenMax;
+      this.changed("screen");
+    });
   }
 }
 
