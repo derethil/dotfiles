@@ -27,6 +27,8 @@ class BrightnessService extends Service {
     if (percent < 0) percent = 0;
     if (percent > 1) percent = 1;
 
+    console.log(percent);
+
     sh(`brightnessctl set ${Math.floor(percent * 100)}% -q`).then(() => {
       this.#screen = percent;
       this.changed("screen");
@@ -40,6 +42,7 @@ class BrightnessService extends Service {
 
     Utils.monitorFile(screenPath, async () => {
       const value = await Utils.readFileAsync(screenPath);
+      console.log(value);
       this.#screen = Number(value) / this.#screenMax;
       this.changed("screen");
     });

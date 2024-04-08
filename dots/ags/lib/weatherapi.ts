@@ -15,9 +15,6 @@ export class OpenWeatherMapAPI {
   excludeList = ["minutely", "hourly", "daily", "alerts"];
   baseUrl = "https://api.openweathermap.org/data/3.0/onecall";
 
-  /**
-   * @param {string} apiKey
-   */
   constructor(apiKey: string) {
     this.apiKey = apiKey;
     this.units = options.bar.weather.units.value;

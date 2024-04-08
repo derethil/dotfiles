@@ -1,16 +1,28 @@
 {
-  "include": ["**/*.ts"],
+  "include": [
+    "**/*.ts"
+  ],
   "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022"
+    ],
     "allowJs": true,
     "checkJs": false,
     "strict": true,
     "noImplicitAny": true,
     "baseUrl": ".",
-    "paths": { "fzf": ["./node_modules/fzf/dist/types"] },
-    "typeRoots": ["./types", "./node_modules/@girs", "./node_modules"],
+    "paths": {
+      "fzf": [
+        "./node_modules/fzf/dist/types"
+      ]
+    },
+    "typeRoots": [
+      "./types",
+      "./node_modules/@girs",
+      "./node_modules"
+    ],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   }

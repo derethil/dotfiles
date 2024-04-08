@@ -49,12 +49,12 @@ export const icons = {
     type: {
       headset: "audio-headset-symbolic",
       tv: "audio-tv-symbolic",
-      speaker: "audio-speaker-symbolic",
+      speaker: "audio-external-speaker-symbolic",
     },
   },
 
   brightness: {
-    screen: "",
+    screen: "display-brightness-symbolic",
   },
 
   searches: {
