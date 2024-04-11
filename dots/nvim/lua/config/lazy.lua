@@ -14,7 +14,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.coding.copilot" },
     -- Editor Extras
     -- { import = "lazyvim.plugins.extras.editor.leap" },
-    { import = "lazyvim.plugins.extras.editor.navic" },
     { import = "lazyvim.plugins.extras.editor.mini-move" },
     { import = "lazyvim.plugins.extras.editor.harpoon2" },
     -- Lang Extras
@@ -25,6 +24,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.docker" },
     -- Util Extras
+    { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "lazyvim.plugins.extras.util.dot" },
     { import = "lazyvim.plugins.extras.util.project" },
     -- LazyVim Plugins
