@@ -13,7 +13,7 @@ require("lazy").setup({
     -- Coding Extras
     { import = "lazyvim.plugins.extras.coding.copilot" },
     -- Editor Extras
-    { import = "lazyvim.plugins.extras.editor.leap" },
+    -- { import = "lazyvim.plugins.extras.editor.leap" },
     { import = "lazyvim.plugins.extras.editor.navic" },
     { import = "lazyvim.plugins.extras.editor.mini-move" },
     { import = "lazyvim.plugins.extras.editor.harpoon2" },

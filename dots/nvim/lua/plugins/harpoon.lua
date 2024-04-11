@@ -6,11 +6,6 @@ return {
       -- Unmap Default LazyVim Harpoon Keys
       { "<space>H", "<nop>" },
       { "<space>h", "<nop>" },
-      { "<space>1", "<nop>" },
-      { "<space>2", "<nop>" },
-      { "<space>3", "<nop>" },
-      { "<space>4", "<nop>" },
-      { "<space>5", "<nop>" },
       -- Keybinds
       {
         "<space>a",
@@ -29,21 +24,21 @@ return {
       },
     }
 
-    for key, file in pairs({ h = 1, j = 2, k = 3, l = 4 }) do
+    for file = 1, 5, 1 do
       table.insert(keys, {
-        "<C-" .. key .. ">",
+        "<leader>r" .. file,
+        function()
+          require("harpoon"):list():remove_at(file)
+        end,
+        desc = "Harpoon Remove File " .. file,
+      })
+
+      table.insert(keys, {
+        "<leader>" .. file,
         function()
           require("harpoon"):list():select(file)
         end,
         desc = "Harpoon to File " .. file,
-      })
-
-      table.insert(keys, {
-        "<C-S-" .. key .. ">",
-        function()
-          require("harpoon"):list():remove_at(file)
-        end,
-        desc = "Harpoon Replace File " .. file,
       })
     end
 
