@@ -1,1 +1,1 @@
-../../../../.asdf/completions/asdf.fish
+../../../../.local/share/asdf/completions/asdf.fish
