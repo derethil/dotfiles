@@ -15,8 +15,8 @@ require("lazy").setup({
     -- Editor Extras
     { import = "lazyvim.plugins.extras.editor.leap" },
     { import = "lazyvim.plugins.extras.editor.navic" },
-    -- Formatting Extras
-    { import = "lazyvim.plugins.extras.formatting.prettier" },
+    { import = "lazyvim.plugins.extras.editor.mini-move" },
+    { import = "lazyvim.plugins.extras.editor.harpoon2" },
     -- Lang Extras
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.typescript" },

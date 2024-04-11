@@ -1,6 +1,5 @@
 return {
   -- Install Colorschemes
-  { "folke/tokyonight.nvim" },
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
@@ -17,7 +16,6 @@ return {
   {
     "catppuccin/nvim",
     lazy = true,
-    name = "catppuccin",
     opts = {
       integrations = {
         aerial = true,
@@ -59,8 +57,6 @@ return {
   -- Default Colorscheme
   {
     "LazyVim/LazyVim",
-    opts = {
-      colorscheme = { "kanagawa" },
-    },
+    opts = { colorscheme = { "kanagawa" } },
   },
 }
