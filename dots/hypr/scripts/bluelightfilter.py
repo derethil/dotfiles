@@ -6,6 +6,10 @@ import click
 from suntime import Sun
 
 
+def sysnotify(title, message):
+    subprocess.run(["notify-send", title, message])
+
+
 class BlueLightFilter:
     def __init__(self):
         process = subprocess.run(["which", "hyprshade"], stdout=subprocess.PIPE)
@@ -31,19 +35,21 @@ class BlueLightFilter:
 @click.command()
 @click.option("--latitude", "-lat", help="Latitude", required=True, type=float)
 @click.option("--longitude", "-lon", help="Longitude", required=True, type=float)
-@click.option("--interval", "-i", help="Interval in seconds", default=60, type=int)
+@click.option("--interval", "-i", help="Interval in seconds", default=1, type=int)
 def bluelightfilter(latitude: float, longitude: float, interval: int):
     sun = Sun(latitude, longitude)
     filter = BlueLightFilter()
 
-    sunrise = sun.get_sunrise_time()
-    sunset = sun.get_sunset_time()
-    now = datetime.datetime.now(datetime.UTC)
-
     while True:
+        sunrise = sun.get_sunrise_time()
+        sunset = sun.get_sunset_time()
+        now = datetime.datetime.now(datetime.UTC)
+
         if filter.enabled and sunrise < now < sunset:
             filter.disable()
+            sysnotify("Blue Light Filter", "Disabled")
         elif not filter.enabled and not (sunrise < now < sunset):
+            sysnotify("Blue Light Filter", "Enabled")
             filter.enable()
 
         time.sleep(interval)
