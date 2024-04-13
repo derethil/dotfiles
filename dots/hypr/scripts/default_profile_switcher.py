@@ -4,6 +4,9 @@ from os import path, scandir
 from enum import Enum, unique
 
 import hyprland
+from setproctitle import setproctitle
+
+setproctitle("profileswitcher")
 
 BROWSER_PATH = path.expanduser("~/.mozilla/firefox")
 

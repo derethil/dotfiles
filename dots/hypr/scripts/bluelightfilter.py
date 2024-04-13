@@ -4,6 +4,7 @@ import time
 
 import click
 from suntime import Sun
+from setproctitle import setproctitle
 
 
 def sysnotify(title, message):
@@ -56,4 +57,5 @@ def bluelightfilter(latitude: float, longitude: float, interval: int):
 
 
 if __name__ == "__main__":
+    setproctitle("bluelightfilter")
     bluelightfilter()
