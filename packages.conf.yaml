@@ -72,3 +72,6 @@
 
     - command: gsettings set org.gnome.desktop.interface icon-theme 'MoreWaita'
       description: Setting icon theme to Adwaita/MoreWaita
+
+    - command: hyprshade install; systemctl --user enable --now hyprshade.timer 
+      description: Installing systemd timer for Hyprshade
