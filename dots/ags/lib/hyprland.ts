@@ -56,7 +56,9 @@ function sendBatch(batch: string[]) {
 
 async function setupHyprland() {
   const wmGaps = Math.floor(hyprland.gaps.value * spacing.value);
-  const theme = options.theme.scheme.value === "dark" ? options.theme.dark : options.theme.light;
+  const theme = options.theme.scheme.value === "dark"
+    ? options.theme.dark
+    : options.theme.light;
 
   sendBatch([
     // Theming
@@ -69,8 +71,6 @@ async function setupHyprland() {
     `decoration:drop_shadow ${shadows.value ? "yes" : "no"}`,
     `plugin:hyprexpo:bg_color ${theme.surface.value}`,
     `plugin:hyprexpo:gap_size ${wmGaps}`,
-    // Windows do not fill the entire width when alone in a workspace
-    `workspace w[t1], gapsout:${singleTiledGaps(wmGaps)}`,
   ]);
 
   await sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`));
@@ -84,4 +84,10 @@ async function setupHyprland() {
       ]),
     );
   }
+
+  // HACK: I don't know why this timeout is needed, but gaps are not applied without it on startup
+  // I assume Hyprland is not fully initialized/gets reloaded at some point after this function runs
+  setTimeout(() => {
+    sendBatch([`workspace w[t1], gapsout:${singleTiledGaps(wmGaps)}`]);
+  }, 500);
 }
