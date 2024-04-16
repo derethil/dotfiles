@@ -17,6 +17,7 @@
     - gnome-keyring
     - inotify-tools
     - jq
+    - lazygit
     - neovim
     - netctl
     - noto-fonts-emoji
