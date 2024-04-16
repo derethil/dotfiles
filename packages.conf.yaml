@@ -19,6 +19,7 @@
     - jq
     - neovim
     - netctl
+    - noto-fonts-emoji
     - otf-font-awesome
     - playerctl
     - python-pipx
