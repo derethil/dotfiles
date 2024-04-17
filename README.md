@@ -6,13 +6,15 @@ This repository contains my personal dotfiles. They are highly personalized and 
 
 These dotfiles are designed around the following packages and tools:
 
+
 - **Window Manager**: [Hyprland](https://github.com/hyprwm/Hyprland)
+- **Widgets**: [Aylur's Gtk Shell](https://github.com/Aylur/ags)
+- **Editor**: [Neovim](https://neovim.io/) using [LazyVim](https://www.lazyvim.org/)
 - **Terminal**: [Foot](https://codeberg.org/dnkl/foot/)
 - **Shell**: [Fish](https://fishshell.com/)
+- **File Manager**: [lf](https://github.com/gokcehan/lf)
 - **Prompt**: [Starship](https://starship.rs/)
-- **Widgets**: [Aylur's Gtk Shell](https://github.com/Aylur/ags)
 - **Font**: [San Francisco](https://developer.apple.com/fonts/)
-- **Editor**: [Neovim](https://neovim.io/) using [LazyVim](https://www.lazyvim.org/)
 
 ## Dotbot
 
