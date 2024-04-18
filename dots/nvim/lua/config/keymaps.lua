@@ -26,3 +26,8 @@ vim.keymap.set(
   ":lua require('mini.hipatterns').toggle()<CR>",
   { desc = "Toggle Highlight Patterns", silent = true }
 )
+
+vim.keymap.set("n", "<leader>uL", "nop")
+vim.keymap.set("n", "<leader>ul", function()
+  LazyVim.toggle("relativenumber")
+end, { desc = "Toggle Relative Line Numbers", silent = true })
