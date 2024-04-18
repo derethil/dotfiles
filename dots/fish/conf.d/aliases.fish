@@ -5,8 +5,15 @@ alias del="trash"
 alias nv="nvim"
 alias lg="lazygit"
 
-# Temporary
 function rm
     command echo "You're supposed to use `del` now!"
     command rm $argv
+end
+
+function activate
+    source ./.venv/bin/activate.fish
+end
+
+function refish
+    source ~/.config/fish/config.fish
 end
