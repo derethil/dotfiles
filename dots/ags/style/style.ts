@@ -24,11 +24,14 @@ const {
 } = options.theme;
 
 type ColorOptions = Record<string, Opt<string>> | string | Opt<string>;
-const t = <T extends ColorOptions>(dark: T, light: T) => (scheme.value === "dark" ? dark : light);
+const t = <T extends ColorOptions>(
+  dark: T,
+  light: T,
+) => (scheme.value === "dark" ? dark : light);
 const $ = (name: string, value: string | Opt<any>) => `$${name}: ${value};`;
 const underToDash = (s: string) => s.replace(/_/g, "-");
 
-// prettier-ignore
+// deno-fmt-ignore
 const variables = () => [
   // Static Accents
   $("red", accents.red),
@@ -67,6 +70,9 @@ const variables = () => [
 
   $("font-mono-size", `${options.font.mono.size.value}pt`),
   $("font-mono-name", options.font.mono.name.value),
+
+  // Option Assets
+  $("wallpaper", `url('${options.wallpaper.value}')`),
 
   // System
   $("bar-position", options.bar.position.value),

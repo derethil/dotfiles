@@ -17,7 +17,9 @@ export function OverlayRevaler(props: OverlayRevealerProps) {
 
   const overlay = Widget.Overlay({
     ...revealerProps,
-    overlays: Overlay.bind().as((overlay) => (overlay === null ? [] : [overlay])),
+    overlays: Overlay.bind().as((overlay) => {
+      return (overlay === null ? [] : [overlay]);
+    }),
   });
 
   return Object.assign(overlay, {

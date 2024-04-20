@@ -1,16 +1,26 @@
 #dashboard .window-content {
   @include unset($rec: true);
   @include floating-widget;
-  padding: $padding;
+  padding: 0;
+
 
   .header {
     margin-bottom: 50px;
+    background: $wallpaper center center no-repeat;
+    // background-color: $surface-container-high;
+    background-size: cover;
+
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+    padding: $spacing * 2 $spacing * 2 $spacing * 8 $spacing * 2;
 
     .user-info {
       @include widget;
+      background-color: $surface-container-highest;
       font-weight: bold;
       padding: $spacing;
       margin-right: $spacing;
+
 
       .separator {
         color: $primary;
@@ -20,6 +30,7 @@
 
     .text-entry {
       @include widget;
+      background-color: $surface-container-highest;
 
       stack {
         padding: $spacing;
@@ -37,15 +48,17 @@
   }
 
   .overlay {
-    .app-item {
-      border-radius: $radius;
-      border: $border;
+    @include widget;
 
-      background-color: $surface-container-high;
+    .app-item {
+      @include widget;
+      border-radius: 0;
+
 
       &.active {
-        background-color: $tertiary-container;
-        color: $on-tertiary-container;
+        border-radius: $radius;
+        background-color: $primary-container;
+        color: $on-primary-container;
       }
 
       & > box {

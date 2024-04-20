@@ -1,19 +1,6 @@
 import GLib from "gi://GLib";
 import { SearchMenu } from "./SearchMenu";
 
-const Avatar = () =>
-  Widget.Box({
-    class_name: "avatar",
-    css: options.dashboard.avatar.bind().as(
-      (img) => `
-        min-width: 50px;
-        min-height: 50px;
-        background-image: url('${img}');
-        background-size: cover;
-      `,
-    ),
-  });
-
 const UserInfo = () =>
   Widget.Box({
     hpack: "start",

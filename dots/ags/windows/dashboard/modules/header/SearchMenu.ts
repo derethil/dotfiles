@@ -3,7 +3,12 @@ import { Variable as VariableType } from "types/variable";
 import { SelectIconMenu } from "widgets/SelectIconMenu";
 import { DashboardOverlay } from "windows/dashboard/Dashboard";
 import Gdk from "gi://Gdk";
-import { ApplicationSearch, ClipboardSearch, ProjectsSearch, type Search } from "./Search";
+import {
+  ApplicationSearch,
+  ClipboardSearch,
+  ProjectsSearch,
+  type Search,
+} from "./Search";
 import { StackState, StackStateType } from "lib/stackState";
 
 // Constants and helpers
@@ -42,12 +47,13 @@ function SearchTextEntry(props: SearchTextEntryProps) {
 
       const overlay = searchers[props.active.value].handleChange(self.text);
 
-      // Position Overlay (I tried to use the allocation but it wasn't right. Magic numbers it is.)
-      const { height } = self.get_allocation();
-      const parent = self.get_parent()?.get_allocation();
+      const ALIGN_TO_BOTTOM = 78;
+      const ALIGN_TO_LEFT = 228;
+      const ALIGN_TO_RIGHT = 24;
 
-      overlay.set_margin_top(height + 4 + options.theme.spacing.value * 1.333);
-      overlay.set_margin_left((parent?.x ?? 0) - 15 - options.theme.spacing.value * 1.333);
+      overlay.set_margin_top(ALIGN_TO_BOTTOM + options.theme.spacing.value);
+      overlay.set_margin_left(ALIGN_TO_LEFT);
+      overlay.set_margin_right(ALIGN_TO_RIGHT);
 
       // Open Overlay
       DashboardOverlay.setOverlay(overlay);
