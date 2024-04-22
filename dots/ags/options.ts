@@ -1,5 +1,5 @@
 import { Colors } from "lib/matugen";
-import { opt, mkOptions, Opt } from "lib/option";
+import { mkOptions, Opt, opt } from "lib/option";
 import { BarWidget } from "windows/bar/Bar";
 
 const optionsConfig = mkOptions(OPTIONS, {
@@ -137,7 +137,9 @@ const optionsConfig = mkOptions(OPTIONS, {
     radius: opt(8),
 
     hyprland: {
-      singleTiledGaps: opt<{ left?: number; right?: number; top?: number; bottom?: number }>({
+      singleTiledGaps: opt<
+        { left?: number; right?: number; top?: number; bottom?: number }
+      >({
         left: 500,
         right: 500,
       }),
@@ -165,8 +167,6 @@ const optionsConfig = mkOptions(OPTIONS, {
     position: opt<"left" | "right">("left"),
     corners: opt(false),
     onlyPrimary: opt(true),
-
-    windowButtonOpens: opt("overview"),
 
     layout: {
       start: opt<BarWidget[]>(["window", "workspaces", "systemTray", "media"]),

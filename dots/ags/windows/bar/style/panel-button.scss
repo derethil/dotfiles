@@ -28,15 +28,15 @@
   }
 
   & > * > * > box {
-    padding: $padding * 1.25 0;
-
     &:first-child {
+      padding: $padding * 0.9 0;
       border-radius: $radius $radius 0 0;
       border: $border;
       border-bottom-width: 0;
     }
 
     &:last-child {
+      padding: $padding * 1.25 0;
       border-radius: 0 0 $radius $radius;
       border: $border;
       font-weight: bold;

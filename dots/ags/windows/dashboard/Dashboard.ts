@@ -1,4 +1,4 @@
-import { PopupWindow } from "widgets/PopupWindow";
+import { PopupWindow } from "windows/PopupWindow";
 import { Header } from "./modules/header/Header";
 import { OverlayRevaler } from "widgets/OverlayRevealer";
 

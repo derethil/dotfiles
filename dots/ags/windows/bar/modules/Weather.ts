@@ -15,14 +15,20 @@ const setTemperature = async (label: Label<any>) => {
 
 const setIcon = async (fontIcon: any) => {
   const response = await api.fetchWeatherInfo();
-  fontIcon.label = response.icon;
+  fontIcon.icon = response.icon;
 };
 
 export function Weather() {
   return IconModule({
     className: "weather",
     labelColor: "blue",
-    icon: FontIcon({ label: icons.weather.init }).poll(msBetweenPoll, setIcon),
+    icon: Widget.Icon({
+      icon: "dialog-question-symbolic",
+      size: 32,
+    }).poll(
+      msBetweenPoll,
+      setIcon,
+    ),
     child: Widget.Label({
       className: "temperature",
     }).poll(msBetweenPoll, setTemperature),

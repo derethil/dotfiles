@@ -7,7 +7,6 @@
   .header {
     margin-bottom: 50px;
     background: $wallpaper center center no-repeat;
-    // background-color: $surface-container-high;
     background-size: cover;
 
     border-top-left-radius: $radius;
@@ -16,7 +15,7 @@
 
     .user-info {
       @include widget;
-      background-color: $surface-container-highest;
+      background-color: $surface-container-high;
       font-weight: bold;
       padding: $spacing;
       margin-right: $spacing;
@@ -30,7 +29,6 @@
 
     .text-entry {
       @include widget;
-      background-color: $surface-container-highest;
 
       stack {
         padding: $spacing;

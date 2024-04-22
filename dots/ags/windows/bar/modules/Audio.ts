@@ -19,10 +19,13 @@ function chooseIcon(): string {
     66: icons.audio.volume.high,
   };
 
-  const icon = Object.entries(iconThresholds).reduce((prev, [threshold, name]) => {
-    if (volume >= Number(threshold)) return name;
-    return prev;
-  }, iconThresholds[0]);
+  const icon = Object.entries(iconThresholds).reduce(
+    (prev, [threshold, name]) => {
+      if (volume >= Number(threshold)) return name;
+      return prev;
+    },
+    iconThresholds[0],
+  );
 
   return icon;
 }
@@ -36,7 +39,7 @@ export function AudioModule() {
       if (!Audio["speaker"]) return;
       Audio["speaker"].is_muted = !Audio["speaker"].is_muted;
     },
-    icon: Widget.Icon().hook(Audio, (self) => {
+    icon: Widget.Icon({ size: 22 }).hook(Audio, (self) => {
       self.icon = chooseIcon();
     }),
     child: Widget.Label({ expand: true }).hook(

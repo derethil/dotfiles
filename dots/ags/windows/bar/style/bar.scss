@@ -90,17 +90,8 @@ $bar-spacing: calc($spacing / 2);
   }
 
   // End Widgets
-
-  .weather {
-    & .font-icon {
-      font-family: "Weather Icons";
-    }
-  }
-
-  .audio {
-    .font-icon {
-      font-family: "Font Awesome 6 Free Solid";
-    }
+  .audio image {
+      padding: $padding * 0.5 0;
   }
 
   .system-tray {

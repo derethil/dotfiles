@@ -5,12 +5,9 @@ import { icons } from "lib/icons";
 export function WindowButton() {
   return PanelButton({
     cursor: "pointer",
-    window: options.bar.windowButtonOpens.value,
-    onClicked: () => App.toggleWindow(options.bar.windowButtonOpens.value),
+    window: "dashboard",
+    onClicked: () => App.toggleWindow("dashboard"),
     className: "window-button",
-    child: FontIcon({
-      hexpand: true,
-      label: icons.dashboard,
-    }),
+    child: Widget.Icon("arch-logo-symbolic"),
   });
 }

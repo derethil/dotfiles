@@ -61,6 +61,11 @@ export class Search<T = any> {
 // Search Classes
 
 export class ApplicationSearch extends Search<Application> {
+  public constructor() {
+    super();
+    Applications.reload();
+  }
+
   public handleChange(query: string) {
     const results = Applications.query(query);
     this.handleNewState(results);
@@ -76,7 +81,7 @@ export class ApplicationSearch extends Search<Application> {
           App.toggleWindow(WINDOW_NAME);
           DashboardOverlay.resetOverlay();
         },
-      }),
+      })
     );
 
     return this.Wrapper(items);
@@ -98,7 +103,9 @@ export class ProjectsSearch extends Search<string> {
 
   private async initFzf() {
     const result = await bash(
-      `find ${options.dashboard.projects.dynamic.value.join(" ")} -mindepth 1 -maxdepth 1 -type d`,
+      `find ${
+        options.dashboard.projects.dynamic.value.join(" ")
+      } -mindepth 1 -maxdepth 1 -type d`,
     );
 
     const projects = result.split("\n");
@@ -122,11 +129,11 @@ export class ProjectsSearch extends Search<string> {
           return pathList.pop() ?? label;
         },
         onClick: () => {
-          bash(options.dashboard.projects.command.value.replace('%d', project))
+          bash(options.dashboard.projects.command.value.replace("%d", project));
           App.toggleWindow(WINDOW_NAME);
           DashboardOverlay.resetOverlay();
         },
-      }),
+      })
     );
 
     return this.Wrapper(items);
@@ -134,7 +141,12 @@ export class ProjectsSearch extends Search<string> {
 
   public onAccept() {
     if (this.state.items.length === 0) return;
-    bash(options.dashboard.projects.command.value.replace('%d', this.state.value ?? ""))
+    bash(
+      options.dashboard.projects.command.value.replace(
+        "%d",
+        this.state.value ?? "",
+      ),
+    );
   }
 }
 
@@ -142,7 +154,11 @@ export class ClipboardSearch extends Search<string> {
   fzf: Fzf<string[]> = new Fzf([] as string[]);
 
   private paste(item: string) {
-    Utils.execAsync(["bash", "-c", `echo "${item}" | cliphist decode | wl-copy`]);
+    Utils.execAsync([
+      "bash",
+      "-c",
+      `echo "${item}" | cliphist decode | wl-copy`,
+    ]);
   }
 
   public constructor(active: StackStateType<string>) {
@@ -178,7 +194,7 @@ export class ClipboardSearch extends Search<string> {
           App.toggleWindow(WINDOW_NAME);
           DashboardOverlay.resetOverlay();
         },
-      }),
+      })
     );
 
     return this.Wrapper(items);
