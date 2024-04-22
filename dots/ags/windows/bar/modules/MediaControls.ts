@@ -21,7 +21,7 @@ export function MediaControls() {
   };
 
   return Widget.Revealer({
-    revealChild: false,
+    revealChild: Mpris.bind("players").as(() => Boolean(Mpris.getPlayer())),
     transitionDuration: options.transition.bind("value"),
     transition: "slide_down",
     className: "mpris",
@@ -40,10 +40,5 @@ export function MediaControls() {
         },
       }),
     }),
-    setup: (self) => {
-      self.hook(Mpris, (self) => {
-        self.reveal_child = Boolean(Mpris.getPlayer());
-      });
-    },
   });
 }

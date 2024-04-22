@@ -1,17 +1,12 @@
-const Audio = await Service.import("audio");
+const { speaker } = await Service.import("audio");
 import { icons } from "lib/icons";
-import { FontIcon } from "widgets/FontIcon";
 import { IconModule } from "../IconModule";
 
-function formatVolume(volume: number) {
+function volumeLabel(volume: number): string {
   return String(Math.round(volume * 100));
 }
 
-function chooseIcon(): string {
-  if (!Audio["speaker"]) return "";
-
-  const volume = Audio["speaker"].volume * 100;
-
+function volumeIcon(volume: number): string {
   const iconThresholds = {
     0: icons.audio.volume.muted,
     1: icons.audio.volume.low,
@@ -21,7 +16,7 @@ function chooseIcon(): string {
 
   const icon = Object.entries(iconThresholds).reduce(
     (prev, [threshold, name]) => {
-      if (volume >= Number(threshold)) return name;
+      if (volume * 100 >= Number(threshold)) return name;
       return prev;
     },
     iconThresholds[0],
@@ -35,17 +30,14 @@ export function AudioModule() {
     cursor: "pointer",
     className: "audio",
     labelColor: "magenta",
-    onClicked: () => {
-      if (!Audio["speaker"]) return;
-      Audio["speaker"].is_muted = !Audio["speaker"].is_muted;
-    },
-    icon: Widget.Icon({ size: 22 }).hook(Audio, (self) => {
-      self.icon = chooseIcon();
+    onClicked: () => speaker.is_muted = !speaker.is_muted,
+    icon: Widget.Icon({
+      size: 22,
+      icon: speaker.bind("volume").as(volumeIcon),
     }),
-    child: Widget.Label({ expand: true }).hook(
-      Audio,
-      (self) => (self.label = formatVolume(Audio["speaker"].volume)),
-      "speaker-changed",
-    ),
+    child: Widget.Label({
+      expand: true,
+      label: speaker.bind("volume").as(volumeLabel),
+    }),
   });
 }

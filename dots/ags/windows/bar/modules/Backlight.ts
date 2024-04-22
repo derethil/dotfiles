@@ -8,9 +8,9 @@ export function Backlight() {
     labelColor: "red",
     icon: Widget.Icon(icons.brightness.screen),
     child: Widget.Label({
-      label: Brightness.bind("screen").transform((v) => {
-        return Math.round(v * 100).toString();
-      }),
+      label: Brightness.bind("screen").as((v) =>
+        Math.round(v * 100).toString()
+      ),
     }),
   });
 }

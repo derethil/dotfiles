@@ -1,5 +1,10 @@
 import { icons } from "lib/icons";
 
+export interface WeatherInfo {
+  icon: string;
+  temperature: number;
+}
+
 export interface OpenWeatherMapAPI {
   apiKey: string;
   units: "metric" | "imperial";
@@ -14,7 +19,6 @@ export interface OpenWeatherMapAPI {
 export class OpenWeatherMapAPI {
   excludeList = ["minutely", "hourly", "daily", "alerts"];
   baseUrl = "https://api.openweathermap.org/data/3.0/onecall";
-  iconUrl = "https://openweathermap.org/img/wn/";
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;

@@ -16,12 +16,16 @@ function formatTime(seconds: number): string {
 
 function batteryIcon(battery: typeof Battery): string {
   const { available, charging, charged, percent } = battery;
+
   if (!available) return icons.battery.none;
   if (charged) return icons.battery.chargingFull;
   if (charging) return icons.battery.charging;
+
   const ceilingTen = Math.ceil(percent / 10) * 10;
   const isKey = ceilingTen in icons.battery;
+
   if (isKey) return icons.battery[ceilingTen as keyof typeof icons.battery];
+
   return icons.battery.none;
 }
 
