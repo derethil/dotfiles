@@ -1,6 +1,4 @@
 import { PanelButton } from "../../../widgets/PanelButton";
-import { FontIcon } from "widgets/FontIcon";
-import { icons } from "lib/icons";
 
 export function WindowButton() {
   return PanelButton({

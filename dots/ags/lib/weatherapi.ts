@@ -1,5 +1,3 @@
-import { icons } from "lib/icons";
-
 export interface WeatherInfo {
   icon: string;
   temperature: number;
