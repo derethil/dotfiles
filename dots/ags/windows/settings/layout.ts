@@ -75,7 +75,7 @@ export const Layout = [
       Group({
         title: "Date",
         rows: [
-          Row({opt: bar.date.format, title: "Date Format"}),
+          Row({opt: bar.date.format, title: "Date Format", type: "object"}),
         ]
       }),
       Group({

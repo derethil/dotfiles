@@ -109,6 +109,10 @@ window.settings-dialog {
                 border-radius: 0;
             }
 
+            button:nth-child(4) {
+              background-color: $primary-container;
+            }
+
             button:last-child {
                 border-radius: 0 $radius $radius 0;
             }
