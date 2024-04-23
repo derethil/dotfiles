@@ -3,7 +3,6 @@
   @include floating-widget;
   padding: 0;
 
-
   .header {
     margin-bottom: 50px;
     background: $wallpaper center center no-repeat;
@@ -19,7 +18,6 @@
       font-weight: bold;
       padding: $spacing;
       margin-right: $spacing;
-
 
       .separator {
         color: $primary;
@@ -51,7 +49,6 @@
     .app-item {
       @include widget;
       border-radius: 0;
-
 
       &.active {
         border-radius: $radius;
