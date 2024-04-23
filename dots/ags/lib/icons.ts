@@ -23,10 +23,6 @@ export const icons = {
     screenshot: "",
   },
 
-  clock: "",
-
-  tray: "󱊗",
-
   mediaControls: "",
 
   audio: {
