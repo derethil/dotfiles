@@ -99,6 +99,7 @@ export const icons = {
     themes: "preferences-desktop-theme-symbolic",
     toolbars: "toolbars-symbolic",
     settings: "emblem-system-symbolic",
+    scheme: "preferences-color-symbolic",
     arrow: {
       "right": "pan-end-symbolic",
       "left": "pan-start-symbolic",
