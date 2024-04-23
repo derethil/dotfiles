@@ -52,7 +52,7 @@ export const icons = {
   },
 
   brightness: {
-    screen: "display-brightness-symbolic",
+    screen: "backlight-symbolic",
   },
 
   searches: {
