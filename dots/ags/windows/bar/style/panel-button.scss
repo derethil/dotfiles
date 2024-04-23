@@ -1,12 +1,12 @@
 @import "./bar-margin.scss";
 
 @mixin icon-bg-color($color) {
-  @if ($bar-only-primary) {
-    $color: $primary;
-  }
-
   & > box {
     padding: 0;
+  }
+
+  &.icon-bg-primary > * > * > box:first-child {
+    background-color: $primary;
   }
 
   & > * > * > box:first-child {

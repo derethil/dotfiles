@@ -15,13 +15,18 @@ export function IconModule(props: IconModuleProps) {
     setup: (self) => {
       self.toggleClassName("panel-button-icon");
 
-      if (typeof labelColor === "string")
+      self.hook(options.bar.onlyPrimary, () => {
+        self.toggleClassName("icon-bg-primary", options.bar.onlyPrimary.value);
+      });
+
+      if (typeof labelColor === "string") {
         self.toggleClassName(`panel-button-icon-bg-${labelColor}`);
+      }
 
       if (labelColor instanceof Variable) {
         self.hook(labelColor, () => {
           self.class_names = self.class_names.filter(
-            (c) => !c.startsWith("panel-button-icon-bg-")
+            (c) => !c.startsWith("panel-button-icon-bg-"),
           );
           self.toggleClassName(`panel-button-icon-bg-${labelColor.value}`);
         });
@@ -42,4 +47,4 @@ export function IconModule(props: IconModuleProps) {
       ],
     }),
   });
-};
+}

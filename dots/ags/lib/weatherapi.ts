@@ -40,7 +40,6 @@ export class OpenWeatherMapAPI {
   private constructWeatherId(weather: any): keyof typeof WEATHER_ID_TO_ICON {
     const id = weather.current.weather[0].id;
     const dayOrNight = this.#isDayOrNight(weather);
-    console.log(weather.current);
 
     const key = `${dayOrNight}-${id}`;
 

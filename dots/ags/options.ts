@@ -1,14 +1,16 @@
 import { Colors } from "lib/matugen";
 import { mkOptions, Opt, opt } from "lib/option";
 import { BarWidget } from "windows/bar/Bar";
+import { Market, Resolution } from "services/wallpaper";
 
 const optionsConfig = mkOptions(OPTIONS, {
   mode: opt<"desktop" | "laptop">("desktop"),
   autotheme: opt(true),
 
-  wallpaper: opt(`/home/${Utils.USER}/Pictures/wallpapers/catMachup.png`, {
-    persistent: true,
-  }),
+  wallpaperOpts: {
+    resolution: opt<Resolution>(3840),
+    market: opt<Market>("random"),
+  },
 
   theme: {
     dark: {
@@ -136,13 +138,22 @@ const optionsConfig = mkOptions(OPTIONS, {
     spacing: opt(9),
     radius: opt(8),
 
+    font: {
+      ui: {
+        size: opt(13),
+        name: opt("SF Pro Display"),
+      },
+      mono: {
+        size: opt(13),
+        name: opt("Liga SFMono Nerd Font"),
+      },
+    },
+
     hyprland: {
-      singleTiledGaps: opt<
-        { left?: number; right?: number; top?: number; bottom?: number }
-      >({
-        left: 500,
-        right: 500,
-      }),
+      singleTiledGaps: {
+        left: opt(500),
+        right: opt(500),
+      },
       shadows: opt(true),
       gaps: opt(1.3333),
       inactiveBorder: opt("#000000"),
@@ -151,22 +162,11 @@ const optionsConfig = mkOptions(OPTIONS, {
 
   transition: opt(150),
 
-  font: {
-    ui: {
-      size: opt(13),
-      name: opt("SF Pro Display"),
-    },
-    mono: {
-      size: opt(13),
-      name: opt("Liga SFMono Nerd Font"),
-    },
-  },
-
   bar: {
     flatButtons: opt(true),
     position: opt<"left" | "right">("left"),
     corners: opt(false),
-    onlyPrimary: opt(true),
+    onlyPrimary: opt(false),
 
     layout: {
       start: opt<BarWidget[]>(["window", "workspaces", "systemTray", "media"]),
@@ -232,13 +232,6 @@ const optionsConfig = mkOptions(OPTIONS, {
       ]),
       static: opt(["~/.dotfiles/"]),
     },
-  },
-
-  overview: {
-    scale: opt(8),
-    iconSize: opt(32),
-    minWorkspaces: opt(5),
-    monochromeIcon: opt(false),
   },
 
   notifications: {

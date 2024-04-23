@@ -30,6 +30,12 @@ const actions = {
   },
 };
 
+const setupIconBgPrimaryHook = (self: any) => {
+  self.hook(options.bar.onlyPrimary, () => {
+    self.toggleClassName("icon-bg-primary", options.bar.onlyPrimary.value);
+  });
+};
+
 export function Powermenu() {
   return PanelModule({
     className: "powermenu",
@@ -42,6 +48,7 @@ export function Powermenu() {
         classNames: ["powermenu-button", actions.default.className],
         child: FontIcon({ label: actions.default.icon }),
         onClicked: () => actions.default.action(),
+        setup: setupIconBgPrimaryHook,
       }),
       child: Widget.Box({
         vertical: true,
@@ -52,7 +59,8 @@ export function Powermenu() {
               className: `powermenu-button ${name}`,
               child: FontIcon({ label: icon }),
               onClicked: action,
-            })
+              setup: setupIconBgPrimaryHook,
+            }),
         ),
       }),
     }),

@@ -36,13 +36,8 @@ function activeBorder() {
 }
 
 function singleTiledGaps(wmGaps: number) {
-  const {
-    left = wmGaps,
-    right = wmGaps,
-    top = wmGaps,
-    bottom = wmGaps,
-  } = hyprland.singleTiledGaps.value;
-  return `${top} ${right} ${bottom} ${left}`;
+  const { left, right } = hyprland.singleTiledGaps;
+  return `${wmGaps} ${right.value} ${wmGaps} ${left.value}`;
 }
 
 function sendBatch(batch: string[]) {

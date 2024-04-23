@@ -1,20 +1,31 @@
 import { options } from "options";
-import { sh, dependencies } from "./utils";
+import { dependencies, sh } from "./utils";
 import { Opt } from "./option";
+import { Wallpaper } from "services/wallpaper";
 
 export function matugenWallpaperMonitor() {
-  options.wallpaper.connect("changed", () => matugen());
+  Wallpaper.connect("changed", () => matugen());
   options.autotheme.connect("changed", () => matugen());
-  matugen();
 }
 
-export async function matugen(type: "image" | "color" = "image", arg = options.wallpaper.value) {
+export async function matugen(
+  type: "image" | "color" = "image",
+  arg = Wallpaper.wallpaper,
+) {
   if (!options.autotheme.value || !dependencies("matugen")) return;
 
-  const colors = await sh(`matugen --dry-run -j hex ${type} ${arg}`);
-  const generated = JSON.parse(colors).colors as { light: Colors; dark: Colors };
+  console.log(arg);
 
-  const themeOptions = { dark: options.theme.dark, light: options.theme.light } as {
+  const colors = await sh(`matugen --dry-run -j hex ${type} ${arg}`);
+  const generated = JSON.parse(colors).colors as {
+    light: Colors;
+    dark: Colors;
+  };
+
+  const themeOptions = {
+    dark: options.theme.dark,
+    light: options.theme.light,
+  } as {
     dark: Colors<Opt<string>>;
     light: Colors<Opt<string>>;
   };

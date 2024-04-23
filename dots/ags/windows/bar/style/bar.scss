@@ -114,8 +114,11 @@ $bar-spacing: calc($spacing / 2);
     }
 
     @mixin powermenu-color($color) {
-      @if ($bar-only-primary) {
-        $color: $primary;
+      &.icon-bg-primary {
+        color: $primary;
+        &:hover {
+          color: lighten($primary, 10%);
+        }
       }
 
       color: $color;

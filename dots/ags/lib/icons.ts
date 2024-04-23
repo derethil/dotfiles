@@ -100,6 +100,9 @@ export const icons = {
     tick: "object-select-symbolic",
     refresh: "view-refresh-symbolic",
     close: "window-close-symbolic",
+    themes: "preferences-desktop-theme-symbolic",
+    toolbars: "toolbars-symbolic",
+    settings: "emblem-system-symbolic",
     arrow: {
       "right": "pan-end-symbolic",
       "left": "pan-start-symbolic",

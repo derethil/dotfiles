@@ -18,7 +18,6 @@ export class Opt<T = unknown> extends Variable<T> {
   initial: T;
   id = "";
   persistent: boolean;
-
   toString() {
     return `${this.value}`;
   }
@@ -32,7 +31,9 @@ export class Opt<T = unknown> extends Variable<T> {
 
   init(cacheFile: string) {
     const cacheV = JSON.parse(Utils.readFile(cacheFile) || "{}")[this.id];
-    if (cacheV !== undefined) this.value = cacheV;
+    if (cacheV !== undefined) {
+      this.value = cacheV;
+    }
 
     this.connect("changed", () => {
       const cache = JSON.parse(Utils.readFile(cacheFile) || "{}");
@@ -42,7 +43,9 @@ export class Opt<T = unknown> extends Variable<T> {
   }
 
   reset() {
-    if (this.persistent) return;
+    if (this.persistent) {
+      return;
+    }
 
     if (JSON.stringify(this.value) !== JSON.stringify(this.initial)) {
       this.value = this.initial;
@@ -55,7 +58,7 @@ export const opt = <T>(initial: T, opts?: OptProps) => new Opt(initial, opts);
 
 function getOptions(object: object, path = ""): Opt[] {
   return Object.keys(object).flatMap((key) => {
-    const obj: Opt = object[key as keyof object];
+    const obj: Opt = object[key as keyof {}];
     const id = path ? path + "." + key : key;
 
     if (obj instanceof Variable) {
@@ -63,24 +66,33 @@ function getOptions(object: object, path = ""): Opt[] {
       return obj;
     }
 
-    if (typeof obj === "object") return getOptions(obj, id);
+    if (typeof obj === "object") {
+      return getOptions(obj, id);
+    }
 
     return [];
   });
 }
 
 export function mkOptions<T extends object>(cacheFile: string, object: T) {
-  for (const opt of getOptions(object)) opt.init(cacheFile);
+  for (const opt of getOptions(object)) {
+    opt.init(cacheFile);
+  }
 
   Utils.ensureDirectory(cacheFile.split("/").slice(0, -1).join("/"));
 
   const configFile = `${TMP}/config.json`;
-  const values = getOptions(object).reduce((obj, { id, value }) => ({ [id]: value, ...obj }), {});
+  const values = getOptions(object).reduce(
+    (obj, { id, value }) => ({ [id]: value, ...obj }),
+    {},
+  );
   Utils.writeFileSync(JSON.stringify(values, null, 2), configFile);
   Utils.monitorFile(configFile, () => {
     const cache = JSON.parse(Utils.readFile(configFile) || "{}");
     for (const opt of getOptions(object)) {
-      if (JSON.stringify(cache[opt.id]) !== JSON.stringify(opt.value)) opt.value = cache[opt.id];
+      if (JSON.stringify(cache[opt.id]) !== JSON.stringify(opt.value)) {
+        opt.value = cache[opt.id];
+      }
     }
   });
 
@@ -92,7 +104,9 @@ export function mkOptions<T extends object>(cacheFile: string, object: T) {
     [opt, ...list] = getOptions(object),
     id = opt?.reset(),
   ): Promise<Array<string>> {
-    if (!opt) return sleep().then(() => []);
+    if (!opt) {
+      return sleep().then(() => []);
+    }
 
     return id
       ? [id, ...(await sleep(50).then(() => reset(list)))]
@@ -107,7 +121,9 @@ export function mkOptions<T extends object>(cacheFile: string, object: T) {
     },
     handler(deps: string[], callback: () => void) {
       for (const opt of getOptions(object)) {
-        if (deps.some((i) => opt.id.startsWith(i))) opt.connect("changed", callback);
+        if (deps.some((i) => opt.id.startsWith(i))) {
+          opt.connect("changed", callback);
+        }
       }
     },
   });

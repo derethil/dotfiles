@@ -1,6 +1,7 @@
 import { type Opt } from "lib/option";
 import { options } from "options";
 import { bash, dependencies, sh } from "lib/utils";
+import { Wallpaper } from "services/wallpaper";
 
 const deps = [
   "font",
@@ -50,7 +51,6 @@ const variables = () => [
   $("border", "$border-width solid $border-color"),
 
   // Other Color Variables
-  $("bar-only-primary", options.bar.onlyPrimary),
   $("active-gradient", `linear-gradient(to right, ${t(dark, light).primary_container}, darken(${t(dark, light).primary_container}, 4%))`),
   $("shadow-color", t(`${t(dark, light).shadow}99`, `${t(dark, light).shadow}66`)),
   $("text-shadow", t("2pt 2pt 2pt $shadow-color", "none")),
@@ -65,14 +65,14 @@ const variables = () => [
   $("shadows", `${shadows}`),
 
   // Fonts
-  $("font-ui-size", `${options.font.ui.size.value}pt`),
-  $("font-ui-name", options.font.ui.name.value),
+  $("font-ui-size", `${options.theme.font.ui.size.value}pt`),
+  $("font-ui-name", options.theme.font.ui.name.value),
 
-  $("font-mono-size", `${options.font.mono.size.value}pt`),
-  $("font-mono-name", options.font.mono.name.value),
+  $("font-mono-size", `${options.theme.font.mono.size.value}pt`),
+  $("font-mono-name", options.theme.font.mono.name.value),
 
   // Option Assets
-  $("wallpaper", `url('${options.wallpaper.value}')`),
+  $("wallpaper", `url('${Wallpaper.wallpaper}')`),
 
   // System
   $("bar-position", options.bar.position.value),
