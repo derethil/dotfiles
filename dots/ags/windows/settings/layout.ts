@@ -218,8 +218,8 @@ export const Layout = [
       Group({
         title: "Weather",
         rows: [
-          Row({ opt: bar.weather.location.lat, title: "Latitude", type: "object" }),
-          Row({ opt: bar.weather.location.lon, title: "Longitude", type: "object" }),
+          Row({ opt: bar.weather.location.lat, title: "Latitude", type: "float" }),
+          Row({ opt: bar.weather.location.lon, title: "Longitude", type: "float" }),
           Row({ opt: bar.weather.units, title: "Units", type: "enum", enums: ["metric", "imperial"] }),
         ]
       })

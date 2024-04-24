@@ -54,8 +54,10 @@ export function Setter<T>({
     case "object":
       return Widget.Entry({
         onAccept: (self) => opt.value = JSON.parse(self.text || ""),
-        setup: (self) =>
-          self.hook(opt, () => self.text = JSON.stringify(opt.value)),
+        setup: (self) => {
+          self.toggleClassName("object-setter", type === "object");
+          self.hook(opt, () => self.text = JSON.stringify(opt.value));
+        },
       });
 
     case "string":

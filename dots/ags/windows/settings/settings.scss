@@ -135,6 +135,11 @@ window.settings-dialog {
       }
     }
 
+    .object-setter {
+      font-family: $font-mono-name;
+      font-size: $font-mono-size;
+    }
+
     &.wallpaper {
       button {
         margin-top: $spacing * 0.5;

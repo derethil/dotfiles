@@ -17,8 +17,7 @@ const DateTime = Variable(GLib.DateTime.new_now_local(), {
 
 export function Clock() {
   return IconModule({
-    className: " clock",
-    child: ClockWidget({ format: `%I\n%M` }),
+    child: ClockWidget({ format: options.bar.date.format.value }),
     icon: Widget.Icon({
       icon: DateTime.bind("value").as((time) => selectClockIcon(time)),
       size: 24,
