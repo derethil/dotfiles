@@ -5,6 +5,9 @@ return {
   },
   opts = {
     pickers = {
+      find_files = {
+        hidden = true,
+      },
       colorscheme = {
         layout_strategy = "horizontal",
         enable_preview = true,
