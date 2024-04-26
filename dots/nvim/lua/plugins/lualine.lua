@@ -17,6 +17,16 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
+      opts.options.component_separators = { left = "|", right = "|" }
+      opts.options.section_separators = { left = "", right = "" }
+
+      -- Remove Branch from B Section
+      table.remove(opts.sections.lualine_b, 1)
+      -- Pretty Filename (Not Full Path)
+      table.remove(opts.sections.lualine_c, 4)
+      table.insert(opts.sections.lualine_c, 4, {
+        require("util.lualine").pretty_filename(),
+      })
       -- Git Blame
       local git_blame = require("gitblame")
       table.insert(opts.sections.lualine_c, 5, {
@@ -31,11 +41,7 @@ return {
         end,
       })
       -- Change Default Clock Format
-      opts.sections.lualine_z = {
-        function()
-          return " " .. os.date("%-I:%02M")
-        end,
-      }
+      opts.sections.lualine_z = { "branch" }
     end,
   },
 }
