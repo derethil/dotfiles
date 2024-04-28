@@ -14,11 +14,11 @@ export const DashboardOverlay = OverlayRevaler({
   }),
 });
 
-export function Dashboard() {
+export const Dashboard = () => {
   return PopupWindow({
     name: "dashboard",
     layout: "center",
     transition: "slide_up",
     child: DashboardOverlay,
   });
-}
+};

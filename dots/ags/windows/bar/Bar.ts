@@ -29,7 +29,7 @@ const widgets = {
 const { start, center, end } = options.bar.layout;
 const { position } = options.bar;
 
-export function Bar(monitor: number) {
+export const Bar = (monitor: number) => {
   return Widget.Window({
     name: `bar${monitor}`,
     exclusivity: "exclusive",
@@ -60,4 +60,4 @@ export function Bar(monitor: number) {
       }),
     }),
   });
-}
+};

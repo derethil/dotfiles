@@ -4,9 +4,7 @@ import { IconModule } from "../IconModule";
 
 function selectClockIcon(time: GLib.DateTime): string {
   const hours = (time.get_hour() % 12) + 1;
-  const returnValue = `time-${hours}`;
-  console.log(returnValue);
-  return returnValue;
+  return `time-${hours}`;
 }
 
 const DateTime = Variable(GLib.DateTime.new_now_local(), {

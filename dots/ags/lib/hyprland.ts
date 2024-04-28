@@ -1,4 +1,5 @@
 import { options } from "options";
+import { bash, sh } from "./utils";
 const { messageAsync } = await Service.import("hyprland");
 
 const {
@@ -27,6 +28,12 @@ const deps = [
 export function hyprlandOptions() {
   options.handler(deps, setupHyprland);
   setupHyprland();
+
+  bash(`fd ".conf" ~/.config/hypr/ --follow -t f`).then((files) => {
+    files.split(/\s+/).forEach((file) => {
+      Utils.monitorFile(file, setupHyprland);
+    });
+  });
 }
 
 function activeBorder() {
@@ -71,10 +78,10 @@ async function setupHyprland() {
 
   await sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`));
 
-  if (blur.value > 0) {
+  if (blur.value) {
     sendBatch(
       App.windows.flatMap(({ name }) => [
-        `layerrule unset, ${name}`,
+        `layerrule xray off, ${name}`,
         `layerrule blur, ${name}`,
         `layerrule ignorealpha ${/* based on shadow color */ 0.29}, ${name}`,
       ]),
@@ -84,8 +91,8 @@ async function setupHyprland() {
   // HACK: I don't know why this timeout is needed, but gaps are not applied without it on startup
   // I assume Hyprland is not fully initialized/gets reloaded at some point after this function runs
   setTimeout(() => {
-    sendBatch([`workspace w[t1] s[false], gapsout:${singleTiledGaps(wmGaps)}`]);
     sendBatch([
+      `workspace w[t1] s[false], gapsout:${singleTiledGaps(wmGaps)}`,
       `workspace special:dropdown, gapsout:${singleTiledGaps(wmGaps, 8)}`,
     ]);
   }, 500);
