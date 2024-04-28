@@ -15,7 +15,7 @@
   }
 
   & > * > * > box:last-child {
-    background-color: $surface;
+    background-color: transparentize($surface, $widget-transparency);
   }
 }
 

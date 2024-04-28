@@ -1,5 +1,5 @@
 window.settings-dialog {
-  background-color: $surface-container;
+  background-color: transparentize($surface-container, $widget-transparency);
   color: $on-surface;
 
   .header {
@@ -60,7 +60,7 @@ window.settings-dialog {
   }
 
   .row {
-    background-color: $surface-container-high;
+    background-color: transparentize($surface-container-high, $widget-transparency);
     padding: $padding;
     border: $border;
     border-top: none;

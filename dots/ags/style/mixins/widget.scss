@@ -2,6 +2,6 @@
   transition: $transition;
   border-radius: $radius;
   color: $on-surface;
-  background-color: $surface-container-high;
+  background-color: transparentize($surface-container-high, $widget-transparency);
   border: $border;
 }

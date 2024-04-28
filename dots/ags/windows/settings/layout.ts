@@ -24,10 +24,10 @@ export const Layout = [
         title: "Theme",
         rows: [
           Row({ opt: theme.hyprland.shadows, title: "Shadows" }),
-          Row({ opt: theme.widget.opacity, title: "Widget Opacity", max: 100 }),
+          Row({ opt: theme.widget.transparency, title: "Widget Transparency", max: 100 }),
           Row({ opt: theme.border.transparency, title: "Border Transparency", max: 100 }),
           Row({ opt: theme.border.width, title: "Border Width", max: 100 }),
-          Row({ opt: theme.blur, title: "Blur", note: "0 to disable", max: 70 })
+          Row({ opt: theme.blur, title: "Blur", note: "0 to disable", type: "boolean" })
         ],
       }),
       Group({

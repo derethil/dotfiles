@@ -126,12 +126,12 @@ const optionsConfig = mkOptions(OPTIONS, {
       orange: opt("#ff9e3b"),
     },
 
-    blur: opt(0),
+    blur: opt(true),
     scheme: opt<"dark" | "light">("dark"),
-    widget: { opacity: opt(0) },
+    widget: { transparency: opt(20) },
     border: {
       width: opt(2),
-      transparency: opt(0.96),
+      transparency: opt(96),
     },
 
     padding: opt(7),
