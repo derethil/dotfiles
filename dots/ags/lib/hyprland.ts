@@ -35,9 +35,10 @@ function activeBorder() {
   return color.replace("#", "");
 }
 
-function singleTiledGaps(wmGaps: number) {
+function singleTiledGaps(wmGaps: number, scaleParam?: number) {
   const { left, right } = hyprland.singleTiledGaps;
-  return `${wmGaps} ${right.value} ${wmGaps} ${left.value}`;
+  const scale = scaleParam || 1;
+  return `${wmGaps * scale} ${right.value} ${wmGaps * scale} ${left.value}`;
 }
 
 function sendBatch(batch: string[]) {
@@ -83,6 +84,9 @@ async function setupHyprland() {
   // HACK: I don't know why this timeout is needed, but gaps are not applied without it on startup
   // I assume Hyprland is not fully initialized/gets reloaded at some point after this function runs
   setTimeout(() => {
-    sendBatch([`workspace w[t1], gapsout:${singleTiledGaps(wmGaps)}`]);
+    sendBatch([`workspace w[t1] s[false], gapsout:${singleTiledGaps(wmGaps)}`]);
+    sendBatch([
+      `workspace special:dropdown, gapsout:${singleTiledGaps(wmGaps, 8)}`,
+    ]);
   }, 500);
 }
