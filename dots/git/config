@@ -1,0 +1,24 @@
+[user]
+	email = jarenglenn@gmail.com
+	name = Jaren Glenn
+[includeIf "gitdir:~/development/dragonarmy/"]
+	path = ~/development/dragonarmy/.gitconfig
+[init]
+	defaultBranch = main
+[core]
+  pager = delta
+  editor = nvim
+[delta]
+  navigate = true
+  features = line-numbers decorations
+  whitespace-error-style = 22 reverse
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+[interactive]
+	diffFilter = delta --color-only
+[credential]
+	helper = cache --timeout=28800
+[push]
+  autoSetupremote = true

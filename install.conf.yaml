@@ -32,7 +32,10 @@
       force: true
 
     # Config Dirs
-    ~/.config/git/ignore: dots/.global.gitignore
+    ~/.config/lazygit: dots/git/lazygit
+    ~/.config/git:
+      path: dots/git
+      exluce: [lazygit]
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
     ~/.config/direnv/direnvrc: dots/direnvrc

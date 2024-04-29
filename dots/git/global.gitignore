@@ -1,0 +1,6 @@
+#!/ignore
+
+.venv
+.tool-versions
+.envrc
+.local/
