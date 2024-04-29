@@ -11,3 +11,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "BufNewFile" }, {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = vim.fn.expand("~/.dotfiles/dots/git/config"),
+  callback = function()
+    vim.bo.filetype = "gitconfig"
+  end,
+})
