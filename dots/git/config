@@ -22,3 +22,5 @@
 	helper = cache --timeout=28800
 [push]
   autoSetupremote = true
+[merge]
+  ff = false
