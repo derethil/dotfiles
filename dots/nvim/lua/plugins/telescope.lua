@@ -4,6 +4,7 @@ return {
     "nvim-telescope/telescope.nvim",
     keys = {
       { "<leader>fb", "<cmd>Telescope builtin<cr>", desc = "Find Telescope builtins" },
+      { "<leader>fy", "<cmd>Telescope filetypes<cr>", desc = "Select filetype" },
       {
         "<leader>/",
         function()
