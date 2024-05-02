@@ -15,6 +15,7 @@
     - fzf
     - foot
     - git-delta
+    - glow
     - gnome-keyring
     - inotify-tools
     - jq
