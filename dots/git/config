@@ -8,6 +8,7 @@
 [core]
   pager = delta
   editor = nvim
+  excludesFile = ~/.config/git/global.gitignore
 [delta]
   navigate = true
   features = line-numbers decorations

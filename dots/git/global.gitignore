@@ -4,3 +4,4 @@
 .tool-versions
 .envrc
 .local/
+*.local.*

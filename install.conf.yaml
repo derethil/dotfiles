@@ -2,6 +2,7 @@
     link:
       relink: true
       create: true
+      exclude: *.local.*
 
 - clean:
     - "~"
@@ -35,7 +36,7 @@
     ~/.config/lazygit: dots/git/lazygit
     ~/.config/git:
       path: dots/git
-      exluce: [lazygit]
+      exclude: [lazygit]
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
     ~/.config/direnv/direnvrc: dots/direnvrc
