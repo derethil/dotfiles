@@ -10,17 +10,21 @@ export function range(length: number, start = 1) {
 }
 
 /** Check if the given commands are installed */
-export function dependencies(bins: string | string[]) {
-  if (!Array.isArray(bins)) bins = [bins];
+export function dependencies(...bins: string[]): boolean {
+  const missing = bins.filter((bin) =>
+    Utils.exec({
+      cmd: `which ${bin}`,
+      out: () => false,
+      err: () => true,
+    })
+  );
 
-  const deps = bins.map((bin) => {
-    const has = Utils.exec(`which ${bin}`);
-    if (!has) print(`missing dependency: ${bin}`);
+  if (missing.length > 0) {
+    console.warn(Error(`missing dependencies: ${missing.join(", ")}`));
+    Utils.notify(`missing dependencies: ${missing.join(", ")}`);
+  }
 
-    return !!has;
-  });
-
-  return deps.every((has) => has);
+  return missing.length === 0;
 }
 
 /** Waits given ms to execute callback */
@@ -28,16 +32,18 @@ export function wait<T>(ms: number, callback: () => T): Promise<T> {
   return new Promise((resolve) =>
     Utils.timeout(ms, () => {
       resolve(callback());
-    }),
+    })
   );
 }
 
 /** Executes bash command(s) */
-export async function bash(strings: TemplateStringsArray | string, ...values: unknown[]) {
-  const cmd =
-    typeof strings === "string"
-      ? strings
-      : strings.flatMap((str, i) => str + `${values[i] ?? ""}`).join("");
+export async function bash(
+  strings: TemplateStringsArray | string,
+  ...values: unknown[]
+) {
+  const cmd = typeof strings === "string"
+    ? strings
+    : strings.flatMap((str, i) => str + `${values[i] ?? ""}`).join("");
 
   return Utils.execAsync(["bash", "-c", cmd]).catch((err) => {
     console.error(cmd, err);
@@ -54,7 +60,9 @@ export async function sh(cmd: string | string[]) {
 }
 
 /** Creates the given widget on all monitors. */
-export function forMonitors(widget: (monitor: number) => any): Window<any, any>[] {
+export function forMonitors(
+  widget: (monitor: number) => any,
+): Window<any, any>[] {
   const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
   return range(n, 0).map(widget).flat(1);
 }
@@ -105,7 +113,11 @@ export function toTitleCase(input: string): string {
 export function createSurfaceFromWidget(widget: Gtk.Widget) {
   const cairo = imports.gi.cairo as any;
   const alloc = widget.get_allocation();
-  const surface = new cairo.ImageSurface(cairo.Format.ARGB32, alloc.width, alloc.height);
+  const surface = new cairo.ImageSurface(
+    cairo.Format.ARGB32,
+    alloc.width,
+    alloc.height,
+  );
   const cr = new cairo.Context(surface);
   cr.setSourceRGBA(255, 255, 255, 0);
   cr.rectangle(0, 0, alloc.width, alloc.height);

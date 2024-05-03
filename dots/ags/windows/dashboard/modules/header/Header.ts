@@ -6,7 +6,7 @@ const UserInfo = () =>
     hpack: "start",
     class_name: "user-info",
     children: [
-      Widget.Label(Utils.USER),
+      Widget.Label({ label: options.user.bind() }),
       Widget.Label({ label: "@", class_name: "separator" }),
       Widget.Label(GLib.get_host_name()),
     ],

@@ -81,7 +81,7 @@ const variables = () => [
 ];
 
 async function resetCss() {
-  if (!dependencies(["sass", "fd"])) return;
+  if (!dependencies("sass", "fd")) return;
 
   try {
     const vars = `${TMP}/variables.scss`;

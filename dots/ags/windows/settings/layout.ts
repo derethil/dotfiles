@@ -232,7 +232,8 @@ export const Layout = [
       Group({
         title: "",
         rows: [
-          Row({ opt: options.mode, title: "Form Factor", type: "enum", enums: ["laptop", "desktop"] })
+          Row({ opt: options.mode, title: "Form Factor", type: "enum", enums: ["laptop", "desktop"] }),
+          Row({ opt: options.user, title: "User String", type: "enum", enums: ["derethil", Utils.USER] })
         ]
       }),
       Group({

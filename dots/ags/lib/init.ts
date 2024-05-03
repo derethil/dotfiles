@@ -4,6 +4,7 @@ import { batteryMonitor } from "./battery";
 import { notificationsMiddleware } from "./notifications";
 import { hyprlandOptions } from "./hyprland";
 import { globalServices } from "./globals";
+import { userListener } from "./user.local";
 
 export async function init() {
   try {
@@ -13,6 +14,7 @@ export async function init() {
     batteryMonitor();
     notificationsMiddleware();
     hyprlandOptions();
+    userListener();
   } catch (error) {
     logError(error);
   }

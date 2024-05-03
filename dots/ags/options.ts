@@ -6,6 +6,7 @@ import { Market, Resolution } from "services/wallpaper";
 const optionsConfig = mkOptions(OPTIONS, {
   mode: opt<"desktop" | "laptop">("desktop"),
   autotheme: opt(true),
+  user: opt(Utils.USER),
 
   wallpaperOpts: {
     resolution: opt<Resolution>(3840),

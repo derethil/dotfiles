@@ -8,7 +8,7 @@ const v = {
 
 function mismatch() {
   print(
-    `config expects ags v${v.expect.join(".")}, found v${v.ags.join(".")}`
+    `config expects at least ags v${v.expect.join(".")}, found v${v.ags.join(".")}`
   );
   App.connect("config-parsed", (app) => app.Quit());
   return {};
