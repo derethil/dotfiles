@@ -2,7 +2,7 @@
     link:
       relink: true
       create: true
-      exclude: *.local.*
+      exclude: ".*local.*"
 
 - clean:
     - "~"
