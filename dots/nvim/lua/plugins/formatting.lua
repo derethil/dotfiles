@@ -23,7 +23,7 @@ return {
         ["graphql"] = { "prettierd" },
         ["handlebars"] = { "prettierd" },
         -- Other Custom Formatters
-        ["*"] = { "codespell" },
+        -- ["*"] = { "codespell" },
       },
     },
   },
@@ -33,7 +33,7 @@ return {
       ensure_installed = {
         "biome",
         "deno",
-        "codespell",
+        -- "codespell",
         "prettierd",
       },
     },

@@ -19,6 +19,10 @@ if vim.g.neovide then
   scalemap("<C-0>", "1", "Reset Zoom")
 end
 
+-- General Keymaps
+vim.keymap.set("n", "<leader>a", "ggVG", { desc = "Select All" })
+vim.keymap.set("v", "<leader>a", "VggVG", { desc = "Select All " })
+
 -- Plugin Keymaps
 vim.keymap.set(
   "n",
@@ -26,8 +30,3 @@ vim.keymap.set(
   ":lua require('mini.hipatterns').toggle()<CR>",
   { desc = "Toggle Highlight Patterns", silent = true }
 )
-
-vim.keymap.set("n", "<leader>uL", "nop")
-vim.keymap.set("n", "<leader>ul", function()
-  LazyVim.toggle("relativenumber")
-end, { desc = "Toggle Relative Line Numbers", silent = true })

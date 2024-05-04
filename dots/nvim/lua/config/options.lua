@@ -22,3 +22,6 @@ if vim.g.neovide then
 
   vim.g.neovide_cursor_trail_size = 0.4
 end
+
+vim.opt.swapfile = false
+vim.opt.exrc = true

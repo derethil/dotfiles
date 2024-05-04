@@ -4,14 +4,14 @@ return {
     ---@class PluginLspOpts
     opts = {
       ---@class lspconfig.options
-      servers = {
-        glsl_analyzer = {},
-      },
-      setup = {
-        glsl_analyzer = function()
-          require("lspconfig.glsl_analyzer").setup()
-        end,
-      },
+      -- servers = {
+      --   glsl_analyzer = {},
+      -- },
+      -- setup = {
+      --   glsl_analyzer = function()
+      --     require("lspconfig.glsl_analyzer").setup()
+      --   end,
+      -- },
     },
   },
 }
