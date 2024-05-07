@@ -25,3 +25,4 @@ end
 
 vim.opt.swapfile = false
 vim.opt.exrc = true
+vim.opt.shell = "/usr/bin/fish"

@@ -12,8 +12,9 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- Coding Extras
     { import = "lazyvim.plugins.extras.coding.copilot" },
+    -- Debug Adapter Protocol Extras
+    { import = "lazyvim.plugins.extras.dap.core" },
     -- Editor Extras
-    -- { import = "lazyvim.plugins.extras.editor.leap" },
     { import = "lazyvim.plugins.extras.editor.mini-move" },
     -- Lang Extras
     { import = "lazyvim.plugins.extras.lang.python" },
@@ -22,6 +23,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.docker" },
+    -- Linting Extras
+    { import = "lazyvim.plugins.extras.linting.eslint" },
     -- Util Extras
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "lazyvim.plugins.extras.util.dot" },
