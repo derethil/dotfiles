@@ -8,13 +8,13 @@
     - brightnessctl
     - cliphist
     - dart-sass
+    - diff-so-fancy
     - direnv
     - eza
     - fd
     - fish
     - fzf
     - foot
-    - git-delta
     - glow
     - gnome-keyring
     - inotify-tools

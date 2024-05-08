@@ -6,19 +6,26 @@
 [init]
 	defaultBranch = main
 [core]
-  pager = delta
+  pager = diff-so-fancy | less --tabs=4 -RFX
   editor = nvim
   excludesFile = ~/.config/git/global.gitignore
-[delta]
-  navigate = true
-  features = line-numbers decorations
-  whitespace-error-style = 22 reverse
-[delta "decorations"]
-	commit-decoration-style = bold yellow box ul
-	file-style = bold yellow ul
-	file-decoration-style = none
+[color]
+  ui = true
+[color "diff-highlight"]
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+	oldNormal = red bold
+[color "diff"]
+  meta = 11
+  frag = magenta bold
+  func = 146 bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = diff-so-fancy --patch
 [credential]
 	helper = cache --timeout=28800
 [push]
