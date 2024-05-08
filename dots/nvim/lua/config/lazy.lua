@@ -31,6 +31,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.util.project" },
     -- LazyVim Plugins
     { import = "plugins" },
+    -- LazyRc
+    { import = "lazyvim.plugins.extras.lazyrc" },
   },
   defaults = {
     lazy = false,
