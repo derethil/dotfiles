@@ -25,3 +25,5 @@
   autoSetupremote = true
 [merge]
   ff = false
+[pull]
+  ff = only
