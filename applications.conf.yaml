@@ -26,7 +26,6 @@
     - trash-cli
     - unrar
     - unzip
-    - xorg-xwayland-explicit-sync-git # Temporary until this gets merged into the official repos
     - zip
     # GUI Applications
     - discord
