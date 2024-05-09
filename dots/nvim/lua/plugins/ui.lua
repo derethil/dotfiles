@@ -1,4 +1,21 @@
 return {
+  -- Remove Intrusive Cmdline and Notifications
+  {
+    "folke/noice.nvim",
+    enabled = false,
+  },
+  {
+    "rcarriga/nvim-notify",
+    enabled = false,
+  },
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      notification = {
+        override_vim_notify = true,
+      },
+    },
+  },
   {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
@@ -10,8 +27,8 @@ return {
       delay = 0,
     },
     keys = {
-      { "<leader>gB", "<cmd>GitBlameToggle<CR>", desc = "Toggle Git Blame" },
-      { "<leader>gC", "<cmd>GitBlameOpenCommitURL<CR>", desc = "Open Blamed Commit URL" },
+      { "<leader>uB", "<cmd>GitBlameToggle<CR>", desc = "Toggle Git Blame" },
+      { "<leader>gc", "<cmd>GitBlameOpenCommitURL<CR>", desc = "Open Blamed Commit URL" },
     },
   },
   {
@@ -22,12 +39,14 @@ return {
 
       -- Remove Branch from B Section
       table.remove(opts.sections.lualine_b, 1)
+
       -- Pretty Filename (Not Full Path)
       table.remove(opts.sections.lualine_c, 4)
       table.insert(opts.sections.lualine_c, 4, {
         require("util.lualine").pretty_filename(),
       })
-      -- Git Blame
+
+      -- Git Blame to C Section
       local git_blame = require("gitblame")
       table.insert(opts.sections.lualine_c, 5, {
         git_blame.get_current_blame_text,
@@ -40,8 +59,24 @@ return {
           return blame
         end,
       })
-      -- Change Default Clock Format
+      -- Remove Trouble v3 from C Section
+      table.remove(opts.sections.lualine_c, 6)
+
+      -- Add Branch to Z Section
       opts.sections.lualine_z = { "branch" }
+    end,
+  },
+  {
+    "Bekaboo/dropbar.nvim",
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+    },
+    opts = {
+      enabled = true,
+    },
+    init = function()
+      vim.opt.winbar = nil
+      vim.keymap.set("n", "<leader>ls", require("dropbar.api").pick, { desc = "Select Dropdown Menu" })
     end,
   },
 }

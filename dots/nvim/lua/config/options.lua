@@ -26,3 +26,5 @@ end
 vim.opt.swapfile = false
 vim.opt.exrc = true
 vim.opt.shell = "/usr/bin/fish"
+
+vim.opt.mousemoveevent = true

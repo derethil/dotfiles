@@ -82,8 +82,8 @@ return {
       vim.keymap.set("n", "<leader>e", function()
         local file_browser = require("telescope").extensions.file_browser
         file_browser.file_browser({
-          path = vim.uv.cwd(),
-          select_buffer = true,
+          path = "%:p:h",
+          current_buffer = true,
         })
       end, { desc = "File Browser (cwd)" })
 
