@@ -1,5 +1,8 @@
 add_newline = false
 
+[aws]
+disabled = true
+
 [character]
 format="[╰─](bold blue)$symbol "
 success_symbol = "[λ](bold blue)"
@@ -9,14 +12,14 @@ vimcmd_visual_symbol = "[Λ](bold yellow)"
 vimcmd_replace_symbol = "[Λ](bold purple)"
 vimcmd_replace_one_symbol = "[Λ](bold purple)"
 
+[cmd_duration]
+min_time = 1_000
+
 [directory]
 format = "[╭─$path]($style) [$read_only]($read_only_style)"
 style = "bold blue"
 read_only = " "
 read_only_style = "blue"
-
-[cmd_duration]
-min_time = 1_000
 
 [fill]
 symbol = " "
