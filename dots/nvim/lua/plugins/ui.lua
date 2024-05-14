@@ -27,7 +27,7 @@ return {
       delay = 0,
     },
     keys = {
-      { "<leader>uB", "<cmd>GitBlameToggle<CR>", desc = "Toggle Git Blame" },
+      { "<leader>uB", "<cmd>GitBlameToggle<CR>",        desc = "Toggle Git Blame" },
       { "<leader>gc", "<cmd>GitBlameOpenCommitURL<CR>", desc = "Open Blamed Commit URL" },
     },
   },
@@ -78,5 +78,9 @@ return {
       vim.opt.winbar = nil
       vim.keymap.set("n", "<leader>ls", require("dropbar.api").pick, { desc = "Select Dropdown Menu" })
     end,
+  },
+  -- Help with the 20/20/20 rule
+  {
+    "wildfunctions/myeyeshurt", opts = {}
   },
 }

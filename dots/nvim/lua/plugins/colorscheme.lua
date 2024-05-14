@@ -2,7 +2,6 @@ return {
   -- Install Colorschemes
   {
     "rebelot/kanagawa.nvim",
-    lazy = false,
     opts = {
       colors = {
         theme = {
@@ -14,20 +13,24 @@ return {
     },
   },
   {
+    'folke/tokyonight.nvim',
+    lazy = false,
+  },
+  {
     "catppuccin/nvim",
-    lazy = true,
+    name = "catppuccin",
     opts = {
       integrations = {
-        aerial = true,
-        alpha = true,
+        aerial = false,
         cmp = true,
+        dap = true,
+        dap_ui = true,
         dashboard = true,
         flash = true,
         gitsigns = true,
         headlines = true,
         illuminate = true,
         indent_blankline = { enabled = true },
-        leap = true,
         lsp_trouble = true,
         mason = true,
         markdown = true,
@@ -41,11 +44,7 @@ return {
             information = { "undercurl" },
           },
         },
-        navic = { enabled = true, custom_bg = "lualine" },
         neotest = true,
-        neotree = true,
-        noice = true,
-        notify = true,
         semantic_tokens = true,
         telescope = true,
         treesitter = true,
@@ -57,6 +56,6 @@ return {
   -- Default Colorscheme
   {
     "LazyVim/LazyVim",
-    opts = { colorscheme = { "kanagawa" } },
+    opts = { colorscheme = { "catppuccin" } },
   },
 }

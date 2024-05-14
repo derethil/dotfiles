@@ -11,7 +11,7 @@ return {
   {
     "akinsho/git-conflict.nvim",
     version = "*",
-    lazy = false,
+    event = "VeryLazy",
     config = function(_, opts)
       require("git-conflict").setup(opts)
     end,
@@ -20,13 +20,28 @@ return {
       default_commands = true,
     },
     keys = {
-      { "<leader>mo", "<cmd>GitConflictCHooseOurs<CR>", "Git Conflict: Choose Ours" },
+      { "<leader>mo", "<cmd>GitConflictCHooseOurs<CR>",   "Git Conflict: Choose Ours" },
       { "<leader>mt", "<cmd>GitConflictChooseTheirs<CR>", "Git Conflict: Choose Theirs" },
-      { "<leader>mb", "<cmd>GitConflictChooseBoth<CR>", "Git Conflict: Choose Both" },
-      { "<leader>m0", "<cmd>GitConflictChooseNone<CR>", "Git Conflict: Choose None" },
-      { "[m", "<cmd>GitConflictPrevConflict<CR>", "Go to Previous Conflict" },
-      { "]m", "<cmd>GitConflictNextConflict<CR>", "Go to Next Conflict" },
-      { "<leader>xm", "<cmd>GitConflictListQf<CR>", "Git Conflicts List" },
+      { "<leader>mb", "<cmd>GitConflictChooseBoth<CR>",   "Git Conflict: Choose Both" },
+      { "<leader>m0", "<cmd>GitConflictChooseNone<CR>",   "Git Conflict: Choose None" },
+      { "[m",         "<cmd>GitConflictPrevConflict<CR>", "Go to Previous Conflict" },
+      { "]m",         "<cmd>GitConflictNextConflict<CR>", "Go to Next Conflict" },
+      { "<leader>xm", "<cmd>GitConflictListQf<CR>",       "Git Conflicts List" },
     },
   },
+  {
+    "tris203/precognition.nvim",
+    lazy = true,
+    event = { 'LazyFile', 'VeryLazy' },
+    opts = {
+      startVisible = true,
+      showBlankVirtLine = false,
+    },
+    config = function(_, opts)
+      require("precognition").setup(opts)
+    end,
+    keys = {
+      { "<leader>uk", function() require("precognition").toggle() end, desc = "Toggle Precognition Hints" }
+    }
+  }
 }
