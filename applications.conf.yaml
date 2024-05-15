@@ -6,10 +6,10 @@
     # CLI Applications
     - arch-update
     - bottom
-    - broot
     - cloc
     - docker
     - docker-compose
+    - docker-credential-secretservice-bin
     - downgrade
     - duf
     - gamemode
@@ -17,7 +17,6 @@
     - lf
     - mangohud
     - ncdu
-    - neofetch
     - plocate
     - proton-ge-custom-bin
     - rye
