@@ -36,7 +36,7 @@ export function Setter<T>({
   opt,
   type = typeof opt.value as RowProps<T>["type"],
   enums,
-  max = 1000,
+  max = 999999,
   min = 0,
 }: RowProps<T>) {
   switch (type) {

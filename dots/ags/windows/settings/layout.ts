@@ -251,6 +251,13 @@ export const Layout = [
             Row({ opt: options.osd.progress.pack.h, title: "Horizontal Alignment", type: "enum", enums: ["start", "center", "end"] }),
             Row({ opt: options.osd.progress.pack.v, title: "Vertical Alignment", type: "enum", enums: ["start", "center", "end"] }),
         ]
+      }),
+      Group({
+        title: "Eye Nudge",
+        rows: [
+          Row({ opt: options.eyenudge.interval, title: "Nudge Interval" }),
+          Row({ opt: options.eyenudge.duration, title: "Nudge Duration" }),
+        ]
       })
     ]
   })
