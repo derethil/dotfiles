@@ -21,6 +21,14 @@ return {
         end,
         desc = "Grep (buffer)",
       },
+      {
+        "<leader>fv",
+        function()
+          require("util.telescope").grep_ags_style_variables(require("telescope.themes").get_dropdown())
+        end,
+        desc = "Find AGS Style Variables"
+
+      }
     },
     opts = {
       pickers = {

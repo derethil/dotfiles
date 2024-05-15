@@ -34,7 +34,7 @@ return {
     lazy = true,
     event = { 'LazyFile', 'VeryLazy' },
     opts = {
-      startVisible = true,
+      startVisible = false,
       showBlankVirtLine = false,
     },
     config = function(_, opts)
