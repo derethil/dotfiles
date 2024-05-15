@@ -11,91 +11,109 @@ type PopupWindowProps = Omit<WindowProps, "name"> & {
   name: string;
   layout?: keyof ReturnType<typeof Layout>;
   transition?: Transition;
+  locked?: boolean;
 };
 
-export const Padding = (
-  name: string,
-  { css = "", hexpand = true, vexpand = true }: EventBoxProps = {}
-) =>
+interface PaddingProps {
+  name: string;
+  locked?: boolean;
+  css?: EventBoxProps["css"];
+  hexpand?: EventBoxProps["hexpand"];
+  vexpand?: EventBoxProps["vexpand"];
+}
+
+export const Padding = (props: PaddingProps) =>
   Widget.EventBox({
-    hexpand,
-    vexpand,
+    hexpand: props.hexpand ?? true,
+    vexpand: props.vexpand ?? true,
     can_focus: false,
-    child: Widget.Box({ css }),
-    setup: (w) => w.on("button-press-event", () => App.toggleWindow(name)),
+    child: Widget.Box({ css: props.css ?? "" }),
+    setup: (w) => {
+      if (props.locked) return;
+      w.on("button-press-event", () => App.toggleWindow(props.name));
+    },
   });
 
-const PopupRevealer = (
-  name: string,
-  child: Child,
-  transition: Transition = "slide_down"
-) =>
+interface PopupRevealerProps {
+  name: string;
+  child: Child;
+  transition?: Transition;
+}
+
+const PopupRevealer = (props: PopupRevealerProps) =>
   Widget.Box(
     { css: "padding: 1px;" },
     Widget.Revealer({
-      transition,
+      transition: props.transition ?? "slide_down",
       child: Widget.Box({
         class_name: "window-content",
-        child,
+        child: props.child,
       }),
       transitionDuration: options.transition.bind(),
       setup: (self) =>
         self.hook(App, (_, wname, visible) => {
-          if (wname === name) self.reveal_child = visible;
+          if (wname === props.name) self.reveal_child = visible;
         }),
-    })
+    }),
   );
 
-const Layout = (name: string, child: Child, transition?: Transition) => ({
+interface LayoutProps {
+  name: string;
+  child: Child;
+  locked?: boolean;
+  transition?: Transition;
+}
+
+const Layout = (props: LayoutProps) => ({
   center: () =>
     Widget.CenterBox(
       {},
-      Padding(name),
+      Padding(props),
       Widget.CenterBox(
         { vertical: true },
-        Padding(name),
-        PopupRevealer(name, child, transition),
-        Padding(name)
+        Padding(props),
+        PopupRevealer(props),
+        Padding(props),
       ),
-      Padding(name)
+      Padding(props),
     ),
   top: () =>
     Widget.CenterBox(
       {},
-      Padding(name),
+      Padding(props),
       Widget.Box(
         { vertical: true },
-        PopupRevealer(name, child, transition),
-        Padding(name)
+        PopupRevealer(props),
+        Padding(props),
       ),
-      Padding(name)
+      Padding(props),
     ),
   "top-right": () =>
     Widget.Box(
       {},
-      Padding(name),
+      Padding(props),
       Widget.Box(
         {
           hexpand: false,
           vertical: true,
         },
-        PopupRevealer(name, child, transition),
-        Padding(name)
-      )
+        PopupRevealer(props),
+        Padding(props),
+      ),
     ),
   "top-center": () =>
     Widget.Box(
       {},
-      Padding(name),
+      Padding(props),
       Widget.Box(
         {
           hexpand: false,
           vertical: true,
         },
-        PopupRevealer(name, child, transition),
-        Padding(name)
+        PopupRevealer(props),
+        Padding(props),
       ),
-      Padding(name)
+      Padding(props),
     ),
   "top-left": () =>
     Widget.Box(
@@ -105,10 +123,10 @@ const Layout = (name: string, child: Child, transition?: Transition) => ({
           hexpand: false,
           vertical: true,
         },
-        PopupRevealer(name, child, transition),
-        Padding(name)
+        PopupRevealer(props),
+        Padding(props),
       ),
-      Padding(name)
+      Padding(props),
     ),
   "bottom-left": () =>
     Widget.Box(
@@ -118,37 +136,37 @@ const Layout = (name: string, child: Child, transition?: Transition) => ({
           hexpand: false,
           vertical: true,
         },
-        Padding(name),
-        PopupRevealer(name, child, transition)
+        Padding(props),
+        PopupRevealer(props),
       ),
-      Padding(name)
+      Padding(props),
     ),
   "bottom-center": () =>
     Widget.Box(
       {},
-      Padding(name),
+      Padding(props),
       Widget.Box(
         {
           hexpand: false,
           vertical: true,
         },
-        Padding(name),
-        PopupRevealer(name, child, transition)
+        Padding(props),
+        PopupRevealer(props),
       ),
-      Padding(name)
+      Padding(props),
     ),
   "bottom-right": () =>
     Widget.Box(
       {},
-      Padding(name),
+      Padding(props),
       Widget.Box(
         {
           hexpand: false,
           vertical: true,
         },
-        Padding(name),
-        PopupRevealer(name, child, transition)
-      )
+        Padding(props),
+        PopupRevealer(props),
+      ),
     ),
 });
 
@@ -158,6 +176,7 @@ export function PopupWindow({
   layout = "center",
   transition,
   exclusivity = "ignore",
+  locked,
   ...props
 }: PopupWindowProps) {
   return Widget.Window<Gtk.Widget>({
@@ -169,7 +188,7 @@ export function PopupWindow({
     exclusivity,
     layer: "top",
     anchor: ["top", "bottom", "right", "left"],
-    child: Layout(name, child, transition)[layout](),
+    child: Layout({ name, child, transition, locked })[layout](),
     ...props,
   });
 }
