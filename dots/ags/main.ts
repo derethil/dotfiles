@@ -6,6 +6,7 @@ import { Bar } from "./windows/bar/Bar";
 import { Dashboard } from "./windows/dashboard/Dashboard";
 import { OnScreenDisplay } from "./windows/osd/OnScreenDisplay";
 import { Settings } from "windows/settings/Settings";
+import { EyeNudge } from "windows/eyenudge/EyeNudge";
 
 App.config({
   onConfigParsed: () => {
@@ -13,10 +14,12 @@ App.config({
   },
   closeWindowDelay: {
     dashboard: options.transition.value,
+    eyenudge: options.transition.value,
   },
   windows: [
     ...forMonitors(Bar),
     ...forMonitors(OnScreenDisplay),
+    EyeNudge(),
     Dashboard(),
     Settings(),
   ],

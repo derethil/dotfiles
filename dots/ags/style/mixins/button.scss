@@ -6,8 +6,8 @@
 
 @mixin button-hover() {
   box-shadow: inset 0 0 0 $border-width $border-color;
-  background-color: $primary-container;
-  color: $on-primary-container;
+  background-color: $primary;
+  color: $on-primary;
 }
 
 @mixin button-active() {

@@ -182,7 +182,7 @@ export function PopupWindow({
   return Widget.Window<Gtk.Widget>({
     name,
     class_names: [name, "popup-window"],
-    setup: (w) => w.keybind("Escape", () => App.closeWindow(name)),
+    setup: (w) => !locked && w.keybind("Escape", () => App.closeWindow(name)),
     visible: false,
     keymode: "on-demand",
     exclusivity,

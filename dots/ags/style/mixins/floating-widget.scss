@@ -5,7 +5,7 @@
 
   margin: max($spacing, 0px);
   border: $border;
-  background-color: transparentize($surface, $widget-transparency);
+  background-color: transparentize($surface-container, $widget-transparency);
   color: $on-surface;
   border-radius: $radius;
   padding: calc($padding / 2);

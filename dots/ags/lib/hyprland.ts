@@ -1,5 +1,5 @@
 import { options } from "options";
-import { bash, sh } from "./utils";
+import { bash } from "./utils";
 const { messageAsync } = await Service.import("hyprland");
 
 const {

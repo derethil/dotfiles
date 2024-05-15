@@ -128,6 +128,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     },
 
     blur: opt(true),
+
     scheme: opt<"dark" | "light">("dark"),
     widget: { transparency: opt(20) },
     border: {
@@ -233,6 +234,11 @@ const optionsConfig = mkOptions(OPTIONS, {
       ]),
       static: opt(["~/.dotfiles/"]),
     },
+  },
+
+  eyenudge: {
+    interval: opt(1200),
+    duration: opt(20),
   },
 
   notifications: {
