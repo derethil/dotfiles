@@ -125,3 +125,8 @@ export function createSurfaceFromWidget(widget: Gtk.Widget) {
   widget.draw(cr);
   return surface;
 }
+
+export function playNotificationBell() {
+  const path = `${App.configDir}/assets/notification.wav`;
+  bash(`pw-cat --playback ${path} --media-role notification`);
+}

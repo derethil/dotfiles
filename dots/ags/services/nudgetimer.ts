@@ -1,4 +1,5 @@
 import GLib from "gi://GLib";
+import { playNotificationBell } from "lib/utils";
 
 export type NudgeState = "waiting" | "running" | "paused" | "pending";
 
@@ -93,6 +94,7 @@ class NudgeTimerClass extends Service {
         break;
       case "running":
         this.waitForNudge();
+        playNotificationBell();
         break;
     }
   }

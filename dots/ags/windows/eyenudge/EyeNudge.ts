@@ -48,7 +48,7 @@ const Actions = (nudgeState: NudgeState) => {
     ...statefulActions[nudgeState] ?? [],
     Widget.Button({
       label: "Snooze",
-      onPrimaryClick: () => snooze(5),
+      onPrimaryClick: () => snooze(300),
     }),
     Widget.Button({
       label: "Skip",
