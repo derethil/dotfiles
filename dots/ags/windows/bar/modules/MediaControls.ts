@@ -26,9 +26,9 @@ export function MediaControls() {
     transition: "slide_down",
     className: "mpris",
     child: IconModule({
-      icon: FontIcon({
-        label: icons.mediaControls,
-        className: "mpris-label-icon",
+      icon: Widget.Icon({
+        size: 20,
+        icon: icons.mediaControls,
       }),
       labelColor: "green",
       child: Widget.Box({

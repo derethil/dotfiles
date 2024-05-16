@@ -46,11 +46,14 @@ export const BatteryModule = () =>
         Battery.charging ? "fully charged" : "empty"
       }`;
     }),
-    className: "clock",
+    className: "battery",
     child: Widget.Label({
       label: Battery.bind("percent").transform((p) => p.toString()),
     }),
-    icon: FontIcon({ label: icons.battery.none }).hook(Battery, (self) => {
-      self.label = batteryIcon(Battery);
+    icon: Widget.Icon({
+      icon: icons.battery.none,
+      size: 18,
+    }).hook(Battery, (self) => {
+      self.icon = batteryIcon(Battery);
     }),
   });

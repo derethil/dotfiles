@@ -23,7 +23,7 @@ export const icons = {
     screenshot: "",
   },
 
-  mediaControls: "",
+  mediaControls: "music-symbolic",
 
   audio: {
     mic: {
@@ -77,19 +77,19 @@ export const icons = {
 
   battery: {
     warning: "dialog-warning-symbolic",
-    none: "󱉝",
-    charging: "󰂄",
-    chargingFull: "󱟢",
-    100: "󰁹",
-    90: "󰂂",
-    80: "󰂁",
-    70: "󰂀",
-    60: "󰁿",
-    50: "󰁾",
-    40: "󰁽",
-    30: "󰁼",
-    20: "󰁻",
-    10: "󰂃",
+    none: "battery-not-found-symbolic",
+    charging: "battery-charging-symbolic",
+    chargingFull: "battery-charging-full-symbolic",
+    100: "battery-100-symbolic",
+    90: "battery-90-symbolic",
+    80: "battery-80-symbolic",
+    70: "battery-70-symbolic",
+    60: "battery-60-symbolic",
+    50: "battery-50-symbolic",
+    40: "battery-40-symbolic",
+    30: "battery-30-symbolic",
+    20: "battery-20-symbolic",
+    10: "battery-critical-symbolic",
   },
 
   ui: {
