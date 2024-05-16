@@ -14,7 +14,6 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    lazy = false,
   },
   {
     "catppuccin/nvim",
@@ -56,6 +55,6 @@ return {
   -- Default Colorscheme
   {
     "LazyVim/LazyVim",
-    opts = { colorscheme = { "catppuccin" } },
+    opts = { colorscheme = { "kanagawa" } },
   },
 }
