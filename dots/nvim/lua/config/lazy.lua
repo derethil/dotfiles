@@ -27,7 +27,6 @@ require("lazy").setup({
     -- Linting Extras
     { import = "lazyvim.plugins.extras.linting.eslint" },
     -- Util Extras
-    { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
     { import = "lazyvim.plugins.extras.util.dot" },
     { import = "lazyvim.plugins.extras.util.project" },
     -- LazyVim Plugins
