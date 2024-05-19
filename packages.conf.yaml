@@ -29,6 +29,7 @@
     - slurp
     - socat
     - starship
+    - tmux
     - wl-clipboard
     - wofi
     - wtype
