@@ -26,11 +26,7 @@ end
 
 vim.opt.swapfile = false
 vim.opt.exrc = true
-vim.opt.shell = "/usr/bin/fish"
+vim.opt.shell = "/bin/bash"
 vim.opt.cursorline = false
 
 vim.opt.mousemoveevent = true
-
--- LSP
--- vim.g.lazyvim_python_lsp = "pyright"
--- vim.g.lazyvim_python_ruff = "ruff_lsp"
