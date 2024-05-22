@@ -27,4 +27,13 @@
     }
   }
 
+  .footer {
+    padding-bottom: $spacing;
+    button {
+      @include button($flat: true);
+      color: $outline;
+      padding: $padding;
+      font-size: 10pt;
+    }
+  }
 }

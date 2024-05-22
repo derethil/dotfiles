@@ -2,6 +2,20 @@ import { PopupWindow } from "windows/PopupWindow";
 import { type NudgeState, NudgeTimer } from "services/nudgetimer";
 import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
 
+const snooze = (until?: number) => {
+  App.toggleWindow("eyenudge");
+  NudgeTimer.waitForNudge(until);
+};
+
+const disableForToday = () => {
+  const now = new Date();
+  const reenableAt = new Date(now);
+  reenableAt.setDate(now.getDate() + 1);
+  reenableAt.setHours(8);
+  const disableDuration = reenableAt.getTime() - now.getTime();
+  snooze(disableDuration);
+};
+
 const NudgeRemaining = () => {
   return Widget.Label({
     vexpand: true,
@@ -15,31 +29,23 @@ const NudgeRemaining = () => {
 };
 
 const Actions = (nudgeState: NudgeState) => {
-  const start = () => NudgeTimer.startNudge();
-  const pause = () => NudgeTimer.pauseNudge();
-
-  const snooze = (until?: number) => {
-    App.toggleWindow("eyenudge");
-    NudgeTimer.waitForNudge(until);
-  };
-
   const statefulActions: Partial<Record<NudgeState, Gtk.Widget[]>> = {
     pending: [
       Widget.Button({
         label: "Start",
-        onPrimaryClick: start,
+        onPrimaryClick: () => NudgeTimer.startNudge(),
       }),
     ],
     paused: [
       Widget.Button({
         label: "Resume",
-        onPrimaryClick: start,
+        onPrimaryClick: () => NudgeTimer.startNudge(),
       }),
     ],
     running: [
       Widget.Button({
         label: "Pause",
-        onPrimaryClick: pause,
+        onPrimaryClick: () => NudgeTimer.pauseNudge(),
       }),
     ],
   };
@@ -87,6 +93,15 @@ const Content = () => {
         hexpand: true,
         hpack: "center",
         children: NudgeTimer.bind("nudge_state").as(Actions),
+      }),
+      Widget.Box({
+        className: "footer",
+        hexpand: true,
+        hpack: "center",
+        child: Widget.Button({
+          label: "Disable for today",
+          onPrimaryClick: disableForToday,
+        }),
       }),
     ],
   });
