@@ -25,7 +25,8 @@
     - noto-fonts-emoji
     - otf-font-awesome
     - playerctl
-    - python-pipx
+    - rye
+    - pyenv
     - slurp
     - socat
     - starship
