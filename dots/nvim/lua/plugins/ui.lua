@@ -47,7 +47,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
-      opts.options.component_separators = { left = "|", right = "|" }
+      opts.options.component_separators = { left = "|", right = "" }
       opts.options.section_separators = { left = "", right = "" }
 
       -- Remove Branch from B Section
@@ -75,8 +75,13 @@ return {
       -- Remove Trouble v3 from C Section
       table.remove(opts.sections.lualine_c, 6)
 
+      -- Add Separators to Y Section
+      opts.sections.lualine_y = {
+        { "progress", separator = { left = "", right = nil } },
+      }
+
       -- Add Branch to Z Section
-      opts.sections.lualine_z = { "branch" }
+      opts.sections.lualine_z = { { "branch", separator = { left = "", right = nil } } }
     end,
   },
   {
