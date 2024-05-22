@@ -114,8 +114,4 @@ return {
       vim.keymap.set("n", "<leader>ls", require("dropbar.api").pick, { desc = "Select Dropdown Menu" })
     end,
   },
-  -- Help with the 20/20/20 rule
-  {
-    "wildfunctions/myeyeshurt", opts = {}
-  },
 }
