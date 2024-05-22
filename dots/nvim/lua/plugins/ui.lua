@@ -75,9 +75,26 @@ return {
       -- Remove Trouble v3 from C Section
       table.remove(opts.sections.lualine_c, 6)
 
-      -- Add Separators to Y Section
+      -- Y Section
       opts.sections.lualine_y = {
         { "progress", separator = { left = "", right = nil } },
+        {
+          function()
+            local words = vim.fn.wordcount()['words']
+            return words .. ' words'
+          end,
+          cond = function()
+            local ft = vim.bo.filetype
+            local count = {
+              latex = true,
+              tex = true,
+              text = true,
+              markdown = true,
+              vimwiki = true,
+            }
+            return count[ft] ~= nil
+          end,
+        },
       }
 
       -- Add Branch to Z Section
