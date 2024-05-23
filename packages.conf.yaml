@@ -4,7 +4,6 @@
 - pacman:
     - adwaita-icon-theme
     - bat
-    - bc
     - brightnessctl
     - cliphist
     - dart-sass
@@ -25,6 +24,7 @@
     - noto-fonts-emoji
     - otf-font-awesome
     - playerctl
+    - ripgrep
     - rye
     - pyenv
     - slurp
@@ -34,19 +34,19 @@
     - wl-clipboard
     - wofi
     - wtype
+    - yazi
     - xdg-desktop-portal-gtk
     - zoxide
 - yay:
     - aylurs-gtk-shell
     - bibata-cursor-theme-bin
     - bun-bin
-    - ctpv-git
     - git-open
     - hyprcwd-git
     - hyprcursor-git
     - hyprevents-git
     - hypridle-git
-    - hyprland-git
+    - hyprland
     - hyprlang-git
     - hyprpicker
     - hyprprop-git
@@ -54,7 +54,6 @@
     - hyprshot
     - kanagawa-gtk-theme-git
     - morewaita
-    - poppler
     - swww
     - ttf-icomoon-feather-git
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
@@ -65,13 +64,9 @@
       global: latest
       versions:
         - latest
-    - plugin: python
-      global: latest
-      versions:
-        - latest
 
 - shell:
-    - command: pipx install poetry
+    - command: rye install poetry
       description: Installing poetry
 
     - command: cd ~/.config/hypr/scripts/ && python -m venv ~/.config/hypr/scripts/.venv && source ~/.config/hypr/scripts/.venv/bin/activate && ~/.local/bin/poetry install --no-root

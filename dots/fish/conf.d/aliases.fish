@@ -1,5 +1,6 @@
 # Simple Aliases
-alias la="eza -la --icons --group-directories-first"
+alias ls="eza -la --icons --group-directories-first"
+alias cat="bat"
 alias btm="btm --enable_gpu_memory"
 alias del="trash"
 alias nv="nvim"
