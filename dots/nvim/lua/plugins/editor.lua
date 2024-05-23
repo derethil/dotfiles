@@ -41,6 +41,16 @@ return {
       { "<leader>xm", "<cmd>GitConflictListQf<CR>",       "Git Conflicts List" },
     },
   },
+  -- Build Better Vim Habits
+  {
+    "m4xshen/hardtime.nvim",
+    event = "VeryLazy",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>uH", "<cmd>Hardtime toggle<cr>", "Toggle Hardtime" },
+    },
+    opts = {}
+  },
   {
     "tris203/precognition.nvim",
     lazy = true,

@@ -28,5 +28,7 @@ vim.opt.swapfile = false
 vim.opt.exrc = true
 vim.opt.shell = "/bin/bash"
 vim.opt.cursorline = false
+vim.opt.inccommand = "split"
+vim.opt.undofile = true
 
 vim.opt.mousemoveevent = true

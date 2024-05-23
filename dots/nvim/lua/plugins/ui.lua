@@ -103,6 +103,8 @@ return {
   },
   {
     "Bekaboo/dropbar.nvim",
+    event = "LazyFile",
+    lazy = true,
     dependencies = {
       "nvim-telescope/telescope-fzf-native.nvim",
     },

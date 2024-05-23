@@ -1,4 +1,6 @@
 local pickers = require("telescope.pickers")
+local builtin = require("telescope.builtin")
+local previewers = require("telescope.previewers")
 local finders = require("telescope.finders")
 local config = require("telescope.config").values
 local actions = require("telescope.actions")
@@ -76,6 +78,34 @@ function M.open_selected_file_entry_with_system()
     local fb_utils = require("telescope._extensions.file_browser.utils")
     fb_utils.notify("actions.open", { msg = "Couldn't open file!", level = "WARN" })
   end
+end
+
+local diff_so_fancy = previewers.new_termopen_previewer {
+  get_command = function(entry)
+    -- Command for Git Status
+    if entry.status == '??' or 'A ' then
+      return { "git", "diff", entry.path }
+    end
+    -- For Git Commits and Git BCommits
+    return { "git", "diff", entry.path .. "^!" }
+  end
+}
+function M.dsf_git_status(opts)
+  opts = opts or {}
+  opts.previewer = diff_so_fancy
+  builtin.git_status(opts)
+end
+
+function M.dsf_git_commits(opts)
+  opts = opts or {}
+  opts.previewer = diff_so_fancy
+  builtin.git_commits(opts)
+end
+
+function M.dsf_git_bcommits(opts)
+  opts = opts or {}
+  opts.previewer = diff_so_fancy
+  builtin.git_bcommits(opts)
 end
 
 return M

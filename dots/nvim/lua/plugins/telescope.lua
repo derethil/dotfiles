@@ -27,7 +27,23 @@ return {
           require("util.telescope").grep_ags_style_variables(require("telescope.themes").get_dropdown())
         end,
         desc = "Find AGS Style Variables"
-
+      },
+      {
+        "<leader>.",
+        function()
+          require("telescope.builtin").find_files(require("telescope.themes").get_ivy({
+            cwd = vim.fn.expand("%:p:h"),
+            prompt_title = "Find Sibling Files"
+          }))
+        end,
+        desc = "Find Files (Buffer Dir)"
+      },
+      {
+        "<leader>gs",
+        function()
+          require("util.telescope").dsf_git_status()
+        end,
+        desc = "Git Status"
       }
     },
     opts = {
@@ -47,7 +63,7 @@ return {
         },
         mappings = {
           ["i"] = {
-            ["jk"] = require("telescope.actions").close,
+            ["<esc>"] = require("telescope.actions").close,
           },
         },
       },
