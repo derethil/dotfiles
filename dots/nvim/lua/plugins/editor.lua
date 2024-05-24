@@ -64,7 +64,7 @@ return {
     "FabijanZulj/blame.nvim",
     config = function(_, opts) require("blame").setup(opts) end,
     keys = {
-      { '<leader>ub', "<cmd>BlameToggle virtual<CR>", desc = "Toggle Git Blame" }
+      { '<leader>uB', "<cmd>BlameToggle<CR>", desc = "Toggle Git Blame" }
     },
     opts = {
       date_format = "%d/%m/%Y",
@@ -74,14 +74,14 @@ return {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",  -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
-
-      -- Only one of these is needed, not both.
-      "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",              -- optional
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "ibhagwan/fzf-lua",
     },
-    config = true
+    config = true,
+    keys = {
+      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" }
+    }
   }
 
 }
