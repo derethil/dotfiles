@@ -15,4 +15,7 @@ return {
       inlay_hints = { enabled = false }
     },
   },
+  {
+    "tikhomirov/vim-glsl",
+  },
 }

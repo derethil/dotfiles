@@ -27,7 +27,7 @@ return {
       delay = 0,
     },
     keys = {
-      { "<leader>uB", "<cmd>GitBlameToggle<CR>",        desc = "Toggle Git Blame" },
+      { "<leader>uo", "<cmd>GitBlameToggle<CR>",        desc = "Toggle Statusline Git Blame" },
       { "<leader>gc", "<cmd>GitBlameOpenCommitURL<CR>", desc = "Open Blamed Commit URL" },
     },
   },
@@ -113,7 +113,7 @@ return {
     },
     init = function()
       vim.opt.winbar = nil
-      vim.keymap.set("n", "<leader>ls", require("dropbar.api").pick, { desc = "Select Dropdown Menu" })
+      vim.keymap.set("n", "<leader>z", require("dropbar.api").pick, { desc = "Select Dropdown Menu" })
     end,
   },
 }

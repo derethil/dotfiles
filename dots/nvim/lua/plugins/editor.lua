@@ -17,30 +17,6 @@ return {
       opts.mapping["<CR>"] = nil
     end,
   },
-  {
-    "tikhomirov/vim-glsl",
-  },
-  {
-    "akinsho/git-conflict.nvim",
-    version = "*",
-    event = "VeryLazy",
-    config = function(_, opts)
-      require("git-conflict").setup(opts)
-    end,
-    opts = {
-      default_mappings = false,
-      default_commands = true,
-    },
-    keys = {
-      { "<leader>mo", "<cmd>GitConflictCHooseOurs<CR>",   "Git Conflict: Choose Ours" },
-      { "<leader>mt", "<cmd>GitConflictChooseTheirs<CR>", "Git Conflict: Choose Theirs" },
-      { "<leader>mb", "<cmd>GitConflictChooseBoth<CR>",   "Git Conflict: Choose Both" },
-      { "<leader>m0", "<cmd>GitConflictChooseNone<CR>",   "Git Conflict: Choose None" },
-      { "[m",         "<cmd>GitConflictPrevConflict<CR>", "Go to Previous Conflict" },
-      { "]m",         "<cmd>GitConflictNextConflict<CR>", "Go to Next Conflict" },
-      { "<leader>xm", "<cmd>GitConflictListQf<CR>",       "Git Conflicts List" },
-    },
-  },
   -- Build Better Vim Habits
   {
     "m4xshen/hardtime.nvim",
@@ -59,11 +35,53 @@ return {
       startVisible = false,
       showBlankVirtLine = false,
     },
-    config = function(_, opts)
-      require("precognition").setup(opts)
-    end,
+    config = function(_, opts) require("precognition").setup(opts) end,
     keys = {
       { "<leader>uk", function() require("precognition").toggle() end, desc = "Toggle Precognition Hints" }
     }
+  },
+  -- Git Integration
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    event = "VeryLazy",
+    config = function(_, opts) require("git-conflict").setup(opts) end,
+    opts = {
+      default_mappings = false,
+      default_commands = true,
+    },
+    keys = {
+      { "<leader>mo", "<cmd>GitConflictCHooseOurs<cr>",   desc = "Git Conflict: Choose Ours" },
+      { "<leader>mt", "<cmd>GitConflictChooseTheirs<cr>", desc = "Git Conflict: Choose Theirs" },
+      { "<leader>mb", "<cmd>GitConflictChooseBoth<cr>",   desc = "Git Conflict: Choose Both" },
+      { "<leader>m0", "<cmd>GitConflictChooseNone<cr>",   desc = "Git Conflict: Choose None" },
+      { "[m",         "<cmd>GitConflictPrevConflict<cr>", desc = "Go to Previous Conflict" },
+      { "]m",         "<cmd>GitConflictNextConflict<cr>", desc = "Go to Next Conflict" },
+      { "<leader>xm", "<cmd>GitConflictListQf<cr>",       desc = "Git Conflicts List" },
+    },
+  },
+  {
+    "FabijanZulj/blame.nvim",
+    config = function(_, opts) require("blame").setup(opts) end,
+    keys = {
+      { '<leader>ub', "<cmd>BlameToggle virtual<CR>", desc = "Toggle Git Blame" }
+    },
+    opts = {
+      date_format = "%d/%m/%Y",
+      merge_consecutive = false,
+    }
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",  -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    config = true
   }
+
 }
