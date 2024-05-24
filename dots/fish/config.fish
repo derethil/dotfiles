@@ -8,7 +8,10 @@ thefuck --alias | source
 zoxide init fish | source
 pyenv init - | source
 
-
-
 # Load Sudo Alias
 fish_load_sudo_alias
+
+# Start Tmux
+if status is-interactive; and not set -q TMUX
+    tmux attach || tmux
+end
