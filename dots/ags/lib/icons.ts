@@ -8,6 +8,11 @@ export const icons = {
     executable: "application-x-executable-symbolic",
   },
 
+  apps: {
+    apps: "view-app-grid-symbolic",
+    search: "window-new-symbolic",
+  },
+
   workspace: "",
 
   powermenu: {
@@ -52,7 +57,6 @@ export const icons = {
   },
 
   searches: {
-    applications: "window-new-symbolic",
     clipboard: "edit-paste-symbolic",
     projects: "document-open-symbolic",
   },

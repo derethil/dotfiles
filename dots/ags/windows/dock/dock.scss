@@ -1,0 +1,44 @@
+@mixin dock($spacing: $spacing * 0.7) {
+    separator {
+        border-radius: $radius;
+        background-color: $border-color;
+        margin: 0 $spacing;
+        min-width: $border-width;
+        min-height: 2em;
+    }
+
+    button {
+        @include button($flat: true);
+
+        box {
+            margin: calc($spacing / 2);
+        }
+
+        image {
+            margin: $padding;
+
+            @if $scheme == 'light' {
+                -gtk-icon-shadow: $text-shadow;
+            }
+        }
+
+        .indicator {
+            min-width: 32px;
+            min-height: $border-width * 1.5;
+            background-color: $on-surface;
+            border-radius: $radius;
+            margin-bottom: calc($padding / -4);
+
+            &.focused {
+                background-color: $inverse-primary;
+            }
+        }
+    }
+}
+
+window.floating-dock .dock {
+    @include dock;
+    @include floating-widget;
+    border-radius: if($radius == 0, 0, $radius + $spacing / 2);
+    padding: calc($padding / 2);
+}

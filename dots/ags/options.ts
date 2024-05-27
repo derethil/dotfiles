@@ -241,6 +241,21 @@ const optionsConfig = mkOptions(OPTIONS, {
     duration: opt(20),
   },
 
+  dock: {
+    iconSize: opt(32),
+    pinnedApps: opt<string[]>([
+      "firefox",
+      "footclient",
+      "neovide",
+      "discord",
+      "mattermost",
+      "obsidian",
+      "spotify",
+      "steam",
+      "stremio",
+    ]),
+  },
+
   notifications: {
     blacklist: opt(["Spotify"]),
   },

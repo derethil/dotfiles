@@ -14,7 +14,7 @@
 
     .user-info {
       @include widget;
-      background-color: transparentize($surface-container-high, $widget-transparency);
+      background-color: $surface-container-high;
       font-weight: bold;
       padding: $spacing;
       margin-right: $spacing;
@@ -27,6 +27,7 @@
 
     .text-entry {
       @include widget;
+      background-color: $surface-container-high;
 
       stack {
         padding: $spacing;
