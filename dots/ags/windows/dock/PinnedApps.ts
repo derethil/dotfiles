@@ -8,6 +8,7 @@ const Hyprland = await Service.import("hyprland");
 const matchClient = (client: Client, term: string) => {
   if (client.class.toLowerCase().includes(term)) return true;
   if (client.title.toLowerCase().includes(term)) return true;
+  if (client.initialTitle.toLowerCase().includes(term)) return true;
   return false;
 };
 
@@ -38,8 +39,9 @@ export function PinnedApps() {
             setup: (self) =>
               self.hook(Hyprland, () => {
                 const running = Hyprland.clients.filter((client) =>
-                  client.class.toLowerCase().includes(term)
+                  matchClient(client, term)
                 );
+
                 const focused = running.find((client) =>
                   client.address === Hyprland.active.client.address
                 );
