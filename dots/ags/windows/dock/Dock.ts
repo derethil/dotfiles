@@ -1,9 +1,10 @@
-import { Client } from "types/service/hyprland";
-import { PinnedApps } from "./PinnedApps";
-import { Taskbar } from "./Taskbar";
-import { AppButton } from "./AppButton";
 import { icons } from "lib/icons";
 import { bash } from "lib/utils";
+import { Client } from "types/service/hyprland";
+import { AppButton } from "./AppButton";
+import { PinnedApps } from "./PinnedApps";
+import { Taskbar } from "./Taskbar";
+
 const Hyprland = await Service.import("hyprland");
 
 export const focusClient = ({ address }: Client) => {

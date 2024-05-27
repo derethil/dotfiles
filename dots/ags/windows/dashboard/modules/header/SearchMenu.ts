@@ -1,15 +1,15 @@
+import Gdk from "gi://Gdk";
 import { icons } from "lib/icons";
+import { StackState, StackStateType } from "lib/stackState";
 import { Variable as VariableType } from "types/variable";
 import { SelectIconMenu } from "widgets/SelectIconMenu";
 import { DashboardOverlay } from "windows/dashboard/Dashboard";
-import Gdk from "gi://Gdk";
 import {
   ApplicationSearch,
   ClipboardSearch,
   ProjectsSearch,
   type Search,
 } from "./Search";
-import { StackState, StackStateType } from "lib/stackState";
 
 // Constants and helpers
 
@@ -98,7 +98,7 @@ export function SearchMenu() {
       SelectIconMenu({
         active: activeSearch as VariableType<string>,
         options: {
-          Applications: icons.searches.applications,
+          Applications: icons.apps.search,
           Clipboard: icons.searches.clipboard,
           Projects: icons.searches.projects,
         },

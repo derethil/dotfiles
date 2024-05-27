@@ -1,6 +1,6 @@
+import { icons } from "lib/icons";
 import { Opt } from "lib/option";
 import { Setter } from "./Setter";
-import { icons } from "lib/icons";
 
 export type RowProps<T> = {
   opt: Opt<T>;

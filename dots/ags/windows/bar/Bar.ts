@@ -1,14 +1,14 @@
 // Bar Widgets
-import { Workspaces } from "./modules/Workspaces";
-import { Clock } from "./modules/Clock";
-import { Powermenu } from "./modules/Powermenu";
-import { Weather } from "./modules/Weather";
-import { SystemTray } from "./modules/SystemTray";
 import { AudioModule } from "./modules/Audio";
-import { MediaControls } from "./modules/MediaControls";
-import { BatteryModule } from "./modules/Battery";
 import { Backlight } from "./modules/Backlight";
+import { BatteryModule } from "./modules/Battery";
+import { Clock } from "./modules/Clock";
+import { MediaControls } from "./modules/MediaControls";
+import { Powermenu } from "./modules/Powermenu";
+import { SystemTray } from "./modules/SystemTray";
+import { Weather } from "./modules/Weather";
 import { WindowButton } from "./modules/WindowButton";
+import { Workspaces } from "./modules/Workspaces";
 
 export type BarWidget = keyof typeof widgets;
 

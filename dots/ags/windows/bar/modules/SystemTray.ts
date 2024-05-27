@@ -1,7 +1,8 @@
-const SystemTrayService = await Service.import("systemtray");
+import Gdk from "gi://Gdk";
 import { type TrayItem } from "types/service/systemtray";
 import { PanelButton } from "../../../widgets/PanelButton";
-import Gdk from "gi://Gdk";
+
+const SystemTrayService = await Service.import("systemtray");
 
 function SystemTrayItem(item: TrayItem) {
   return Widget.Button({

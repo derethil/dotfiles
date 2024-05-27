@@ -1,7 +1,7 @@
-import { type RowProps } from "./Row";
-import { Opt } from "lib/option";
-import { icons } from "lib/icons";
 import Gdk from "gi://Gdk";
+import { icons } from "lib/icons";
+import { Opt } from "lib/option";
+import { type RowProps } from "./Row";
 
 function EnumSetter(opt: Opt<string>, values: string[]) {
   const label = Widget.Label({ label: opt.bind().as((v) => `${v}`) });

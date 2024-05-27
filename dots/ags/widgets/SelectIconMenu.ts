@@ -34,7 +34,7 @@ export function SelectIconMenu(props: SelectIconMenuProps) {
       Widget.MenuItem({
         label,
         on_activate: () => handleActivate(label),
-      }),
+      })
     ),
   });
 }

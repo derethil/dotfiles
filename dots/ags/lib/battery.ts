@@ -1,5 +1,4 @@
 import { icons } from "lib/icons";
-import { options } from "options";
 
 export async function batteryMonitor() {
   const battery = await Service.import("battery");

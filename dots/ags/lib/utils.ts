@@ -1,8 +1,8 @@
-import Window from "types/widgets/window";
-import Gdk from "gi://Gdk?version=3.0";
 import GLib from "gi://GLib?version=2.0";
-import { substitutes } from "lib/icons";
+import Gdk from "gi://Gdk?version=3.0";
 import Gtk from "gi://Gtk?version=3.0";
+import { substitutes } from "lib/icons";
+import Window from "types/widgets/window";
 
 /** Generate an array of numbers */
 export function range(length: number, start = 1) {

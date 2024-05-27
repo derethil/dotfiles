@@ -1,8 +1,8 @@
-import { Row } from "./Row";
+import { icons } from "lib/icons";
 import { Group } from "./Group";
 import { Page } from "./Page";
+import { Row } from "./Row";
 import { Wallpaper } from "./Wallpaper";
-import { icons } from "lib/icons";
 
 const { theme, autotheme, bar } = options;
 

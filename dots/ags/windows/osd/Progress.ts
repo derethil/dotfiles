@@ -1,5 +1,5 @@
-import type Gtk from "gi://Gtk?version=3.0";
 import GLib from "gi://GLib?version=2.0";
+import type Gtk from "gi://Gtk?version=3.0";
 import { range } from "lib/utils";
 import { options } from "options";
 
@@ -10,7 +10,9 @@ type ProgressProps = {
   child: Gtk.Widget;
 };
 
-export const Progress = ({ height = 18, width = 180, vertical = false, child }: ProgressProps) => {
+export const Progress = (
+  { height = 18, width = 180, vertical = false, child }: ProgressProps,
+) => {
   const fill = Widget.Box({
     class_name: "fill",
     hexpand: vertical,
@@ -62,7 +64,7 @@ export const Progress = ({ height = 18, width = 180, vertical = false, child }: 
           fill_size += step;
           fill.css = `min-${axis}: ${fill_size}px`;
           animations.shift();
-        }),
+        })
       );
     },
   });

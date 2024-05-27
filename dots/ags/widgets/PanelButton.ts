@@ -1,5 +1,5 @@
-import { ButtonProps } from "types/widgets/button"
 import { BoxProps } from "types/widgets/box";
+import { ButtonProps } from "types/widgets/button";
 
 type PanelButtonProps = ButtonProps & {
   children?: BoxProps["children"];
@@ -45,3 +45,4 @@ export function PanelButton({
     ...rest,
   });
 }
+

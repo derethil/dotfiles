@@ -1,4 +1,3 @@
-import { options } from "options";
 import { dependencies, sh } from "lib/utils";
 
 export type Resolution = 1920 | 1366 | 3840;

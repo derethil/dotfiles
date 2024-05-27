@@ -1,7 +1,6 @@
+import { icons } from "lib/icons";
 import RegularWindow from "windows/RegularWindow";
 import { Layout } from "./layout";
-import { icons } from "lib/icons";
-import { options } from "options";
 
 const current = Variable(Layout[0].attribute.title);
 

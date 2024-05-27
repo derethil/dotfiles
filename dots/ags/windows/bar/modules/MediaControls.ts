@@ -1,9 +1,9 @@
-const Mpris = await Service.import("mpris");
-import * as mprisWidgets from "widgets/Mpris";
-import { FontIcon } from "widgets/FontIcon";
 import { icons } from "lib/icons";
 import Box from "types/widgets/box";
+import * as mprisWidgets from "widgets/Mpris";
 import { IconModule } from "../IconModule";
+
+const Mpris = await Service.import("mpris");
 
 const getPlayer = (name = options.bar.media.preferred.value) =>
   Mpris.getPlayer(name) || Mpris.players[0] || null;

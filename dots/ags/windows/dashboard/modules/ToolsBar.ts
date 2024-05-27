@@ -1,6 +1,6 @@
+import { icons } from "lib/icons";
 import { FontIcon } from "widgets/FontIcon";
 import { PanelButton } from "widgets/PanelButton";
-import { icons } from "lib/icons";
 
 interface ToolProps {
   command: string | string[];

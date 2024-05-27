@@ -1,6 +1,7 @@
-const { speaker } = await Service.import("audio");
 import { icons } from "lib/icons";
 import { IconModule } from "../IconModule";
+
+const { speaker } = await Service.import("audio");
 
 function volumeLabel(volume: number): string {
   return String(Math.round(volume * 100));

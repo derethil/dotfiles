@@ -1,5 +1,5 @@
-import { AppButton } from "./AppButton";
 import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
+import { AppButton } from "./AppButton";
 import { focusClient, killClient } from "./Dock";
 
 const Hyprland = await Service.import("hyprland");

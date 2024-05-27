@@ -1,11 +1,11 @@
+import { Fzf } from "fzf";
 import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk?version=3.0";
-import { Fzf } from "fzf";
 import { StackState, StackStateType } from "lib/stackState";
 import { bash } from "lib/utils";
 import { Application } from "types/service/applications";
-import { SearchItem } from "./SearchItem";
 import { DashboardOverlay } from "windows/dashboard/Dashboard";
+import { SearchItem } from "./SearchItem";
 import { WINDOW_NAME } from "./SearchMenu";
 
 const Applications = await Service.import("applications");

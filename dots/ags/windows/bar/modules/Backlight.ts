@@ -1,6 +1,6 @@
 import { icons } from "lib/icons";
-import { IconModule } from "../IconModule";
 import { Brightness } from "services/brightness";
+import { IconModule } from "../IconModule";
 
 export function Backlight() {
   return IconModule({

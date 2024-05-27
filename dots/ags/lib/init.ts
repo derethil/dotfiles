@@ -1,9 +1,9 @@
-import { matugenWallpaperMonitor } from "./matugen";
-import { gtkThemeMonitor } from "./gtk";
 import { batteryMonitor } from "./battery";
-import { notificationsMiddleware } from "./notifications";
-import { hyprlandOptions } from "./hyprland";
 import { globalServices } from "./globals";
+import { gtkThemeMonitor } from "./gtk";
+import { hyprlandOptions } from "./hyprland";
+import { matugenWallpaperMonitor } from "./matugen";
+import { notificationsMiddleware } from "./notifications";
 import { userListener } from "./user.local";
 
 export async function init() {

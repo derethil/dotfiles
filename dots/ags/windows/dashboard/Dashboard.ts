@@ -1,6 +1,6 @@
+import { OverlayRevaler } from "widgets/OverlayRevealer";
 import { PopupWindow } from "windows/PopupWindow";
 import { Header } from "./modules/header/Header";
-import { OverlayRevaler } from "widgets/OverlayRevealer";
 
 export const DashboardOverlay = OverlayRevaler({
   transition: "slide_down",

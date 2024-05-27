@@ -1,6 +1,6 @@
-import { PopupWindow } from "windows/PopupWindow";
 import { type NudgeState, NudgeTimer } from "services/nudgetimer";
 import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
+import { PopupWindow } from "windows/PopupWindow";
 
 const snooze = (until?: number) => {
   App.toggleWindow("eyenudge");

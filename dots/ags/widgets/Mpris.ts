@@ -1,17 +1,17 @@
-import { icons } from "../lib/icons";
+import Gtk from "gi://Gtk?version=3.0";
 import { blurImg } from "lib/utils";
-import { FontIcon } from "./FontIcon";
 import { MprisPlayer } from "types/service/mpris";
-import { WindowProps } from "types/widgets/window";
-import { LabelProps } from "types/widgets/label";
 import { IconProps } from "types/widgets/icon";
+import { LabelProps } from "types/widgets/label";
 import { SliderProps } from "types/widgets/slider";
 import StackProps from "types/widgets/stack";
-import Gtk from "gi://Gtk?version=3.0";
+import { WindowProps } from "types/widgets/window";
+import { icons } from "../lib/icons";
+import { FontIcon } from "./FontIcon";
 
 export const CoverArt = (
   player: MprisPlayer,
-  props: WindowProps<any, any, any>
+  props: WindowProps<any, any, any>,
 ) =>
   Widget.Box({
     ...props,
@@ -23,7 +23,7 @@ export const CoverArt = (
 
 export const BlurredCoverArt = (
   player: MprisPlayer,
-  props: WindowProps<any, any, any>
+  props: WindowProps<any, any, any>,
 ) =>
   Widget.Box({
     ...props,
@@ -35,7 +35,7 @@ export const BlurredCoverArt = (
           blurImg(player.cover_path).then((img) => {
             img && box.setCss(`background-image: url("${img}")`);
           }),
-        "notify::cover-path"
+        "notify::cover-path",
       ),
   });
 
@@ -55,7 +55,7 @@ export const ArtistLabel = (player: MprisPlayer, props: LabelProps = {}) =>
 
 export const PlayerIcon = (
   player: MprisPlayer,
-  { symbolic = true, ...props }: IconProps & { symbolic?: boolean } = {}
+  { symbolic = true, ...props }: IconProps & { symbolic?: boolean } = {},
 ) =>
   Widget.Icon({
     ...props,
@@ -144,7 +144,7 @@ const PlayerButton = ({
       "shown",
       player,
       prop as any,
-      (p) => `${p}`
+      (p) => `${p}`,
     ),
     onClicked: () => player[onClick](),
     visible: player.bind(canProp as any).transform((c) => c !== cantValue),

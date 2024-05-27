@@ -1,6 +1,6 @@
 import { type Opt } from "lib/option";
-import { options } from "options";
 import { bash, dependencies, sh } from "lib/utils";
+import { options } from "options";
 import { Wallpaper } from "services/wallpaper";
 
 const deps = [

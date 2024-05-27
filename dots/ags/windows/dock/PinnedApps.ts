@@ -1,7 +1,6 @@
-import { focusClient, killClient } from "./Dock";
-import { AppButton } from "./AppButton";
-import { range } from "lib/utils";
 import { Client } from "types/service/hyprland";
+import { AppButton } from "./AppButton";
+import { focusClient, killClient } from "./Dock";
 
 const Applications = await Service.import("applications");
 const Hyprland = await Service.import("hyprland");

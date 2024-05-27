@@ -1,6 +1,5 @@
-import { OpenWeatherMapAPI, WeatherInfo } from "lib/weatherapi";
-import Label from "types/widgets/label";
 import { getEnv } from "lib/dotenv";
+import { OpenWeatherMapAPI, WeatherInfo } from "lib/weatherapi";
 import { IconModule } from "../IconModule";
 
 const INITIAL: WeatherInfo = {

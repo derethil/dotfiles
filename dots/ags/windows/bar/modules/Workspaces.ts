@@ -1,8 +1,9 @@
-const Hyprland = await Service.import("hyprland");
-import { FontIcon } from "widgets/FontIcon";
 import { icons } from "lib/icons";
 import { range } from "lib/utils";
+import { FontIcon } from "widgets/FontIcon";
 import { PanelModule } from "widgets/PanelModule";
+
+const Hyprland = await Service.import("hyprland");
 
 const swapToWorkspace = (arg: string | number) =>
   Utils.execAsync(`hyprctl dispatch workspace ${arg}`);

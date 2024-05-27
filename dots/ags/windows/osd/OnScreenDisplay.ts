@@ -1,7 +1,7 @@
-import { icon } from "lib/utils";
 import { icons } from "lib/icons";
-import { Progress } from "./Progress";
 import { Brightness } from "services/brightness";
+import { Progress } from "./Progress";
+
 const Audio = await Service.import("audio");
 
 const DELAY = 2500;
@@ -41,7 +41,11 @@ function OnScreenProgress(vertical: boolean) {
   }
 
   return revealer
-    .hook(Brightness, () => show(Brightness.screen, icons.brightness.screen), "notify::screen")
+    .hook(
+      Brightness,
+      () => show(Brightness.screen, icons.brightness.screen),
+      "notify::screen",
+    )
     .hook(
       Audio.speaker,
       () => {
@@ -77,8 +81,7 @@ function MicrophoneMute() {
           if (count === 0) revealer.reveal_child = false;
         });
       }
-    }),
-  );
+    }));
 }
 export const OnScreenDisplay = (monitor: number) => {
   return Widget.Window({

@@ -21,9 +21,9 @@ export function SearchItem<T>(props: SearchItemProps<T>) {
 
   const iconWidget = props.icon
     ? Widget.Icon({
-        class_name: "icon",
-        icon: icon(props.icon, icons.fallback.executable),
-      })
+      class_name: "icon",
+      icon: icon(props.icon, icons.fallback.executable),
+    })
     : null;
 
   return Widget.Button({
@@ -35,13 +35,12 @@ export function SearchItem<T>(props: SearchItemProps<T>) {
     onPrimaryClick: () => props.onClick(),
     setup: (self) => {
       self.hook(props.searchState, () => {
-        const type = typeof props.searchState.value;
         self.toggleClassName(
           "active",
           typeof props.searchState.value === "string"
             ? props.label === props.searchState.value
-            : // @ts-ignore
-              props.selector(props.searchState) === props.label,
+            // @ts-ignore
+            : props.selector(props.searchState) === props.label,
         );
       });
     },

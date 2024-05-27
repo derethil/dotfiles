@@ -1,8 +1,7 @@
-const Battery = await Service.import("battery");
-
-import { FontIcon } from "widgets/FontIcon";
 import { icons } from "lib/icons";
 import { IconModule } from "../IconModule";
+
+const Battery = await Service.import("battery");
 
 function formatTime(seconds: number): string {
   const hours = Math.floor(seconds / 3600);

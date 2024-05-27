@@ -1,7 +1,7 @@
 import { options } from "options";
-import { dependencies, sh } from "./utils";
-import { Opt } from "./option";
 import { Wallpaper } from "services/wallpaper";
+import { Opt } from "./option";
+import { dependencies, sh } from "./utils";
 
 export function matugenWallpaperMonitor() {
   Wallpaper.connect("changed", () => matugen());
