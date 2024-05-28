@@ -6,6 +6,8 @@ alias del="trashy put"
 alias nv="nvim"
 alias lg="lazygit"
 
+alias udb="sudo updatedb"
+
 function rm
     command echo "You're supposed to use `del` now!"
     command rm $argv

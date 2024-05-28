@@ -13,7 +13,7 @@
 - link:
     # Home Files
     ~/.bashrc: dots/bash/bashrc
-    ~/.profile: dots/bash/profile
+    ~/.bash_profile: dots/bash/bash_profile
 
     # GTK Settings
     ~/.config/gtk-3.0/:
