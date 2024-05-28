@@ -84,9 +84,14 @@ return {
       },
     },
   },
-  -- Default Colorscheme
   {
-    "LazyVim/LazyVim",
-    opts = { colorscheme = { "kanagawa" } },
-  },
+    "vague2k/huez.nvim",
+    lazy = false,
+    import = "huez-manager.import",
+    config = function(_, opts) require("huez").setup(opts) end,
+    keys = {
+      { '<leader>uR', '<cmd>HuezLive<cr>', desc = 'Preview Registry Colorschmes' },
+      { '<leader>uC', '<cmd>Huez<cr>',     desc = 'Preview Colorschmes' }
+    }
+  }
 }

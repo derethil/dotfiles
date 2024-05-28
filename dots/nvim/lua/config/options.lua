@@ -33,3 +33,4 @@ vim.opt.inccommand = "split"
 vim.opt.undofile = true
 
 vim.opt.mousemoveevent = true
+vim.opt.scrolloff = 12

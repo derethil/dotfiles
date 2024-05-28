@@ -78,9 +78,16 @@ return {
       "sindrets/diffview.nvim",
       "ibhagwan/fzf-lua",
     },
-    config = true,
+    config = function(_, opts) require("neogit").setup(opts) end,
     keys = {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" }
+    },
+    opts = {
+      integrations = {
+        diffview = true,
+        fzf = true,
+      },
+      graph_style = "unicode",
     }
   }
 
