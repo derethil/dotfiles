@@ -2,7 +2,7 @@
 alias ls="eza -la --icons --group-directories-first"
 alias cat="bat"
 alias btm="btm --enable_gpu_memory"
-alias del="trash"
+alias del="trashy put"
 alias nv="nvim"
 alias lg="lazygit"
 

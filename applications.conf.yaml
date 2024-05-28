@@ -22,7 +22,6 @@
     - rye
     - thefuck
     - tldr
-    - trash-cli
     - unrar
     - unzip
     - zip
@@ -39,6 +38,7 @@
     - qt6ct
     - spotify
     - steam
+    - trashy-git
     - vesktop
     - visual-studio-code-bin
     - xwaylandvideobridge-bin
