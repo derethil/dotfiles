@@ -42,6 +42,7 @@ export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
 PATH=~/.local/bin:$PATH
 PATH=~/.local/share/cargo/bin:$PATH
-PATH=~/.local/share/rye/shims:$PATH
 PATH=~/.local/share/rye/bin:$PATH
 PATH=~/.local/share/go/bin:$PATH
+
+source "$HOME/.rye/env
