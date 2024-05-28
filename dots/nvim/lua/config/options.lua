@@ -5,7 +5,8 @@
 -- Neovide Options
 
 if vim.g.neovide then
-  vim.o.guifont = "Liga SFMono Nerd Font,Source Code Pro:h12"
+  -- vim.o.guifont = "Liga SFMono Nerd Font,Source Code Pro:h12"
+  vim.o.guifont = "Geist Mono Semibold:h12"
 
   vim.g.neovide_refresh_rate = 144
 
