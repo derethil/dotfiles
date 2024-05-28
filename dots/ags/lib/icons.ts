@@ -16,11 +16,11 @@ export const icons = {
   workspace: "",
 
   powermenu: {
-    shutdown: "",
-    reboot: "",
-    suspend: "",
-    lock: "",
-    logout: "",
+    shutdown: "system-shutdown-symbolic",
+    reboot: "system-reboot-symbolic",
+    suspend: "system-suspend-symbolic",
+    lock: "system-lock-screen-symbolic",
+    logout: "system-log-out-symbolic",
   },
 
   tools: {

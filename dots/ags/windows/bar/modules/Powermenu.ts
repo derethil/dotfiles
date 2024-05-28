@@ -46,7 +46,7 @@ export function Powermenu() {
       className: "powermenu-revealer",
       indicator: Widget.Button({
         classNames: ["powermenu-button", actions.default.className],
-        child: FontIcon({ label: actions.default.icon }),
+        child: Widget.Icon({ icon: actions.default.icon, size: 20 }),
         onClicked: () => actions.default.action(),
         setup: setupIconBgPrimaryHook,
       }),
@@ -57,7 +57,7 @@ export function Powermenu() {
             Widget.Button({
               vpack: "center",
               className: `powermenu-button ${name}`,
-              child: FontIcon({ label: icon }),
+              child: Widget.Icon({ icon, size: 20 }),
               onClicked: action,
               setup: setupIconBgPrimaryHook,
             }),

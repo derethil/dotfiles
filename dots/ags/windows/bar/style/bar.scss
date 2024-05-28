@@ -113,10 +113,6 @@ $bar-spacing: calc($spacing / 2);
 
     &-button {
       padding: $padding * 0.8 0;
-      & .font-icon {
-        font-family: "feather";
-        font-weight: bold;
-      }
     }
 
     @mixin powermenu-color($color) {
