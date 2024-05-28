@@ -1,9 +1,15 @@
 function fish_greeting
-    echo "from zoya
+    set greeting "from zoya
   🌷🌸🌷🌸
   🌸🌷🌸🌷🌸
  /ᐠ🌷🌸🌷🌸🌷
 (˶ᵔᵕᵔ🌷🌸🌷
  \ つ\  /
   U U/🎀\\"
+
+    if type -q tte
+        echo $greeting | tte --no-color --frame-rate 300 beams
+    else
+        echo $greeting
+    end
 end
