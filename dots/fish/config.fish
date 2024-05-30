@@ -16,6 +16,7 @@ fish_add_path $RYE_HOME/bin
 fish_add_path $RYE_HOME/shims
 fish_add_path $GOPATH/bin
 fish_add_path $PYENV_ROOT/bin
+fish_add_path $PNPM_HOME
 
 # Start Tmux
 if status is-interactive; and not set -q TMUX
