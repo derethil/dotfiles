@@ -89,9 +89,9 @@ return {
     lazy = false,
     import = "huez-manager.import",
     config = function(_, opts) require("huez").setup(opts) end,
-    keys = {
-      { '<leader>uR', '<cmd>HuezLive<cr>', desc = 'Preview Registry Colorschmes' },
-      { '<leader>uC', '<cmd>Huez<cr>',     desc = 'Preview Colorschmes' }
-    }
+    init = function()
+      vim.keymap.set('n', '<leader>uR', '<cmd>HuezLive<cr>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>uC', '<cmd>Huez<cr>', { noremap = true, silent = true })
+    end
   }
 }
