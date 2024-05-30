@@ -83,11 +83,18 @@ return {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" }
     },
     opts = {
+      commit_editor = {
+        staged_diff_split_kind = "auto"
+      },
       integrations = {
         diffview = true,
         fzf = true,
       },
       graph_style = "unicode",
+      git_services = {
+        ["gitlab.dragonarmy.rocks"] =
+        "https://gitlab.dragonarmy.rocks/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
+      }
     }
   }
 

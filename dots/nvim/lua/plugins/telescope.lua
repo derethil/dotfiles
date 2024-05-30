@@ -33,7 +33,8 @@ return {
         function()
           require("telescope.builtin").find_files(require("telescope.themes").get_ivy({
             cwd = vim.fn.expand("%:p:h"),
-            prompt_title = "Find Sibling Files"
+            prompt_title = "Find Sibling Files",
+            preview = true
           }))
         end,
         desc = "Find Files (Buffer Dir)"
@@ -47,13 +48,8 @@ return {
       }
     },
     opts = {
-      pickers = {
-        colorscheme = {
-          layout_strategy = "horizontal",
-          enable_preview = true,
-        },
-      },
       defaults = {
+        preview = false,
         layout_strategy = "flex",
         sorting_strategy = "ascending",
         layout_config = {
@@ -80,6 +76,7 @@ return {
       extensions = {
         file_browser = {
           theme = "ivy",
+          preview = true,
           grouped = true,
           use_ui_input = false,
           display_stat = false,

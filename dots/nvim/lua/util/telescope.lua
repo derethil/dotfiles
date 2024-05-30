@@ -6,13 +6,19 @@ local config = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
+local Job = require("plenary.job")
+
 local M = {}
+
+-- Grep Current Buffer
 
 function M.grep_current_buffer()
   require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_ivy({
     previewer = false,
   }))
 end
+
+-- AGS Variable Picker
 
 function M.grep_ags_style_variables(opts)
   local path = "/tmp/ags/variables.scss"
@@ -57,6 +63,8 @@ function M.grep_ags_style_variables(opts)
   }):find()
 end
 
+-- File Browser Utils
+
 function M.copy_selected_file_entry_path()
   local entry = require("telescope.actions.state").get_selected_entry()
   local path = entry and entry.value
@@ -79,6 +87,8 @@ function M.open_selected_file_entry_with_system()
     fb_utils.notify("actions.open", { msg = "Couldn't open file!", level = "WARN" })
   end
 end
+
+-- Git Utils
 
 local diff_so_fancy = previewers.new_termopen_previewer {
   get_command = function(entry)
