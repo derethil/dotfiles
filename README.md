@@ -14,7 +14,7 @@ These dotfiles are designed around the following packages and tools:
 - **Shell**: [Fish](https://fishshell.com/)
 - **File Manager**: [lf](https://github.com/gokcehan/lf)
 - **Prompt**: [Starship](https://starship.rs/)
-- **Font**: [San Francisco](https://developer.apple.com/fonts/)
+- **Font**: [Geist Mono](https://vercel.com/font)
 
 ## Dotbot
 
