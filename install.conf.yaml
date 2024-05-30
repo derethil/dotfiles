@@ -11,10 +11,6 @@
     - "~/.local/share/applications/"
 
 - link:
-    # Home Files
-    ~/.bashrc: dots/bash/bashrc
-    ~/.bash_profile: dots/bash/bash_profile
-
     # GTK Settings
     ~/.config/gtk-3.0/:
       path: dots/gtk/gtk-3.0/*
