@@ -6,25 +6,25 @@ import { PanelModule } from "widgets/PanelModule";
 const actions = {
   default: {
     className: "shutdown",
-    icon: icons.powermenu.shutdown,
+    icon: icons.power.shutdown,
     action: () => Utils.execAsync("shutdown -h now"),
   },
   hidden: {
     lock: {
-      icon: icons.powermenu.lock,
+      icon: icons.power.lock,
       // TODO: Implement lock screen
       action: () => console.log("lock"),
     },
     suspend: {
-      icon: icons.powermenu.suspend,
+      icon: icons.power.suspend,
       action: () => Utils.execAsync("systemctl suspend"),
     },
     logout: {
-      icon: icons.powermenu.logout,
+      icon: icons.power.logout,
       action: () => Utils.execAsync("hyprctl dispatch exit"),
     },
     reboot: {
-      icon: icons.powermenu.reboot,
+      icon: icons.power.reboot,
       action: () => Utils.execAsync("shutdown -r now"),
     },
   },

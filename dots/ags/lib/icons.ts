@@ -13,9 +13,15 @@ export const icons = {
     search: "window-new-symbolic",
   },
 
+  notifications: {
+    base: "notification-symbolic",
+    alert: "notificaiton-alert-symbolic",
+    off: "notification-disabled-symbolic",
+  },
+
   workspace: "",
 
-  powermenu: {
+  power: {
     shutdown: "system-shutdown-symbolic",
     reboot: "system-reboot-symbolic",
     suspend: "system-suspend-symbolic",
@@ -24,8 +30,9 @@ export const icons = {
   },
 
   tools: {
-    colorPicker: "",
-    screenshot: "",
+    workspaces: "preferences-desktop-remote-desktop-symbolic",
+    colorPicker: "palette-symbolic",
+    screenshot: "image-symbolic",
   },
 
   mediaControls: "music-symbolic",

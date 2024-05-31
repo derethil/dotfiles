@@ -4,7 +4,7 @@ window.floating-dock .system-dock {
   border-radius: if($radius == 0, 0, $radius + $spacing / 2);
   padding: calc($padding / 2);
 
-  .tools .panel-button {
-    padding: $padding $padding * 2;
+  .dock-button {
+    padding: calc($padding / 2);
   }
 }

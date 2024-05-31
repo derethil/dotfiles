@@ -1,5 +1,6 @@
 import { isGdkMonitorActive } from "lib/utils";
 import { Tools } from "./modules/Tools";
+import { NotificationsButton } from "./modules/NotificationsButton";
 
 const Hyprland = await Service.import("hyprland");
 
@@ -8,6 +9,11 @@ export function SystemDock(monitor: number) {
     className: "system-dock",
     children: [
       Tools(),
+      Widget.Separator({
+        vpack: "center",
+        hpack: "center",
+      }),
+      NotificationsButton(),
     ],
   });
 

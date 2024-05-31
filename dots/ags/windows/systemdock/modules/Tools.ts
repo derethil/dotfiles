@@ -1,40 +1,38 @@
 import { icons } from "lib/icons";
-import { FontIcon } from "widgets/FontIcon";
-import { PanelButton } from "widgets/PanelButton";
+import { DockButton } from "./DockButton";
 
-interface ToolProps {
-  command: string | string[];
-  icon: string;
-  className: string;
-}
-
-const ToolButton = ({ className, command, icon }: ToolProps) =>
-  PanelButton({
-    className: className,
-    cursor: "pointer",
-    onClicked: () => {
-      Utils.execAsync(command);
-      App.toggleWindow("dashboard");
-    },
-    child: FontIcon({
-      label: icon,
-    }),
-  });
+const Hyprland = await Service.import("hyprland");
 
 export function Tools() {
   return Widget.Box({
     className: "tools",
     hexpand: true,
     children: [
-      ToolButton({
-        className: "color-picker",
-        command: "hyprpicker -a",
-        icon: icons.tools.colorPicker,
+      DockButton({
+        handleClick: () =>
+          Hyprland.messageAsync("dispatch hyprexpo:expo toggle"),
+        icon: icons.tools.workspaces,
+        tooltip: "Workspaces",
       }),
-      ToolButton({
-        className: "screenshot",
-        command: "hyprshot -m region --clipboard-only",
+      Widget.Separator({
+        vpack: "center",
+        hpack: "center",
+      }),
+      DockButton({
+        handleClick: () => App.toggleWindow("settings"),
+        icon: icons.ui.settings,
+        tooltip: "AGS Settings",
+      }),
+      DockButton({
+        handleClick: () => Utils.execAsync("hyprpicker -a"),
+        icon: icons.tools.colorPicker,
+        tooltip: "Color Picker",
+      }),
+      DockButton({
+        handleClick: () =>
+          Utils.execAsync("hyprshot -m region --clipboard-only"),
         icon: icons.tools.screenshot,
+        tooltip: "Screenshot",
       }),
     ],
   });
