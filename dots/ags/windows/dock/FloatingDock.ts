@@ -1,3 +1,4 @@
+import { isGdkMonitorActive } from "lib/utils";
 import { Dock } from "./Dock";
 
 const Hyprland = await Service.import("hyprland");
@@ -7,9 +8,9 @@ export function FloatingDock(monitor: number) {
     transition: "slide_up",
     child: Dock(),
     setup: (self) => {
-      const update = () => {
-        const workspace = Hyprland.getWorkspace(Hyprland.active.workspace.id);
-        if (Hyprland.getMonitor(monitor)?.name === workspace?.monitor) {
+      const update = async () => {
+        if (await isGdkMonitorActive(monitor)) {
+          const workspace = Hyprland.getWorkspace(Hyprland.active.workspace.id);
           self.reveal_child = workspace?.windows === 0;
         }
       };

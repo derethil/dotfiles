@@ -2,7 +2,6 @@ import GLib from "gi://GLib?version=2.0";
 import Gdk from "gi://Gdk?version=3.0";
 import Gtk from "gi://Gtk?version=3.0";
 import { substitutes } from "lib/icons";
-import Window from "types/widgets/window";
 
 /** Generate an array of numbers */
 export function range(length: number, start = 1) {
@@ -60,9 +59,7 @@ export async function sh(cmd: string | string[]) {
 }
 
 /** Creates the given widget on all monitors. */
-export function forMonitors(
-  widget: (monitor: number) => any,
-): Window<any, any>[] {
+export function forMonitors(widget: (monitor: number) => Gtk.Window) {
   const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
   return range(n, 0).map(widget).flat(1);
 }
@@ -129,4 +126,31 @@ export function createSurfaceFromWidget(widget: Gtk.Widget) {
 export function playNotificationBell() {
   const path = `${App.configDir}/assets/notification.wav`;
   bash(`pw-cat --playback ${path} --media-role notification`);
+}
+
+export async function getGdkMonitor(hyprlandId: number) {
+  const Hyprland = await Service.import("hyprland");
+  const monitor = Hyprland.getMonitor(hyprlandId);
+
+  if (!monitor) return;
+
+  return Gdk.Display.get_default()?.get_monitor_at_point(monitor.x, monitor.y);
+}
+
+export async function isGdkMonitorActive(gdkMonitorId: number) {
+  const Hyprland = await Service.import("hyprland");
+  const activeWorkspace = Hyprland.getWorkspace(Hyprland.active.workspace.id);
+
+  if (!activeWorkspace) return false;
+
+  const activeMonitor = await getGdkMonitor(activeWorkspace.monitorID);
+  const compareToMonitor = Gdk.Display.get_default()?.get_monitor(gdkMonitorId);
+
+  if (!activeMonitor || !compareToMonitor) return false;
+
+  const activeWidth = activeMonitor.workarea.width;
+  const unionedWidth =
+    activeMonitor.workarea.union(compareToMonitor.workarea).width;
+
+  return activeWidth === unionedWidth;
 }
