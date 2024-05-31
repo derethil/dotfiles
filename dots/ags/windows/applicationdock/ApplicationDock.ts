@@ -48,6 +48,12 @@ export function ApplicationDock(monitor: number) {
     },
   });
 
+  const handleHover = (reveal: boolean) => {
+    const workspace = Hyprland.getWorkspace(Hyprland.active.workspace.id);
+    if (workspace?.windows === 0) return;
+    revealer.reveal_child = reveal;
+  };
+
   return Widget.Window({
     monitor,
     name: `applicationdock${monitor}`,
@@ -64,7 +70,7 @@ export function ApplicationDock(monitor: number) {
     }),
     setup: (self) =>
       self
-        .on("enter-notify-event", () => revealer.reveal_child = true)
-        .on("leave-notify-event", () => revealer.reveal_child = false),
+        .on("enter-notify-event", () => handleHover(true))
+        .on("leave-notify-event", () => handleHover(false)),
   });
 }
