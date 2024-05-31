@@ -1,6 +1,6 @@
 import { Client } from "types/service/hyprland";
+import { focusClient, killClient } from "../appUtils";
 import { AppButton } from "./AppButton";
-import { focusClient, killClient } from "./Dock";
 
 const Applications = await Service.import("applications");
 const Hyprland = await Service.import("hyprland");
@@ -12,7 +12,7 @@ const matchClient = (client: Client, term: string) => {
   return false;
 };
 
-export function PinnedApps() {
+export function Pinned() {
   return Widget.Box({
     className: "pins",
     homogeneous: true,

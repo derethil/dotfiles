@@ -1,6 +1,6 @@
 import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
+import { focusClient, killClient } from "../appUtils";
 import { AppButton } from "./AppButton";
-import { focusClient, killClient } from "./Dock";
 
 const Hyprland = await Service.import("hyprland");
 const Applications = await Service.import("applications");

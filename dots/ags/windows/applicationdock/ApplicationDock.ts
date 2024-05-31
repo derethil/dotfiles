@@ -1,12 +1,39 @@
+import { icons } from "lib/icons";
 import { isGdkMonitorActive } from "lib/utils";
-import { Dock } from "./Dock";
+import { AppButton } from "./modules/AppButton";
+import { Pinned } from "./modules/Pinned";
+import { Taskbar } from "./modules/Taskbar";
 
 const Hyprland = await Service.import("hyprland");
 
-export function FloatingDock(monitor: number) {
+export function ApplicationDock(monitor: number) {
+  const dock = Widget.Box({
+    className: "application-dock",
+    children: [
+      AppButton({
+        className: "launcher nonrunning",
+        icon: icons.apps.apps,
+        tooltipText: "Applications",
+        onClicked: () => App.toggleWindow("dashboard"),
+      }),
+      Widget.Separator({
+        vpack: "center",
+        hpack: "center",
+        orientation: 1,
+      }),
+      Pinned(),
+      Widget.Separator({
+        vpack: "center",
+        hpack: "center",
+        orientation: 1,
+      }),
+      Taskbar(),
+    ],
+  });
+
   const revealer = Widget.Revealer({
     transition: "slide_up",
-    child: Dock(),
+    child: dock,
     setup: (self) => {
       const update = async () => {
         if (await isGdkMonitorActive(monitor)) {
@@ -23,7 +50,7 @@ export function FloatingDock(monitor: number) {
 
   return Widget.Window({
     monitor,
-    name: `dock${monitor}`,
+    name: `applicationdock${monitor}`,
     className: "floating-dock",
     anchor: ["bottom"],
     child: Widget.Box({

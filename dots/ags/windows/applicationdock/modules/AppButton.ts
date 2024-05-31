@@ -1,4 +1,3 @@
-import { range } from "lib/utils";
 import { ButtonProps } from "types/widgets/button";
 
 interface Props extends ButtonProps {

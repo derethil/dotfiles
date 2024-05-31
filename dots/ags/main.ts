@@ -1,8 +1,8 @@
 import "lib/session";
 import "style/style";
+import { ApplicationDock } from "windows/applicationdock/ApplicationDock";
 import { Bar } from "windows/bar/Bar";
 import { Dashboard } from "windows/dashboard/Dashboard";
-import { FloatingDock } from "windows/dock/FloatingDock";
 import { EyeNudge } from "windows/eyenudge/EyeNudge";
 import { OnScreenDisplay } from "windows/osd/OnScreenDisplay";
 import { Settings } from "windows/settings/Settings";
@@ -20,7 +20,7 @@ App.config({
   windows: [
     ...forMonitors(Bar),
     ...forMonitors(OnScreenDisplay),
-    ...forMonitors(FloatingDock),
+    ...forMonitors(ApplicationDock),
     EyeNudge(),
     Dashboard(),
     Settings(),
