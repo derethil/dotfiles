@@ -44,7 +44,9 @@ export function SystemDock(monitor: number) {
     monitor,
     name: `system-dock-${monitor}`,
     className: "floating-dock",
-    anchor: ["top"],
+    anchor: options.docks.systemOnBottom.bind().as((v) =>
+      v ? ["bottom"] : ["top"]
+    ),
     child: Widget.Box({
       children: [
         revealer,

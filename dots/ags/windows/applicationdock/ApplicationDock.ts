@@ -58,7 +58,9 @@ export function ApplicationDock(monitor: number) {
     monitor,
     name: `applicationdock${monitor}`,
     className: "floating-dock",
-    anchor: ["bottom"],
+    anchor: options.docks.systemOnBottom.bind().as((v) =>
+      v ? ["top"] : ["bottom"]
+    ),
     child: Widget.Box({
       children: [
         revealer,

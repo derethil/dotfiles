@@ -13,7 +13,7 @@ export function DockButton(props: ToolProps) {
     cursor: "pointer",
     child: Widget.Icon({
       icon: props.icon,
-      size: 24,
+      size: options.docks.iconSize.bind().as((v) => v * 0.75),
     }),
     onClicked: () => props.handleClick(),
   });

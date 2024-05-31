@@ -258,7 +258,15 @@ export const Layout = [
           Row({ opt: options.eyenudge.interval, title: "Nudge Interval" }),
           Row({ opt: options.eyenudge.duration, title: "Nudge Duration" }),
         ]
+      }),
+      Group({
+        title: "Docks",
+        rows: [
+          Row({ opt: options.docks.systemOnBottom, title: "System Dock on Bottom" }),
+          Row({ opt: options.docks.iconSize, title: "Icon Size" }),
+        ]
       })
+
     ]
   })
 ] as const;

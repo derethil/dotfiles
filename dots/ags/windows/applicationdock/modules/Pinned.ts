@@ -16,7 +16,7 @@ export function Pinned() {
   return Widget.Box({
     className: "pins",
     homogeneous: true,
-    children: options.dock.pinnedApps.bind().transform((terms) =>
+    children: options.docks.pinnedApps.bind().transform((terms) =>
       terms
         .map((term) => ({ app: Applications.query(term)?.[0], term }))
         .filter(({ app }) => app)

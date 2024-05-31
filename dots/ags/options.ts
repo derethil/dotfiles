@@ -241,7 +241,8 @@ const optionsConfig = mkOptions(OPTIONS, {
     duration: opt(20),
   },
 
-  dock: {
+  docks: {
+    systemOnBottom: opt(false),
     iconSize: opt(32),
     pinnedApps: opt<string[]>([
       "firefox",

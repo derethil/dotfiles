@@ -24,7 +24,7 @@ export function AppButton({ icon, pinned = false, ...rest }: Props) {
         overlays: pinned ? [indicators] : [],
         child: Widget.Icon({
           icon,
-          size: options.dock.iconSize.bind(),
+          size: options.docks.iconSize.bind(),
         }),
       }),
     }),
