@@ -49,7 +49,9 @@ return {
     },
     opts = {
       defaults = {
-        preview = false,
+        preview = {
+          hide_on_startup = true
+        },
         layout_strategy = "flex",
         sorting_strategy = "ascending",
         layout_config = {
@@ -60,6 +62,7 @@ return {
         mappings = {
           ["i"] = {
             ["<esc>"] = require("telescope.actions").close,
+            ["<C-u>"] = require("telescope.actions.layout").toggle_preview
           },
         },
       },
