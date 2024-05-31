@@ -30,7 +30,7 @@ export const icons = {
   },
 
   tools: {
-    workspaces: "preferences-desktop-remote-desktop-symbolic",
+    workspaces: "view-grid",
     colorPicker: "palette-symbolic",
     screenshot: "image-symbolic",
   },
@@ -79,11 +79,10 @@ export const icons = {
       track: "󰓦",
       playlist: "󰑐",
     },
-    playing: "",
-    paused: "",
-    stopped: "",
-    next: "",
-    prev: "",
+    playing: "media-playback-pause",
+    stopped: "media-playback-start",
+    next: "media-skip-forward",
+    prev: "media-skip-backward",
   },
 
   battery: {
