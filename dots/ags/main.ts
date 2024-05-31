@@ -6,6 +6,7 @@ import { Dashboard } from "windows/dashboard/Dashboard";
 import { EyeNudge } from "windows/eyenudge/EyeNudge";
 import { OnScreenDisplay } from "windows/osd/OnScreenDisplay";
 import { Settings } from "windows/settings/Settings";
+import { SystemDock } from "windows/systemdock/SystemDock";
 import { init } from "./lib/init";
 import { forMonitors } from "./lib/utils";
 
@@ -21,6 +22,7 @@ App.config({
     ...forMonitors(Bar),
     ...forMonitors(OnScreenDisplay),
     ...forMonitors(ApplicationDock),
+    ...forMonitors(SystemDock),
     EyeNudge(),
     Dashboard(),
     Settings(),

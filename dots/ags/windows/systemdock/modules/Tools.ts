@@ -21,9 +21,9 @@ const ToolButton = ({ className, command, icon }: ToolProps) =>
     }),
   });
 
-export function ToolsBar() {
+export function Tools() {
   return Widget.Box({
-    className: "tool-bar",
+    className: "tools",
     hexpand: true,
     children: [
       ToolButton({
