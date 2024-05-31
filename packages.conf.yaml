@@ -26,7 +26,6 @@
     - playerctl
     - ripgrep
     - rye
-    - pyenv
     - slurp
     - socat
     - starship

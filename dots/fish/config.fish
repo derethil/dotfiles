@@ -4,7 +4,6 @@ direnv hook fish | source
 starship init fish | source
 thefuck --alias | source
 zoxide init fish | source
-# pyenv init - | source
 
 # Sudo Aliases
 fish_load_sudo_alias
@@ -15,7 +14,6 @@ fish_add_path $CARGO_HOME/bin
 fish_add_path $RYE_HOME/bin
 fish_add_path $RYE_HOME/shims
 fish_add_path $GOPATH/bin
-fish_add_path $PYENV_ROOT/bin
 fish_add_path $PNPM_HOME
 
 # Start Tmux
