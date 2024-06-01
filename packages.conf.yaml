@@ -13,7 +13,6 @@
     - fd
     - fish
     - fzf
-    - foot
     - glow
     - gnome-keyring
     - inotify-tools
@@ -30,6 +29,7 @@
     - socat
     - starship
     - tmux
+    - wezterm
     - wl-clipboard
     - wofi
     - wtype

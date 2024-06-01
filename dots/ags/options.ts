@@ -246,7 +246,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     iconSize: opt(32),
     pinnedApps: opt<string[]>([
       "firefox",
-      "footclient",
+      "wezterm",
       "neovide",
       "discord",
       "mattermost",
