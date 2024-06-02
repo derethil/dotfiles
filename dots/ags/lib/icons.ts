@@ -19,7 +19,7 @@ export const icons = {
     off: "notification-disabled-symbolic",
   },
 
-  workspace: "",
+  workspace: "circle-symbolic",
 
   power: {
     shutdown: "system-shutdown-symbolic",

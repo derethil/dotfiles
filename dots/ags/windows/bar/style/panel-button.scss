@@ -6,16 +6,17 @@
   }
 
   &.icon-bg-primary > * > * > box:first-child {
-    background-color: $primary;
+    background-color: $primary-fixed;
+    color: $on-primary-fixed;
   }
 
   & > * > * > box:first-child {
     background-color: $color;
-    color: $surface;
+    color: $on-primary-fixed;
   }
 
   & > * > * > box:last-child {
-    background-color: transparentize($surface, $widget-transparency);
+    color: $on-background;
   }
 }
 

@@ -17,7 +17,7 @@ export const DashboardOverlay = OverlayRevaler({
 export const Dashboard = () => {
   return PopupWindow({
     name: "dashboard",
-    layout: "center",
+    layout: "bottom-center",
     transition: "slide_up",
     child: DashboardOverlay,
   });

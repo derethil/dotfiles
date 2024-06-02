@@ -1,6 +1,5 @@
 import { icons } from "lib/icons";
 import { range } from "lib/utils";
-import { FontIcon } from "widgets/FontIcon";
 import { PanelModule } from "widgets/PanelModule";
 
 const Hyprland = await Service.import("hyprland");
@@ -15,8 +14,9 @@ const Container = (hideAfter: number) => {
     children: range(10).map((i) => {
       return Widget.Button({
         className: "workspace",
-        child: FontIcon({
-          label: icons.workspace,
+        child: Widget.Icon({
+          icon: icons.workspace,
+          size: options.theme.spacing.bind().as((s) => s * 2.25),
           className: "indicator",
         }),
         onClicked: () => swapToWorkspace(i),
