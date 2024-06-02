@@ -18,7 +18,9 @@ export function SystemDock(monitor: number) {
   });
 
   const revealer = Widget.Revealer({
-    transition: "slide_up",
+    transition: options.docks.systemOnBottom.bind().as((v) =>
+      v ? "slide_up" : "slide_down"
+    ),
     child: dock,
     setup: (self) => {
       const update = async () => {

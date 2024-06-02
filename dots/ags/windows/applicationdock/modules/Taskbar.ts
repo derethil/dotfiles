@@ -9,7 +9,7 @@ export function Taskbar() {
   return Widget.Box({
     children: Hyprland.bind("clients").transform((clients) =>
       clients.map((client) => {
-        for (const appName of options.dock.pinnedApps.value) {
+        for (const appName of options.docks.pinnedApps.value) {
           if (client.class.toLowerCase().includes(appName.toLowerCase())) {
             return null;
           }

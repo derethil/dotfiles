@@ -7,6 +7,9 @@ import { Taskbar } from "./modules/Taskbar";
 const Hyprland = await Service.import("hyprland");
 
 export function ApplicationDock(monitor: number) {
+  const taskbar = Taskbar();
+
+  Utils.notify(`${taskbar.children.length}`);
   const dock = Widget.Box({
     className: "application-dock",
     children: [
@@ -26,13 +29,19 @@ export function ApplicationDock(monitor: number) {
         vpack: "center",
         hpack: "center",
         orientation: 1,
+        setup: (self) =>
+          self.hook(taskbar, () => {
+            self.visible = taskbar.children.length > 0;
+          }, "notify::children"),
       }),
-      Taskbar(),
+      taskbar,
     ],
   });
 
   const revealer = Widget.Revealer({
-    transition: "slide_up",
+    transition: options.docks.systemOnBottom.bind().as((v) =>
+      v ? "slide_down" : "slide_up"
+    ),
     child: dock,
     setup: (self) => {
       const update = async () => {
