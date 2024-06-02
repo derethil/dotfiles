@@ -20,6 +20,7 @@ require("lazy").setup({
     },
     -- Coding Extras
     { import = "lazyvim.plugins.extras.coding.copilot" },
+    { import = "lazyvim.plugins.extras.coding.copilot-chat" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     -- Debug Adapter Protocol Extras
@@ -30,6 +31,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.editor.refactoring" },
     { import = "lazyvim.plugins.extras.editor.dial" },
     { import = "lazyvim.plugins.extras.editor.illuminate" },
+    { import = "lazyvim.plugins.extras.editor.outline" },
     -- Lang Extras
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
@@ -46,8 +48,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.util.project" },
     -- LazyVim Plugins
     { import = "plugins" },
-    -- LazyRc
-    { import = "lazyvim.plugins.extras.lazyrc" },
   },
   defaults = {
     lazy = false,
