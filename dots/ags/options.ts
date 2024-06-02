@@ -242,8 +242,8 @@ const optionsConfig = mkOptions(OPTIONS, {
   },
 
   docks: {
-    systemOnBottom: opt(false),
     iconSize: opt(32),
+    screenshotFolder: opt("~/Pictures/Screenshots/"),
     pinnedApps: opt<string[]>([
       "firefox",
       "wezterm",

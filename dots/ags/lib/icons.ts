@@ -35,6 +35,12 @@ export const icons = {
     screenshot: "image-symbolic",
   },
 
+  screenshots: {
+    window: "window-symbolic",
+    area: "region-drag-symbolic",
+    fullscreen: "full-screen-symbolic",
+  },
+
   mediaControls: "music-symbolic",
 
   audio: {
@@ -110,6 +116,7 @@ export const icons = {
     toolbars: "toolbars-symbolic",
     settings: "emblem-system-symbolic",
     scheme: "preferences-color-symbolic",
+    save: "document-save-symbolic",
     arrow: {
       "right": "pan-end-symbolic",
       "left": "pan-start-symbolic",

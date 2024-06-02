@@ -1,27 +1,37 @@
 import { isGdkMonitorActive } from "lib/utils";
-import { Tools } from "./modules/Tools";
+import { SystemButtons } from "./modules/SystemButtons";
 import { NotificationsButton } from "./modules/NotificationsButton";
+import { toggleToolDock, ToolDock } from "./modules/ToolDock";
 
 const Hyprland = await Service.import("hyprland");
 
 export function SystemDock(monitor: number) {
   const dock = Widget.Box({
     className: "system-dock",
+    vertical: true,
     children: [
-      Tools(),
-      Widget.Separator({
-        vpack: "center",
-        hpack: "center",
+      Widget.Box({
+        children: [
+          SystemButtons(),
+          Widget.Separator({
+            vpack: "center",
+            hpack: "center",
+          }),
+          NotificationsButton(),
+        ],
       }),
-      NotificationsButton(),
+      ToolDock(),
     ],
   });
 
   const revealer = Widget.Revealer({
-    transition: options.docks.systemOnBottom.bind().as((v) =>
-      v ? "slide_up" : "slide_down"
-    ),
-    child: dock,
+    transition: "slide_down",
+    child: Widget.Box({
+      vertical: true,
+      children: [
+        dock,
+      ],
+    }),
     setup: (self) => {
       const update = async () => {
         if (await isGdkMonitorActive(monitor)) {
@@ -40,22 +50,21 @@ export function SystemDock(monitor: number) {
     const workspace = Hyprland.getWorkspace(Hyprland.active.workspace.id);
     if (workspace?.windows === 0) return;
     revealer.reveal_child = reveal;
+    if (!reveal) toggleToolDock();
   };
 
   return Widget.Window({
     monitor,
     name: `system-dock-${monitor}`,
     className: "floating-dock",
-    anchor: options.docks.systemOnBottom.bind().as((v) =>
-      v ? ["bottom"] : ["top"]
-    ),
+    anchor: ["top"],
     child: Widget.Box({
       children: [
-        revealer,
         Widget.Box({
           className: "padding",
           css: "padding: 2px",
         }),
+        revealer,
       ],
     }),
     setup: (self) =>

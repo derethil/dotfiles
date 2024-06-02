@@ -1,7 +1,7 @@
 import { PanelButton } from "widgets/PanelButton";
 
 interface ToolProps {
-  handleClick: () => void;
+  handlePrimaryClick?: () => void;
   icon: string;
   tooltip?: string;
 }
@@ -15,6 +15,6 @@ export function DockButton(props: ToolProps) {
       icon: props.icon,
       size: options.docks.iconSize.bind().as((v) => v * 0.75),
     }),
-    onClicked: () => props.handleClick(),
+    onClicked: () => props.handlePrimaryClick?.(),
   });
 }

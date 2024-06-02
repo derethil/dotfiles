@@ -262,7 +262,6 @@ export const Layout = [
       Group({
         title: "Docks",
         rows: [
-          Row({ opt: options.docks.systemOnBottom, title: "System Dock on Bottom" }),
           Row({ opt: options.docks.iconSize, title: "Icon Size" }),
         ]
       })

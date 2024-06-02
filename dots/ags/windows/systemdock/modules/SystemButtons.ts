@@ -1,15 +1,16 @@
 import { icons } from "lib/icons";
 import { DockButton } from "./DockButton";
+import { toggleToolDock } from "./ToolDock";
 
 const Hyprland = await Service.import("hyprland");
 
-export function Tools() {
+export function SystemButtons() {
   return Widget.Box({
     className: "tools",
     hexpand: true,
     children: [
       DockButton({
-        handleClick: () =>
+        handlePrimaryClick: () =>
           Hyprland.messageAsync("dispatch hyprexpo:expo toggle"),
         icon: icons.tools.workspaces,
         tooltip: "Workspaces",
@@ -19,18 +20,19 @@ export function Tools() {
         hpack: "center",
       }),
       DockButton({
-        handleClick: () => App.toggleWindow("settings"),
+        handlePrimaryClick: () => App.toggleWindow("settings"),
         icon: icons.ui.settings,
         tooltip: "AGS Settings",
       }),
       DockButton({
-        handleClick: () => Utils.execAsync("hyprpicker -a"),
+        handlePrimaryClick: () => Utils.execAsync("hyprpicker -a"),
         icon: icons.tools.colorPicker,
         tooltip: "Color Picker",
       }),
       DockButton({
-        handleClick: () =>
-          Utils.execAsync("hyprshot -m region --clipboard-only"),
+        handlePrimaryClick: () =>
+          // Utils.execAsync("hyprshot -m region --clipboard-only"),
+          toggleToolDock("screenshot"),
         icon: icons.tools.screenshot,
         tooltip: "Screenshot",
       }),

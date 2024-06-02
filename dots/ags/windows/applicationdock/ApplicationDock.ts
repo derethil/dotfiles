@@ -9,7 +9,6 @@ const Hyprland = await Service.import("hyprland");
 export function ApplicationDock(monitor: number) {
   const taskbar = Taskbar();
 
-  Utils.notify(`${taskbar.children.length}`);
   const dock = Widget.Box({
     className: "application-dock",
     children: [
@@ -39,9 +38,7 @@ export function ApplicationDock(monitor: number) {
   });
 
   const revealer = Widget.Revealer({
-    transition: options.docks.systemOnBottom.bind().as((v) =>
-      v ? "slide_down" : "slide_up"
-    ),
+    transition: "slide_up",
     child: dock,
     setup: (self) => {
       const update = async () => {
@@ -67,9 +64,7 @@ export function ApplicationDock(monitor: number) {
     monitor,
     name: `applicationdock${monitor}`,
     className: "floating-dock",
-    anchor: options.docks.systemOnBottom.bind().as((v) =>
-      v ? ["top"] : ["bottom"]
-    ),
+    anchor: ["bottom"],
     child: Widget.Box({
       children: [
         revealer,

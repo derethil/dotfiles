@@ -7,4 +7,27 @@ window.floating-dock .system-dock {
   .dock-button {
     padding: calc($padding / 2);
   }
+
+  .tool-dock {
+    padding: calc($padding / 2);
+    margin-top: $padding / 2;
+    border-top: $border;
+  }
+
+  .switch {
+    @include switch;
+    margin-top: $padding * 1.5;
+    margin-bottom: $padding * 1.5;
+  }
+
+  .screenshot-dock {
+    .save-icon {
+      margin-left: $padding;
+    }
+
+    .switch {
+      margin-left: $padding;
+      margin-right: $padding;
+    }
+  }
 }
