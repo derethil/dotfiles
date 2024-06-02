@@ -1,12 +1,31 @@
 return {
   {
-    "vague2k/huez.nvim",
+    'sainnhe/gruvbox-material',
     lazy = false,
-    import = "huez-manager.import",
-    config = function(_, opts) require("huez").setup(opts) end,
-    init = function()
-      vim.keymap.set('n', '<leader>uR', '<cmd>HuezLive<cr>', { noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>uC', '<cmd>Huez<cr>', { noremap = true, silent = true })
+    opts = {
+      background = 'hard',
+      enable_italic = true,
+      enable_bold = true,
+      ui_contrast = 'high',
+      diagnostic_virtual_text = 'colored',
+      current_word = 'underline'
+    },
+    config = function(_, opts)
+      for opt, val in pairs(opts) do
+        if type(val) == 'boolean' then val = val and 1 or 0 end
+        vim.g['gruvbox_material_' .. opt] = val
+      end
+      vim.cmd.colorscheme('gruvbox-material')
     end
-  }
+  },
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    config = true,
+    event = { "WinNew" },
+    opts = {
+      hi = {
+        fg = "#A9B665"
+      }
+    }
+  },
 }

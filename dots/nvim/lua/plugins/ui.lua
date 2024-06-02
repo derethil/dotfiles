@@ -32,19 +32,6 @@ return {
     },
   },
   {
-    "nvim-zh/colorful-winsep.nvim",
-    config = true,
-    event = { "WinNew" },
-    opts = function()
-      local colors = require("kanagawa.colors").setup().theme
-      return {
-        hi = {
-          fg = colors.ui.special
-        }
-      }
-    end
-  },
-  {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
       opts.options.component_separators = { left = "|", right = "" }
