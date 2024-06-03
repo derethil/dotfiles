@@ -1,5 +1,7 @@
 @mixin bar-module-icon {
   padding: 0;
+  font-family: $font-mono-name;
+  font-weight: bold;
 
   .icon-container {
     color: $on-primary-fixed;
