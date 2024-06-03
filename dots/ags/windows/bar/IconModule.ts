@@ -1,46 +1,47 @@
-import { Variable } from "resource:///com/github/Aylur/ags/variable.js";
-import { PanelButton } from "widgets/PanelButton";
+import { Binding } from "types/service";
+import { BoxProps } from "types/widgets/box";
 
-type PanelButtonProps = Parameters<typeof PanelButton>[0];
-
-interface IconModuleProps extends PanelButtonProps {
-  icon: PanelButtonProps["child"];
-  labelColor?: string | Variable<string>;
+interface IconModuleProps extends BoxProps {
+  icon: BoxProps["child"];
+  labelColor?: string | Binding<any, any, string>;
 }
+
+const iconContainerClassNames = (labelColor: IconModuleProps["labelColor"]) => {
+  if (!labelColor) return "icon-container";
+
+  if (typeof labelColor === "string") {
+    return options.bar.onlyPrimary.bind().as((onlyPrimary) => {
+      const color = onlyPrimary ? "primary" : labelColor;
+      return `bg-${color} icon-container`;
+    });
+  }
+
+  return Utils.merge(
+    [options.bar.onlyPrimary.bind(), labelColor],
+    (onlyPrimary, labelColor) => {
+      if (onlyPrimary) return `bg-primary icon-container`;
+      return `bg-${labelColor} icon-container`;
+    },
+  );
+};
 
 export function IconModule(props: IconModuleProps) {
   const { icon, labelColor, ...rest } = props;
-  return PanelButton({
+  return Widget.Box({
     ...rest,
-    setup: (self) => {
-      self.toggleClassName("panel-button-icon");
-
-      self.hook(options.bar.onlyPrimary, () => {
-        self.toggleClassName("icon-bg-primary", options.bar.onlyPrimary.value);
-      });
-
-      if (typeof labelColor === "string") {
-        self.toggleClassName(`panel-button-icon-bg-${labelColor}`);
-      }
-
-      if (labelColor instanceof Variable) {
-        self.hook(labelColor, () => {
-          self.class_names = self.class_names.filter(
-            (c) => !c.startsWith("panel-button-icon-bg-"),
-          );
-          self.toggleClassName(`panel-button-icon-bg-${labelColor.value}`);
-        });
-      }
-    },
     child: Widget.Box({
+      classNames: ["bar-module", "bar-module-icon"],
       hexpand: true,
       vertical: true,
       children: [
         Widget.Box({
+          className: iconContainerClassNames(labelColor),
           vertical: true,
           child: icon,
         }),
         Widget.Box({
+          className: "content-container",
+          hpack: "center",
           vertical: true,
           child: props.child,
         }),

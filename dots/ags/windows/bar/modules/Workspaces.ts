@@ -9,10 +9,12 @@ const swapToWorkspace = (arg: string | number) =>
 
 const Container = (hideAfter: number) => {
   return Widget.Box({
+    className: "bar-module",
     vertical: true,
     hexpand: true,
     children: range(10).map((i) => {
       return Widget.Button({
+        hpack: "center",
         className: "workspace",
         child: Widget.Icon({
           icon: icons.workspace,
@@ -37,7 +39,7 @@ const Container = (hideAfter: number) => {
 };
 
 export function Workspaces() {
-  return PanelModule({
+  return Widget.EventBox({
     className: "workspaces",
     cursor: "pointer",
     onScrollUp: () => swapToWorkspace("e-1"),

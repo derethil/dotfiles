@@ -40,19 +40,19 @@ export const Bar = (monitor: number) => {
       css: "min-width: 2px; min-height: 2px;",
       vertical: true,
       startWidget: Widget.Box({
+        className: "bar-start",
         vertical: true,
         vpack: "start",
         expand: true,
         children: start.bind().as((v) => v.map((w) => widgets[w]())),
       }),
-
       centerWidget: Widget.Box({
         vertical: true,
         vpack: "center",
         children: center.bind().as((v) => v.map((w) => widgets[w]())),
       }),
-
       endWidget: Widget.Box({
+        className: "bar-end",
         vertical: true,
         vpack: "end",
         expand: true,

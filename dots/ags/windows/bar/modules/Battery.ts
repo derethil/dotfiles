@@ -28,17 +28,13 @@ function batteryIcon(battery: typeof Battery): string {
   return icons.battery.none;
 }
 
-const labelColor = Variable<string>("green");
-
-Battery.connect("changed", () => {
-  if (Battery.percent < 15) labelColor.value = "red";
-  else if (Battery.percent < 30) labelColor.value = "yellow";
-  else labelColor.value = "green";
-});
-
 export const BatteryModule = () =>
   IconModule({
-    labelColor,
+    labelColor: Battery.bind("percent").as((percent) => {
+      if (percent < 15) return "red";
+      if (percent < 30) return "yellow";
+      return "green";
+    }),
     tooltipText: Battery.bind("time_remaining").as((seconds) => {
       const formatted = formatTime(seconds);
       return `${formatted} until ${

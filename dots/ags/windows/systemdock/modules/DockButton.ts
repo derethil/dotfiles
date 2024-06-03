@@ -1,5 +1,3 @@
-import { PanelButton } from "widgets/PanelButton";
-
 interface ToolProps {
   handlePrimaryClick?: () => void;
   icon: string;
@@ -7,7 +5,7 @@ interface ToolProps {
 }
 
 export function DockButton(props: ToolProps) {
-  return PanelButton({
+  return Widget.Button({
     className: "dock-button",
     tooltipText: props.tooltip,
     cursor: "pointer",

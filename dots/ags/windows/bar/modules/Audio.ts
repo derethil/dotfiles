@@ -31,9 +31,6 @@ export function AudioModule() {
     cursor: "pointer",
     className: "audio",
     labelColor: "magenta",
-    onClicked: () => speaker.is_muted = !speaker.is_muted,
-    onScrollUp: () => speaker.volume += 0.05,
-    onScrollDown: () => speaker.volume -= 0.05,
     icon: Widget.Icon({
       size: 22,
       icon: speaker.bind("volume").as(volumeIcon),

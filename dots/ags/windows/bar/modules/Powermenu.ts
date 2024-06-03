@@ -1,7 +1,5 @@
 import { icons } from "lib/icons";
-import { FontIcon } from "widgets/FontIcon";
 import { HoverRevealer } from "widgets/HoverRevealer";
-import { PanelModule } from "widgets/PanelModule";
 
 const actions = {
   default: {
@@ -37,8 +35,8 @@ const setupIconBgPrimaryHook = (self: any) => {
 };
 
 export function Powermenu() {
-  return PanelModule({
-    className: "powermenu",
+  return Widget.Box({
+    className: "bar-module",
     child: HoverRevealer({
       hexpand: true,
       direction: "up",

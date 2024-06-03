@@ -1,62 +1,52 @@
 $bar-spacing: calc($spacing / 2);
 
-@import "./bar-margin.scss";
-@import "./panel-button.scss";
-
 .bar {
   @include unset($rec: true);
   font-size: $font-ui-size;
   font-family: $font-ui-name;
 
-  .panel-button {
-    @include panel-button($flat: true, $reactive: false);
+  .bar-start {
+    margin-top: max($bar-spacing, 0px);
   }
 
-  & > box {
-    margin-top: $bar-spacing;
-    margin-bottom: $bar-spacing;
+  .bar-end {
+    margin-bottom: max($bar-spacing, 0px);
   }
 
-  // Start Widgets
+  .bar-module {
+    margin: $bar-spacing 0;
+    @include floating-widget;
+    @include bar-module;
+  }
 
   .window-button {
-    @include unset($rec: true);
-    @include panel-button($flat: true, $reactive: true);
     color: $primary;
-    padding-top: $padding * 0.5;
-    padding-bottom: $padding * 0.5;
   }
 
   .workspaces {
-    @include floating-widget($children: true);
-    @include bar-margin($children: true);
-
     button {
-      padding: $padding * 0.5 0;
+      padding: calc($padding * 0.5) 0;
 
-      // Default Indicator (Empty Workspace)
       .indicator {
         transition: $transition;
         color: transparentize($outline, 0.5);
         border: transparent;
       }
 
-      // Hovering Empty Workspace
       &.empty:hover .indicator {
         color: $primary;
       }
 
-      // Occupied Workspace
       &.occupied {
         .indicator {
           color: $on-surface;
         }
+
         &:hover .indicator {
           color: $primary;
         }
       }
 
-      // Active Workspace
       &.active {
         & .indicator,
         &.empty .indicator {
@@ -72,7 +62,7 @@ $bar-spacing: calc($spacing / 2);
 
   .media {
     image {
-      margin: $spacing * 0.25 0;
+      margin: calc($spacing * 0.25) 0;
     }
 
     button {
@@ -81,45 +71,18 @@ $bar-spacing: calc($spacing / 2);
       }
     }
 
-    .font-icon {
-      font-family: "Font Awesome 6 Free Solid";
-    }
-
     .controls {
       button {
         padding: $padding * 0.4 0;
 
-        &:hover .font-icon {
+        &:hover {
           color: lighten($on-surface, 10%);
         }
       }
     }
   }
 
-  .audio image,
-  .backlight image,
-  .battery image {
-    padding: $padding * 0.5 0;
-  }
-
-  .system-tray {
-    padding: $spacing * 0.125;
-
-    .tray-item {
-      margin: $spacing * 0.375;
-      @if ($scheme == "light") {
-        background-color: $on-surface;
-        padding: $spacing * 0.25;
-        margin: 0;
-        border-radius: 50%;
-      }
-    }
-  }
-
   .powermenu {
-    @include floating-widget($children: true);
-    @include bar-margin($children: true);
-
     &-button {
       padding: $padding * 1.2;
     }

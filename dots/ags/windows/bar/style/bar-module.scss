@@ -1,0 +1,56 @@
+@mixin bar-module-icon {
+  padding: 0;
+
+  .icon-container {
+    color: $on-primary-fixed;
+    border-bottom: $border;
+    padding: calc($padding * 1.25) 0;
+
+    &.bg-primary {
+      background-color: $primary-fixed;
+    }
+
+    &.bg-red {
+      background-color: $red;
+    }
+
+    &.bg-magenta {
+      background-color: $magenta;
+    }
+
+    &.bg-blue {
+      background-color: $blue;
+    }
+
+    &.bg-green {
+      background-color: $green;
+    }
+
+    &.bg-yellow {
+      background-color: $yellow;
+    }
+  }
+}
+
+@mixin bar-module() {
+  @include unset;
+  @include floating-widget;
+
+  &.bar-module-icon {
+    @include bar-module-icon;
+  }
+
+  color: $on-surface;
+  transition: $transition;
+  border-radius: $radius;
+
+  & > * {
+    padding: $padding $padding * 1.5;
+  }
+
+  @if $bar-position == "left" {
+    margin: $bar-spacing 0 $bar-spacing $spacing;
+  } @else {
+    margin: $bar-spacing $spacing $bar-spacing 0;
+  }
+}
