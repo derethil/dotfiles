@@ -2,8 +2,17 @@
   padding: 0;
   font-family: $font-mono-name;
   font-weight: bold;
+  border: none;
+
+  .content-container {
+    border: $border;
+    border-top: none;
+    border-radius: 0 0 $radius $radius;
+  }
 
   .icon-container {
+    border: $border;
+    border-radius: $radius $radius 0 0;
     color: $on-primary-fixed;
     border-bottom: $border;
     padding: calc($padding * 1.25) 0;

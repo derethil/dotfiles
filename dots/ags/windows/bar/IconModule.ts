@@ -39,7 +39,6 @@ export function IconModule(props: IconModuleProps) {
         }),
         Widget.Box({
           className: "content-container",
-          hpack: "center",
           vertical: true,
           child: props.child,
         }),
