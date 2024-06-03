@@ -1,11 +1,11 @@
 return {
   {
     "stevearc/conform.nvim",
-    ---@class ConformOpts
+    keys = {
+      { "<leader>cF", "<cmd>ConformInfo<cr>", { desc = "Conform" } }
+    },
     opts = {
-      ---@type table<string, conform.FormatterUnit[]>
       formatters_by_ft = {
-        -- Replace Prettier with Deno, Biome, and Prettierd (in that priority of support)
         ["javascript"] = { "deno_fmt" },
         ["javascriptreact"] = { "deno_fmt" },
         ["typescript"] = { "deno_fmt" },
@@ -35,6 +35,7 @@ return {
         "deno",
         -- "codespell",
         "prettierd",
+        "eslint_d"
       },
     },
   },
