@@ -6,23 +6,21 @@ interface IconModuleProps extends BoxProps {
   labelColor?: string | Binding<any, any, string>;
 }
 
+const constructor = (onlyPrimary: boolean, labelColor: string) => {
+  const color = onlyPrimary ? "primary" : labelColor;
+  return `bg-${color} icon-container`;
+};
+
 const iconContainerClassNames = (labelColor: IconModuleProps["labelColor"]) => {
   if (!labelColor) return "icon-container";
 
   if (typeof labelColor === "string") {
-    return options.bar.onlyPrimary.bind().as((onlyPrimary) => {
-      const color = onlyPrimary ? "primary" : labelColor;
-      return `bg-${color} icon-container`;
-    });
+    return options.bar.onlyPrimary.bind().as((onlyPrimary) =>
+      constructor(onlyPrimary, labelColor)
+    );
   }
 
-  return Utils.merge(
-    [options.bar.onlyPrimary.bind(), labelColor],
-    (onlyPrimary, labelColor) => {
-      if (onlyPrimary) return `bg-primary icon-container`;
-      return `bg-${labelColor} icon-container`;
-    },
-  );
+  return Utils.merge([options.bar.onlyPrimary.bind(), labelColor], constructor);
 };
 
 export function IconModule(props: IconModuleProps) {
