@@ -84,7 +84,7 @@ $bar-spacing: calc($spacing / 2);
 
   .powermenu {
     &-button {
-      padding: $padding * 1.2;
+      padding: $padding;
     }
 
     @mixin powermenu-color($color) {

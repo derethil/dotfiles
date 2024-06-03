@@ -171,7 +171,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     onlyPrimary: opt(false),
 
     layout: {
-      start: opt<BarWidget[]>(["window", "workspaces", "systemTray", "media"]),
+      start: opt<BarWidget[]>(["window", "workspaces", "media"]),
       center: opt<BarWidget[]>([]),
       end: opt<BarWidget[]>(["weather", "audio", "clock", "powermenu"]),
     },
