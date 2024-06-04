@@ -7,20 +7,15 @@ export const icons = {
   fallback: {
     executable: "application-x-executable-symbolic",
   },
-
   apps: {
     apps: "view-app-grid-symbolic",
     search: "window-new-symbolic",
   },
-
   notifications: {
     base: "notification-symbolic",
     alert: "notificaiton-alert-symbolic",
     off: "notification-disabled-symbolic",
   },
-
-  workspace: "circle-symbolic",
-
   power: {
     shutdown: "system-shutdown-symbolic",
     reboot: "system-reboot-symbolic",
@@ -28,21 +23,16 @@ export const icons = {
     lock: "system-lock-screen-symbolic",
     logout: "system-log-out-symbolic",
   },
-
   tools: {
     workspaces: "view-grid",
     colorPicker: "palette-symbolic",
     screenshot: "image-symbolic",
   },
-
   screenshots: {
     window: "window-symbolic",
     area: "region-drag-symbolic",
     fullscreen: "full-screen-symbolic",
   },
-
-  mediaControls: "music-symbolic",
-
   audio: {
     mic: {
       muted: "microphone-disabled-symbolic",
@@ -50,30 +40,25 @@ export const icons = {
       medium: "microphone-sensitivity-medium-symbolic",
       high: "microphone-sensitivity-high-symbolic",
     },
-
     volume: {
       muted: "audio-volume-muted-symbolic",
       low: "audio-volume-low-symbolic",
       medium: "audio-volume-medium-symbolic",
       high: "audio-volume-high-symbolic",
     },
-
     type: {
       headset: "audio-headset-symbolic",
       tv: "audio-tv-symbolic",
       speaker: "audio-external-speaker-symbolic",
     },
   },
-
   brightness: {
     screen: "backlight-symbolic",
   },
-
   searches: {
     clipboard: "edit-paste-symbolic",
     projects: "document-open-symbolic",
   },
-
   mpris: {
     fallback: "audio-x-generic-symbolic",
     shuffle: {
@@ -90,7 +75,6 @@ export const icons = {
     next: "media-skip-forward",
     prev: "media-skip-backward",
   },
-
   battery: {
     warning: "dialog-warning-symbolic",
     none: "battery-not-found-symbolic",
@@ -107,7 +91,11 @@ export const icons = {
     20: "battery-20-symbolic",
     10: "battery-critical-symbolic",
   },
-
+  system: {
+    updates: "package-down-symbolic",
+  },
+  workspace: "circle-symbolic",
+  mediaControls: "music-symbolic",
   ui: {
     tick: "object-select-symbolic",
     refresh: "view-refresh-symbolic",

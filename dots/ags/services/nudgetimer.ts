@@ -5,7 +5,7 @@ export type NudgeState = "waiting" | "running" | "paused" | "pending";
 
 const { interval, duration } = options.eyenudge;
 
-class NudgeTimerClass extends Service {
+class NudgeTimerService extends Service {
   // Static
   static {
     Service.register(
@@ -108,4 +108,4 @@ class NudgeTimerClass extends Service {
   }
 }
 
-export const NudgeTimer = new NudgeTimerClass();
+export const NudgeTimer = new NudgeTimerService();

@@ -13,7 +13,7 @@ export function ToolDock() {
   return Widget.Revealer({
     reveal_child: CurrentDockType.bind().as(Boolean),
     child: Widget.Box({
-      className: "tool-dock",
+      className: "tool-dock dock-module",
       vertical: true,
       children: [
         Widget.Box({

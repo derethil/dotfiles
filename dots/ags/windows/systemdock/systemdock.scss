@@ -4,12 +4,12 @@ window.floating-dock .system-dock {
   border-radius: if($radius == 0, 0, $radius + $spacing / 2);
   padding: calc($padding / 2);
 
+  .dock-module,
   .dock-button {
     padding: calc($padding / 2);
   }
 
   .tool-dock {
-    padding: calc($padding / 2);
     margin-top: $padding / 2;
     border-top: $border;
   }
@@ -28,6 +28,14 @@ window.floating-dock .system-dock {
     .switch {
       margin-left: $padding;
       margin-right: $padding;
+    }
+  }
+
+  .updates {
+    margin-right: $padding;
+    label {
+      font-family: $font-mono-name;
+      padding-right: calc($padding / 2);
     }
   }
 }

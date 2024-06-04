@@ -96,5 +96,9 @@ return {
         "https://gitlab.dragonarmy.rocks/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
       }
     }
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false
   }
 }

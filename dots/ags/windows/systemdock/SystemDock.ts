@@ -2,6 +2,7 @@ import { isGdkMonitorActive } from "lib/utils";
 import { SystemButtons } from "./modules/SystemButtons";
 import { NotificationsButton } from "./modules/NotificationsButton";
 import { toggleToolDock, ToolDock } from "./modules/ToolDock";
+import { UpdatesModule } from "./modules/PackageUpdates";
 
 const Hyprland = await Service.import("hyprland");
 
@@ -17,6 +18,7 @@ export function SystemDock(monitor: number) {
             vpack: "center",
             hpack: "center",
           }),
+          UpdatesModule(),
           NotificationsButton(),
         ],
       }),
@@ -25,6 +27,7 @@ export function SystemDock(monitor: number) {
   });
 
   const revealer = Widget.Revealer({
+    reveal_child: true,
     transition: "slide_down",
     child: Widget.Box({
       vertical: true,

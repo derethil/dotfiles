@@ -1,0 +1,82 @@
+import { bash, dependencies } from "lib/utils";
+
+type PackageType = "pacman" | "aur" | "dev";
+
+const CHECK_UPDATE_COMMAND: Record<PackageType, string> = {
+  pacman: "checkupdates",
+  aur: "yay -Qum 2> /dev/null",
+  dev: "yay -Qum --devel 2> /dev/null",
+};
+
+class PackageUpdatesService extends Service {
+  static {
+    Service.register(
+      this,
+      {
+        "updates-changed": ["int"],
+      },
+      {
+        "pacman-updates": ["int", "r"],
+        "aur-updates": ["int", "r"],
+        "dev-updates": ["int", "r"],
+      },
+    );
+  }
+
+  private intervalMs: number = 300000;
+
+  private pacman: number = 0;
+  private aur: number = 0;
+  private dev: number = 0;
+
+  get pacman_updates(): number {
+    return this.pacman;
+  }
+
+  get aur_updates(): number {
+    return this.aur;
+  }
+
+  get dev_updates(): number {
+    return this.dev;
+  }
+
+  private async checkUpdates(packageType: PackageType) {
+    try {
+      const out = await bash(CHECK_UPDATE_COMMAND[packageType]);
+      return out.trim().split("\n").length;
+    } catch (e) {
+      console.error(e);
+      return 0;
+    }
+  }
+
+  private async checkSystemUpdates() {
+    const updates = await Promise.all([
+      this.checkUpdates("pacman"),
+      this.checkUpdates("aur"),
+      this.checkUpdates("dev"),
+    ]);
+
+    Utils.notify("Package Updates", updates.join(" / "));
+
+    [this.pacman, this.aur, this.dev] = updates;
+    this.emit("updates-changed", updates.reduce((acc, val) => acc + val, 0));
+  }
+
+  public constructor() {
+    super();
+    if (!dependencies("yay", "checkupdates")) return;
+    this.checkSystemUpdates();
+    setInterval(this.checkSystemUpdates, this.intervalMs);
+  }
+
+  connect(
+    event = "updates-changed",
+    callback: (_: this, ...args: any[]) => void,
+  ) {
+    return super.connect(event, callback);
+  }
+}
+
+export const PackageUpdates = new PackageUpdatesService();

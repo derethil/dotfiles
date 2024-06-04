@@ -46,9 +46,8 @@ export const BatteryModule = () =>
       label: Battery.bind("percent").transform((p) => p.toString()),
     }),
     icon: Widget.Icon({
-      icon: icons.battery.none,
       size: 18,
-    }).hook(Battery, (self) => {
-      self.icon = batteryIcon(Battery);
+      setup: (self) =>
+        self.hook(Battery, () => self.icon = batteryIcon(Battery)),
     }),
   });
