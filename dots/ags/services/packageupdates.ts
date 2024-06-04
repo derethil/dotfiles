@@ -37,6 +37,7 @@ class PackageUpdatesService extends Service {
   private async checkUpdates(packageType: PackageType) {
     try {
       const out = await bash(CHECK_UPDATE_COMMAND[packageType]);
+      if (out === "") return 0;
       return out.trim().split("\n").length;
     } catch (e) {
       console.error(e);
@@ -68,6 +69,18 @@ class PackageUpdatesService extends Service {
   ) {
     return super.connect(event, callback);
   }
+
+  public refresh() {
+    this.checkSystemUpdates();
+  }
 }
 
 export const PackageUpdates = new PackageUpdatesService();
+
+declare global {
+  const packageupdates: PackageUpdatesService;
+}
+
+Object.assign(globalThis, {
+  packageupdates: PackageUpdates,
+});

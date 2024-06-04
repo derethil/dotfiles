@@ -26,7 +26,10 @@ export function UpdatesModule() {
             DockButton({
               icon: icons.system.updates,
               tooltip: "Package Updates",
-              handlePrimaryClick: () => bash("wezterm start -- arch-update -d"),
+              handlePrimaryClick: () =>
+                bash(
+                  "wezterm start --class 'wezterm-system-updater' -- arch-update -d",
+                ),
             }),
             Widget.Label({
               setup: (self) =>
