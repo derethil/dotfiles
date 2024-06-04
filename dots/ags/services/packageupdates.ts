@@ -1,11 +1,10 @@
 import { bash, dependencies } from "lib/utils";
 
-type PackageType = "pacman" | "aur" | "dev";
+type PackageType = "pacman" | "aur";
 
 const CHECK_UPDATE_COMMAND: Record<PackageType, string> = {
   pacman: "checkupdates",
-  aur: "yay -Qum 2> /dev/null",
-  dev: "yay -Qum --devel 2> /dev/null",
+  aur: "yay -Qum --devel 2> /dev/null",
 };
 
 class PackageUpdatesService extends Service {
@@ -18,7 +17,6 @@ class PackageUpdatesService extends Service {
       {
         "pacman-updates": ["int", "r"],
         "aur-updates": ["int", "r"],
-        "dev-updates": ["int", "r"],
       },
     );
   }
@@ -27,7 +25,6 @@ class PackageUpdatesService extends Service {
 
   private pacman: number = 0;
   private aur: number = 0;
-  private dev: number = 0;
 
   get pacman_updates(): number {
     return this.pacman;
@@ -35,10 +32,6 @@ class PackageUpdatesService extends Service {
 
   get aur_updates(): number {
     return this.aur;
-  }
-
-  get dev_updates(): number {
-    return this.dev;
   }
 
   private async checkUpdates(packageType: PackageType) {
@@ -55,12 +48,10 @@ class PackageUpdatesService extends Service {
     const updates = await Promise.all([
       this.checkUpdates("pacman"),
       this.checkUpdates("aur"),
-      this.checkUpdates("dev"),
     ]);
 
-    Utils.notify("Package Updates", updates.join(" / "));
+    [this.pacman, this.aur] = updates;
 
-    [this.pacman, this.aur, this.dev] = updates;
     this.emit("updates-changed", updates.reduce((acc, val) => acc + val, 0));
   }
 

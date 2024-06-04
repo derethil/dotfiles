@@ -5,8 +5,8 @@ import { bash } from "lib/utils";
 import { PackageUpdates } from "services/packageupdates";
 
 const UpdatesHook = () => {
-  const { pacman_updates, aur_updates, dev_updates } = PackageUpdates;
-  return `${pacman_updates}/${aur_updates}/${dev_updates}`;
+  const { pacman_updates, aur_updates } = PackageUpdates;
+  return `${pacman_updates}/${aur_updates}`;
 };
 
 export function UpdatesModule() {
