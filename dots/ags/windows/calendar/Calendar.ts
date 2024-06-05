@@ -1,6 +1,18 @@
 import GLib from "types/@girs/glib-2.0/glib-2.0";
-import { PopupWindow } from "windows/PopupWindow";
+import { PopupWindow, PopupWindowProps } from "windows/PopupWindow";
 import { NavHeader } from "./NavHeader";
+
+const Location = (): NonNullable<PopupWindowProps["layout"]> => {
+  const getClockPosition = () => {
+    if (options.bar.layout.start.value.includes("clock")) return "top";
+    // TODO: Build PopupWindow for center-left and center-right
+    if (options.bar.layout.start.value.includes("clock")) return "bottom";
+    return "bottom";
+  };
+
+  const clockPosition = getClockPosition();
+  return `${clockPosition}-${options.bar.position.value}`;
+};
 
 export function Calendar() {
   const Calendar = Widget.Calendar({
@@ -37,10 +49,12 @@ export function Calendar() {
   const shiftYear = (shift: number) =>
     shiftDate(Date.value.add_years(shift) ?? Date.value);
 
+  const location = Location();
+
   return PopupWindow({
-    transition: "slide_right",
+    transition: location.endsWith("left") ? "slide_right" : "slide_left",
     exclusivity: "exclusive",
-    layout: "bottom-left",
+    layout: location,
     name: "calendar",
     onClose: () => {
       Utils.timeout(options.transition.value, () => {

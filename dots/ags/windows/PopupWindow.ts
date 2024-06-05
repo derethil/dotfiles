@@ -6,7 +6,7 @@ import { type WindowProps } from "types/widgets/window";
 type Transition = RevealerProps["transition"];
 type Child = WindowProps["child"];
 
-type PopupWindowProps = Omit<WindowProps, "name"> & {
+export type PopupWindowProps = Omit<WindowProps, "name"> & {
   name: string;
   layout?: keyof ReturnType<typeof Layout>;
   transition?: Transition;
