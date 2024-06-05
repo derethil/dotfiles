@@ -1,0 +1,57 @@
+.container {
+  @include floating-widget;
+  padding: 0;
+  border: none;
+
+  .header {
+    border-radius: $radius $radius 0 0;
+    border: $border;
+    padding-top: calc($spacing / 2);
+    padding-bottom: $spacing;
+    background-color: $primary-fixed;
+    color: $on-primary-fixed;
+
+    .nav-header {
+      button {
+        color: $on-primary-fixed;
+        transition: $transition;
+
+        &:hover {
+          color: lighten($on-primary-fixed, 10%);
+        }
+      }
+
+      &.month label {
+        font-family: $font-mono-name;
+        font-size: calc($font-ui-size * 1.8);
+        font-weight: 600;
+      }
+
+      &.year label {
+        font-family: $font-mono-name;
+        font-size: calc($font-ui-size * 1.4);
+      }
+    }
+  }
+
+  calendar {
+    border: $border;
+    border-top: none;
+    border-radius: 0 0 $radius $radius;
+    background-color: $surface;
+    color: $on-surface;
+
+    &.highlight {
+      color: $primary;
+    }
+
+    &:indeterminate {
+      color: transparent;
+    }
+
+    &:selected {
+      background-color: $primary-fixed;
+      color: $on-primary-fixed;
+    }
+  }
+}

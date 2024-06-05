@@ -14,12 +14,16 @@ const DateTime = Variable(GLib.DateTime.new_now_local(), {
 });
 
 export function Clock() {
-  return IconModule({
-    child: ClockWidget({ format: options.bar.date.format.value }),
-    icon: Widget.Icon({
-      icon: DateTime.bind("value").as((time) => selectClockIcon(time)),
-      size: 24,
+  return Widget.EventBox({
+    cursor: "pointer",
+    onPrimaryClick: () => App.toggleWindow("calendar"),
+    child: IconModule({
+      child: ClockWidget({ format: options.bar.date.format.value }),
+      icon: Widget.Icon({
+        icon: DateTime.bind("value").as((time) => selectClockIcon(time)),
+        size: 24,
+      }),
+      labelColor: "yellow",
     }),
-    labelColor: "yellow",
   });
 }

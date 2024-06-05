@@ -2,6 +2,7 @@ import "lib/session";
 import "style/style";
 import { ApplicationDock } from "windows/applicationdock/ApplicationDock";
 import { Bar } from "windows/bar/Bar";
+import { Calendar } from "windows/calendar/Calendar";
 import { Dashboard } from "windows/dashboard/Dashboard";
 import { EyeNudge } from "windows/eyenudge/EyeNudge";
 import { OnScreenDisplay } from "windows/osd/OnScreenDisplay";
@@ -17,12 +18,14 @@ App.config({
   closeWindowDelay: {
     dashboard: options.transition.value,
     eyenudge: options.transition.value,
+    calendar: options.transition.value,
   },
   windows: [
     ...forMonitors(Bar),
     ...forMonitors(OnScreenDisplay),
     ...forMonitors(ApplicationDock),
     ...forMonitors(SystemDock),
+    Calendar(),
     EyeNudge(),
     Dashboard(),
     Settings(),

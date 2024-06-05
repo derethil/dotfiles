@@ -12,6 +12,7 @@ export const toggleToolDock = (dock?: DockType) => {
 export function ToolDock() {
   return Widget.Revealer({
     reveal_child: CurrentDockType.bind().as(Boolean),
+    transitionDuration: options.transition.bind(),
     child: Widget.Box({
       className: "tool-dock dock-module",
       vertical: true,
