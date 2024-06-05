@@ -11,11 +11,13 @@ type PopupWindowProps = Omit<WindowProps, "name"> & {
   layout?: keyof ReturnType<typeof Layout>;
   transition?: Transition;
   locked?: boolean;
+  onClose?: () => void;
 };
 
 interface PaddingProps {
   name: string;
   locked?: boolean;
+  onClose: () => void;
   css?: EventBoxProps["css"];
   hexpand?: EventBoxProps["hexpand"];
   vexpand?: EventBoxProps["vexpand"];
@@ -29,7 +31,10 @@ export const Padding = (props: PaddingProps) =>
     child: Widget.Box({ css: props.css ?? "" }),
     setup: (w) => {
       if (props.locked) return;
-      w.on("button-press-event", () => App.toggleWindow(props.name));
+      w.on("button-press-event", () => {
+        App.toggleWindow(props.name);
+        props.onClose();
+      });
     },
   });
 
@@ -61,6 +66,7 @@ interface LayoutProps {
   child: Child;
   locked?: boolean;
   transition?: Transition;
+  onClose: () => void;
 }
 
 const Layout = (props: LayoutProps) => ({
@@ -176,18 +182,23 @@ export function PopupWindow({
   transition,
   exclusivity = "ignore",
   locked,
+  onClose = () => {},
   ...props
 }: PopupWindowProps) {
   return Widget.Window<Gtk.Widget>({
     name,
     class_names: [name, "popup-window"],
-    setup: (w) => !locked && w.keybind("Escape", () => App.closeWindow(name)),
+    setup: (w) =>
+      !locked && w.keybind("Escape", () => {
+        App.closeWindow(name);
+        onClose();
+      }),
     visible: false,
     keymode: "on-demand",
     exclusivity,
     layer: "top",
     anchor: ["top", "bottom", "right", "left"],
-    child: Layout({ name, child, transition, locked })[layout](),
+    child: Layout({ name, child, transition, locked, onClose })[layout](),
     ...props,
   });
 }

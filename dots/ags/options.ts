@@ -171,7 +171,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     onlyPrimary: opt(false),
 
     layout: {
-      start: opt<BarWidget[]>(["window", "workspaces", "media"]),
+      start: opt<BarWidget[]>(["window", "workspaces", "systemTray", "media"]),
       center: opt<BarWidget[]>([]),
       end: opt<BarWidget[]>(["weather", "audio", "clock", "powermenu"]),
     },
@@ -202,7 +202,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     },
 
     tray: {
-      hidden: opt(["Wayland to X11 Video bridge"]),
+      hidden: opt(["Wayland to X11 Video bridge", "spotify"]),
     },
   },
 
