@@ -2,10 +2,6 @@ import GLib from "types/@girs/glib-2.0/glib-2.0";
 import { PopupWindow } from "windows/PopupWindow";
 import { NavHeader } from "./NavHeader";
 
-const Date = Variable(GLib.DateTime.new_now_local(), {
-  poll: [5000, () => GLib.DateTime.new_now_local()],
-});
-
 export function Calendar() {
   const Calendar = Widget.Calendar({
     onDaySelected: ({ date: [year, month, day] }) => {
@@ -16,8 +12,17 @@ export function Calendar() {
     sensitive: false,
   });
 
+  const Date = Variable(GLib.DateTime.new_now_local(), {
+    poll: [1000, () => {
+      const newDate = GLib.DateTime.new_now_local();
+      Calendar.select_day(newDate.get_day_of_month());
+      Calendar.select_month(newDate.get_month(), newDate.get_year());
+      return newDate;
+    }],
+  });
+
   const shiftDate = (newDate: GLib.DateTime) => {
-    if (Date.is_polling) Date.stopPoll();
+    Date.stopPoll();
     Date.value = newDate;
     Calendar.select_month(Date.value.get_month(), Date.value.get_year());
 
