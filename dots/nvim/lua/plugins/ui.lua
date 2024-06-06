@@ -103,4 +103,8 @@ return {
       vim.keymap.set("n", "<leader>z", require("dropbar.api").pick, { desc = "Select Dropdown Menu" })
     end,
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false
+  },
 }
