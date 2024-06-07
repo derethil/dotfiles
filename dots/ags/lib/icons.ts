@@ -6,6 +6,7 @@ export const substitutes: Record<string, string> = {
 export const icons = {
   fallback: {
     executable: "application-x-executable-symbolic",
+    notification: "dialog-information-symbolic",
   },
   apps: {
     apps: "view-app-grid-symbolic",

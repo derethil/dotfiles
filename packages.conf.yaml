@@ -21,8 +21,7 @@
     - neovim
     - netctl
     - noto-fonts-emoji
-    - otf-font-awesome
-    - playerctl
+    - otf-geist-mono-nerd
     - ripgrep
     - rye
     - slurp
@@ -55,7 +54,6 @@
     - morewaita
     - swww
     - ttf-icomoon-feather-git
-    - ttf-geist-mono
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
     - xdg-desktop-portal-hyprland-git
 

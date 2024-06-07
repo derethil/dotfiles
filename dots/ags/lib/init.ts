@@ -6,6 +6,8 @@ import { matugenWallpaperMonitor } from "./matugen";
 import { notificationsMiddleware } from "./notifications";
 import { userListener } from "./user.local";
 
+const Notifications = await Service.import("notifications");
+
 export async function init() {
   try {
     globalServices();
@@ -15,6 +17,9 @@ export async function init() {
     notificationsMiddleware();
     hyprlandOptions();
     userListener();
+
+    // Service Properties
+    Notifications.popupTimeout = 5000;
   } catch (error) {
     logError(error);
   }

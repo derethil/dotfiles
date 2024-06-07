@@ -5,6 +5,7 @@ import { Bar } from "windows/bar/Bar";
 import { Calendar } from "windows/calendar/Calendar";
 import { Dashboard } from "windows/dashboard/Dashboard";
 import { EyeNudge } from "windows/eyenudge/EyeNudge";
+import { NotificationPopup } from "windows/notifications/NotificationPopups";
 import { OnScreenDisplay } from "windows/osd/OnScreenDisplay";
 import { Settings } from "windows/settings/Settings";
 import { SystemDock } from "windows/systemdock/SystemDock";
@@ -25,6 +26,7 @@ App.config({
     ...forMonitors(OnScreenDisplay),
     ...forMonitors(ApplicationDock),
     ...forMonitors(SystemDock),
+    ...forMonitors(NotificationPopup),
     Calendar(),
     EyeNudge(),
     Dashboard(),

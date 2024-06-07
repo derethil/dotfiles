@@ -31,9 +31,7 @@ export function SystemButtons() {
       }),
       DockButton({
         activeOnTool: "screenshot",
-        handlePrimaryClick: () =>
-          // Utils.execAsync("hyprshot -m region --clipboard-only"),
-          toggleCurrentTool("screenshot"),
+        handlePrimaryClick: () => toggleCurrentTool("screenshot"),
         icon: icons.tools.screenshot,
         tooltip: "Screenshot",
       }),

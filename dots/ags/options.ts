@@ -222,6 +222,12 @@ const optionsConfig = mkOptions(OPTIONS, {
     },
   },
 
+  notifications: {
+    position: opt<Array<"top" | "bottom" | "left" | "right">>(["top", "right"]),
+    blacklist: opt(["Spotify"]),
+    width: opt(440),
+  },
+
   dashboard: {
     avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
 
@@ -255,10 +261,6 @@ const optionsConfig = mkOptions(OPTIONS, {
       "steam",
       "stremio",
     ]),
-  },
-
-  notifications: {
-    blacklist: opt(["Spotify"]),
   },
 });
 

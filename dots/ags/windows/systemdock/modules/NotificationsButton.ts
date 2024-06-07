@@ -3,7 +3,7 @@ import { DockButton } from "./DockButton";
 
 export function NotificationsButton() {
   return DockButton({
-    handlePrimaryClick: () => Utils.notify("open notifications"),
+    handlePrimaryClick: () => App.toggleWindow(`notifications`),
     icon: icons.notifications.base,
     tooltip: "Notifications",
   });

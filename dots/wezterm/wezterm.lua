@@ -7,7 +7,7 @@ config.color_scheme = "Gruvbox Material (Gogh)"
 config.window_background_opacity = 0.75
 
 -- Font Configuration
-config.font = wezterm.font("Geist Mono Semibold")
+config.font = wezterm.font("GeistMono NF SemiBold")
 config.font_size = 12
 config.bold_brightens_ansi_colors = true
 
