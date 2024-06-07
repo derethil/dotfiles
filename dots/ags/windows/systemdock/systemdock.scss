@@ -4,17 +4,23 @@ window.floating-dock switch {
   margin-bottom: $padding * 1.5;
 }
 
+window.floating-dock .system-dock,
+window.floating-dock .tool-container > box {
+  .dock-module {
+    padding: 0 calc($padding / 2);
+  }
+
+  .dock-button {
+    padding: calc($padding / 2);
+  }
+}
+
 window.floating-dock .system-dock {
   @include dock;
   @include floating-widget;
   margin-bottom: 0px;
   border-radius: if($radius == 0, 0, $radius + $spacing / 2);
   padding: calc($padding / 2);
-
-  .dock-button,
-  .dock-module {
-    padding: calc($padding / 2);
-  }
 
   .updates {
     margin-right: $padding;
@@ -25,16 +31,11 @@ window.floating-dock .system-dock {
   }
 }
 
-window.floating-dock .tool-dock {
-  @include floating-widget;
+window.floating-dock .tool-container > box {
   @include dock;
+  @include floating-widget;
   margin-top: calc($padding - $spacing - $border-width);
   border-top: $border;
-
-  .dock-button,
-  .dock-module {
-    padding: 0 calc($padding / 2);
-  }
 
   .screenshot-dock {
     padding-right: calc($padding / 2);

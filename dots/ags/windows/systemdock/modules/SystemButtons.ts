@@ -6,7 +6,7 @@ const Hyprland = await Service.import("hyprland");
 
 export function SystemButtons() {
   return Widget.Box({
-    className: "tools",
+    className: "dock-module",
     hexpand: true,
     children: [
       DockButton({

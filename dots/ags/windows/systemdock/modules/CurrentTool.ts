@@ -19,7 +19,6 @@ export function CurrentTool() {
       className: "tool-container",
       children: [
         Widget.Box({
-          className: "tool-dock dock-module",
           child: ScreenshotDock(),
           visible: CurrentToolStr.bind().as((t) => t === "screenshot"),
         }),
