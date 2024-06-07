@@ -8,7 +8,7 @@ I do not recommend installing the whole thing outright (if you are not me :)).
 These dotfiles are designed around the following packages and tools:
 
 - **Window Manager**: [Hyprland](https://github.com/hyprwm/Hyprland)
-- **Widgets**: [Aylur's Gtk Shell](https://github.com/Aylur/ags)
+- **Desktop UI**: [Aylur's Gtk Shell](https://github.com/Aylur/ags)
 - **Editor**: [Neovim](https://neovim.io/) using
   [LazyVim](https://www.lazyvim.org/)
 - **Terminal**: [WezTerm](https://wezfurlong.org/wezterm/index.html)
