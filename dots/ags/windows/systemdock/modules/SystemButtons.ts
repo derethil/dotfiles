@@ -1,6 +1,6 @@
 import { icons } from "lib/icons";
 import { DockButton } from "./DockButton";
-import { toggleToolDock } from "./ToolDock";
+import { toggleCurrentTool } from "./CurrentTool";
 
 const Hyprland = await Service.import("hyprland");
 
@@ -30,9 +30,10 @@ export function SystemButtons() {
         tooltip: "Color Picker",
       }),
       DockButton({
+        activeOnTool: "screenshot",
         handlePrimaryClick: () =>
           // Utils.execAsync("hyprshot -m region --clipboard-only"),
-          toggleToolDock("screenshot"),
+          toggleCurrentTool("screenshot"),
         icon: icons.tools.screenshot,
         tooltip: "Screenshot",
       }),

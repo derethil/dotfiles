@@ -15,7 +15,7 @@ export function ScreenshotDock() {
   };
 
   return Widget.Box({
-    className: "screenshot-dock",
+    className: "screenshot-dock tool",
     vpack: "center",
     children: [
       DockButton({
@@ -38,18 +38,19 @@ export function ScreenshotDock() {
         hpack: "center",
         className: "vertical",
       }),
-      Widget.Switch({
-        className: "switch",
-        state: shouldSave.value,
-        onActivate: () => shouldSave.value = !shouldSave.value,
-        tooltipText: "Save to Disk",
-      }),
       Widget.Box({
-        className: "save-icon",
-        child: Widget.Icon({
-          size: options.docks.iconSize.bind().as((v) => v * 0.75),
-          icon: icons.ui.save,
-        }),
+        className: "save-option dock-module",
+        children: [
+          Widget.Switch({
+            state: shouldSave.value,
+            onActivate: () => shouldSave.value = !shouldSave.value,
+            tooltipText: "Save to Disk",
+          }),
+          Widget.Icon({
+            size: options.docks.iconSize.bind().as((v) => v * 0.75),
+            icon: icons.ui.save,
+          }),
+        ],
       }),
     ],
   });

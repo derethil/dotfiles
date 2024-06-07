@@ -1,38 +1,32 @@
 import { isGdkMonitorActive } from "lib/utils";
-import { SystemButtons } from "./modules/SystemButtons";
+import { CurrentTool, toggleCurrentTool } from "./modules/CurrentTool";
 import { NotificationsButton } from "./modules/NotificationsButton";
-import { toggleToolDock, ToolDock } from "./modules/ToolDock";
 import { UpdatesModule } from "./modules/PackageUpdates";
+import { SystemButtons } from "./modules/SystemButtons";
 
 const Hyprland = await Service.import("hyprland");
 
 export function SystemDock(monitor: number) {
-  const dock = Widget.Box({
-    className: "system-dock",
-    vertical: true,
-    children: [
-      Widget.Box({
-        children: [
-          SystemButtons(),
-          Widget.Separator({
-            vpack: "center",
-            hpack: "center",
-          }),
-          UpdatesModule(),
-          NotificationsButton(),
-        ],
-      }),
-      ToolDock(),
-    ],
-  });
-
   const revealer = Widget.Revealer({
     reveal_child: true,
     transition: "slide_down",
+    transitionDuration: options.transition.bind(),
     child: Widget.Box({
       vertical: true,
       children: [
-        dock,
+        Widget.Box({
+          className: "system-dock",
+          children: [
+            SystemButtons(),
+            Widget.Separator({
+              vpack: "center",
+              hpack: "center",
+            }),
+            UpdatesModule(),
+            NotificationsButton(),
+          ],
+        }),
+        CurrentTool(),
       ],
     }),
     setup: (self) => {
@@ -53,7 +47,7 @@ export function SystemDock(monitor: number) {
     const workspace = Hyprland.getWorkspace(Hyprland.active.workspace.id);
     if (workspace?.windows === 0) return;
     revealer.reveal_child = reveal;
-    if (!reveal) toggleToolDock();
+    if (!reveal) toggleCurrentTool();
   };
 
   return Widget.Window({
