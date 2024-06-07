@@ -1,10 +1,14 @@
 @import "./button";
 
 @mixin switch {
-  @include button;
+  @include button($inactive: true);
 
   slider {
-    background-color: $surface-container;
+    @if ($scheme == "light") {
+      background-color: $surface-container-low;
+    } @else {
+      background-color: $on-surface;
+    }
     border-radius: $radius;
     min-width: 24px;
     min-height: 24px;
