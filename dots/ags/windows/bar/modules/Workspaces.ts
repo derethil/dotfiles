@@ -18,7 +18,7 @@ const Container = (hideAfter: number) => {
         className: "workspace",
         child: Widget.Icon({
           icon: icons.workspace,
-          size: options.theme.spacing.bind().as((s) => s * 2.25),
+          size: options.bar.workspaces.iconSize.bind(),
           className: "indicator",
         }),
         onClicked: () => swapToWorkspace(i),

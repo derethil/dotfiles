@@ -198,6 +198,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     },
 
     workspaces: {
+      iconSize: opt(18),
       minimum: opt(5),
     },
 

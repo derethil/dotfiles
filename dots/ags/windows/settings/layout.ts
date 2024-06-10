@@ -199,6 +199,7 @@ export const Layout = [
       Group({
         title: "Workspaces",
         rows: [
+          Row({ opt: bar.workspaces.iconSize, title: "Icon Size" }),
           Row({ opt: bar.workspaces.minimum, title: "Minimum Shown In Bar", note: "0 for fully dynamic workspaces" })
         ]
       }),
