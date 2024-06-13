@@ -7,7 +7,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
-    lazypath })
+    lazypath,
+  })
 end
 
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
@@ -16,7 +17,7 @@ require("lazy").setup({
   spec = {
     {
       "LazyVim/LazyVim",
-      import = "lazyvim.plugins"
+      import = "lazyvim.plugins",
     },
     -- Coding Extras
     { import = "lazyvim.plugins.extras.coding.copilot" },
@@ -35,6 +36,7 @@ require("lazy").setup({
     -- Lang Extras
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.clangd" },
@@ -51,7 +53,7 @@ require("lazy").setup({
   },
   defaults = {
     lazy = false,
-    version = false,            -- always use the latest git commit
+    version = false, -- always use the latest git commit
   },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
