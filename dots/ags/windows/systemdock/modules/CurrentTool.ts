@@ -2,7 +2,7 @@ import { ScreenshotDock } from "./ScreenshotDock";
 
 type DockType = "screenshot";
 
-export const CurrentToolStr = Variable<null | DockType>("screenshot");
+export const CurrentToolStr = Variable<null | DockType>(null);
 
 export const toggleCurrentTool = (dock?: DockType) => {
   if (!dock) return (CurrentToolStr.value = null);
