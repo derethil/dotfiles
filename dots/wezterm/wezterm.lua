@@ -1,4 +1,4 @@
-local wezterm = require('wezterm')
+local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Appearance Configuration
@@ -13,5 +13,6 @@ config.bold_brightens_ansi_colors = true
 
 -- Wayland crashes on Hyprland right now
 config.enable_wayland = false
+config.default_prog = { "tmux", "new-session", "-As", "base" }
 
 return config
