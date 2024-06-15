@@ -1,5 +1,5 @@
 function yay
-    if contains -- -So $argv
+    if contains -- -O $argv
         # Check if a pckage name was provided
         if test (count $argv) != 2
             return

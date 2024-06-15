@@ -18,4 +18,4 @@ abbr --position anywhere -a yaylo 'yay -Qdt'      # list orphans
 abbr --position anywhere -a yayro 'yay -Qdt && yay -Rns $(yay -Qtdq)' # remove orphans
 abbr --position anywhere -a yayc 'yay -Scc'       # clean cache
 abbr --position anywhere -a yaylf 'yay -Ql'       # list files
-abbr --position anywhere -a yayo 'yay -So'        # open AUR page
+abbr --position anywhere -a yayo 'yay -O'        # open AUR page
