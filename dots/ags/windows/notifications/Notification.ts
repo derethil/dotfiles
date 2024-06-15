@@ -2,10 +2,22 @@ import { type Notification as NotificationType } from "types/service/notificatio
 import GLib from "gi://GLib";
 import { icons } from "lib/icons";
 
-const time = (time: number, format = "%l:%M %p") =>
-  GLib.DateTime
-    .new_from_unix_local(time)
-    .format(format);
+const formatTime = (time: number): string => {
+  const datetime = GLib.DateTime.new_from_unix_local(time);
+  const now = GLib.DateTime.new_now_local();
+  const microseconds = now.difference(datetime);
+  const minutes = microseconds / 1000000 / 60;
+
+  if (minutes < 1) return "now";
+  if (minutes < 60) return `${Math.floor(minutes)}m ago`;
+  return `${Math.floor(minutes / 60)}h ago`;
+};
+
+const timeLabel = (time: number) => {
+  return Variable(formatTime(time), {
+    poll: [60000, async () => formatTime(time)],
+  }).bind();
+};
 
 const NotificationIcon = ({ app_entry, app_icon, image }: NotificationType) => {
   if (image) {
@@ -77,7 +89,7 @@ export function Notification(notification: NotificationType) {
               Widget.Label({
                 className: "time",
                 vpack: "start",
-                label: time(notification.time),
+                label: timeLabel(notification.time),
               }),
               Widget.Button({
                 className: "close-button",

@@ -16,9 +16,6 @@ const Location = (): NonNullable<PopupWindowProps["layout"]> => {
 
 export function Calendar() {
   const Calendar = Widget.Calendar({
-    onDaySelected: ({ date: [year, month, day] }) => {
-      Date.value = GLib.DateTime.new_local(year, month, day, 0, 0, 0);
-    },
     showDetails: false,
     showHeading: false,
     sensitive: false,
