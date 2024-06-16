@@ -3,6 +3,7 @@ import { CurrentTool, toggleCurrentTool } from "./modules/CurrentTool";
 import { NotificationsButton } from "./modules/NotificationsButton";
 import { UpdatesModule } from "./modules/PackageUpdates";
 import { SystemButtons } from "./modules/SystemButtons";
+import { NudgeModule } from "./modules/NudgeModule";
 
 const Hyprland = await Service.import("hyprland");
 
@@ -22,6 +23,7 @@ export function SystemDock(monitor: number) {
               vpack: "center",
               hpack: "center",
             }),
+            NudgeModule(),
             UpdatesModule(),
             NotificationsButton(),
           ],

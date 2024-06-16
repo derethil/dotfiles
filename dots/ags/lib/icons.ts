@@ -28,6 +28,7 @@ export const icons = {
     workspaces: "view-grid",
     colorPicker: "palette-symbolic",
     screenshot: "image-symbolic",
+    nudge: "eye-symbolic",
   },
   screenshots: {
     window: "window-symbolic",

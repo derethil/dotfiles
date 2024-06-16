@@ -16,14 +16,26 @@ const disableForToday = () => {
   snooze(disableDuration);
 };
 
+function formatSeconds(seconds: number): string {
+  if (seconds < 60) {
+    const padding = seconds < 10 ? " " : "";
+    return `${padding}${seconds.toFixed(2)}s`;
+  } else {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const padding = remainingSeconds < 10 ? " " : "";
+    return `${minutes}m ${padding}${remainingSeconds.toFixed(0)}s`;
+  }
+}
+
 const NudgeRemaining = () => {
   return Widget.Label({
     vexpand: true,
     className: "nudge-remaining",
     label: NudgeTimer.bind("nudge_remaining").as((remaining) => {
       const seconds = remaining / 1000;
-      const padding = seconds < 10 ? " " : "";
-      return `${padding}${seconds.toFixed(2)}s`;
+      if (seconds >= options.eyenudge.interval.value) return "Paused";
+      return formatSeconds(seconds);
     }),
   });
 };
@@ -53,11 +65,11 @@ const Actions = (nudgeState: NudgeState) => {
   return [
     ...statefulActions[nudgeState] ?? [],
     Widget.Button({
-      label: "Snooze",
+      label: "5m",
       onPrimaryClick: () => snooze(300),
     }),
     Widget.Button({
-      label: "Skip",
+      label: "20m",
       onPrimaryClick: () => snooze(),
     }),
   ];

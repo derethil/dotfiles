@@ -7,7 +7,7 @@ window.floating-dock switch {
 window.floating-dock .system-dock,
 window.floating-dock .tool-container > box {
   .dock-module {
-    padding: 0 calc($padding / 2);
+    @include spacing;
   }
 
   .dock-button {
@@ -22,12 +22,14 @@ window.floating-dock .system-dock {
   border-radius: if($radius == 0, 0, $radius + $spacing / 2);
   padding: calc($padding / 2);
 
-  .updates {
+  .updates,
+  .nudge > label {
     margin-right: $padding;
-    label {
-      font-family: $font-mono-name;
-      padding-right: calc($padding / 2);
-    }
+  }
+
+  .updates label {
+    font-family: $font-mono-name;
+    padding-right: calc($padding / 2);
   }
 }
 
