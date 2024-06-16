@@ -7,15 +7,6 @@ const snooze = (until?: number) => {
   NudgeTimer.waitForNudge(until);
 };
 
-const disableForToday = () => {
-  const now = new Date();
-  const reenableAt = new Date(now);
-  reenableAt.setDate(now.getDate() + 1);
-  reenableAt.setHours(8);
-  const disableDuration = reenableAt.getTime() - now.getTime();
-  snooze(disableDuration);
-};
-
 function formatSeconds(seconds: number): string {
   if (seconds < 60) {
     const padding = seconds < 10 ? " " : "";
@@ -32,9 +23,12 @@ const NudgeRemaining = () => {
   return Widget.Label({
     vexpand: true,
     className: "nudge-remaining",
-    label: NudgeTimer.bind("nudge_remaining").as((remaining) => {
+    label: Utils.merge([
+      NudgeTimer.bind("nudge_remaining"),
+      NudgeTimer.bind("nudge_state"),
+    ], (remaining, state) => {
+      if (state === "disabled") return "Disabled";
       const seconds = remaining / 1000;
-      if (seconds >= options.eyenudge.interval.value) return "Paused";
       return formatSeconds(seconds);
     }),
   });
@@ -42,6 +36,12 @@ const NudgeRemaining = () => {
 
 const Actions = (nudgeState: NudgeState) => {
   const statefulActions: Partial<Record<NudgeState, Gtk.Widget[]>> = {
+    disabled: [
+      Widget.Button({
+        label: "Close",
+        onPrimaryClick: () => App.toggleWindow("eyenudge"),
+      }),
+    ],
     pending: [
       Widget.Button({
         label: "Start",
@@ -62,14 +62,16 @@ const Actions = (nudgeState: NudgeState) => {
     ],
   };
 
+  const label = nudgeState === "disabled" ? "Start in" : "Snooze for";
+
   return [
     ...statefulActions[nudgeState] ?? [],
     Widget.Button({
-      label: "5m",
+      label: `${label} 5m`,
       onPrimaryClick: () => snooze(300),
     }),
     Widget.Button({
-      label: "20m",
+      label: `${label} 20m`,
       onPrimaryClick: () => snooze(),
     }),
   ];
@@ -81,6 +83,7 @@ const Title = (nudgeState: NudgeState) => {
     running: "Eye Nudge - Look Away",
     paused: "Eye Nudge - Paused",
     waiting: "Eye Nudge - Waiting",
+    disabled: "Eye Nudge - Disabled",
   };
 
   return Titles[nudgeState] ?? "Eye Nudge";
@@ -110,9 +113,14 @@ const Content = () => {
         className: "footer",
         hexpand: true,
         hpack: "center",
+        visible: NudgeTimer.bind("nudge_state").as((s) => s !== "disabled"),
         child: Widget.Button({
           label: "Disable for today",
-          onPrimaryClick: disableForToday,
+          visible: NudgeTimer.bind("nudge_state").as((s) => s !== "disabled"),
+          onPrimaryClick: () => {
+            NudgeTimer.disableNudgeToday();
+            App.toggleWindow("eyenudge");
+          },
         }),
       }),
     ],

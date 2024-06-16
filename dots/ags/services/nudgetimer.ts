@@ -1,7 +1,12 @@
 import GLib from "gi://GLib";
 import { playNotificationBell } from "lib/utils";
 
-export type NudgeState = "waiting" | "running" | "paused" | "pending";
+export type NudgeState =
+  | "waiting"
+  | "running"
+  | "paused"
+  | "pending"
+  | "disabled";
 
 const { interval, duration } = options.eyenudge;
 
@@ -78,7 +83,20 @@ class NudgeTimerService extends Service {
     this.clearInterval();
   }
 
+  public disableNudgeToday() {
+    this.nudge_state = "disabled";
+    this.clearInterval();
+    this.enableAtMidnight();
+  }
+
   // Private Helpers
+
+  private enableAtMidnight() {
+    const msUntilMidnight = 86400000 - (Date.now() % 86400000);
+    setTimeout(() => {
+      this.waitForNudge();
+    }, msUntilMidnight);
+  }
 
   private clearInterval(): boolean {
     if (!this.nudgeInterval) return false;
