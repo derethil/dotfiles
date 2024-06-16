@@ -32,8 +32,8 @@ _envs=(
 	# ssh
 	SSH_AUTH_SOCK
 )
-
-mapfile -t -O "${#_envs[@]}" _envs < <(rg '^env? =' ../conf.d/environment.conf | awk '{print $3}' | tr -d ',')
+bash_directory=$(dirname "${BASH_SOURCE[0]}")
+mapfile -t -O "${#_envs[@]}" _envs < <(rg '^env? =' "$bash_directory/../conf.d/environment.conf" | awk '{print $3}' | tr -d ',')
 
 case "$1" in
 system)
