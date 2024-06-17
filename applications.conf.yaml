@@ -6,7 +6,6 @@
     # CLI Applications
     - arch-update
     - bottom
-    - cloc
     - docker
     - docker-compose
     - docker-credential-secretservice-bin
@@ -22,6 +21,7 @@
     - plocate
     - proton-ge-custom-bin
     - rye
+    - scc
     - thefuck
     - tldr
     - unrar
