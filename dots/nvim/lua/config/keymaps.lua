@@ -22,8 +22,8 @@ end
 
 -- Vim Keymaps
 
-vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select All" })
-vim.keymap.set("v", "<C-a>", "VggVG", { desc = "Select All " })
+vim.keymap.set("n", "<leader>a", "ggVG", { desc = "Select All" })
+vim.keymap.set("v", "<leader>a", "VggVG", { desc = "Select All " })
 vim.keymap.set("n", "x", '"_x', { desc = "Delete without yanking" })
 vim.keymap.set("v", "p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set("n", "<leader>j", "*``cgn", { desc = "Replace word under cursor" })
