@@ -2,7 +2,7 @@ return {
   {
     "stevearc/conform.nvim",
     keys = {
-      { "<leader>cF", "<cmd>ConformInfo<cr>", { desc = "Conform" } }
+      { "<leader>cF", "<cmd>ConformInfo<cr>", { desc = "Conform" } },
     },
     opts = {
       formatters_by_ft = {
@@ -22,8 +22,7 @@ return {
         ["markdown.mdx"] = { "prettierd" },
         ["graphql"] = { "prettierd" },
         ["handlebars"] = { "prettierd" },
-        -- Other Custom Formatters
-        -- ["*"] = { "codespell" },
+        ["rust"] = { "rustfmt" },
       },
     },
   },
@@ -33,9 +32,10 @@ return {
       ensure_installed = {
         "biome",
         "deno",
-        -- "codespell",
+        "rustfmt",
+        "rustywind",
         "prettierd",
-        "eslint_d"
+        "eslint_d",
       },
     },
   },
