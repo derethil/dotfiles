@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd ~/Documents/Books || exit
+
+papeer get --selector='ol>li>a' --format=epub https://doc.rust-lang.org/book/
+
+mv "The_Rust_Programming_Language_-_The_Rust_Programming_Language.epub" "TheRustProgrammingLanguage.epub"
