@@ -1,10 +1,10 @@
 # Simple Aliases
 alias ls="eza -la --icons --group-directories-first"
+alias lt="eza --tree --icons --group-directories-first --level=3"
 alias cat="bat"
 alias btm="btm --enable_gpu_memory"
 alias del="trashy put"
 alias nv="nvim"
-alias lg="lazygit"
 
 alias udb="sudo updatedb"
 
