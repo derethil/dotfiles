@@ -233,7 +233,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
 
     projects: {
-      command: opt("neovide -- --cmd cd %d"),
+      command: opt("code -r %d"),
       dynamic: opt([
         "~/development/personal",
         "~/development/personal/school/*",

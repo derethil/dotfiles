@@ -10,7 +10,7 @@ return {
           settings = {
             tailwindCSS = {
               experimental = {
-                classRegex = require("util.tailwind").mergedRegex,
+                classRegex = require("util.tailwind").cvaRegex,
               },
             },
           },

@@ -23,3 +23,4 @@ set -Ux NUGET_PACKAGES "$XDG_CACHE_HOME"/NuGetPackages
 set -Ux HISTFILE $XDG_DATA_HOME/bash/history
 set -Ux GTK2_RC_FILES $XDG_CONFIG_HOME/gtk-2.0/gtkrc
 set -Ux PNPM_HOME $XDG_DATA_HOME/pnpm
+set -Ux JAVA_HOME /usr/lib/jvm/default
