@@ -27,7 +27,7 @@ return {
       delay = 0,
     },
     keys = {
-      { "<leader>uo", "<cmd>GitBlameToggle<CR>",        desc = "Toggle Statusline Git Blame" },
+      { "<leader>uo", "<cmd>GitBlameToggle<CR>", desc = "Toggle Statusline Git Blame" },
       { "<leader>gc", "<cmd>GitBlameOpenCommitURL<CR>", desc = "Open Blamed Commit URL" },
     },
   },
@@ -67,8 +67,8 @@ return {
         { "progress", separator = { left = "", right = nil } },
         {
           function()
-            local words = vim.fn.wordcount()['words']
-            return words .. ' words'
+            local words = vim.fn.wordcount()["words"]
+            return words .. " words"
           end,
           cond = function()
             local ft = vim.bo.filetype
@@ -105,6 +105,6 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    enabled = false
+    enabled = false,
   },
 }

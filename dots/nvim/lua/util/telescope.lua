@@ -48,33 +48,35 @@ function M.grep_ags_style_variables(opts)
 
   -- Run the search
   opts = opts or {}
-  pickers.new(opts, {
-    prompt_title = "AGS Style Variables",
-    finder = finders.new_table(read_file()),
-    sorter = config.generic_sorter(opts),
-    attach_mappings = function(prompt_bufnr)
-      actions.select_default:replace(function()
-        actions.close(prompt_bufnr)
-        local selection = action_state.get_selected_entry()
-        vim.api.nvim_put({ selection.value }, "", false, true)
-      end)
-      return true
-    end,
-  }):find()
+  pickers
+    .new(opts, {
+      prompt_title = "AGS Style Variables",
+      finder = finders.new_table(read_file()),
+      sorter = config.generic_sorter(opts),
+      attach_mappings = function(prompt_bufnr)
+        actions.select_default:replace(function()
+          actions.close(prompt_bufnr)
+          local selection = action_state.get_selected_entry()
+          vim.api.nvim_put({ selection.value }, "", false, true)
+        end)
+        return true
+      end,
+    })
+    :find()
 end
 
 -- Git Utils
 
-local diff_so_fancy = previewers.new_termopen_previewer {
+local diff_so_fancy = previewers.new_termopen_previewer({
   get_command = function(entry)
     -- Command for Git Status
-    if entry.status == '??' or 'A ' then
+    if entry.status == "??" or "A " then
       return { "git", "diff", entry.path }
     end
     -- For Git Commits and Git BCommits
     return { "git", "diff", entry.path .. "^!" }
-  end
-}
+  end,
+})
 function M.dsf_git_status(opts)
   opts = opts or {}
   opts.previewer = diff_so_fancy

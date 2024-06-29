@@ -4,7 +4,7 @@ return {
     ensure_installed = {
       "cppdgb",
       "python",
-      "js"
-    }
-  }
+      "js",
+    },
+  },
 }
