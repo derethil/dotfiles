@@ -246,6 +246,10 @@ const optionsConfig = mkOptions(OPTIONS, {
   eyenudge: {
     interval: opt(1200),
     duration: opt(20),
+    disableForClients: opt<(string | RegExp)[]>([
+      /^steam_app_[0-9]+$/,
+      "com.stremio.stremio",
+    ]),
   },
 
   docks: {

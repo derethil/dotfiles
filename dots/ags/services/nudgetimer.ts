@@ -1,6 +1,8 @@
 import GLib from "gi://GLib";
 import { playNotificationBell } from "lib/utils";
 
+const Hyprland = await Service.import("hyprland");
+
 export type NudgeState =
   | "waiting"
   | "running"
@@ -35,6 +37,7 @@ class NudgeTimerService extends Service {
   public constructor() {
     super();
     this.waitForNudge();
+    this.clientsMonitor();
   }
 
   // Getters
@@ -90,6 +93,30 @@ class NudgeTimerService extends Service {
   }
 
   // Private Helpers
+
+  private shouldDisableFor(clientClass: string) {
+    const disableFor = options.eyenudge.disableForClients.value;
+    return disableFor.some((marker) => {
+      if (typeof marker === "string") return marker === clientClass;
+      return marker.test(clientClass);
+    });
+  }
+
+  private checkDisableClients() {
+    const classes = Hyprland.clients.map((client) => client.initialClass);
+    const shouldDisable = classes.some(this.shouldDisableFor);
+
+    if (shouldDisable && this.nudge_state !== "disabled") {
+      this.disableNudgeToday();
+    } else if (!shouldDisable && this.nudge_state === "disabled") {
+      this.waitForNudge();
+    }
+  }
+
+  private clientsMonitor() {
+    this.checkDisableClients();
+    Hyprland.connect("notify::clients", () => this.checkDisableClients());
+  }
 
   private enableAtMidnight() {
     const msUntilMidnight = 86400000 - (Date.now() % 86400000);
