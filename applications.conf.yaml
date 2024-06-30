@@ -47,5 +47,9 @@
     - yuzu
     - zoom
 
+- flatpak:
+    - com.stremio.Stremio
+    - com.heroicgameslauncher.hgl
+
 - shell:
     - [updatedb, Updating locate database]

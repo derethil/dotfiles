@@ -2,12 +2,15 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 [submodule "dotbot-yay"]
-	path = dotbot-yay
+	path = plugins/dotbot-yay
 	url = https://github.com/oxson/dotbot-yay
 [submodule "dotbot-asdf"]
-	path = dotbot-asdf
+	path = plugins/dotbot-asdf
 	url = https://github.com/sobolevn/dotbot-asdf.git
 [submodule "dots/fonts/SFMono-Nerd-Font-Ligaturized"]
 	path = dots/fonts/SFMono-Nerd-Font-Ligaturized
 	url = https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized
 	ignore = untracked
+[submodule "dotbot-flatpak"]
+	path = plugins/dotbot-flatpak
+	url = https://github.com/DrDynamic/dotbot-flatpak.git
