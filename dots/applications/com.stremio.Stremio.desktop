@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=Stremio
+Comment=Video organizer for your Movies, TV Shows and TV Channels
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/opt/stremio/stremio --file-forwarding --socket=wayland com.stremio.Stremio --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --enable-webrtc-pipewire-capturer @@u %U @@
+Icon=com.stremio.Stremio
+Terminal=false
+Type=Application
+Categories=AudioVideo;Video;Player;TV;
+MimeType=application/x-bittorrent;x-scheme-handler/magnet;x-scheme-handler/stremio;video/avi;video/msvideo;video/x-msvideo;video/mp4;video/x-matroska;
+StartupWMClass=stremio
+X-Desktop-File-Install-Version=0.27
+X-Flatpak=com.stremio.Stremio
+
