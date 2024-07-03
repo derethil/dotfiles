@@ -60,6 +60,7 @@ const Actions = (nudgeState: NudgeState) => {
       ActionButton("Close", ActionFunctions.close),
     ],
     pending: [
+      ActionButton("Start", ActionFunctions.start),
       ActionButton("Snooze for 5m", () => ActionFunctions.startIn(300)),
       ActionButton("Snooze for 20m", () => ActionFunctions.startIn()),
     ],

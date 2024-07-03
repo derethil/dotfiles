@@ -14,7 +14,7 @@ export const icons = {
   },
   notifications: {
     base: "notification-symbolic",
-    alert: "notificaiton-alert-symbolic",
+    alert: "notification-alert-symbolic",
     off: "notification-disabled-symbolic",
   },
   power: {
