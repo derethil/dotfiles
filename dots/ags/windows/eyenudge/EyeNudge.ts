@@ -1,3 +1,4 @@
+import { icons } from "lib/icons";
 import { type NudgeState, NudgeTimer } from "services/nudgetimer";
 import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
 import { PopupWindow } from "windows/PopupWindow";
@@ -90,15 +91,43 @@ const Title = (nudgeState: NudgeState) => {
 };
 
 const Content = () => {
+  const handleDisableNudge = () => {
+    Utils.notify({
+      summary: "Eye Nudge",
+      body: "Nudges have been turned off for now.",
+      iconName: icons.tools.nudge,
+      actions: { "Undo": () => NudgeTimer.waitForNudge() },
+    });
+    NudgeTimer.disableNudge();
+    App.toggleWindow("eyenudge");
+  };
+
+  const closeVisible = NudgeTimer.bind("nudge_state").as((state) =>
+    state !== "disabled"
+  );
+
   return Widget.Box({
     css: "min-width: 500px; min-height: 300px;",
     vertical: true,
     vpack: "fill",
     hexpand: true,
     children: [
-      Widget.Label({
-        className: "nudge-title",
-        label: NudgeTimer.bind("nudge_state").as(Title),
+      Widget.Overlay({
+        overlay: Widget.Box({
+          visible: closeVisible,
+          className: "close-button",
+          hpack: "end",
+          child: Widget.Button({
+            tooltipText: "Disable",
+            cursor: "pointer",
+            onPrimaryClick: handleDisableNudge,
+            child: Widget.Icon({ icon: "window-close-symbolic", size: 24 }),
+          }),
+        }),
+        child: Widget.Label({
+          className: "nudge-title",
+          label: NudgeTimer.bind("nudge_state").as(Title),
+        }),
       }),
       Widget.Separator(),
       NudgeRemaining(),
@@ -108,20 +137,6 @@ const Content = () => {
         hexpand: true,
         hpack: "center",
         children: NudgeTimer.bind("nudge_state").as(Actions),
-      }),
-      Widget.Box({
-        className: "footer",
-        hexpand: true,
-        hpack: "center",
-        visible: NudgeTimer.bind("nudge_state").as((s) => s !== "disabled"),
-        child: Widget.Button({
-          label: "Disable for today",
-          visible: NudgeTimer.bind("nudge_state").as((s) => s !== "disabled"),
-          onPrimaryClick: () => {
-            NudgeTimer.disableNudgeToday();
-            App.toggleWindow("eyenudge");
-          },
-        }),
       }),
     ],
   });

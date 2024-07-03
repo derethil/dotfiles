@@ -3,12 +3,13 @@ import { playNotificationBell } from "lib/utils";
 
 const Hyprland = await Service.import("hyprland");
 
-export type NudgeState =
-  | "waiting"
-  | "running"
-  | "paused"
-  | "pending"
-  | "disabled";
+export enum NudgeState {
+  Waiting = "waiting", // Waiting for the next nudge
+  Running = "running", // Nudge is currently running
+  Paused = "paused", // Nudge is paused,
+  Pending = "pending", // Nudge is open and ready to run
+  Disabled = "disabled", // Nudge is disabled for today
+}
 
 const { interval, duration } = options.eyenudge;
 
@@ -28,7 +29,8 @@ class NudgeTimerService extends Service {
   // Instance Variables
 
   private nudgeRemaining: number = 0;
-  private nudgeState: NudgeState = "waiting";
+  private nudgeState: NudgeState = NudgeState.Waiting;
+  private disabledForClient: boolean = false;
 
   private nudgeInterval: GLib.Source | null = null;
 
@@ -66,30 +68,29 @@ class NudgeTimerService extends Service {
 
   public waitForNudge(minutesUntilNudge?: number) {
     this.nudge_remaining = (minutesUntilNudge ?? interval.value) * 1000;
-    this.nudge_state = "waiting";
+    this.nudge_state = NudgeState.Waiting;
     this.startInterval();
   }
 
   public triggerNudge(nudgeLength?: number) {
     this.nudge_remaining = (nudgeLength ?? duration.value) * 1000;
-    this.nudge_state = "pending";
+    this.nudge_state = NudgeState.Pending;
     this.clearInterval();
   }
 
   public startNudge() {
-    this.nudge_state = "running";
+    this.nudge_state = NudgeState.Running;
     this.startInterval();
   }
 
   public pauseNudge() {
-    this.nudge_state = "paused";
+    this.nudge_state = NudgeState.Paused;
     this.clearInterval();
   }
 
-  public disableNudgeToday() {
-    this.nudge_state = "disabled";
+  public disableNudge() {
+    this.nudge_state = NudgeState.Disabled;
     this.clearInterval();
-    this.enableAtMidnight();
   }
 
   // Private Helpers
@@ -105,10 +106,13 @@ class NudgeTimerService extends Service {
   private checkDisableClients() {
     const classes = Hyprland.clients.map((client) => client.initialClass);
     const shouldDisable = classes.some(this.shouldDisableFor);
+    const isDisabled = this.nudge_state === NudgeState.Disabled;
 
-    if (shouldDisable && this.nudge_state !== "disabled") {
-      this.disableNudgeToday();
-    } else if (!shouldDisable && this.nudge_state === "disabled") {
+    if (!this.disabledForClient && (shouldDisable && !isDisabled)) {
+      this.disableNudge();
+    }
+
+    if (this.disabledForClient && (!shouldDisable && isDisabled)) {
       this.waitForNudge();
     }
   }
@@ -116,13 +120,6 @@ class NudgeTimerService extends Service {
   private clientsMonitor() {
     this.checkDisableClients();
     Hyprland.connect("notify::clients", () => this.checkDisableClients());
-  }
-
-  private enableAtMidnight() {
-    const msUntilMidnight = 86400000 - (Date.now() % 86400000);
-    setTimeout(() => {
-      this.waitForNudge();
-    }, msUntilMidnight);
   }
 
   private clearInterval(): boolean {
