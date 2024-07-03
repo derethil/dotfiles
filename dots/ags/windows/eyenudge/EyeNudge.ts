@@ -36,46 +36,46 @@ const NudgeRemaining = () => {
 };
 
 const Actions = (nudgeState: NudgeState) => {
-  const statefulActions: Partial<Record<NudgeState, Gtk.Widget[]>> = {
+  const ActionFunctions = {
+    disable: NudgeTimer.disableNudge,
+    close: () => App.toggleWindow("eyenudge"),
+    start: NudgeTimer.startNudge,
+    startIn: (seconds?: number) => snooze(seconds),
+    pause: NudgeTimer.pauseNudge,
+  };
+
+  const ActionButton = (label: string, action: () => void) =>
+    Widget.Button({
+      label,
+      onPrimaryClick: () => action(),
+    });
+
+  const ActionComponents: Record<NudgeState, Gtk.Widget[]> = {
     disabled: [
-      Widget.Button({
-        label: "Close",
-        onPrimaryClick: () => App.toggleWindow("eyenudge"),
-      }),
+      ActionButton("Close", ActionFunctions.close),
+      ActionButton("Start in 5m", () => ActionFunctions.startIn(300)),
+      ActionButton("Start in 20m", () => ActionFunctions.startIn()),
+    ],
+    waiting: [
+      ActionButton("Close", ActionFunctions.close),
     ],
     pending: [
-      Widget.Button({
-        label: "Start",
-        onPrimaryClick: () => NudgeTimer.startNudge(),
-      }),
+      ActionButton("Snooze for 5m", () => ActionFunctions.startIn(300)),
+      ActionButton("Snooze for 20m", () => ActionFunctions.startIn()),
     ],
     paused: [
-      Widget.Button({
-        label: "Resume",
-        onPrimaryClick: () => NudgeTimer.startNudge(),
-      }),
+      ActionButton("Resume", ActionFunctions.start),
+      ActionButton("Snooze for 5m", () => ActionFunctions.startIn(300)),
+      ActionButton("Snooze for 20m", () => ActionFunctions.startIn()),
     ],
     running: [
-      Widget.Button({
-        label: "Pause",
-        onPrimaryClick: () => NudgeTimer.pauseNudge(),
-      }),
+      ActionButton("Pause", ActionFunctions.pause),
+      ActionButton("Snooze for 5m", () => ActionFunctions.startIn(300)),
+      ActionButton("Snooze for 20m", () => ActionFunctions.startIn()),
     ],
   };
 
-  const label = nudgeState === "disabled" ? "Start in" : "Snooze for";
-
-  return [
-    ...statefulActions[nudgeState] ?? [],
-    Widget.Button({
-      label: `${label} 5m`,
-      onPrimaryClick: () => snooze(300),
-    }),
-    Widget.Button({
-      label: `${label} 20m`,
-      onPrimaryClick: () => snooze(),
-    }),
-  ];
+  return ActionComponents[nudgeState];
 };
 
 const Title = (nudgeState: NudgeState) => {
