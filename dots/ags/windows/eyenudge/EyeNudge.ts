@@ -97,6 +97,7 @@ const Content = () => {
       body: "Nudges have been turned off for now.",
       iconName: icons.tools.nudge,
       actions: { "Undo": () => NudgeTimer.waitForNudge() },
+      timeout: 5000,
     });
     NudgeTimer.disableNudge();
     App.toggleWindow("eyenudge");
