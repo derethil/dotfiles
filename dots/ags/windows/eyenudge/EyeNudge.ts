@@ -37,17 +37,17 @@ const NudgeRemaining = () => {
 
 const Actions = (nudgeState: NudgeState) => {
   const ActionFunctions = {
-    disable: NudgeTimer.disableNudge,
+    disable: () => NudgeTimer.disableNudge(),
     close: () => App.toggleWindow("eyenudge"),
-    start: NudgeTimer.startNudge,
+    start: () => NudgeTimer.startNudge(),
     startIn: (seconds?: number) => snooze(seconds),
-    pause: NudgeTimer.pauseNudge,
+    pause: () => NudgeTimer.pauseNudge(),
   };
 
   const ActionButton = (label: string, action: () => void) =>
     Widget.Button({
       label,
-      onPrimaryClick: () => action(),
+      onPrimaryClick: action,
     });
 
   const ActionComponents: Record<NudgeState, Gtk.Widget[]> = {
@@ -58,6 +58,7 @@ const Actions = (nudgeState: NudgeState) => {
     ],
     waiting: [
       ActionButton("Close", ActionFunctions.close),
+      ActionButton("Pause", ActionFunctions.pause),
     ],
     pending: [
       ActionButton("Start", ActionFunctions.start),

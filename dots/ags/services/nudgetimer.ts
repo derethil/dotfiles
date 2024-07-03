@@ -30,6 +30,7 @@ class NudgeTimerService extends Service {
 
   private nudgeRemaining: number = 0;
   private nudgeState: NudgeState = NudgeState.Waiting;
+  private lastNudgeState: NudgeState = NudgeState.Waiting;
   private disabledForClient: boolean = false;
 
   private nudgeInterval: GLib.Source | null = null;
@@ -60,6 +61,7 @@ class NudgeTimerService extends Service {
   }
 
   private set nudge_state(value: NudgeState) {
+    this.lastNudgeState = this.nudgeState;
     this.nudgeState = value;
     this.changed("nudge-state");
   }
@@ -79,7 +81,7 @@ class NudgeTimerService extends Service {
   }
 
   public startNudge() {
-    this.nudge_state = NudgeState.Running;
+    this.nudge_state = this.lastNudgeState;
     this.startInterval();
   }
 
