@@ -6,6 +6,8 @@ return {
     "sainnhe/gruvbox-material",
     lazy = false,
     opts = {
+      transparent_background = 2,
+      foreground = "material",
       background = "hard",
       enable_italic = true,
       enable_bold = true,

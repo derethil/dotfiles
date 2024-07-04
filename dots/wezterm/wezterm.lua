@@ -1,10 +1,11 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+require("colorscheme")(config)
+
 -- Appearance Configuration
 config.hide_tab_bar_if_only_one_tab = true
-config.color_scheme = "Gruvbox Material (Gogh)"
-config.window_background_opacity = 0.75
+config.window_background_opacity = 0.85
 
 -- Font Configuration
 config.font = wezterm.font("GeistMono NF SemiBold")
