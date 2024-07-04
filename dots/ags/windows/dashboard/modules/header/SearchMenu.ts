@@ -25,7 +25,7 @@ type Handlers = Record<string, Search>;
 
 function SearchTextEntry(props: SearchTextEntryProps) {
   const searchers: Handlers = {
-    Applications: new ApplicationSearch(),
+    Applications: new ApplicationSearch(props.active),
     Projects: new ProjectsSearch(),
     Clipboard: new ClipboardSearch(props.active),
   };

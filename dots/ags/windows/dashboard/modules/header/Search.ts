@@ -61,9 +61,12 @@ export class Search<T = any> {
 // Search Classes
 
 export class ApplicationSearch extends Search<Application> {
-  public constructor() {
+  public constructor(active: StackStateType<string>) {
     super();
     Applications.reload();
+    active.connect("changed", () => {
+      if (active.value === "Applications") Applications.reload();
+    });
   }
 
   public handleChange(query: string) {
