@@ -1,5 +1,11 @@
 return {
   {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "gruvbox-material",
+    },
+  },
+  {
     "rebelot/kanagawa.nvim",
   },
   {

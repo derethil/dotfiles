@@ -54,9 +54,10 @@ require("lazy").setup({
   },
   defaults = {
     lazy = false,
-    version = false, -- always use the latest git commit
+    version = false,
   },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  checker = { enabled = true },
+  change_detection = { notify = false },
   performance = {
     rtp = {
       disabled_plugins = {

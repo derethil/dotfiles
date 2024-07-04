@@ -41,6 +41,7 @@
     ~/.config/neovide/: dots/neovide
     ~/.config/ags: dots/ags
     ~/.config/wezterm/: dots/wezterm
+    ~/.config/yazi/: dots/yazi
     # Config Files
     ~/.config/starship.toml: dots/starship.toml
 

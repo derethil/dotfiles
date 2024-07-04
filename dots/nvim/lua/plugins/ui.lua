@@ -1,13 +1,9 @@
 return {
-  -- Remove Intrusive Cmdline and Notifications
-  {
-    "folke/noice.nvim",
-    enabled = false,
-  },
-  {
-    "rcarriga/nvim-notify",
-    enabled = false,
-  },
+  -- Disable Defaults
+  { "folke/which-key", enabled = false },
+  { "folke/noice.nvim", enabled = false },
+  { "rcarriga/nvim-notify", enabled = false },
+  -- Less Intrusive notifications
   {
     "j-hui/fidget.nvim",
     opts = {
@@ -19,6 +15,7 @@ return {
       },
     },
   },
+  -- Git Blame
   {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
@@ -34,6 +31,7 @@ return {
       { "<leader>gc", "<cmd>GitBlameOpenCommitURL<CR>", desc = "Open Blamed Commit URL" },
     },
   },
+  -- Custom Lualine Config
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
@@ -62,8 +60,6 @@ return {
           return blame
         end,
       })
-      -- Remove Trouble v3 from C Section
-      table.remove(opts.sections.lualine_c, 6)
 
       -- Y Section
       opts.sections.lualine_y = {
@@ -89,21 +85,6 @@ return {
 
       -- Add Branch to Z Section
       opts.sections.lualine_z = { { "branch", separator = { left = "", right = nil } } }
-    end,
-  },
-  {
-    "Bekaboo/dropbar.nvim",
-    event = "LazyFile",
-    lazy = true,
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-    },
-    opts = {
-      enabled = true,
-    },
-    init = function()
-      vim.opt.winbar = nil
-      vim.keymap.set("n", "<leader>z", require("dropbar.api").pick, { desc = "Select Dropdown Menu" })
     end,
   },
   {
