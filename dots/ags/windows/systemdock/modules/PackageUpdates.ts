@@ -1,5 +1,5 @@
 import { icons } from "lib/icons";
-import { DockButton } from "./DockButton";
+import { DockButton } from "../DockButton";
 import { bash } from "lib/utils";
 
 import { PackageUpdates } from "services/packageupdates";

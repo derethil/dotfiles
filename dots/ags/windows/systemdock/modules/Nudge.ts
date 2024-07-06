@@ -1,6 +1,6 @@
 import { icons } from "lib/icons";
 import { NudgeTimer } from "services/nudgetimer";
-import { DockButton } from "./DockButton";
+import { DockButton } from "../DockButton";
 import Label from "types/widgets/label";
 
 const LabelHook = (self: Label<unknown>) => {
@@ -15,7 +15,7 @@ const LabelHook = (self: Label<unknown>) => {
   }, "changed");
 };
 
-export function NudgeModule() {
+export function Nudge() {
   return Widget.Box({
     className: "dock-module",
     children: [

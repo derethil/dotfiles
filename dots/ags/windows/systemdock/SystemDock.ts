@@ -1,9 +1,9 @@
 import { isGdkMonitorActive } from "lib/utils";
-import { CurrentTool, toggleCurrentTool } from "./modules/CurrentTool";
-import { NotificationsButton } from "./modules/NotificationsButton";
+import { CurrentTool, toggleCurrentTool } from "./CurrentTool";
+import { Notifications } from "./modules/Notifications";
 import { UpdatesModule } from "./modules/PackageUpdates";
-import { SystemButtons } from "./modules/SystemButtons";
-import { NudgeModule } from "./modules/NudgeModule";
+import { System } from "./modules/System";
+import { Nudge } from "./modules/Nudge";
 
 const Hyprland = await Service.import("hyprland");
 
@@ -18,14 +18,14 @@ export function SystemDock(monitor: number) {
         Widget.Box({
           className: "system-dock",
           children: [
-            SystemButtons(),
+            System(),
             Widget.Separator({
               vpack: "center",
               hpack: "center",
             }),
-            NudgeModule(),
+            Nudge(),
             UpdatesModule(),
-            NotificationsButton(),
+            Notifications(),
           ],
         }),
         CurrentTool(),

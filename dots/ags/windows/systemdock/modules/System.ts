@@ -1,10 +1,10 @@
 import { icons } from "lib/icons";
-import { DockButton } from "./DockButton";
-import { toggleCurrentTool } from "./CurrentTool";
+import { DockButton } from "../DockButton";
+import { toggleCurrentTool } from "../CurrentTool";
 
 const Hyprland = await Service.import("hyprland");
 
-export function SystemButtons() {
+export function System() {
   return Widget.Box({
     className: "dock-module",
     hexpand: true,

@@ -1,4 +1,4 @@
-import { ScreenshotDock } from "./ScreenshotDock";
+import { ScreenshotDock } from "./tools//ScreenshotDock";
 
 type DockType = "screenshot";
 
