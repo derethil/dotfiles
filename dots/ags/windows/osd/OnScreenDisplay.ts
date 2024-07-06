@@ -49,7 +49,7 @@ function OnScreenProgress(vertical: boolean) {
     .hook(
       Audio.speaker,
       () => {
-        show(Audio.speaker.volume, icons.audio.type.speaker);
+        show(Audio.speaker.volume, icons.audio.volume.high);
       },
       "notify::volume",
     );

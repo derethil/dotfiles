@@ -1,49 +1,71 @@
-window.floating-dock switch {
-  @include switch;
-  margin-top: $padding * 1.5;
-  margin-bottom: $padding * 1.5;
-}
+window.floating-dock {
+  .system-dock,
+  .tool-container > box {
+    .dock-module {
+      @include spacing;
+    }
 
-window.floating-dock .system-dock,
-window.floating-dock .tool-container > box {
-  .dock-module {
-    @include spacing;
+    .dock-button {
+      padding: calc($padding / 2);
+    }
   }
 
-  .dock-button {
+  scale {
+    @include slider;
+
+    margin: 0 calc($spacing * 0.5);
+  }
+
+  switch {
+    @include switch;
+    margin-top: $padding * 1.5;
+    margin-bottom: $padding * 1.5;
+  }
+
+  .system-dock {
+    @include dock;
+    @include floating-widget;
+    margin-bottom: 0px;
+    border-radius: if($radius == 0, 0, $radius + $spacing / 2);
     padding: calc($padding / 2);
-  }
-}
 
-window.floating-dock .system-dock {
-  @include dock;
-  @include floating-widget;
-  margin-bottom: 0px;
-  border-radius: if($radius == 0, 0, $radius + $spacing / 2);
-  padding: calc($padding / 2);
-
-  .updates,
-  .nudge > label {
-    margin-right: $padding;
-  }
-
-  .updates label {
-    font-family: $font-mono-name;
-    padding-right: calc($padding / 2);
-  }
-}
-
-window.floating-dock .tool-container > box {
-  @include dock;
-  @include floating-widget;
-  margin-top: calc($padding - $spacing - $border-width);
-  border-top: $border;
-
-  .screenshot-dock {
-    padding-right: calc($padding / 2);
-
-    switch {
+    .updates,
+    .nudge > label {
       margin-right: $padding;
+    }
+
+    .updates label {
+      font-family: $font-mono-name;
+      padding-right: calc($padding / 2);
+    }
+  }
+
+  .tool-container > box {
+    @include dock;
+    @include floating-widget;
+    margin-top: calc($padding - $spacing - $border-width);
+    border-top: $border;
+
+    .screenshot-dock {
+      padding-right: calc($padding / 2);
+
+      switch {
+        margin-right: $padding;
+      }
+    }
+
+    .audio-dock {
+      .speaker-selector {
+        margin-bottom: $padding;
+      }
+
+      separator {
+        min-height: unset;
+      }
+
+      .speaker-controls {
+        margin-top: $padding;
+      }
     }
   }
 }

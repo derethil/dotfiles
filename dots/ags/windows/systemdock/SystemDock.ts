@@ -20,6 +20,7 @@ export function SystemDock(monitor: number) {
           children: [
             System(),
             Widget.Separator({
+              className: "dock-separator",
               vpack: "center",
               hpack: "center",
             }),

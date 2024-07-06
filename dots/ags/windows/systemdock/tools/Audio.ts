@@ -1,10 +1,10 @@
 import { icons } from "lib/icons";
-import { getSpeakerData } from "lib/audio";
+import { getSpeakerData, getVolumeIcon } from "lib/audio";
 import { DockButton } from "../DockButton";
 
 const AudioService = await Service.import("audio");
 
-function StreamSelector() {
+function SpeakerSelector() {
   const speakers = Utils.merge(
     [
       AudioService.bind("speakers"),
@@ -37,13 +37,55 @@ function StreamSelector() {
   });
 }
 
+function SpeakerIndicator() {
+  return Widget.Button({
+    cursor: "pointer",
+    vpack: "center",
+    onPrimaryClick: () => {
+      AudioService.speaker.is_muted = !AudioService.speaker.is_muted;
+    },
+    tooltipText: AudioService.speaker.bind("volume").as((volume) =>
+      `Volume: ${Math.floor(volume * 100)}%`
+    ),
+    child: Widget.Icon({
+      size: 22,
+      icon: getVolumeIcon(AudioService.speaker),
+    }),
+  });
+}
+
+function SpeakerVolume() {
+  return Widget.Slider({
+    drawValue: false,
+    value: AudioService.speaker.bind("volume"),
+    onChange: ({ value }) => AudioService.speaker.volume = value,
+    className: AudioService.speaker.bind("is_muted").as((m) =>
+      m ? "muted" : ""
+    ),
+    min: 0,
+    max: 1,
+    hexpand: true,
+  });
+}
+
 export function Audio() {
   return Widget.Box({
     css: "min-width: 250px",
     className: "audio-dock tool",
     vertical: true,
     children: [
-      StreamSelector(),
+      SpeakerSelector(),
+      Widget.Separator({
+        vertical: false,
+      }),
+      Widget.Box({
+        hexpand: true,
+        className: "speaker-controls",
+        children: [
+          SpeakerIndicator(),
+          SpeakerVolume(),
+        ],
+      }),
     ],
   });
 }
