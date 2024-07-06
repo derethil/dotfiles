@@ -25,6 +25,11 @@ export function System() {
         tooltip: "AGS Settings",
       }),
       DockButton({
+        icon: icons.audio.volume.high,
+        tooltip: "Audio",
+        handlePrimaryClick: () => toggleCurrentTool("audio"),
+      }),
+      DockButton({
         handlePrimaryClick: () => Utils.execAsync("hyprpicker -a"),
         icon: icons.tools.colorPicker,
         tooltip: "Color Picker",

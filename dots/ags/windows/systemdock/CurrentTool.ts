@@ -1,4 +1,5 @@
 import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
+import { Audio } from "./tools/Audio";
 import { Screenshots } from "./tools/Screenshots";
 
 type Tool = "screenshot" | "audio";
@@ -27,6 +28,7 @@ export function CurrentTool() {
       vpack: "start",
       className: "tool-container",
       children: ToolsFactory({
+        audio: Audio,
         screenshot: Screenshots,
       }),
     }),
