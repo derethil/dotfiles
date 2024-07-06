@@ -1,8 +1,10 @@
 import { icons } from "lib/icons";
-import { getSpeakerData, getVolumeIcon } from "lib/audio";
+import { getMicrophoneIcon, getSpeakerData, getVolumeIcon } from "lib/audio";
 import { DockButton } from "../DockButton";
 
 const AudioService = await Service.import("audio");
+
+type StreamType = "microphone" | "speaker";
 
 function SpeakerSelector() {
   const speakers = Utils.merge(
@@ -30,47 +32,60 @@ function SpeakerSelector() {
         return DockButton({
           icon: data?.icon ?? icons.audio.volume.high,
           tooltip: `Select ${data?.label ?? "Unknown"} Output`,
-          handlePrimaryClick: () => AudioService.speaker = speaker,
+          handlePrimaryClick: () => {
+            Utils.notify("Default Speaker Changed", data?.label ?? "Unknown");
+            AudioService.speaker = speaker;
+          },
         });
       })
     ),
   });
 }
 
-function SpeakerIndicator() {
+function StreamIndicator(type: StreamType) {
+  const stream = AudioService[type];
   return Widget.Button({
     cursor: "pointer",
     vpack: "center",
-    onPrimaryClick: () => {
-      AudioService.speaker.is_muted = !AudioService.speaker.is_muted;
-    },
-    tooltipText: AudioService.speaker.bind("volume").as((volume) =>
+    onPrimaryClick: () => stream.is_muted = !stream.is_muted,
+    tooltipText: stream.bind("volume").as((volume) =>
       `Volume: ${Math.floor(volume * 100)}%`
     ),
     child: Widget.Icon({
       size: 22,
-      icon: getVolumeIcon(AudioService.speaker),
+      icon: type === "speaker"
+        ? getVolumeIcon(stream)
+        : getMicrophoneIcon(stream),
     }),
   });
 }
 
-function SpeakerVolume() {
+function StreamVolume(type: StreamType) {
+  const stream = AudioService[type];
   return Widget.Slider({
     drawValue: false,
-    value: AudioService.speaker.bind("volume"),
-    onChange: ({ value }) => AudioService.speaker.volume = value,
-    className: AudioService.speaker.bind("is_muted").as((m) =>
-      m ? "muted" : ""
-    ),
+    value: stream.bind("volume"),
+    onChange: ({ value }) => stream.volume = value,
+    className: stream.bind("is_muted").as((m) => m ? "muted" : ""),
     min: 0,
     max: 1,
     hexpand: true,
   });
 }
 
+function StreamControls(type: StreamType) {
+  return Widget.Box({
+    className: "stream-controls",
+    children: [
+      StreamIndicator(type),
+      StreamVolume(type),
+    ],
+  });
+}
+
 export function Audio() {
   return Widget.Box({
-    css: "min-width: 250px",
+    css: "min-width: 300px",
     className: "audio-dock tool",
     vertical: true,
     children: [
@@ -79,11 +94,11 @@ export function Audio() {
         vertical: false,
       }),
       Widget.Box({
-        hexpand: true,
-        className: "speaker-controls",
+        vertical: true,
+        className: "main-audio-controls",
         children: [
-          SpeakerIndicator(),
-          SpeakerVolume(),
+          StreamControls("speaker"),
+          StreamControls("microphone"),
         ],
       }),
     ],

@@ -31,19 +31,23 @@ export const getSpeakerData = (stream: Stream): SpeakerData | null => {
   return null;
 };
 
-const iconThresholds = {
-  0: icons.audio.volume.muted,
-  1: icons.audio.volume.low,
-  33: icons.audio.volume.medium,
-  66: icons.audio.volume.high,
-};
+type StreamType = "mic" | "volume";
+type Threshold = "low" | "medium" | "high" | "muted";
 
-export const getVolumeIcon = (stream: Stream) =>
+const IconThresholds = (icons: Record<Threshold, string>) => ({
+  0: icons.muted,
+  1: icons.low,
+  33: icons.medium,
+  66: icons.high,
+});
+
+const getStreamIcon = (stream: Stream, type: StreamType) =>
   Utils.merge(
     [stream.bind("volume"), stream.bind("is_muted")],
     (volume, isMuted) => {
       if (isMuted) return icons.audio.volume.muted;
-      return Object.entries(iconThresholds).reduce(
+      const thresholds = IconThresholds(icons.audio[type]);
+      return Object.entries(thresholds).reduce(
         (icon, [threshold, value]) => {
           if (volume * 100 >= Number(threshold)) return value;
           return icon;
@@ -52,3 +56,9 @@ export const getVolumeIcon = (stream: Stream) =>
       );
     },
   );
+
+export const getVolumeIcon = (stream: Stream) =>
+  getStreamIcon(stream, "volume");
+
+export const getMicrophoneIcon = (stream: Stream) =>
+  getStreamIcon(stream, "mic");
