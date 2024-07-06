@@ -1,4 +1,4 @@
-import { ScreenshotDock } from "./tools//ScreenshotDock";
+import { Screenshots } from "./tools/Screenshots";
 
 type DockType = "screenshot";
 
@@ -19,7 +19,7 @@ export function CurrentTool() {
       className: "tool-container",
       children: [
         Widget.Box({
-          child: ScreenshotDock(),
+          child: Screenshots(),
           visible: CurrentToolStr.bind().as((t) => t === "screenshot"),
         }),
       ],

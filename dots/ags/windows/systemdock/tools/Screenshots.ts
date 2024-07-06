@@ -4,7 +4,7 @@ import { bash } from "lib/utils";
 
 type Mode = "output" | "window" | "region";
 
-export function ScreenshotDock() {
+export function Screenshots() {
   const shouldSave = Variable(false);
 
   const takeScreenshot = (mode: Mode) => {
