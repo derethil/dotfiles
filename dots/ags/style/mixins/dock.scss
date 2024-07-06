@@ -1,7 +1,7 @@
 @mixin dock($spacing: $spacing * 0.7) {
   separator {
     border-radius: $radius;
-    background-color: $border-color;
+    background-color: $border-color-opaque;
     margin: 0 $spacing;
     min-width: $border-width;
     min-height: 2em;

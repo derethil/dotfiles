@@ -1,13 +1,22 @@
+import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
 import { Screenshots } from "./tools/Screenshots";
 
-type DockType = "screenshot";
+type Tool = "screenshot" | "audio";
 
-export const CurrentToolStr = Variable<null | DockType>(null);
+export const CurrentToolStr = Variable<null | Tool>(null);
 
-export const toggleCurrentTool = (dock?: DockType) => {
+export const toggleCurrentTool = (dock?: Tool) => {
   if (!dock) return (CurrentToolStr.value = null);
   CurrentToolStr.value = CurrentToolStr.value === dock ? null : dock;
 };
+
+const ToolsFactory = (tools: Record<Tool, () => Gtk.Widget>) =>
+  Object.entries(tools).map(([type, widget]) =>
+    Widget.Box({
+      child: widget(),
+      visible: CurrentToolStr.bind().as((t) => t === type),
+    })
+  );
 
 export function CurrentTool() {
   return Widget.Revealer({
@@ -17,12 +26,9 @@ export function CurrentTool() {
       hpack: "center",
       vpack: "start",
       className: "tool-container",
-      children: [
-        Widget.Box({
-          child: Screenshots(),
-          visible: CurrentToolStr.bind().as((t) => t === "screenshot"),
-        }),
-      ],
+      children: ToolsFactory({
+        screenshot: Screenshots,
+      }),
     }),
   });
 }

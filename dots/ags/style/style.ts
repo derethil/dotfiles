@@ -47,6 +47,7 @@ const variables = () => [
 
   // Border
   $("border-width", `${border.width}px`),
+  $("border-color-opaque", `${t(dark.outline, light.outline)}`),
   $("border-color", `transparentize(${t(dark.outline, light.outline)}, ${border.transparency.value / 100})`),
   $("border", "$border-width solid $border-color"),
 
