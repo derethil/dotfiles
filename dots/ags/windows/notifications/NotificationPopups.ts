@@ -1,4 +1,6 @@
+import GLib from "types/@girs/glib-2.0/glib-2.0";
 import { Notification } from "./Notification";
+import { Variable as VariableT } from "types/variable";
 
 const notifications = await Service.import("notifications");
 
@@ -6,7 +8,11 @@ const { transition } = options;
 
 function Animated(id: number) {
   const n = notifications.getNotification(id)!;
-  const widget = Notification(n);
+
+  let progressSource: null | GLib.Source = null;
+  const remainingProgress = Variable(n.timeout);
+
+  const widget = Notification(n, remainingProgress);
 
   const inner = Widget.Revealer({
     transition: "slide_left",
@@ -25,10 +31,21 @@ function Animated(id: number) {
     child: outer,
   });
 
+  const createProgress = () =>
+    setInterval(() => {
+      if (remainingProgress.value > 0) {
+        remainingProgress.value -= 10;
+      } else {
+        progressSource?.destroy();
+      }
+    }, 10);
+
   Utils.idle(() => {
     outer.reveal_child = true;
     Utils.timeout(transition.value, () => {
       inner.reveal_child = true;
+      if (n.timeout === 0) return;
+      progressSource = createProgress();
     });
   });
 
@@ -39,6 +56,7 @@ function Animated(id: number) {
         outer.reveal_child = false;
         Utils.timeout(transition.value, () => {
           box.destroy();
+          progressSource?.destroy();
         });
       });
     },

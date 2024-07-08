@@ -46,6 +46,10 @@
     }
   }
 
+  levelbar trough block:first-child {
+    background: $active-gradient;
+  }
+
   button.close-button {
     @include button($flat: true);
     margin-left: calc($spacing / 2);

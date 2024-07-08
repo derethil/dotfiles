@@ -1,6 +1,8 @@
 import { type Notification as NotificationType } from "types/service/notifications";
 import GLib from "gi://GLib";
 import { icons } from "lib/icons";
+import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
+import { Variable as VariableT } from "types/variable";
 
 const formatTime = (time: number): string => {
   const datetime = GLib.DateTime.new_from_unix_local(time);
@@ -64,7 +66,10 @@ const NotificationIcon = ({ app_entry, app_icon, image }: NotificationType) => {
   });
 };
 
-export function Notification(notification: NotificationType) {
+export function Notification(
+  notification: NotificationType,
+  remainingProgress: VariableT<number>,
+) {
   const content = Widget.Box({
     className: "content",
     children: [
@@ -133,24 +138,28 @@ export function Notification(notification: NotificationType) {
     })
     : null;
 
+  const progressbar = notification.timeout > 0
+    ? Widget.LevelBar({
+      minValue: 0,
+      maxValue: notification.timeout,
+      value: remainingProgress.bind(),
+    })
+    : null;
+
   const eventbox = Widget.EventBox({
     vexpand: false,
     onPrimaryClick: notification.dismiss,
     onHover() {
-      if (actionsbox) {
-        actionsbox.reveal_child = true;
-      }
+      if (actionsbox) actionsbox.reveal_child = true;
     },
-    onHoverLost() {
-      if (actionsbox) {
-        actionsbox.reveal_child = true;
-      }
-
-      notification.dismiss();
+    onHoverLost: () => {
+      if (actionsbox) actionsbox.reveal_child = true;
     },
     child: Widget.Box({
       vertical: true,
-      children: actionsbox ? [content, actionsbox] : [content],
+      children: [content, actionsbox, progressbar].filter((x) =>
+        x !== null
+      ) as Gtk.Widget[],
     }),
   });
 
