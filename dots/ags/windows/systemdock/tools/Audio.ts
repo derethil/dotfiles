@@ -34,6 +34,7 @@ function SpeakerSelector() {
           tooltip: `Select ${data?.label ?? "Unknown"} Output`,
           handlePrimaryClick: () => {
             Utils.notify({
+              iconName: getSpeakerData(speaker)?.icon,
               summary: "Audio Output Changed",
               body: data?.label ?? "Unknown",
               timeout: 5000,
@@ -68,6 +69,7 @@ function StreamVolume(type: StreamType) {
   const stream = AudioService[type];
   return Widget.Slider({
     drawValue: false,
+    sensitive: stream.bind("is_muted").as((m) => !m),
     value: stream.bind("volume"),
     onChange: ({ value }) => stream.volume = value,
     className: stream.bind("is_muted").as((m) => m ? "muted" : ""),

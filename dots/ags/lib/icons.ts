@@ -1,6 +1,6 @@
 export const substitutes: Record<string, string> = {
   "audio-card-analog-pci": "audio-speakers-symbolic",
-  "audio-headset-analog-usb": "audio-headset-symbolic",
+  "audio-headset-analog-usb": "audio-headphones-symbolic",
 };
 
 export const icons = {
@@ -49,9 +49,10 @@ export const icons = {
       high: "audio-volume-high-symbolic",
     },
     type: {
-      headset: "audio-headset-symbolic",
+      headset: "audio-headphones-symbolic",
       tv: "audio-tv-symbolic",
       speaker: "audio-external-speaker-symbolic",
+      airpods: "audio-airpods-symbolic",
     },
   },
   brightness: {

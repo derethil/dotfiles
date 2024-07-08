@@ -19,6 +19,10 @@ const SpeakerMap: Record<string, SpeakerData> = {
     icon: icons.audio.type.headset,
     label: "Headset",
   },
+  "bluez_output.70_AE_D5_C2_D1_B1.1": {
+    icon: icons.audio.type.airpods,
+    label: "Airpods",
+  },
 };
 
 export const getSpeakerData = (stream: Stream): SpeakerData | null => {
@@ -43,7 +47,7 @@ const getStreamIcon = (stream: Stream, type: StreamType) =>
   Utils.merge(
     [stream.bind("volume"), stream.bind("is_muted")],
     (volume, isMuted) => {
-      if (isMuted) return icons.audio.volume.muted;
+      if (isMuted) return icons.audio[type].muted;
       const thresholds = IconThresholds(icons.audio[type]);
       return Object.entries(thresholds).reduce(
         (icon, [threshold, value]) => {
