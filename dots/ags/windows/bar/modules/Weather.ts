@@ -22,6 +22,9 @@ export function Weather() {
       icon: weatherInfo.bind("value").as((v) => v.icon),
       size: 32,
     }),
+    threeColumns: weatherInfo.bind("value").as((v) =>
+      Math.round(v.temperature) > 99
+    ),
     child: Widget.Label({
       label: weatherInfo.bind("value").as((v) =>
         Math.round(v.temperature).toString()

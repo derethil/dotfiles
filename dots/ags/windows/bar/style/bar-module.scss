@@ -8,6 +8,12 @@
     border: $border;
     border-top: none;
     border-radius: 0 0 $radius $radius;
+
+    &.three-columns {
+      font-size: calc($font-ui-size * 0.88);
+      padding-bottom: calc($padding * 1.12);
+      padding-top: calc($padding * 1.125);
+    }
   }
 
   .icon-container {

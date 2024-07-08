@@ -22,7 +22,7 @@ export function System() {
       DockButton({
         handlePrimaryClick: () => App.toggleWindow("settings"),
         icon: icons.ui.settings,
-        tooltip: "AGS Settings",
+        tooltip: "UI Settings",
       }),
       DockButton({
         icon: icons.tools.speaker,

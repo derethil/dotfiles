@@ -1,4 +1,3 @@
-import { icons } from "lib/icons";
 import { IconModule } from "../IconModule";
 import { getVolumeIcon } from "lib/audio";
 
@@ -9,6 +8,8 @@ function volumeLabel(volume: number): string {
 }
 
 export function AudioModule() {
+  const label = speaker.bind("volume").as(volumeLabel);
+
   return IconModule({
     cursor: "pointer",
     className: "audio",
@@ -17,9 +18,7 @@ export function AudioModule() {
       size: 22,
       icon: getVolumeIcon(speaker),
     }),
-    child: Widget.Label({
-      expand: true,
-      label: speaker.bind("volume").as(volumeLabel),
-    }),
+    threeColumns: label.as((volume) => volume.toString().length > 2),
+    child: Widget.Label({ expand: true, label: label }),
   });
 }

@@ -4,6 +4,7 @@ import { BoxProps } from "types/widgets/box";
 interface IconModuleProps extends BoxProps {
   icon: BoxProps["child"];
   labelColor?: string | Binding<any, any, string>;
+  threeColumns?: boolean | Binding<any, any, boolean>;
 }
 
 const constructor = (onlyPrimary: boolean, labelColor: string) => {
@@ -23,6 +24,15 @@ const iconContainerClassNames = (labelColor: IconModuleProps["labelColor"]) => {
   return Utils.merge([options.bar.onlyPrimary.bind(), labelColor], constructor);
 };
 
+const getClasses = (
+  always: string,
+  threeColumns: IconModuleProps["threeColumns"],
+) => {
+  if (!threeColumns) return always;
+  if (typeof threeColumns === "boolean") return `${always} three-columns`;
+  return threeColumns.as((value) => value ? `${always} three-columns` : always);
+};
+
 export function IconModule(props: IconModuleProps) {
   const { icon, labelColor, ...rest } = props;
   return Widget.Box({
@@ -38,7 +48,7 @@ export function IconModule(props: IconModuleProps) {
           child: icon,
         }),
         Widget.Box({
-          className: "content-container",
+          className: getClasses("content-container", props.threeColumns),
           vertical: true,
           child: props.child,
         }),
