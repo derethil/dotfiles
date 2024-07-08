@@ -88,6 +88,10 @@ export const icons = {
     clipboard: "edit-paste-symbolic",
     projects: "document-open-symbolic",
   },
+  schemes: {
+    dark: "dark-mode-symbolic",
+    light: "light-mode-symbolic",
+  },
   ui: {
     overview: "view-grid",
     dot: "circle-symbolic",

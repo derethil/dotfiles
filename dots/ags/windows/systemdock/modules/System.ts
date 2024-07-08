@@ -25,6 +25,14 @@ export function System() {
         tooltip: "UI Settings",
       }),
       DockButton({
+        handlePrimaryClick: () => {
+          const scheme = options.theme.scheme;
+          scheme.value = scheme.value === "dark" ? "light" : "dark";
+        },
+        icon: options.theme.scheme.bind().as((s) => icons.schemes[s]),
+        tooltip: "Switch Theme",
+      }),
+      DockButton({
         icon: icons.tools.speaker,
         tooltip: "Audio",
         handlePrimaryClick: () => toggleCurrentTool("audio"),

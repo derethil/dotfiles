@@ -1,9 +1,11 @@
+import { IconProps } from "types/widgets/icon";
 import { CurrentToolStr } from "./CurrentTool";
+import { ButtonProps } from "types/widgets/button";
 
 interface ToolProps {
   handlePrimaryClick?: () => void;
-  icon: string;
-  tooltip?: string;
+  icon: IconProps["icon"];
+  tooltip?: ButtonProps["tooltipText"];
   activeOnTool?: string;
 }
 
