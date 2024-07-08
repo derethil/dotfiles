@@ -68,7 +68,7 @@ const NotificationIcon = ({ app_entry, app_icon, image }: NotificationType) => {
 
 export function Notification(
   notification: NotificationType,
-  remainingProgress: VariableT<number>,
+  msReminaing: VariableT<number>,
 ) {
   const content = Widget.Box({
     className: "content",
@@ -142,7 +142,7 @@ export function Notification(
     ? Widget.LevelBar({
       minValue: 0,
       maxValue: notification.timeout,
-      value: remainingProgress.bind(),
+      value: msReminaing.bind(),
     })
     : null;
 
