@@ -98,9 +98,9 @@ export function SearchMenu() {
       SelectIconMenu({
         active: activeSearch as VariableType<string>,
         options: {
-          Applications: icons.apps.search,
-          Clipboard: icons.searches.clipboard,
-          Projects: icons.searches.projects,
+          Applications: icons.launchers.applications,
+          Clipboard: icons.launchers.clipboard,
+          Projects: icons.launchers.projects,
         },
       }),
       Widget.Separator({ class_name: "vertical" }),

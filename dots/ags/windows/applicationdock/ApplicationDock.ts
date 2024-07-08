@@ -14,7 +14,7 @@ export function ApplicationDock(monitor: number) {
     children: [
       AppButton({
         className: "launcher nonrunning",
-        icon: icons.apps.apps,
+        icon: icons.tools.applications,
         tooltipText: "Applications",
         onClicked: () => App.toggleWindow("dashboard"),
       }),

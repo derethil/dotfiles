@@ -30,7 +30,7 @@ function SpeakerSelector() {
       speakers.map((speaker) => {
         const data = getSpeakerData(speaker);
         return DockButton({
-          icon: data?.icon ?? icons.audio.volume.high,
+          icon: data?.icon ?? icons.tools.speaker,
           tooltip: `Select ${data?.label ?? "Unknown"} Output`,
           handlePrimaryClick: () => {
             Utils.notify({

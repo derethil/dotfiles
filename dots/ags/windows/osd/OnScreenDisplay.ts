@@ -43,13 +43,13 @@ function OnScreenProgress(vertical: boolean) {
   return revealer
     .hook(
       Brightness,
-      () => show(Brightness.screen, icons.brightness.screen),
+      () => show(Brightness.screen, icons.tools.backlight),
       "notify::screen",
     )
     .hook(
       Audio.speaker,
       () => {
-        show(Audio.speaker.volume, icons.audio.volume.high);
+        show(Audio.speaker.volume, icons.audio.speaker.levels.high);
       },
       "notify::volume",
     );
@@ -72,7 +72,7 @@ function MicrophoneMute() {
     Utils.idle(() => {
       if (mute !== Audio.microphone.stream?.is_muted) {
         mute = Audio.microphone.stream!.is_muted;
-        icon.icon = icons.audio.mic[mute ? "muted" : "high"];
+        icon.icon = icons.audio.microphone.levels[mute ? "muted" : "high"];
         revealer.reveal_child = true;
         count++;
 

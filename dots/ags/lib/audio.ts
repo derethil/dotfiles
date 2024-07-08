@@ -8,19 +8,19 @@ type SpeakerData = {
 
 const SpeakerMap: Record<string, SpeakerData> = {
   ".*hdmi-stereo": {
-    icon: icons.audio.type.tv,
+    icon: icons.audio.speaker.class.tv,
     label: "TV",
   },
   ".*analog-stereo": {
-    icon: icons.audio.type.speaker,
+    icon: icons.audio.speaker.class.speaker,
     label: "External Speaker",
   },
   ".*stereo-game": {
-    icon: icons.audio.type.headset,
+    icon: icons.audio.speaker.class.headset,
     label: "Headset",
   },
   "bluez_output.70_AE_D5_C2_D1_B1.1": {
-    icon: icons.audio.type.airpods,
+    icon: icons.audio.speaker.class.airpods,
     label: "Airpods",
   },
 };
@@ -33,10 +33,10 @@ export const getSpeakerData = (stream: Stream): SpeakerData | null => {
   return null;
 };
 
-type StreamType = "mic" | "volume";
-type Threshold = "low" | "medium" | "high" | "muted";
+type StreamType = "microphone" | "speaker";
+type Levels = "low" | "medium" | "high" | "muted";
 
-const IconThresholds = (icons: Record<Threshold, string>) => ({
+const IconThresholds = (icons: Record<Levels, string>) => ({
   0: icons.muted,
   1: icons.low,
   33: icons.medium,
@@ -47,20 +47,20 @@ const getStreamIcon = (stream: Stream, type: StreamType) =>
   Utils.merge(
     [stream.bind("volume"), stream.bind("is_muted")],
     (volume, isMuted) => {
-      if (isMuted) return icons.audio[type].muted;
-      const thresholds = IconThresholds(icons.audio[type]);
+      if (isMuted) return icons.audio[type].levels.muted;
+      const thresholds = IconThresholds(icons.audio[type].levels);
       return Object.entries(thresholds).reduce(
         (icon, [threshold, value]) => {
           if (volume * 100 >= Number(threshold)) return value;
           return icon;
         },
-        icons.audio.volume.high,
+        icons.tools.speaker,
       );
     },
   );
 
 export const getVolumeIcon = (stream: Stream) =>
-  getStreamIcon(stream, "volume");
+  getStreamIcon(stream, "speaker");
 
 export const getMicrophoneIcon = (stream: Stream) =>
-  getStreamIcon(stream, "mic");
+  getStreamIcon(stream, "microphone");

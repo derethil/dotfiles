@@ -17,7 +17,7 @@ const Container = (hideAfter: number) => {
         hpack: "center",
         className: "workspace",
         child: Widget.Icon({
-          icon: icons.workspace,
+          icon: icons.ui.dot,
           size: options.bar.workspaces.iconSize.bind(),
           className: "indicator",
         }),

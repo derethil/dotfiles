@@ -12,8 +12,8 @@ export function System() {
       DockButton({
         handlePrimaryClick: () =>
           Hyprland.messageAsync("dispatch hyprexpo:expo toggle"),
-        icon: icons.tools.workspaces,
-        tooltip: "Workspaces",
+        icon: icons.ui.overview,
+        tooltip: "Open Overview",
       }),
       Widget.Separator({
         vpack: "center",
@@ -25,13 +25,13 @@ export function System() {
         tooltip: "AGS Settings",
       }),
       DockButton({
-        icon: icons.audio.volume.high,
+        icon: icons.tools.speaker,
         tooltip: "Audio",
         handlePrimaryClick: () => toggleCurrentTool("audio"),
       }),
       DockButton({
         handlePrimaryClick: () => Utils.execAsync("hyprpicker -a"),
-        icon: icons.tools.colorPicker,
+        icon: icons.tools.colorpicker,
         tooltip: "Color Picker",
       }),
       DockButton({

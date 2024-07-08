@@ -16,10 +16,10 @@ const PlayPauseButton = (player: MprisPlayer) => {
       icon: player.bind("play_back_status").as((status) => {
         switch (status) {
           case "Playing":
-            return icons.mpris.playing;
+            return icons.media.mpris.playing;
           case "Paused":
           case "Stopped":
-            return icons.mpris.stopped;
+            return icons.media.mpris.stopped;
         }
       }),
     }),
@@ -32,7 +32,7 @@ const NextButton = (player: MprisPlayer) => {
     cursor: "pointer",
     visible: player.bind("can_go_next"),
     child: Widget.Icon({
-      icon: icons.mpris.next,
+      icon: icons.media.mpris.next,
     }),
   });
 };
@@ -43,7 +43,7 @@ const PreviousButton = (player: MprisPlayer) => {
     cursor: "pointer",
     visible: player.bind("can_go_prev"),
     child: Widget.Icon({
-      icon: icons.mpris.prev,
+      icon: icons.media.mpris.prev,
     }),
   });
 };
@@ -69,7 +69,7 @@ export function MediaControls() {
     child: IconModule({
       icon: Widget.Icon({
         size: 20,
-        icon: icons.mediaControls,
+        icon: icons.media.controls,
       }),
       labelColor: "green",
       child: Widget.Box({
