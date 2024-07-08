@@ -1,6 +1,8 @@
 import { icons } from "lib/icons";
 import { Brightness } from "services/brightness";
 import { Progress } from "./Progress";
+import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
+import { Binding } from "types/service";
 
 const Audio = await Service.import("audio");
 
@@ -49,15 +51,15 @@ function OnScreenProgress(vertical: boolean) {
     .hook(
       Audio.speaker,
       () => {
-        show(Audio.speaker.volume, icons.audio.speaker.levels.high);
+        show(Audio.speaker.volume, icons.tools.speaker);
       },
       "notify::volume",
     );
 }
 
-function MicrophoneMute() {
+function StreamMute(type: "microphone" | "speaker") {
   const icon = Widget.Icon({
-    class_name: "microphone",
+    className: "microphone",
   });
 
   const revealer = Widget.Revealer({
@@ -66,13 +68,13 @@ function MicrophoneMute() {
   });
 
   let count = 0;
-  let mute = Audio.microphone.stream?.is_muted ?? false;
+  let mute = Audio[type].stream?.is_muted ?? false;
 
-  return revealer.hook(Audio.microphone, () =>
+  return revealer.hook(Audio[type], () =>
     Utils.idle(() => {
-      if (mute !== Audio.microphone.stream?.is_muted) {
-        mute = Audio.microphone.stream!.is_muted;
-        icon.icon = icons.audio.microphone.levels[mute ? "muted" : "high"];
+      if (mute !== Audio[type].stream?.is_muted) {
+        mute = Audio[type].stream!.is_muted;
+        icon.icon = icons.audio[type].levels[mute ? "muted" : "high"];
         revealer.reveal_child = true;
         count++;
 
@@ -83,7 +85,14 @@ function MicrophoneMute() {
       }
     }));
 }
-export const OnScreenDisplay = (monitor: number) => {
+
+const DisplayWidgets: (Gtk.Widget | Binding<any, any, Gtk.Widget>)[] = [
+  options.osd.progress.vertical.bind().as(OnScreenProgress),
+  StreamMute("microphone"),
+  StreamMute("speaker"),
+];
+
+export function OnScreenDisplay(monitor: number) {
   return Widget.Window({
     monitor,
     name: `indicator-${monitor}`,
@@ -96,19 +105,14 @@ export const OnScreenDisplay = (monitor: number) => {
       expand: true,
       child: Widget.Overlay({
         child: Widget.Box<any, any>({ expand: true }),
-        overlays: [
+        overlays: DisplayWidgets.map((child) =>
           Widget.Box({
             hpack: options.osd.progress.pack.h.bind(),
             vpack: options.osd.progress.pack.v.bind(),
-            child: options.osd.progress.vertical.bind().as(OnScreenProgress),
-          }),
-          Widget.Box({
-            hpack: options.osd.microphone.pack.h.bind(),
-            vpack: options.osd.microphone.pack.v.bind(),
-            child: MicrophoneMute(),
-          }),
-        ],
+            child: child,
+          })
+        ),
       }),
     }),
   });
-};
+}
