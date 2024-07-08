@@ -33,7 +33,11 @@ function SpeakerSelector() {
           icon: data?.icon ?? icons.audio.volume.high,
           tooltip: `Select ${data?.label ?? "Unknown"} Output`,
           handlePrimaryClick: () => {
-            Utils.notify("Default Speaker Changed", data?.label ?? "Unknown");
+            Utils.notify({
+              summary: "Audio Output Changed",
+              body: data?.label ?? "Unknown",
+              timeout: 5000,
+            });
             AudioService.speaker = speaker;
           },
         });

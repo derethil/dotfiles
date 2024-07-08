@@ -1,8 +1,6 @@
 import { Stream } from "types/service/audio";
 import { icons } from "./icons";
 
-const Audio = await Service.import("audio");
-
 type SpeakerData = {
   icon: string;
   label: string;
@@ -15,7 +13,7 @@ const SpeakerMap: Record<string, SpeakerData> = {
   },
   ".*analog-stereo": {
     icon: icons.audio.type.speaker,
-    label: "Speaker",
+    label: "External Speaker",
   },
   ".*stereo-game": {
     icon: icons.audio.type.headset,
