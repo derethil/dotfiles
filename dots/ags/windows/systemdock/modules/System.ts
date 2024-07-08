@@ -15,6 +15,11 @@ export function System() {
         icon: icons.ui.overview,
         tooltip: "Open Overview",
       }),
+      DockButton({
+        handlePrimaryClick: () => App.toggleWindow(`notifications`),
+        icon: icons.notifications.base,
+        tooltip: "Notifications",
+      }),
       Widget.Separator({
         vpack: "center",
         hpack: "center",
@@ -36,6 +41,10 @@ export function System() {
         icon: icons.tools.speaker,
         tooltip: "Audio",
         handlePrimaryClick: () => toggleCurrentTool("audio"),
+      }),
+      Widget.Separator({
+        vpack: "center",
+        hpack: "center",
       }),
       DockButton({
         handlePrimaryClick: () => Utils.execAsync("hyprpicker -a"),

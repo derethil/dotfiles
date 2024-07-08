@@ -1,11 +1,17 @@
 import { isGdkMonitorActive } from "lib/utils";
 import { CurrentTool, toggleCurrentTool } from "./CurrentTool";
-import { Notifications } from "./modules/Notifications";
 import { UpdatesModule } from "./modules/PackageUpdates";
 import { System } from "./modules/System";
 import { Nudge } from "./modules/Nudge";
 
 const Hyprland = await Service.import("hyprland");
+
+const DockSeparator = () =>
+  Widget.Separator({
+    className: "dock-separator",
+    vpack: "center",
+    hpack: "center",
+  });
 
 export function SystemDock(monitor: number) {
   const revealer = Widget.Revealer({
@@ -19,14 +25,9 @@ export function SystemDock(monitor: number) {
           className: "system-dock",
           children: [
             System(),
-            Widget.Separator({
-              className: "dock-separator",
-              vpack: "center",
-              hpack: "center",
-            }),
+            DockSeparator(),
             Nudge(),
             UpdatesModule(),
-            Notifications(),
           ],
         }),
         CurrentTool(),

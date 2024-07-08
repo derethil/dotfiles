@@ -20,6 +20,10 @@ export function UpdatesModule() {
     child: Widget.Box({
       className: "dock-module",
       children: [
+        Widget.Separator({
+          vpack: "center",
+          hpack: "center",
+        }),
         Widget.Box({
           className: "updates",
           children: [
@@ -36,10 +40,6 @@ export function UpdatesModule() {
                 self.hook(PackageUpdates, () => self.label = UpdatesHook()),
             }),
           ],
-        }),
-        Widget.Separator({
-          vpack: "center",
-          hpack: "center",
         }),
       ],
     }),

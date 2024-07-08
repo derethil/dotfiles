@@ -18,24 +18,18 @@ const LabelHook = (self: Label<unknown>) => {
 export function Nudge() {
   return Widget.Box({
     className: "dock-module",
-    children: [
-      Widget.Box({
-        className: "nudge",
-        children: [
-          DockButton({
-            icon: icons.tools.nudge,
-            tooltip: "Nudge Timer",
-            handlePrimaryClick: () => App.toggleWindow("eyenudge"),
-          }),
-          Widget.Label({
-            setup: (self) => LabelHook(self),
-          }),
-        ],
-      }),
-      Widget.Separator({
-        vpack: "center",
-        hpack: "center",
-      }),
-    ],
+    child: Widget.Box({
+      className: "nudge",
+      children: [
+        DockButton({
+          icon: icons.tools.nudge,
+          tooltip: "Nudge Timer",
+          handlePrimaryClick: () => App.toggleWindow("eyenudge"),
+        }),
+        Widget.Label({
+          setup: (self) => LabelHook(self),
+        }),
+      ],
+    }),
   });
 }
