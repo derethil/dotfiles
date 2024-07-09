@@ -86,12 +86,6 @@ function StreamMute(type: "microphone" | "speaker") {
     }));
 }
 
-const DisplayWidgets: (Gtk.Widget | Binding<any, any, Gtk.Widget>)[] = [
-  options.osd.progress.vertical.bind().as(OnScreenProgress),
-  StreamMute("microphone"),
-  StreamMute("speaker"),
-];
-
 export function OnScreenDisplay(monitor: number) {
   return Widget.Window({
     monitor,
@@ -105,13 +99,23 @@ export function OnScreenDisplay(monitor: number) {
       expand: true,
       child: Widget.Overlay({
         child: Widget.Box<any, any>({ expand: true }),
-        overlays: DisplayWidgets.map((child) =>
+        overlays: [
           Widget.Box({
             hpack: options.osd.progress.pack.h.bind(),
             vpack: options.osd.progress.pack.v.bind(),
-            child: child,
-          })
-        ),
+            child: options.osd.progress.vertical.bind().as(OnScreenProgress),
+          }),
+          Widget.Box({
+            hpack: options.osd.progress.pack.h.bind(),
+            vpack: options.osd.progress.pack.v.bind(),
+            child: StreamMute("microphone"),
+          }),
+          Widget.Box({
+            hpack: options.osd.progress.pack.h.bind(),
+            vpack: options.osd.progress.pack.v.bind(),
+            child: StreamMute("speaker"),
+          }),
+        ],
       }),
     }),
   });
