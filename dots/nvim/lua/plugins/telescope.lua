@@ -3,6 +3,12 @@ return {
   { "nvim-telescope/telescope-ui-select.nvim" },
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        version = "^1.0.0",
+      },
+    },
     keys = {
       {
         "<leader>fb",
@@ -40,6 +46,13 @@ return {
         desc = "Find Files (Buffer Dir)",
       },
       {
+        "<leader>sg",
+        function()
+          require("telescope").extensions.live_grep_args.live_grep_args()
+        end,
+        desc = "Grep (Root Dir)",
+      },
+      {
         "<leader>gs",
         function()
           require("util.telescope").dsf_git_status()
@@ -47,6 +60,10 @@ return {
         desc = "Git Status",
       },
     },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension("live_grep_args")
+    end,
     opts = {
       defaults = {
         preview = {
