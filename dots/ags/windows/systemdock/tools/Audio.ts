@@ -97,6 +97,35 @@ function StreamControls(options: StreamOptions) {
   });
 }
 
+function StreamMixer() {
+  const ShownAppStreams = Utils.merge(
+    [
+      AudioService.bind("apps"),
+      options.docks.hideAppMixerList.bind(),
+    ],
+    (streams, shouldHide) => {
+      return streams.filter((stream) => {
+        if (shouldHide.length === 0) return true;
+        for (const regex of shouldHide) {
+          return !regex.test(stream.name ?? "");
+        }
+      });
+    },
+  );
+  return Widget.Box({
+    vertical: true,
+    className: "app-controls",
+    children: ShownAppStreams.as((apps) =>
+      apps.map((app) =>
+        StreamControls({
+          stream: app,
+          type: "app",
+        })
+      )
+    ),
+  });
+}
+
 export function Audio() {
   return Widget.Box({
     css: "min-width: 300px",
@@ -124,18 +153,7 @@ export function Audio() {
       Widget.Separator({
         vertical: false,
       }),
-      Widget.Box({
-        vertical: true,
-        className: "app-controls",
-        children: AudioService.bind("apps").as((apps) =>
-          apps.map((app) =>
-            StreamControls({
-              stream: app,
-              type: "app",
-            })
-          )
-        ),
-      }),
+      StreamMixer(),
     ],
   });
 }
