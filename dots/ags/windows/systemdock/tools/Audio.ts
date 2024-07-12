@@ -1,10 +1,30 @@
+import { Stream } from "types/service/audio";
 import { icons } from "lib/icons";
-import { getMicrophoneIcon, getSpeakerData, getVolumeIcon } from "lib/audio";
+import { getSpeakerData, getStreamIcon, StreamOptions } from "lib/audio";
 import { DockButton } from "../DockButton";
+import { toTitleCase } from "lib/utils";
 
 const AudioService = await Service.import("audio");
 
-type StreamType = "microphone" | "speaker";
+function SelectSpeakerButton(speaker: Stream) {
+  const data = getSpeakerData(speaker);
+
+  const handleChangeSpeaker = () => {
+    AudioService.speaker = speaker;
+    Utils.notify({
+      iconName: getSpeakerData(speaker)?.icon,
+      summary: "Audio Output Changed",
+      body: data?.label ?? "Unknown",
+      timeout: 5000,
+    });
+  };
+
+  return DockButton({
+    icon: data?.icon ?? icons.tools.speaker,
+    tooltip: `Select ${data?.label ?? "Unknown"} Output`,
+    handlePrimaryClick: handleChangeSpeaker,
+  });
+}
 
 function SpeakerSelector() {
   const speakers = Utils.merge(
@@ -26,47 +46,35 @@ function SpeakerSelector() {
     className: "speaker-selector",
     hexpand: true,
     hpack: "center",
-    children: speakers.as((speakers) =>
-      speakers.map((speaker) => {
-        const data = getSpeakerData(speaker);
-        return DockButton({
-          icon: data?.icon ?? icons.tools.speaker,
-          tooltip: `Select ${data?.label ?? "Unknown"} Output`,
-          handlePrimaryClick: () => {
-            Utils.notify({
-              iconName: getSpeakerData(speaker)?.icon,
-              summary: "Audio Output Changed",
-              body: data?.label ?? "Unknown",
-              timeout: 5000,
-            });
-            AudioService.speaker = speaker;
-          },
-        });
-      })
-    ),
+    children: speakers.as((speakers) => speakers.map(SelectSpeakerButton)),
   });
 }
 
-function StreamIndicator(type: StreamType) {
-  const stream = AudioService[type];
+function StreamIndicator(options: StreamOptions) {
+  const { stream, type } = options;
+
+  const getTooltip = () =>
+    stream.bind("volume").as((volume) => {
+      const label = type === "app"
+        ? toTitleCase(stream.name ?? "Volume")
+        : "Volume";
+
+      return `${label}: ${Math.floor(volume * 100)}%`;
+    });
+
   return Widget.Button({
     cursor: "pointer",
     vpack: "center",
     onPrimaryClick: () => stream.is_muted = !stream.is_muted,
-    tooltipText: stream.bind("volume").as((volume) =>
-      `Volume: ${Math.floor(volume * 100)}%`
-    ),
+    tooltipText: getTooltip(),
     child: Widget.Icon({
       size: 22,
-      icon: type === "speaker"
-        ? getVolumeIcon(stream)
-        : getMicrophoneIcon(stream),
+      icon: getStreamIcon(options),
     }),
   });
 }
 
-function StreamVolume(type: StreamType) {
-  const stream = AudioService[type];
+function StreamVolume({ stream }: StreamOptions) {
   return Widget.Slider({
     drawValue: false,
     sensitive: stream.bind("is_muted").as((m) => !m),
@@ -79,12 +87,12 @@ function StreamVolume(type: StreamType) {
   });
 }
 
-function StreamControls(type: StreamType) {
+function StreamControls(options: StreamOptions) {
   return Widget.Box({
     className: "stream-controls",
     children: [
-      StreamIndicator(type),
-      StreamVolume(type),
+      StreamIndicator(options),
+      StreamVolume(options),
     ],
   });
 }
@@ -103,9 +111,30 @@ export function Audio() {
         vertical: true,
         className: "main-audio-controls",
         children: [
-          StreamControls("speaker"),
-          StreamControls("microphone"),
+          StreamControls({
+            stream: AudioService.speaker,
+            type: "speaker",
+          }),
+          StreamControls({
+            stream: AudioService.microphone,
+            type: "microphone",
+          }),
         ],
+      }),
+      Widget.Separator({
+        vertical: false,
+      }),
+      Widget.Box({
+        vertical: true,
+        className: "app-controls",
+        children: AudioService.bind("apps").as((apps) =>
+          apps.map((app) =>
+            StreamControls({
+              stream: app,
+              type: "app",
+            })
+          )
+        ),
       }),
     ],
   });

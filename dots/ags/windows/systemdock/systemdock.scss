@@ -65,6 +65,11 @@ window.floating-dock {
 
       .main-audio-controls {
         margin-top: $padding;
+        margin-bottom: $padding;
+      }
+
+      .app-controls {
+        margin-top: $padding;
       }
     }
   }

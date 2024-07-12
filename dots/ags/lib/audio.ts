@@ -1,9 +1,15 @@
 import { Stream } from "types/service/audio";
 import { icons } from "./icons";
+import { icon } from "./utils";
 
 type SpeakerData = {
   icon: string;
   label: string;
+};
+
+export type StreamOptions = {
+  stream: Stream;
+  type: "speaker" | "microphone" | "app";
 };
 
 const SpeakerMap: Record<string, SpeakerData> = {
@@ -33,7 +39,6 @@ export const getSpeakerData = (stream: Stream): SpeakerData | null => {
   return null;
 };
 
-type StreamType = "microphone" | "speaker";
 type Levels = "low" | "medium" | "high" | "muted";
 
 const IconThresholds = (icons: Record<Levels, string>) => ({
@@ -43,7 +48,11 @@ const IconThresholds = (icons: Record<Levels, string>) => ({
   66: icons.high,
 });
 
-const getStreamIcon = (stream: Stream, type: StreamType) =>
+interface MainStreamOptions extends StreamOptions {
+  type: Exclude<StreamOptions["type"], "app">;
+}
+
+const getMainStreamIcon = ({ stream, type }: MainStreamOptions) =>
   Utils.merge(
     [stream.bind("volume"), stream.bind("is_muted")],
     (volume, isMuted) => {
@@ -59,8 +68,15 @@ const getStreamIcon = (stream: Stream, type: StreamType) =>
     },
   );
 
-export const getVolumeIcon = (stream: Stream) =>
-  getStreamIcon(stream, "speaker");
-
-export const getMicrophoneIcon = (stream: Stream) =>
-  getStreamIcon(stream, "microphone");
+export const getStreamIcon = (options: StreamOptions) => {
+  switch (options.type) {
+    case "speaker":
+    case "microphone":
+      return getMainStreamIcon(options as MainStreamOptions);
+    case "app":
+      return options.stream.bind("name").as((name) => {
+        const n = name ?? "";
+        return Utils.lookUpIcon(n) ? n : icons.fallback.audio;
+      });
+  }
+};

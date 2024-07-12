@@ -1,5 +1,5 @@
+import { getStreamIcon } from "lib/audio";
 import { IconModule } from "../IconModule";
-import { getVolumeIcon } from "lib/audio";
 
 const { speaker } = await Service.import("audio");
 
@@ -16,7 +16,7 @@ export function AudioModule() {
     labelColor: "magenta",
     icon: Widget.Icon({
       size: 22,
-      icon: getVolumeIcon(speaker),
+      icon: getStreamIcon({ stream: speaker, type: "speaker" }),
     }),
     threeColumns: label.as((volume) => volume.toString().length > 2),
     child: Widget.Label({ expand: true, label: label }),
