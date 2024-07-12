@@ -1,7 +1,10 @@
 export const substitutes: Record<string, string> = {
+  // Other Substitutes
   "audio-card-analog-pci": "audio-speakers-symbolic",
   "audio-headset-analog-usb": "audio-headphones-symbolic",
+  // Stream Name Substitutes
   "spotify": "spotify-client",
+  "Firefox": "firefox",
 };
 
 export const icons = {

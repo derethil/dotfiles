@@ -74,9 +74,8 @@ export const getStreamIcon = (options: StreamOptions) => {
     case "microphone":
       return getMainStreamIcon(options as MainStreamOptions);
     case "app":
-      return options.stream.bind("name").as((name) => {
-        const n = name ?? "";
-        return Utils.lookUpIcon(n) ? n : icons.fallback.audio;
-      });
+      return options.stream.bind("name").as((name) =>
+        icon(name, icons.fallback.audio)
+      );
   }
 };
