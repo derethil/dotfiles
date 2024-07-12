@@ -2,6 +2,10 @@ return {
   -- Telescope Configuration
   { "nvim-telescope/telescope-ui-select.nvim" },
   {
+    "piersolenski/telescope-import.nvim",
+    dependencies = "nvim-telescope/telescope.nvim",
+  },
+  {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       {
@@ -59,10 +63,16 @@ return {
         end,
         desc = "Git Status",
       },
+      {
+        "<leader>ai",
+        "<cmd>Telescope import<cr>",
+        desc = "Add Import",
+      },
     },
     config = function(_, opts)
       require("telescope").setup(opts)
       require("telescope").load_extension("live_grep_args")
+      require("telescope").load_extension("import")
     end,
     opts = {
       defaults = {
