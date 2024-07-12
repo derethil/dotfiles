@@ -3,6 +3,7 @@ return {
   { "folke/which-key", enabled = false },
   { "folke/noice.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },
+  { "lukas-reineke/indent-blankline.nvim", enabled = false },
   -- Less Intrusive notifications
   {
     "j-hui/fidget.nvim",
@@ -86,9 +87,5 @@ return {
       -- Add Branch to Z Section
       opts.sections.lualine_z = { { "branch", separator = { left = "", right = nil } } }
     end,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    enabled = false,
   },
 }

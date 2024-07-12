@@ -147,55 +147,6 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     enabled = false,
   },
-  -- {
-  --   "stevearc/oil.nvim",
-  --   opts = {
-  --     delete_to_trash = true,
-  --     use_default_keymaps = false,
-  --     skip_confirm_for_simple_edits = false,
-  --     view_options = {
-  --       show_hidden = true,
-  --     },
-  --     keymaps = {
-  --       ["g?"] = "actions.show_help",
-  --       ["<C-y>"] = "actions.select",
-  --       ["<CR>"] = "actions.select",
-  --       ["<C-\\>"] = "actions.select_vsplit",
-  --       ["<C-->"] = "actions.select_split",
-  --       ["<C-u>"] = "actions.preview",
-  --       ["q"] = "actions.close",
-  --       ["<C-r>"] = "actions.refresh",
-  --       ["-"] = "actions.parent",
-  --       ["_"] = "actions.open_cwd",
-  --       ["`"] = "actions.cd",
-  --       ["~"] = "actions.tcd",
-  --       ["gs"] = "actions.change_sort",
-  --       ["gx"] = "actions.open_external",
-  --       ["gt"] = "actions.toggle_trash",
-  --       ["g."] = "actions.toggle_hidden",
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     require("oil").setup(opts)
-  --   end,
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  --   keys = {
-  --     {
-  --       "<leader>e",
-  --       function()
-  --         require("oil").open()
-  --       end,
-  --       desc = "Open Oil Explorer (Cwd)",
-  --     },
-  --     {
-  --       "<leader>E",
-  --       function()
-  --         require("oil").open(LazyVim.root())
-  --       end,
-  --       desc = "Open Oil Explorer (Root Dir)",
-  --     },
-  --   },
-  -- },
   {
     "arnamak/stay-centered.nvim",
     event = "VeryLazy",
