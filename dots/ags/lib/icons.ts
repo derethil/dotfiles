@@ -112,8 +112,8 @@ export const icons = {
     },
   },
   fallback: {
-    audio: "audio-x-generic-symbolic",
-    media: "audio-x-generic-symbolic",
+    audio: "music-symbolic",
+    media: "music-symbolic",
     executable: "application-x-executable-symbolic",
     notification: "dialog-information-symbolic",
   },
