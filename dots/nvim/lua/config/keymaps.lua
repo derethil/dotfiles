@@ -40,7 +40,7 @@ end, { desc = "Automatically indent to the appropriate position", silent = true,
 
 vim.keymap.set(
   "n",
-  "<leader>uh",
+  "<leader>uH",
   ":lua require('mini.hipatterns').toggle()<CR>",
   { desc = "Toggle Highlight Patterns", silent = true }
 )
