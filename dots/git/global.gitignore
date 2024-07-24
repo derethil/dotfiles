@@ -6,4 +6,6 @@
 .local/
 .nvim.lua
 .lazy.lua
+**/*.local
 *.local.*
+
