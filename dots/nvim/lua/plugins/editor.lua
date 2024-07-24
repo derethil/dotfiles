@@ -67,7 +67,7 @@ return {
       default_commands = true,
     },
     keys = {
-      { "<leader>mo", "<cmd>GitConflictCHooseOurs<cr>", desc = "Git Conflict: Choose Ours" },
+      { "<leader>mo", "<cmd>GitConflictChooseOurs<cr>", desc = "Git Conflict: Choose Ours" },
       { "<leader>mt", "<cmd>GitConflictChooseTheirs<cr>", desc = "Git Conflict: Choose Theirs" },
       { "<leader>mb", "<cmd>GitConflictChooseBoth<cr>", desc = "Git Conflict: Choose Both" },
       { "<leader>m0", "<cmd>GitConflictChooseNone<cr>", desc = "Git Conflict: Choose None" },
