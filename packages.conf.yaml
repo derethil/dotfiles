@@ -41,22 +41,23 @@
     - bun-bin
     - git-open
     - hyprcwd-git
-    - hyprcursor-git
+    - hyprcursor
     - hyprevents-git
     - hyprland
-    - hyprlang-git
+    - hyprlang
     - hyprpicker
     - hyprprop-git
     - hyprshade-git
     - hyprshot
     - hyprutils
+    - hyprwayland-scanner
     - kanagawa-gtk-theme-git
     - morewaita
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
     - swww
     - ttf-icomoon-feather-git
     - ueberzugpp
-    - xdg-desktop-portal-hyprland-git
+    - xdg-desktop-portal-hyprland
 
 - asdf:
     - plugin: nodejs
