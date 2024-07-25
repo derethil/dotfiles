@@ -41,6 +41,7 @@ export function System() {
         icon: icons.tools.speaker,
         tooltip: "Audio",
         handlePrimaryClick: () => toggleCurrentTool("audio"),
+        activeOnTool: "audio",
       }),
       Widget.Separator({
         vpack: "center",
