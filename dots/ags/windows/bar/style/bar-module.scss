@@ -24,7 +24,8 @@
     padding: calc($padding * 1.25) 0;
 
     &.bg-primary {
-      background-color: $primary-fixed;
+      background-color: $primary;
+      color: $on-primary;
     }
 
     &.bg-red {

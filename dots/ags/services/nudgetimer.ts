@@ -1,4 +1,5 @@
 import GLib from "gi://GLib";
+import { icons } from "lib/icons";
 import { playNotificationBell } from "lib/utils";
 
 const Hyprland = await Service.import("hyprland");
@@ -68,8 +69,8 @@ class NudgeTimerService extends Service {
 
   // Public Methods
 
-  public waitForNudge(minutesUntilNudge?: number) {
-    this.nudge_remaining = (minutesUntilNudge ?? interval.value) * 1000;
+  public waitForNudge(secondsUntilNudge?: number) {
+    this.nudge_remaining = (secondsUntilNudge ?? interval.value) * 1000;
     this.nudge_state = NudgeState.Waiting;
     this.startInterval();
   }
@@ -81,6 +82,11 @@ class NudgeTimerService extends Service {
   }
 
   public startNudge() {
+    this.nudge_state = NudgeState.Running;
+    this.startInterval();
+  }
+
+  public resumeNudge() {
     this.nudge_state = this.lastNudgeState;
     this.startInterval();
   }
@@ -138,6 +144,12 @@ class NudgeTimerService extends Service {
         break;
       case "running":
         this.waitForNudge();
+        Utils.notify({
+          summary: "Eye Nudge",
+          body: "You can look back at your screen now.",
+          iconName: icons.tools.nudge,
+          timeout: 5000,
+        });
         playNotificationBell();
         break;
     }

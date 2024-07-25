@@ -39,6 +39,7 @@ const Actions = (nudgeState: NudgeState) => {
   const ActionFunctions = {
     disable: () => NudgeTimer.disableNudge(),
     close: () => App.toggleWindow("eyenudge"),
+    resume: () => NudgeTimer.resumeNudge(),
     start: () => NudgeTimer.startNudge(),
     startIn: (seconds?: number) => snooze(seconds),
     pause: () => NudgeTimer.pauseNudge(),
@@ -66,7 +67,7 @@ const Actions = (nudgeState: NudgeState) => {
       ActionButton("Snooze for 20m", () => ActionFunctions.startIn()),
     ],
     paused: [
-      ActionButton("Resume", ActionFunctions.start),
+      ActionButton("Resume", ActionFunctions.resume),
       ActionButton("Snooze for 5m", () => ActionFunctions.startIn(300)),
       ActionButton("Snooze for 20m", () => ActionFunctions.startIn()),
     ],
