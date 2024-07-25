@@ -48,6 +48,8 @@ return {
         require("util.lualine").pretty_filename(),
       })
 
+      -- Remove Symbols from C Section
+      table.remove(opts.sections.lualine_c, 5)
       -- Git Blame to C Section
       local git_blame = require("gitblame")
       table.insert(opts.sections.lualine_c, 5, {

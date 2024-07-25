@@ -6,7 +6,15 @@ return {
     },
   },
   {
-    "rebelot/kanagawa.nvim",
+    "xero/miasma.nvim",
+  },
+  {
+    "mellow-theme/mellow.nvim",
+    config = function()
+      vim.g.mellow_bold_booleans = true
+      vim.g.mellow_bold_functions = true
+      vim.g.mellow_transparent = true
+    end,
   },
   {
     "sainnhe/gruvbox-material",
