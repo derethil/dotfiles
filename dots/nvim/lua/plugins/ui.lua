@@ -1,6 +1,5 @@
 return {
   -- Disable Defaults
-  { "folke/which-key", enabled = false },
   { "folke/noice.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
@@ -29,7 +28,7 @@ return {
     },
     keys = {
       { "<leader>uo", "<cmd>GitBlameToggle<CR>", desc = "Toggle Statusline Git Blame" },
-      { "<leader>gc", "<cmd>GitBlameOpenCommitURL<CR>", desc = "Open Blamed Commit URL" },
+      { "<leader>gC", "<cmd>GitBlameOpenCommitURL<CR>", desc = "Git Browse Commit" },
     },
   },
   -- Custom Lualine Config
@@ -88,6 +87,20 @@ return {
 
       -- Add Branch to Z Section
       opts.sections.lualine_z = { { "branch", separator = { left = "", right = nil } } }
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    config = function(_, opts)
+      local icons = LazyVim.config.icons
+      local wk = require("which-key")
+      wk.setup(opts)
+      wk.add({
+        { "<leader>m", group = "conflicts", icon = { icon = "󰊢", color = "orange" } },
+        { "<leader>D", group = "dadbod", icon = { icon = icons.kinds.Struct, color = "green" } },
+        { "<leader>r", group = "refactor", icon = { icon = icons.kinds.Interface, color = "yellow" } },
+        { "<leader>e", hidden = true },
+      })
     end,
   },
 }

@@ -1,9 +1,4 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
 -- Neovide Keymaps
-
 if vim.g.neovide then
   local scalemap = function(key, factor, desc)
     vim.keymap.set({ "n", "v" }, key, "<nop>")
@@ -21,9 +16,8 @@ if vim.g.neovide then
 end
 
 -- Vim Keymaps
-
-vim.keymap.set("n", "<leader>a", "ggVG", { desc = "Select All" })
-vim.keymap.set("v", "<leader>a", "VggVG", { desc = "Select All " })
+vim.keymap.set("n", "<leader>A", "ggVG", { desc = "Select All" })
+vim.keymap.set("v", "<leader>A", "VggVG", { desc = "Select All " })
 vim.keymap.set("n", "x", '"_x', { desc = "Delete without yanking" })
 vim.keymap.set("v", "p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set("n", "<leader>j", "*``cgn", { desc = "Replace word under cursor" })
@@ -36,15 +30,5 @@ vim.keymap.set("n", "i", function()
   end
 end, { desc = "Automatically indent to the appropriate position", silent = true, expr = true })
 
--- Plugin Keymaps
-
-vim.keymap.set(
-  "n",
-  "<leader>uH",
-  ":lua require('mini.hipatterns').toggle()<CR>",
-  { desc = "Toggle Highlight Patterns", silent = true }
-)
-
 -- User Command Keymaps
-
 vim.keymap.set("v", "<leader>yb", "<cmd>'<,'>CopyCodeBlock<CR>", { desc = "Copy in Code Block format" })

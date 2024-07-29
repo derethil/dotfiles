@@ -40,7 +40,7 @@ return {
       "DBUIFindBuffer",
     },
     keys = {
-      { "<leader>D", "<cmd>DBUIToggle<cr>", desc = "Toggle Dadbod UI" },
+      { "<leader>Dd", "<cmd>DBUIToggle<cr>", desc = "Toggle Dadbod UI" },
       { "<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc = "Find Dadbod Buffer" },
       { "<leader>Da", "<cmd>DBUIAddConnection<cr>", desc = "Add Dadbod Connection" },
     },

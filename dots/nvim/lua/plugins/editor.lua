@@ -21,39 +21,6 @@ return {
       opts.mapping["<CR>"] = nil
     end,
   },
-  -- Build Better Vim Habits
-  {
-    "m4xshen/hardtime.nvim",
-    event = "VeryLazy",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    keys = {
-      { "<leader>uk", "<cmd>Hardtime toggle<cr>", "Toggle Hardtime" },
-    },
-    opts = {
-      enabled = false,
-    },
-  },
-  {
-    "tris203/precognition.nvim",
-    lazy = true,
-    event = { "LazyFile", "VeryLazy" },
-    opts = {
-      startVisible = false,
-      showBlankVirtLine = false,
-    },
-    config = function(_, opts)
-      require("precognition").setup(opts)
-    end,
-    keys = {
-      {
-        "<leader>uk",
-        function()
-          require("precognition").toggle()
-        end,
-        desc = "Toggle Precognition Hints",
-      },
-    },
-  },
   -- Git Merge Conflicts
   {
     "akinsho/git-conflict.nvim",
@@ -102,15 +69,49 @@ return {
       require("neogit").setup(opts)
     end,
     keys = {
-      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
+      {
+        "<leader>gg",
+        function()
+          require("neogit").open()
+        end,
+        desc = "Neogit (Root Dir)",
+      },
+      {
+        "<leader>gG",
+        function()
+          require("neogit").open({ cwd = vim.fn.expand("%:p:h") })
+        end,
+        desc = "Neogit (cwd)",
+      },
+      {
+        "<leader>gl",
+        function()
+          require("neogit").action("log", "log_current", { "--graph", "--decorate" })()
+        end,
+        desc = "Neogit Log (Root Dir)",
+      },
+      {
+        "<leader>gL",
+        function()
+          require("neogit").action("log", "log_current", { "--", vim.fn.expand("%:p:h"), "--decorate" })()
+        end,
+        desc = "Neogit Log (cwd)",
+      },
+      {
+        "<leader>gf",
+        function()
+          require("neogit").action("log", "log_current", { "--", vim.fn.expand("%:p"), "--decorate" })()
+        end,
+        desc = "Neogit Log (Buffer)",
+      },
     },
     opts = {
       commit_editor = {
         staged_diff_split_kind = "auto",
       },
       integrations = {
+        telescope = true,
         diffview = true,
-        fzf = true,
       },
       graph_style = "unicode",
       git_services = {
