@@ -104,6 +104,13 @@ return {
         end,
         desc = "Neogit Log (Buffer)",
       },
+      {
+        "<leader>gw",
+        function()
+          require("neogit").action("branch", "checkout_create_branch")()
+        end,
+        desc = "Switch to New Branch",
+      },
     },
     opts = {
       commit_editor = {
