@@ -2,21 +2,29 @@ import { icons } from "lib/icons";
 import { DockButton } from "../DockButton";
 import { bash } from "lib/utils";
 
-import { PackageUpdates } from "services/packageupdates";
+import { ArchUpdate } from "services/archupdate";
 
-const UpdatesHook = () => {
-  const { pacman_updates, aur_updates } = PackageUpdates;
-  return `${pacman_updates}/${aur_updates}`;
-};
+const openArchUpdate = () =>
+  bash("wezterm start --class 'wezterm-system-updater' -- arch-update -d");
+
+function UpdatesLabel() {
+  return Widget.Label({
+    label: ArchUpdate.bind("updates").as((u) => u.toString()),
+  });
+}
+
+function UpdatesButton() {
+  return DockButton({
+    icon: icons.system.updates,
+    tooltip: "Package Updates",
+    handlePrimaryClick: openArchUpdate,
+  });
+}
 
 export function UpdatesModule() {
   return Widget.Revealer({
     transition: "slide_right",
-    setup: (self) => {
-      self.hook(PackageUpdates, (_, totalUpdates) => {
-        self.reveal_child = totalUpdates > 0;
-      });
-    },
+    revealChild: ArchUpdate.bind("state").as((s) => s === "updates-available"),
     child: Widget.Box({
       className: "dock-module",
       children: [
@@ -27,18 +35,8 @@ export function UpdatesModule() {
         Widget.Box({
           className: "updates",
           children: [
-            DockButton({
-              icon: icons.system.updates,
-              tooltip: "Package Updates",
-              handlePrimaryClick: () =>
-                bash(
-                  "wezterm start --class 'wezterm-system-updater' -- arch-update -d",
-                ),
-            }),
-            Widget.Label({
-              setup: (self) =>
-                self.hook(PackageUpdates, () => self.label = UpdatesHook()),
-            }),
+            UpdatesButton(),
+            UpdatesLabel(),
           ],
         }),
       ],
