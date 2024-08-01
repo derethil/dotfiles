@@ -13,6 +13,14 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = false },
+      setup = {
+        -- HACK: disable denols renaming capability due to duplicate rename popping up
+        denols = function()
+          LazyVim.lsp.on_attach(function(client)
+            client.server_capabilities.renameProvider = false
+          end, "denols")
+        end,
+      },
       servers = {
         ruff_lsp = {},
         pyright = {},
