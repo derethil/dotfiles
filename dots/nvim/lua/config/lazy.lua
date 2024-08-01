@@ -27,6 +27,7 @@ require("lazy").setup({
     -- Debug Adapter Protocol Extras
     { import = "lazyvim.plugins.extras.dap.core" },
     -- Editor Extras
+    { import = "lazyvim.plugins.extras.editor.inc-rename" },
     { import = "lazyvim.plugins.extras.editor.mini-move" },
     { import = "lazyvim.plugins.extras.editor.mini-diff" },
     { import = "lazyvim.plugins.extras.editor.refactoring" },
@@ -49,7 +50,7 @@ require("lazy").setup({
     -- Util Extras
     { import = "lazyvim.plugins.extras.util.dot" },
     { import = "lazyvim.plugins.extras.util.project" },
-    -- LazyVim Plugins
+    -- Custom Plugins
     { import = "plugins" },
   },
   defaults = {
