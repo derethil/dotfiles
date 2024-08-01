@@ -3,6 +3,7 @@
 
 - pacman:
     - adwaita-icon-theme
+    - arch-update
     - bat
     - brightnessctl
     - cliphist
@@ -77,3 +78,6 @@
 
     - command: hyprshade install; systemctl --user enable --now hyprshade.timer
       description: Installing systemd timer for Hyprshade
+
+    - command: systemctl --user enable --now arch-update.timer
+      description: Enabling arch-update timer

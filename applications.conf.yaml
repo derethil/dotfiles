@@ -4,7 +4,6 @@
 
 - yay:
     # CLI Applications
-    - arch-update
     - bottom
     - docker
     - docker-compose
