@@ -37,7 +37,7 @@ class ArchUpdateService extends Service {
     const state = Utils.readFile(file).trim();
     const cleaned = state.replace(/arch-update?_/g, "");
     this.current_state = cleaned === "" ? "up-to-date" : cleaned;
-    this.emit("changed", this);
+    this.emit("changed");
     this.emit("state-changed", this.current_state);
     this.notify("state");
   }
@@ -45,7 +45,7 @@ class ArchUpdateService extends Service {
   private syncUpdates(file: string | Gio.File) {
     const updates = Utils.readFile(file).trim().split("\n");
     this.pending = updates?.length ?? 0;
-    this.emit("changed", this);
+    this.emit("changed");
     this.emit("updates-changed", this.current_state);
     this.notify("updates");
   }
