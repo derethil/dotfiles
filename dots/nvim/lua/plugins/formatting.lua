@@ -27,6 +27,25 @@ return {
     },
   },
   {
+    "codethread/qmk.nvim",
+    event = "BufReadPre *keymap.c",
+    config = function()
+      require("qmk").setup({
+        auto_format_pattern = nil,
+        name = "LAYOUT",
+        comment_preview = { position = "top" },
+        layout = {
+          "x x x x x x x x x x x x x x _ x",
+          "x x x x x x x x x x x x x x _ x",
+          "x x x x x x x x x x x x x x _ x",
+          "x x x x x x x x x x x x xx^ _ x",
+          "^xx x x x x x x x x x x xx^ x x",
+          "x x x xxxxxx^xxxxxx x x x x x x",
+        },
+      })
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {

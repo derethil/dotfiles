@@ -6,6 +6,9 @@ return {
     },
   },
   {
+    "nyoom-engineering/oxocarbon.nvim",
+  },
+  {
     "xero/miasma.nvim",
   },
   {
