@@ -8,10 +8,10 @@ return {
   {
     "nyoom-engineering/oxocarbon.nvim",
     config = function()
-      vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = "#d0d0d0" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "#d0d0d0" })
-      vim.api.nvim_set_hl(0, "LineNr", { bg = "none", fg = "#686868" })
-      vim.api.nvim_set_hl(0, "Comment", { bg = "none", fg = "#686868" })
+      -- vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = "#d0d0d0" })
+      -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "#d0d0d0" })
+      -- vim.api.nvim_set_hl(0, "LineNr", { bg = "none", fg = "#686868" })
+      -- vim.api.nvim_set_hl(0, "Comment", { bg = "none", fg = "#686868" })
     end,
   },
   {
