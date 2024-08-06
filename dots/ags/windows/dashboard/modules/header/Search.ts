@@ -175,7 +175,7 @@ export class ClipboardSearch extends Search<string> {
   }
 
   public async initFzf() {
-    const clipboard = await bash("cliphist list");
+    const clipboard = await bash("cliphist list | iconv -f utf-8 -t utf-8 -c");
     const lines = clipboard.split("\n");
     this.fzf = new Fzf(lines, {
       limit: 32,
