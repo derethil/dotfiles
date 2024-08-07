@@ -260,7 +260,6 @@ const optionsConfig = mkOptions(OPTIONS, {
     pinnedApps: opt<string[]>([
       "firefox",
       "wezterm",
-      "neovide",
       "discord",
       "mattermost",
       "obsidian",
