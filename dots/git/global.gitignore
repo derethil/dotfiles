@@ -8,4 +8,6 @@
 .lazy.lua
 **/*.local
 *.local.*
+.direnv/
+.python-version
 
