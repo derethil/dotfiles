@@ -69,12 +69,14 @@ async function setupHyprland() {
     `general:gaps_out ${wmGaps}`,
     `general:gaps_in ${Math.floor(wmGaps / 2)}`,
     `general:col.active_border rgba(${activeBorder()}ff)`,
+    `group:col.border_active rgba(${activeBorder()}ff)`,
     `general:col.inactive_border rgba(${hyprland.inactiveBorder.value})`,
+    `group:col.border_inactive rgba(${hyprland.inactiveBorder.value})`,
     `decoration:rounding ${radius.value}`,
     `decoration:drop_shadow ${shadows.value ? "yes" : "no"}`,
     `plugin:hyprexpo:bg_color ${theme.surface.value}`,
     `plugin:hyprexpo:gap_size ${wmGaps}`,
-  ]);
+  ]).catch(console.error);
 
   await sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`));
 
@@ -85,7 +87,7 @@ async function setupHyprland() {
         `layerrule blur, ${name}`,
         `layerrule ignorealpha ${/* based on shadow color */ 0.29}, ${name}`,
       ]),
-    );
+    ).catch(console.error);
   }
 
   // HACK: I don't know why this timeout is needed, but gaps are not applied without it on startup
@@ -94,6 +96,6 @@ async function setupHyprland() {
     sendBatch([
       `workspace w[t1] s[false], gapsout:${singleTiledGaps(wmGaps)}`,
       `workspace special:dropdown, gapsout:${singleTiledGaps(wmGaps, 8)}`,
-    ]);
+    ]).catch(console.error);
   }, 500);
 }
