@@ -11,7 +11,7 @@ These dotfiles are designed around the following packages and tools:
 - **Desktop UI**: [Aylur's Gtk Shell](https://github.com/Aylur/ags)
 - **Editor**: [Neovim](https://neovim.io/) using
   [LazyVim](https://www.lazyvim.org/)
-- **Terminal**: [WezTerm](https://wezfurlong.org/wezterm/index.html)
+- **Terminal**: [Foot](https://codeberg.org/dnkl/foot)
 - **Shell**: [Fish](https://fishshell.com/)
 - **File Manager**: [Yazi](https://github.com/sxyazi/yazi)
 - **Prompt**: [Starship](https://starship.rs/)
