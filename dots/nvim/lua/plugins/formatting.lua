@@ -3,6 +3,14 @@ return {
     "stevearc/conform.nvim",
     keys = {
       { "<leader>cF", "<cmd>ConformInfo<cr>", { desc = "Conform" } },
+      {
+        "<leader>fd",
+        function()
+          local bufnr = vim.api.nvim_get_current_buf()
+          require("util.formatting").format_diff(bufnr)
+        end,
+        { desc = "Format diff" },
+      },
     },
     opts = {
       formatters_by_ft = {
