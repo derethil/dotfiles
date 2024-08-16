@@ -42,8 +42,8 @@ export function Workspaces() {
   return Widget.EventBox({
     className: "workspaces",
     cursor: "pointer",
-    onScrollUp: () => swapToWorkspace("e-1"),
-    onScrollDown: () => swapToWorkspace("e+1"),
+    onScrollUp: () => swapToWorkspace("m-1"),
+    onScrollDown: () => swapToWorkspace("m+1"),
     child: options.bar.workspaces.minimum.bind().as(Container),
   });
 }
