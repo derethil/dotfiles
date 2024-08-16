@@ -66,6 +66,7 @@ return {
       -- Y Section
       opts.sections.lualine_y = {
         { "progress", separator = { left = "", right = nil } },
+        { "location", separator = { left = nil, right = nil } },
         {
           function()
             local words = vim.fn.wordcount()["words"]
