@@ -1,20 +1,3 @@
--- Neovide Keymaps
-if vim.g.neovide then
-  local scalemap = function(key, factor, desc)
-    vim.keymap.set({ "n", "v" }, key, "<nop>")
-    vim.keymap.set(
-      { "n", "v" },
-      key,
-      string.format(":lua vim.g.neovide_scale_factor = %s<CR>", factor),
-      { desc = desc }
-    )
-  end
-
-  scalemap("<C-ScrollWheelUp>", "vim.g.neovide_scale_factor + 0.1", "Zoom In")
-  scalemap("<C-ScrollWHeelDown>", "vim.g.neovide_scale_factor - 0.1", "Zoom Out")
-  scalemap("<C-0>", "1", "Reset Zoom")
-end
-
 -- Vim Keymaps
 vim.keymap.set("n", "<leader>A", "ggVG", { desc = "Select All" })
 vim.keymap.set("v", "<leader>A", "VggVG", { desc = "Select All " })

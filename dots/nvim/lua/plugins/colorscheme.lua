@@ -29,7 +29,7 @@ return {
     "sainnhe/gruvbox-material",
     lazy = false,
     opts = {
-      transparent_background = (not vim.g.neovide and 2 or 0),
+      transparent_background = 2,
       foreground = "material",
       background = "hard",
       enable_italic = true,

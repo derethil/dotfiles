@@ -38,7 +38,6 @@
     ~/.config/tmux: dots/tmux
     ~/.config/direnv/direnvrc: dots/direnvrc
     ~/.config/nvim: dots/nvim
-    ~/.config/neovide/: dots/neovide
     ~/.config/ags: dots/ags
     ~/.config/foot/: dots/foot
     ~/.config/yazi/: dots/yazi
