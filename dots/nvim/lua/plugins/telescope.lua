@@ -75,6 +75,11 @@ return {
       require("telescope").load_extension("import")
     end,
     opts = {
+      extensions = {
+        import = {
+          insert_at_top = true,
+        },
+      },
       defaults = {
         preview = {
           hide_on_startup = true,

@@ -116,6 +116,7 @@ return {
   {
     "pocco81/auto-save.nvim",
     event = "BufEnter",
+    enabled = false,
     keys = {
       { "<leader>n", "<cmd>ASToggle<cr>", desc = "Toggle Auto Save" },
     },
