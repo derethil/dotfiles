@@ -5,7 +5,7 @@ import { bash } from "lib/utils";
 import { ArchUpdate } from "services/archupdate";
 
 const openArchUpdate = () =>
-  bash("wezterm start --class 'wezterm-system-updater' -- arch-update -d");
+  bash("footclient --title 'terminal-arch-update' arch-update -d");
 
 function UpdatesLabel() {
   return Widget.Label({

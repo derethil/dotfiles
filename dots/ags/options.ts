@@ -259,7 +259,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     hideAppMixerList: opt<RegExp[]>([/.*[cC]hromium/]),
     pinnedApps: opt<string[]>([
       "firefox",
-      "wezterm",
+      "footclient",
       "discord",
       "mattermost",
       "obsidian",
