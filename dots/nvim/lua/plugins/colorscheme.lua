@@ -8,7 +8,7 @@ local function customize_gruvbox()
   local palette = get_palette()
   local set_hl = vim.fn["gruvbox_material#highlight"]
 
-  set_hl("NormalFloat", palette.fg1, palette.none)
+  set_hl("MiniFilesNormal", palette.fg1, palette.none)
   set_hl("FloatBorder", palette.grey1, palette.none)
   set_hl("MiniFilesCursorLine", palette.none, palette.bg_diff_green, "bold")
   set_hl("NvimSeparator", palette.green, palette.none)

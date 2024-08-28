@@ -51,7 +51,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.linting.eslint" },
     -- Util Extras
     { import = "lazyvim.plugins.extras.util.dot" },
-    { import = "lazyvim.plugins.extras.util.project" },
     -- Custom Plugins
     { import = "plugins" },
   },
