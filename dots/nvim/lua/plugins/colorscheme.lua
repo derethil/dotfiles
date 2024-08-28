@@ -1,29 +1,25 @@
+local function get_palette()
+  local config = vim.fn["gruvbox_material#get_configuration"]()
+  local palette = vim.fn["gruvbox_material#get_palette"](config.background, config.foreground, config.colors_override)
+  return palette
+end
+
+local function customize_gruvbox()
+  local palette = get_palette()
+  local set_hl = vim.fn["gruvbox_material#highlight"]
+
+  set_hl("NormalFloat", palette.fg1, palette.none)
+  set_hl("FloatBorder", palette.grey1, palette.none)
+  set_hl("MiniFilesCursorLine", palette.none, palette.bg_diff_green, "bold")
+  set_hl("NvimSeparator", palette.green, palette.none)
+end
+
 return {
   {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "gruvbox-material",
     },
-  },
-  {
-    "nyoom-engineering/oxocarbon.nvim",
-    config = function()
-      -- vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = "#d0d0d0" })
-      -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "#d0d0d0" })
-      -- vim.api.nvim_set_hl(0, "LineNr", { bg = "none", fg = "#686868" })
-      -- vim.api.nvim_set_hl(0, "Comment", { bg = "none", fg = "#686868" })
-    end,
-  },
-  {
-    "xero/miasma.nvim",
-  },
-  {
-    "mellow-theme/mellow.nvim",
-    config = function()
-      vim.g.mellow_bold_booleans = true
-      vim.g.mellow_bold_functions = true
-      vim.g.mellow_transparent = true
-    end,
   },
   {
     "sainnhe/gruvbox-material",
@@ -39,23 +35,23 @@ return {
       current_word = "underline",
     },
     config = function(_, opts)
+      -- Set Options based on lazy.nvim options
       for opt, val in pairs(opts) do
         if type(val) == "boolean" then
           val = val and 1 or 0
         end
         vim.g["gruvbox_material_" .. opt] = val
       end
+
+      -- Customize Colors
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", {}),
+        pattern = "gruvbox-material",
+        callback = customize_gruvbox,
+      })
+
+      -- Set colorscheme
       vim.cmd.colorscheme("gruvbox-material")
     end,
-  },
-  {
-    "nvim-zh/colorful-winsep.nvim",
-    config = true,
-    event = { "WinNew" },
-    opts = {
-      hi = {
-        fg = "#A9B665",
-      },
-    },
   },
 }

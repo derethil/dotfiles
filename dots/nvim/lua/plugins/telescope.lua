@@ -64,7 +64,7 @@ return {
         desc = "Git Status",
       },
       {
-        "<leader>ei",
+        "<leader>fi",
         "<cmd>Telescope import<cr>",
         desc = "Add Import",
       },

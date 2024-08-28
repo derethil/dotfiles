@@ -54,35 +54,7 @@ return {
       merge_consecutive = true,
     },
   },
-  -- File Explorer
-  {
-    "mikavilpas/yazi.nvim",
-    event = "VeryLazy",
-    keys = {
-      {
-        "<leader>e",
-        function()
-          require("yazi").yazi()
-        end,
-        desc = "Open File Explorer (buffer dir)",
-      },
-      {
-        "<leader>E",
-        function()
-          require("yazi").yazi(nil, LazyVim.root())
-        end,
-        desc = "Open File Explorer (root dir)",
-      },
-    },
-    opts = {
-      open_for_directories = true,
-      yazi_floating_window_border = "rounded",
-    },
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    enabled = false,
-  },
+  -- Cusor Center
   {
     "arnamak/stay-centered.nvim",
     event = "VeryLazy",
@@ -105,20 +77,13 @@ return {
       },
     },
   },
+  -- Swap Arguments
   {
     "machakann/vim-swap",
     keys = {
       { "<leader>c<", "<Plug>(swap-prev)", desc = "Swap with Prev" },
       { "<leader>c>", "<Plug>(swap-next)", desc = "Swap with Next" },
       { "<leader>ci", "<Plug>(swap-interactive)", desc = "Interactive Swap" },
-    },
-  },
-  {
-    "pocco81/auto-save.nvim",
-    event = "BufEnter",
-    enabled = false,
-    keys = {
-      { "<leader>n", "<cmd>ASToggle<cr>", desc = "Toggle Auto Save" },
     },
   },
 }
