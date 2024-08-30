@@ -119,6 +119,28 @@ export class ProjectsSearch extends Search<string> {
     });
   }
 
+  private async tmuxHasSession(sessionName: string) {
+    const hasSession = (await bash(
+      `tmux has-session -t ${sessionName}; echo $?`,
+    )).trim();
+    return hasSession === "0";
+  }
+
+  private async openTmuxSession(project: string) {
+    const sessionName = await bash(`basename ${project} | tr -d '.'`);
+    const hasSession = await this.tmuxHasSession(sessionName);
+
+    let command: string;
+
+    if (!hasSession) {
+      command = `tmux new-session -s ${sessionName} -c ${project}`;
+    } else {
+      command = `tmux attach-session -t ${sessionName}`;
+    }
+
+    bash(`hyprctl dispatch exec 'footclient -- ${command}'`);
+  }
+
   public handleChange(query: string) {
     const results = this.fzf.find(query).map((entry) => entry.item);
     this.handleNewState(results);
@@ -132,7 +154,7 @@ export class ProjectsSearch extends Search<string> {
           return pathList.pop() ?? label;
         },
         onClick: () => {
-          bash(options.dashboard.projects.command.value.replace("%d", project));
+          this.openTmuxSession(project);
           App.toggleWindow(WINDOW_NAME);
           DashboardOverlay.resetOverlay();
         },
@@ -144,12 +166,7 @@ export class ProjectsSearch extends Search<string> {
 
   public onAccept() {
     if (this.state.items.length === 0) return;
-    bash(
-      options.dashboard.projects.command.value.replace(
-        "%d",
-        this.state.value ?? "",
-      ),
-    );
+    this.openTmuxSession(this.state.value ?? "");
   }
 }
 
