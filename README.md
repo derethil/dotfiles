@@ -1,7 +1,7 @@
 # My Dotfiles
 
 This repository contains my personal dotfiles. They are highly personalized and
-I do not recommend installing the whole thing outright (if you are not me :)).
+I do not recommend installing the whole thing outright (if you are not me 🙂).
 
 ## Widgets Screenshot
 
