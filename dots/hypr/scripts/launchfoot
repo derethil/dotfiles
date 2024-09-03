@@ -4,7 +4,7 @@ if ! pgrep -x foot >/dev/null; then
   hyprctl dispatch exec 'foot --server'
   until pgrep -x foot; do sleep 0.05; done
   hyprctl dispatch exec 'notify-send "Foot Terminal" "Server is not running, starting it now..."'
-  footclient "$@" &
+  hyprctl dispatch exec "footclient $*"
 else
-  footclient "$@"
+  hyprctl dispatch exec "footclient $*"
 fi
