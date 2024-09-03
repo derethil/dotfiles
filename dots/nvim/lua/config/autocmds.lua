@@ -18,3 +18,8 @@ vim.api.nvim_create_user_command("CopyCodeBlock", function(opts)
   vim.fn.setreg("+", result)
   vim.notify("Text copied to clipboard")
 end, { range = true })
+
+vim.api.nvim_create_user_command("ConventionalCommits", function()
+  local url = "https://kapeli.com/cheat_sheets/Conventional_Commits.docset/Contents/Resources/Documents/index"
+  vim.fn.system(string.format("open %s", url))
+end, {})
