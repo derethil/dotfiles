@@ -10,6 +10,8 @@ import { WINDOW_NAME } from "./SearchMenu";
 
 const Applications = await Service.import("applications");
 
+const HYPR_SCRIPTS = await bash("realpath ~/.config/hypr/scripts");
+
 // Base Search Class
 
 export class Search<T = any> {
@@ -138,7 +140,7 @@ export class ProjectsSearch extends Search<string> {
       command = `tmux attach-session -t ${sessionName}`;
     }
 
-    bash(`hyprctl dispatch exec 'footclient -- ${command}'`);
+    bash(`hyprctl dispatch exec '${HYPR_SCRIPTS}/launchfoot ${command}'`);
   }
 
   public handleChange(query: string) {
