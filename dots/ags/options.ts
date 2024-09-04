@@ -2,6 +2,7 @@ import { Colors } from "lib/matugen";
 import { mkOptions, Opt, opt } from "lib/option";
 import { BarWidget } from "windows/bar/Bar";
 import { Market, Resolution } from "services/wallpaper";
+import { icons } from "lib/icons";
 
 const optionsConfig = mkOptions(OPTIONS, {
   mode: opt<"desktop" | "laptop">("desktop"),
@@ -254,6 +255,24 @@ const optionsConfig = mkOptions(OPTIONS, {
   docks: {
     iconSize: opt(32),
     screenshotFolder: opt("~/Pictures/Screenshots/"),
+    speakerIconMap: opt({
+      "HDMI": {
+        icon: icons.audio.speaker.class.tv,
+        label: "TV",
+      },
+      "Built-in Audio": {
+        icon: icons.audio.speaker.class.speaker,
+        label: "External Speaker",
+      },
+      "MOMENTUM": {
+        icon: icons.audio.speaker.class.headset,
+        label: "Headset",
+      },
+      "AirPods Pro": {
+        icon: icons.audio.speaker.class.airpods,
+        label: "Airpods",
+      },
+    }),
     hideSpeakerList: opt<RegExp[]>([]),
     hideAppMixerList: opt<RegExp[]>([/.*[cC]hromium/]),
     pinnedApps: opt<string[]>([
