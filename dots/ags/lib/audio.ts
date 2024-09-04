@@ -13,19 +13,19 @@ export type StreamOptions = {
 };
 
 const SpeakerMap: Record<string, SpeakerData> = {
-  ".*hdmi-stereo": {
+  "HDMI": {
     icon: icons.audio.speaker.class.tv,
     label: "TV",
   },
-  ".*analog-stereo": {
+  "Built-in Audio": {
     icon: icons.audio.speaker.class.speaker,
     label: "External Speaker",
   },
-  ".*stereo-game": {
+  "MOMENTUM": {
     icon: icons.audio.speaker.class.headset,
     label: "Headset",
   },
-  "bluez_output.70_AE_D5_C2_D1_B1.1": {
+  "AirPods Pro": {
     icon: icons.audio.speaker.class.airpods,
     label: "Airpods",
   },
@@ -34,7 +34,10 @@ const SpeakerMap: Record<string, SpeakerData> = {
 export const getSpeakerData = (stream: Stream): SpeakerData | null => {
   if (!stream.name) return null;
   for (const [regex, data] of Object.entries(SpeakerMap)) {
-    if (new RegExp(regex).test(stream.name)) return data;
+    console.log(`${JSON.stringify(stream.description)}`);
+    if (new RegExp(regex).test(stream.description ?? stream.name)) {
+      return data;
+    }
   }
   return null;
 };

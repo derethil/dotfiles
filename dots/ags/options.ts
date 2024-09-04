@@ -254,7 +254,7 @@ const optionsConfig = mkOptions(OPTIONS, {
   docks: {
     iconSize: opt(32),
     screenshotFolder: opt("~/Pictures/Screenshots/"),
-    hideSpeakerList: opt<RegExp[]>([/.*mono-chat/]),
+    hideSpeakerList: opt<RegExp[]>([]),
     hideAppMixerList: opt<RegExp[]>([/.*[cC]hromium/]),
     pinnedApps: opt<string[]>([
       "firefox",
