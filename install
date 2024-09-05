@@ -18,18 +18,18 @@ PLUGIN_DIRS=($(ls -d "${PLUGIN_DIR}"/*))
 cd "${BASE_DIR}"
 
 for plugin_dir in ${DOTBOT_DIR} ${PLUGIN_DIRS[@]}; do
-	git -C "${plugin_dir}" submodule sync --quiet --recursive
-	git submodule update --init --recursive "${plugin_dir}"
+  git -C "${plugin_dir}" submodule sync --quiet --recursive
+  git submodule update --init --recursive "${plugin_dir}"
 done
 
 # Install Tools
 
 install_tool() {
-	is_installed=$(pacman -Q "$1" || true)
-	if [ -z "${is_installed}" ]; then
-		echo "Installing $1..."
-		sudo pacman -S "$1"
-	fi
+  is_installed=$(pacman -Q "$1" || true)
+  if [ -z "${is_installed}" ]; then
+    echo "Installing $1..."
+    sudo pacman -S "$1"
+  fi
 }
 
 install_tool yay
@@ -41,11 +41,16 @@ install_tool flatpak
 plugin_args=""
 
 for plugin_dir in ${PLUGIN_DIRS[@]}; do
-	plugin_args+="--plugin-dir ${plugin_dir} "
+  plugin_args+="--plugin-dir ${plugin_dir} "
 done
 
 # Run Dotbot with Specified Configs
 
 for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
-	"${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${conf}${CONFIG_SUFFIX}" ${plugin_args}
+  "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${conf}${CONFIG_SUFFIX}" ${plugin_args}
+done
+
+# Cleanup Plugin Directories
+for plugin_dir in ${PLUGIN_DIRS[@]}; do
+  git -C "${plugin_dir}" clean -dfx
 done

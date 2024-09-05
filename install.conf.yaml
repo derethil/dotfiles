@@ -66,10 +66,3 @@
     ~/Pictures/wallpapers/:
       path: dots/wallpapers/*
       glob: true
-
-- shell:
-    - command: git submodule update --init --recursive
-      description: Installing submodules
-
-    - command: rm -rf dotbot-yay/__pycache__
-      description: Cleaning up dotboy-yay pycache
