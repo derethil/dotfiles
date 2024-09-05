@@ -1,7 +1,7 @@
 # This file contains the necessary packages to install
 # for my dotfiles to work properly.
 
-- pacman:
+- yay:
     - adwaita-icon-theme
     - arch-update
     - bat
@@ -52,7 +52,6 @@
     - hyprshot
     - hyprutils
     - hyprwayland-scanner
-    - kanagawa-gtk-theme-git
     - morewaita
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
     - swww

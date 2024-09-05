@@ -29,10 +29,7 @@
       force: true
 
     # Config Dirs
-    ~/.config/lazygit: dots/git/lazygit
-    ~/.config/git:
-      path: dots/git
-      exclude: [lazygit]
+    ~/.config/git: dots/git
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
     ~/.config/tmux: dots/tmux
