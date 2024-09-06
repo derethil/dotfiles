@@ -29,8 +29,7 @@
     # GUI Applications
     - discord
     - discord-ptb
-    - firefox
-    - firefox-profile-switcher-connector
+    - zen-browser-avx2-bin
     - insomnia-bin
     - mattermost-desktop-bin
     - nwg-look-bin

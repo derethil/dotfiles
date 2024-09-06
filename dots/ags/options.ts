@@ -276,7 +276,7 @@ const optionsConfig = mkOptions(OPTIONS, {
     hideSpeakerList: opt<RegExp[]>([]),
     hideAppMixerList: opt<RegExp[]>([/.*[cC]hromium/]),
     pinnedApps: opt<string[]>([
-      "firefox",
+      "zen",
       "footclient",
       "discord",
       "mattermost",
