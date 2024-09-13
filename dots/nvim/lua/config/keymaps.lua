@@ -1,11 +1,10 @@
 -- Vim Keymaps
-vim.keymap.set("n", "<leader>A", "ggVG", { desc = "Select All" })
-vim.keymap.set("v", "<leader>A", "VggVG", { desc = "Select All " })
 vim.keymap.set("n", "x", '"_x', { desc = "Delete without yanking" })
 vim.keymap.set("v", "p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set("n", "<leader>j", "*``cgn", { desc = "Replace word under cursor" })
 vim.keymap.set({ "n", "v" }, "B", "^", { desc = "Move to the beginning of the line" })
 vim.keymap.set({ "n", "v" }, "E", "$", { desc = "Move to the end of the line" })
+vim.keymap.set({ "n", "v", "i" }, "<C-a>", "<esc>ggVG", { desc = "Select all" })
 
 vim.keymap.set("n", "i", function()
   local cond = #vim.fn.getline(".") == 0
