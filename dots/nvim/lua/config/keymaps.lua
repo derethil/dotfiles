@@ -17,3 +17,4 @@ end, { desc = "Automatically indent to the appropriate position", silent = true,
 
 -- User Command Keymaps
 vim.keymap.set("v", "<leader>yb", "<cmd>'<,'>CopyCodeBlock<CR>", { desc = "Copy in Code Block format" })
+vim.keymap.set({ "n", "x", "v" }, "<space>bo", "<cmd>CloseOtherBuffers<cr>", { desc = "Close Other Buffers" })

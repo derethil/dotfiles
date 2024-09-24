@@ -23,3 +23,20 @@ vim.api.nvim_create_user_command("ConventionalCommits", function()
   local url = "https://kapeli.com/cheat_sheets/Conventional_Commits.docset/Contents/Resources/Documents/index"
   vim.fn.system(string.format("open %s", url))
 end, {})
+vim.api.nvim_create_user_command("CloseOtherBuffers", function()
+  local windownrs = vim.api.nvim_list_wins()
+  local currbuf = vim.api.nvim_get_current_buf()
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    local is_open = false
+    for _, win in ipairs(windownrs) do
+      if vim.api.nvim_win_get_buf(win) == buf or currbuf == buf then
+        is_open = true
+        break
+      end
+    end
+    if not is_open then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end, {})
