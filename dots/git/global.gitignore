@@ -5,6 +5,7 @@
 .envrc
 .local/
 .nvim.lua
+.vscode/
 .lazy.lua
 **/*.local
 *.local.*
