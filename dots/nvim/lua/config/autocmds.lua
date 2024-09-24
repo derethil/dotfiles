@@ -23,6 +23,17 @@ vim.api.nvim_create_user_command("ConventionalCommits", function()
   local url = "https://kapeli.com/cheat_sheets/Conventional_Commits.docset/Contents/Resources/Documents/index"
   vim.fn.system(string.format("open %s", url))
 end, {})
+
+vim.api.nvim_create_user_command("OverseerRestartLast", function()
+  local overseer = require("overseer")
+  local tasks = overseer.list_tasks({ recent_first = true })
+  if vim.tbl_isempty(tasks) then
+    vim.notify("No tasks found", vim.log.levels.WARN)
+  else
+    overseer.run_action(tasks[1], "restart")
+  end
+end, {})
+
 vim.api.nvim_create_user_command("CloseOtherBuffers", function()
   local windownrs = vim.api.nvim_list_wins()
   local currbuf = vim.api.nvim_get_current_buf()
