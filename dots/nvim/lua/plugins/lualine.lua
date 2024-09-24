@@ -52,6 +52,8 @@ return {
       },
     }
 
+    opts.sections.lualine_x = { "overseer" }
+
     -- Add Branch to Z Section
     opts.sections.lualine_z = { { "branch", separator = { left = "", right = nil } } }
   end,

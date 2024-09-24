@@ -3,6 +3,9 @@ return {
     "echasnovski/mini.files",
     event = "VeryLazy",
     opts = {
+      windows = {
+        preview = false,
+      },
       options = {
         use_as_default_explorer = true,
       },
