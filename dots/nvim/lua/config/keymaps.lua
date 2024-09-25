@@ -7,12 +7,7 @@ vim.keymap.set({ "n", "v" }, "E", "$", { desc = "Move to the end of the line" })
 vim.keymap.set({ "n", "v", "i" }, "<C-a>", "<esc>ggVG", { desc = "Select all" })
 
 vim.keymap.set("n", "i", function()
-  local cond = #vim.fn.getline(".") == 0
-  if cond then
-    return '"_cc'
-  else
-    return "i"
-  end
+  return #vim.fn.getline(".") == 0 and '"_cc' or "i"
 end, { desc = "Automatically indent to the appropriate position", silent = true, expr = true })
 
 -- User Command Keymaps

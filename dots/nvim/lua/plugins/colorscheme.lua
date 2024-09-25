@@ -12,6 +12,9 @@ local function customize_gruvbox()
   set_hl("FloatBorder", palette.grey1, palette.none)
   set_hl("MiniFilesCursorLine", palette.none, palette.bg_diff_green, "bold")
   set_hl("NvimSeparator", palette.green, palette.none)
+  set_hl("GitConflictCurrent", palette.none, palette.bg_diff_blue)
+  set_hl("GitConflictCurrentLabel", palette.blue, palette.bg_visual_blue, "bold")
+  set_hl("GitConflictIncomingLabel", palette.green, palette.bg_visual_green, "bold")
 end
 
 return {
