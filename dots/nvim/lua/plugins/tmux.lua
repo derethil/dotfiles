@@ -1,3 +1,13 @@
+local function handleRestoreSession()
+  local argv = vim.fn.argv()
+  if type(argv) == "string" then
+    argv = { argv }
+  end
+  if next(argv) == nil then
+    require("persistence").load()
+  end
+end
+
 return {
   {
     "christoomey/vim-tmux-navigator",
@@ -15,16 +25,7 @@ return {
     config = function(_, opts)
       local plugin = require("persistence")
       plugin.setup(opts)
-
-      local argv = vim.fn.argv()
-
-      if type(argv) == "string" then
-        argv = { argv }
-      end
-
-      if next(argv) == nil then
-        plugin.load()
-      end
+      handleRestoreSession()
     end,
   },
 }
