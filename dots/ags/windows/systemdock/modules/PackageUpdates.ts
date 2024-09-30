@@ -4,8 +4,7 @@ import { bash } from "lib/utils";
 
 import { ArchUpdate } from "services/archupdate";
 
-const openArchUpdate = () =>
-  bash("footclient --title 'terminal-arch-update' arch-update -d");
+const openArchUpdate = () => bash("footclient --title 'terminal-arch-update' arch-update -d");
 
 function UpdatesLabel() {
   return Widget.Label({
@@ -24,7 +23,7 @@ function UpdatesButton() {
 export function UpdatesModule() {
   return Widget.Revealer({
     transition: "slide_right",
-    revealChild: ArchUpdate.bind("state").as((s) => s === "updates-available"),
+    revealChild: ArchUpdate.bind("status").as((s) => s === "updates-available"),
     child: Widget.Box({
       className: "dock-module",
       children: [
@@ -34,10 +33,7 @@ export function UpdatesModule() {
         }),
         Widget.Box({
           className: "updates",
-          children: [
-            UpdatesButton(),
-            UpdatesLabel(),
-          ],
+          children: [UpdatesButton(), UpdatesLabel()],
         }),
       ],
     }),
