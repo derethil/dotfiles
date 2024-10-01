@@ -25,6 +25,11 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+vim.keymap.set({ "n", "x", "v" }, "<space>or", function()
+  vim.cmd("OverseerRestartLast")
+  vim.notify("Restarted last Overseer task", vim.log.levels.INFO, { title = "Overseer" })
+end, { desc = "Restart Last Task" })
+
 return {
   "stevearc/overseer.nvim",
   config = function(opts)
