@@ -21,7 +21,10 @@ vim.api.nvim_create_autocmd("User", {
     local status = { overseer.STATUS.RUNNING, overseer.STATUS.PENDING }
     local tasks = overseer.list_tasks({ status })
     local message = "Restored " .. #tasks .. " Overseer task" .. (#tasks == 1 and "" or "s")
-    vim.notify(message, vim.log.levels.INFO, { title = "Overseer" })
+
+    if #tasks > 0 then
+      vim.notify(message, vim.log.levels.INFO, { title = "Overseer" })
+    end
   end,
 })
 
