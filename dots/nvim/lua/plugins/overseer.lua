@@ -29,8 +29,20 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 vim.keymap.set({ "n", "x", "v" }, "<space>or", function()
+  local overseer = require("overseer")
+
   vim.cmd("OverseerRestartLast")
-  vim.notify("Restarted last Overseer task", vim.log.levels.INFO, { title = "Overseer" })
+
+  local status = { overseer.STATUS.RUNNING, overseer.STATUS.PENDING }
+  local most_recent = overseer.list_tasks({ status = status, recent_fist = true })[1]
+
+  if not most_recent then
+    return
+  end
+
+  local task_name = most_recent.name
+
+  vim.notify("Restarted last Overseer task: " .. task_name, vim.log.levels.INFO, { title = "Overseer" })
 end, { desc = "Restart Last Task" })
 
 return {
