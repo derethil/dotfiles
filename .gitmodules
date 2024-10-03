@@ -14,3 +14,6 @@
 [submodule "dotbot-flatpak"]
 	path = plugins/dotbot-flatpak
 	url = https://github.com/DrDynamic/dotbot-flatpak.git
+[submodule "dots/fonts/VulfFont"]
+	path = dots/fonts/VulfFont
+	url = git@github.com:derethil/vulf-font.git
