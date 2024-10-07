@@ -15,6 +15,11 @@ return {
     },
     keys = {
       {
+        "<leader>fl",
+        "<cmd>Telescope resume<cr>",
+        desc = "Resume Telescope Search",
+      },
+      {
         "<leader>fb",
         "<cmd>Telescope builtin<cr>",
         desc = "Find Telescope builtins",
