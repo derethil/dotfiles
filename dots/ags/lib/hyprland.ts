@@ -59,9 +59,7 @@ function sendBatch(batch: string[]) {
 
 async function setupHyprland() {
   const wmGaps = Math.floor(hyprland.gaps.value * spacing.value);
-  const theme = options.theme.scheme.value === "dark"
-    ? options.theme.dark
-    : options.theme.light;
+  const theme = options.theme.scheme.value === "dark" ? options.theme.dark : options.theme.light;
 
   sendBatch([
     // Theming
@@ -93,9 +91,8 @@ async function setupHyprland() {
   // HACK: I don't know why this timeout is needed, but gaps are not applied without it on startup
   // I assume Hyprland is not fully initialized/gets reloaded at some point after this function runs
   setTimeout(() => {
-    sendBatch([
-      `workspace w[t1] s[false], gapsout:${singleTiledGaps(wmGaps)}`,
-      `workspace special:dropdown, gapsout:${singleTiledGaps(wmGaps, 8)}`,
-    ]).catch(console.error);
+    sendBatch([`workspace w[t1] s[false], gapsout:${singleTiledGaps(wmGaps)}`]).catch(
+      console.error,
+    );
   }, 500);
 }
