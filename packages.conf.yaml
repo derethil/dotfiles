@@ -19,6 +19,7 @@
     - inotify-tools
     - jq
     - lazygit
+    - libva-nvidia-driver
     - neovim
     - netctl
     - noto-fonts-emoji
