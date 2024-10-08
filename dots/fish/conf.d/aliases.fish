@@ -9,7 +9,6 @@ alias nv="nvim"
 alias udb="sudo updatedb"
 
 function rm
-    command echo "You're supposed to use `del` now!"
     command rm $argv
 end
 
