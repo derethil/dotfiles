@@ -5,7 +5,7 @@ function wd
         return 1
     end
 
-    set pattern (echo "\\$argv\$")
+    set pattern (echo "$argv\$")
     set results (locate -r $pattern)
 
     if test (count $results) -eq 0
@@ -13,7 +13,7 @@ function wd
         return 1
     end
 
-    set selected (echo $results | string split " " | fzf)
+    set selected (echo $results | string split " " | fzf -i)
 
     if test (count $selected) -ne 1
         echo "No selection made"
