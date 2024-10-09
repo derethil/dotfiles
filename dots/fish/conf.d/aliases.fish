@@ -19,3 +19,5 @@ end
 function refish
     source ~/.config/fish/config.fish
 end
+
+alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
