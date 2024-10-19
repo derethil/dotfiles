@@ -4,6 +4,8 @@
   # Imports
   imports = [
     ./hardware-configuration.nix
+    ./programs/hyprland.nix
+    ./hardware/graphics.nix
   ];
 
   # Nixpkgs
@@ -59,8 +61,6 @@
       PasswordAuthentication = false;
     };
   };
-
-  programs.hyprland.enable = true;
 
   # State Version
   system.stateVersion = "24.05";

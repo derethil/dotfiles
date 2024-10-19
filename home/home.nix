@@ -7,9 +7,10 @@
     homeDirectory = "/home/derethil";
   };
 
-  programs.neovim.enable = true;
-
   programs.home-manager.enable = true;
+
+  programs.neovim.enable = true;
+  programs.ripgrep.enable = true;
 
   programs.git = {
     enable = true;
