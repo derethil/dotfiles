@@ -16,13 +16,13 @@
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/configuration.nix
+          ./system/configuration.nix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit inputs outputs; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.derethil = import ./home-manager/home.nix;
+            home-manager.users.derethil = import ./home/home.nix;
           }
         ];
       };

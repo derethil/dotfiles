@@ -60,6 +60,8 @@
     };
   };
 
+  programs.hyprland.enable = true;
+
   # State Version
   system.stateVersion = "24.05";
 }
