@@ -53,11 +53,7 @@ in {
         protocols = "http, https, ftp, ftps, file, mailto, ipfs";
       };
 
-      colors =
-        {
-          alpha = 0.86;
-        }
-        colors.dark;
+      colors = lib.mkMerge [{ alpha = 0.86; } colors.dark];
     };
   };
 }

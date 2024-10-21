@@ -8,11 +8,13 @@
       enable = true;
     };
 
-    core.editor = "nvim";
+    extraConfig = {
+      core.editor = "nvim";
+      push.autoSetupremote = true;
+      merge.ff = false;
+      pull.ff = "only";
+    };
 
-    push.autoSetupremote = true;
-    merge.ff = false;
-    pull.ff = "only";
 
     ignores = [
       ".venv"

@@ -54,13 +54,12 @@
 
   # SSH
   services.gnome.gnome-keyring.enable = true;
-  ssh.startAgent = true;
   services.openssh = {
     enable = true;
     settings = {
-      PermitRootLogin = true;
+      PermitRootLogin = "yes";
       PasswordAuthentication = false;
-      settings.UseDNS = true;
+      UseDns = true;
     };
   };
 
