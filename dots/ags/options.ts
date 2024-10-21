@@ -246,17 +246,14 @@ const optionsConfig = mkOptions(OPTIONS, {
   eyenudge: {
     interval: opt(1200),
     duration: opt(20),
-    disableForClients: opt<(string | RegExp)[]>([
-      /^steam_app_[0-9]+$/,
-      "com.stremio.stremio",
-    ]),
+    disableForClients: opt<(string | RegExp)[]>([/^steam_app_[0-9]+$/, "com.stremio.stremio"]),
   },
 
   docks: {
     iconSize: opt(32),
     screenshotFolder: opt("~/Pictures/Screenshots/"),
     speakerIconMap: opt({
-      "HDMI": {
+      HDMI: {
         icon: icons.audio.speaker.class.tv,
         label: "TV",
       },
@@ -264,7 +261,7 @@ const optionsConfig = mkOptions(OPTIONS, {
         icon: icons.audio.speaker.class.speaker,
         label: "External Speaker",
       },
-      "MOMENTUM": {
+      MOMENTUM: {
         icon: icons.audio.speaker.class.headset,
         label: "Headset",
       },
@@ -280,6 +277,7 @@ const optionsConfig = mkOptions(OPTIONS, {
       "footclient",
       "discord",
       "mattermost",
+      "insomnia",
       "obsidian",
       "spotify",
       "steam",
