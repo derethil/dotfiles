@@ -24,21 +24,29 @@ vim.api.nvim_create_user_command("OverseerRestartLast", function()
   end
 end, {})
 
--- Close NonVisible Buffers
+-- Close Nonvisible Buffers
 vim.api.nvim_create_user_command("CloseOtherBuffers", function()
   local windownrs = vim.api.nvim_list_wins()
   local currbuf = vim.api.nvim_get_current_buf()
 
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    local is_open = false
-    for _, win in ipairs(windownrs) do
-      if vim.api.nvim_win_get_buf(win) == buf or currbuf == buf then
-        is_open = true
-        break
+    if buf ~= currbuf then
+      local close = false
+
+      local filebuffer = vim.api.nvim_get_option_value("buftype", { buf = buf }) == ""
+      local hidden = vim.api.nvim_get_option_value("bufhidden", { buf = buf }) == "hide"
+
+      for _, win in ipairs(windownrs) do
+        local in_window = vim.api.nvim_win_is_valid(win) and vim.api.nvim_win_get_buf(win) == buf
+        if not in_window and not hidden and filebuffer then
+          close = true
+          break
+        end
       end
-    end
-    if not is_open then
-      vim.api.nvim_buf_delete(buf, { force = true })
+
+      if close then
+        vim.api.nvim_buf_delete(buf, { force = true })
+      end
     end
   end
 end, {})
