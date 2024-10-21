@@ -18,7 +18,6 @@
     - gnome-keyring
     - inotify-tools
     - jq
-    - lazygit
     - libva-nvidia-driver
     - neovim
     - netctl
@@ -82,3 +81,6 @@
 
     - command: systemctl --user enable --now arch-update.timer
       description: Enabling arch-update timer
+
+    - command: systemctl --user enable hypridle.service
+      description: Enabling hypridle service
