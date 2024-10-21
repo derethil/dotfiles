@@ -1,7 +1,6 @@
 {
   description = "NixOS Configuration";
   inputs = {
-
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
@@ -12,6 +11,12 @@
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
+
+    # Zen Browser
+    zen-browser = {
+      url = "github:fufexan/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs:
   let
