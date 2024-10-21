@@ -24,6 +24,7 @@ return {
       servers = {
         ruff_lsp = {},
         pyright = {},
+        nil_ls = {},
         tailwindcss = {
           settings = {
             tailwindCSS = {
