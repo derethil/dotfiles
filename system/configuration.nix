@@ -48,17 +48,19 @@
   users.users = {
     derethil = {
       isNormalUser = true;
-      openssh.authorizedKeys.keys = [];
       extraGroups = ["wheel"];
     };
   };
 
   # SSH
+  services.gnome.gnome-keyring.enable = true;
+  ssh.startAgent = true;
   services.openssh = {
     enable = true;
     settings = {
-      PermitRootLogin = "no";
+      PermitRootLogin = true;
       PasswordAuthentication = false;
+      settings.UseDNS = true;
     };
   };
 
