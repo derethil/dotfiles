@@ -21,7 +21,7 @@ in {
     ];
 
     bind = let
-      resize = 256;
+      resize = "256";
     in [
       # Compositor Commands
       "$mod, Q, killactive,"

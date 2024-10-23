@@ -1,13 +1,12 @@
 {config, ...}:
 let
   pointer = config.home.pointerCursor;
-  cursorName = "Bibata-Modern-Ice-Hyprcursor";
 in {
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
 
     exec-once = [
-      "hyprctl setcursor ${cursorName} ${toString pointer.size}"
+      "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
     ];
 
     general = {
