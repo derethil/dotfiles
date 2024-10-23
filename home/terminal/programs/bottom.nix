@@ -6,7 +6,7 @@
         disable_gpu = false;
       };
       styles = {
-        theme = "gruvbox-dark";
+        theme = "gruvbox";
       };
     };
   };

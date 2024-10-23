@@ -9,6 +9,11 @@ in {
       "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
     ];
 
+
+    monitor = [
+      "DP-3, 3440x1440@144, 0x0, 1"
+    ];
+
     general = {
       border_size = 3;
       gaps_out = 12;

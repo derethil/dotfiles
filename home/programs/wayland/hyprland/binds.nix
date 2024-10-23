@@ -42,11 +42,17 @@ in {
       "$mod, Space, cyclenext, floating"
       "$mod SHIFT, Space, togglefloating"
 
-      # Move Windows
+      # Focus Windows
       "$mod, H, movefocus, l"
       "$mod, L, movefocus, r"
       "$mod, K, movefocus, u"
       "$mod, J, movefocus, d"
+
+      # Move Windows Within Workspace
+      "$mod SHIFT, H, movewindow, l"
+      "$mod SHIFT, L, movewindow, r"
+      "$mod SHIFT, K, movewindow, u"
+      "$mod SHIFT, J, movewindow, d"
 
       # Resize Windows
       "$mod CTRL, H, resizeactive, -${resize}, 0"
@@ -60,6 +66,9 @@ in {
       "$mod, bracketleft, workspace, m-1"
       "$mod, mouse_down, workspace, m+1"
       "$mod, mouse_up, workspace, m-1"
+
+      # Applications
+      "$mod, Return, exec, foot"
     ] ++ workspaces;
   };
 }
