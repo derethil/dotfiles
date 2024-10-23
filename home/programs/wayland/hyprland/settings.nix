@@ -112,7 +112,7 @@ in {
       vrr = 1;
 
       enable_swallow = true;
-      swallow_regex = "^(footclient|GDLauncher)$";
+      swallow_regex = "^(foot.*|GDLauncher)$";
 
       focus_on_activate = true;
     };
@@ -127,6 +127,12 @@ in {
       explicit_sync = 1;
       explicit_sync_kms = 0;
       direct_scanout = false;
+    };
+
+    cursor = {
+      zoom_factor = 1.0;
+      default_monitor = "DP-1";
+      no_hardware_cursors = true;
     };
 
     xwayland.force_zero_scaling = true;
