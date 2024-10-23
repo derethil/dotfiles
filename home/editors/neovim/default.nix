@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: let
+  linkNvim = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/home/editors/neovim/${path}";
+in {
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -26,6 +32,7 @@
       prettierd
       alejandra
       eslint_d
+      stylua
       # Language Servers
       gopls
       svelte-language-server
@@ -43,6 +50,8 @@
     '';
   };
 
+  xdg.configFile."nvim/lazy-lock.json".source = linkNvim "lazy-lock.json";
+  xdg.configFile."nvim/lazyvim.json".source = linkNvim "lazyvim.json";
   xdg.configFile."nvim/lua" = {
     source = ./lua;
     recursive = true;
