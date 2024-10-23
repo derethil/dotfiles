@@ -15,6 +15,7 @@
   ];
 
   programs = {
+    zoxide.enable = true;
     eza.enable = true;
     ssh.enable = true;
   };

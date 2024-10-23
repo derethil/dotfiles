@@ -42,6 +42,7 @@ in {
       # Misc
       gotools
       go
+      nodejs_22 # Required for Copilot
     ];
 
     extraLuaConfig = ''

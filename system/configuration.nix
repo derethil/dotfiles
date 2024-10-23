@@ -2,13 +2,14 @@
   inputs,
   lib,
   config,
+  pkgs,
   ...
 }: {
   # Imports
   imports = [
     ./hardware-configuration.nix
-    ./programs/hyprland.nix
     ./hardware/graphics.nix
+    ./programs
   ];
 
   # Nixpkgs
@@ -52,6 +53,7 @@
   # Users
   users.users = {
     derethil = {
+      shell = pkgs.fish;
       isNormalUser = true;
       extraGroups = ["wheel"];
     };
