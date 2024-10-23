@@ -7,6 +7,7 @@ in {
 
     exec-once = [
       "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
+      "foot --server"
     ];
 
 

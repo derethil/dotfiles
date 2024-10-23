@@ -15,7 +15,6 @@
       pull.ff = "only";
     };
 
-
     ignores = [
       ".venv"
       ".tool-versions"

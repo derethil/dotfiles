@@ -68,7 +68,7 @@ in {
       "$mod, mouse_up, workspace, m-1"
 
       # Applications
-      "$mod, Return, exec, foot"
+      "$mod, Return, exec, footclient"
     ] ++ workspaces;
   };
 }
