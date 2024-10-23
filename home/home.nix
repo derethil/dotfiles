@@ -1,8 +1,9 @@
-{
+{inputs, ...}: {
   imports = [
     ./terminal
     ./programs
     ./editors/neovim
+    inputs.nix-index-db.hmModules.nix-index
   ];
 
   home = {

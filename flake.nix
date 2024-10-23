@@ -23,9 +23,20 @@
       url = "github:fufexan/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Nix Index Database
+    nix-index-db = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs:
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-stable,
+    home-manager,
+    ...
+  } @ inputs: let
     inherit (self) outputs;
   in {
     nixosConfigurations = {
@@ -35,7 +46,7 @@
           ./system/configuration.nix
           inputs.home-manager.nixosModules.home-manager
           {
-            home-manager.extraSpecialArgs = { inherit inputs outputs; };
+            home-manager.extraSpecialArgs = {inherit inputs outputs;};
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";
