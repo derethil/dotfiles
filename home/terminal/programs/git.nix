@@ -1,4 +1,6 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
+  home.packages = with pkgs; [ git-open ];
+
   programs.git = {
     enable = true;
     userName = "Jaren Glenn";
