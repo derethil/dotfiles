@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }: {
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Ice";
@@ -12,7 +17,7 @@
 
     font = {
       name = "Inter";
-      package = pkgs.google-fonts.override { fonts = ["Inter"];};
+      package = pkgs.google-fonts.override {fonts = ["Inter"];};
       size = 9;
     };
 

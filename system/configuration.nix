@@ -1,6 +1,9 @@
-{ inputs, lib, config, pkgs, ... }:
-
 {
+  inputs,
+  lib,
+  config,
+  ...
+}: {
   # Imports
   imports = [
     ./hardware-configuration.nix
@@ -10,7 +13,9 @@
 
   # Nixpkgs
   nixpkgs = {
-    overlays = [];
+    overlays = [
+      (self: super: {utillinux = super.util-linux;})
+    ];
     config = {
       allowUnfree = true;
     };

@@ -1,6 +1,8 @@
-{ inputs, pkgs, ... }: 
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   # Enable Hyprland & Required Options
   programs.hyprland = {
     enable = true;
@@ -9,7 +11,7 @@
     portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
 
-  # Nvidia 
+  # Nvidia
   environment.variables.LIBVA_DRIVER_NAME = "nvidia";
   environment.variables.XDG_SESSION_TYPE = "wayland";
   environment.variables.GBM_BACKEND = "nvidia-drm";

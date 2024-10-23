@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
-let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   colors = {
     dark = {
       foreground = "d4be98";
@@ -17,14 +20,14 @@ let
       regular6 = "89b482";
       regular7 = "d4be98";
 
-      bright0  = "eddeb5";
-      bright1  = "ea6962";
-      bright2  = "a9b665";
-      bright3  = "d8a657";
-      bright4  = "7daea3";
-      bright5  = "d3869b";
-      bright6  = "89b482";
-      bright7  = "d4be98";
+      bright0 = "eddeb5";
+      bright1 = "ea6962";
+      bright2 = "a9b665";
+      bright3 = "d8a657";
+      bright4 = "7daea3";
+      bright5 = "d3869b";
+      bright6 = "89b482";
+      bright7 = "d4be98";
     };
   };
 in {
@@ -53,9 +56,7 @@ in {
         protocols = "http, https, ftp, ftps, file, mailto, ipfs";
       };
 
-      colors = lib.mkMerge [{ alpha = 0.86; } colors.dark];
+      colors = lib.mkMerge [{alpha = 0.86;} colors.dark];
     };
   };
 }
-
-

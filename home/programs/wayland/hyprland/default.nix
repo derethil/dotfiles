@@ -1,5 +1,9 @@
-{ inputs, pkgs, config, ... }:
-let
+{
+  inputs,
+  pkgs,
+  config,
+  ...
+}: let
   cursor = config.home.pointerCursor.name;
   cursorPackage = config.home.pointerCursor.package;
 in {
@@ -24,7 +28,7 @@ in {
       variables = ["-all"];
       extraCommands = [
         "systemctl --user stop graphical-session.target"
-	"systemctl --user start hyprland-session.target"
+        "systemctl --user start hyprland-session.target"
       ];
     };
   };

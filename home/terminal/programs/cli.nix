@@ -1,5 +1,4 @@
-{pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # Archive Tools
     zip
@@ -11,7 +10,7 @@
 
     # Utils
     ncdu
-    xorg.xeyes 
+    xorg.xeyes
     fd
   ];
 

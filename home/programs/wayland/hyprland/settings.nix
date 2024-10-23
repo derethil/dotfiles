@@ -1,5 +1,4 @@
-{config, ...}:
-let
+{config, ...}: let
   pointer = config.home.pointerCursor;
 in {
   wayland.windowManager.hyprland.settings = {
@@ -9,7 +8,6 @@ in {
       "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
       "foot --server"
     ];
-
 
     monitor = [
       "DP-3, 3440x1440@144, 0x0, 1"
@@ -33,7 +31,7 @@ in {
       always_center_master = true;
       mfact = 0.5;
     };
-    
+
     decoration = {
       rounding = 8;
 
@@ -66,7 +64,7 @@ in {
       enabled = true;
 
       bezier = [
-        "overshot, 0.05, 0.9, 0.1, 1.15" 
+        "overshot, 0.05, 0.9, 0.1, 1.15"
         "easeInOutExpo, 0.87, 0, 0.13, 1"
       ];
 

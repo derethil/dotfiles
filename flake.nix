@@ -38,6 +38,7 @@
             home-manager.extraSpecialArgs = { inherit inputs outputs; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "hm-backup";
             home-manager.users.derethil = import ./home/home.nix;
           }
         ];
