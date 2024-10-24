@@ -10,6 +10,7 @@
 
     # Utils
     ncdu
+    tldr
     xorg.xeyes
     fd
   ];

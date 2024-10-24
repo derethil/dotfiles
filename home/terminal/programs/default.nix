@@ -4,5 +4,6 @@
     ./bottom.nix
     ./git.nix
     ./cli.nix
+    ./thefuck.nix
   ];
 }
