@@ -4,6 +4,8 @@
   programs.starship = {
     enable = true;
     settings = {
+      add_newline = false;
+
       aws.disabled = true;
       git_metrics.disabled = false;
       package.disabled = true;

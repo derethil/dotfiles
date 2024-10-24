@@ -1,6 +1,22 @@
 {pkgs, ...}: {
+  home.packages = with pkgs; [
+    terminaltexteffects
+  ];
+
   programs.fish = {
     enable = true;
+
+    interactiveShellInit = ''
+        set fish_greeting # Disable default greeting
+        set greeting "from zoya
+        🌷🌸🌷🌸
+        🌸🌷🌸🌷🌸
+       /ᐠ🌷🌸🌷🌸🌷
+      (˶ᵔᵕᵔ🌷🌸🌷
+       \ つ\  /
+        U U/🎀\\"
+        echo $greeting | tte --no-color --frame-rate 300 beams
+    '';
 
     shellAliases = {
       l = "eza -la --icons --group-directories-first";
