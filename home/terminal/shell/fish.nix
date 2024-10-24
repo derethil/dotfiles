@@ -1,8 +1,4 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    terminaltexteffects
-  ];
-
   programs.fish = {
     enable = true;
 
@@ -15,7 +11,7 @@
       (˶ᵔᵕᵔ🌷🌸🌷
        \ つ\  /
         U U/🎀\\"
-        echo $greeting | tte --no-color --frame-rate 300 beams
+        echo $greeting
     '';
 
     shellAliases = {
