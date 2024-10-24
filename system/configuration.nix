@@ -8,6 +8,8 @@
     ./nix
   ];
 
+  time.timeZone = "US/Eastern";
+
   # State Version
   system.stateVersion = "24.05";
 }
