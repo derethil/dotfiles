@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ./hyprland
-    ./cliphist.nix
   ];
 
   home.packages = with pkgs; [

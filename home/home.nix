@@ -2,6 +2,7 @@
   imports = [
     ./terminal
     ./programs
+    ./services
     ./editors/neovim
     inputs.nix-index-db.hmModules.nix-index
   ];
