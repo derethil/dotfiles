@@ -1,7 +1,10 @@
-{ pkgs, ...}: {
+{pkgs, ...}: {
+  imports = [
+    ./gdlauncher.nix
+  ];
+
   home.packages = with pkgs; [
     gamescope
-    prismlauncher
     winetricks
   ];
 }

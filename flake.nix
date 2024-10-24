@@ -24,6 +24,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Lemonake (GDLauncher-Carbon)
+    lemonake = {
+      url = "github:passivelemon/lemonake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Nix Index Database
     nix-index-db = {
       url = "github:Mic92/nix-index-database";
