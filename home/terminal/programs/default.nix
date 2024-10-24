@@ -5,5 +5,6 @@
     ./git.nix
     ./cli.nix
     ./thefuck.nix
+    ./xdg.nix
   ];
 }
