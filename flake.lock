@@ -334,19 +334,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-stable_2": {
-      "locked": {
-        "lastModified": 1729181673,
-        "narHash": "sha256-LDiPhQ3l+fBjRATNtnuDZsBS7hqoBtPkKBkhpoBHv3I=",
-        "path": "/nix/store/z7j461v8da67nwrad4xz50dx2l5wk0wz-source",
-        "rev": "4eb33fe664af7b41a4c446f87d20c9a0a6321fa3",
-        "type": "path"
-      },
-      "original": {
-        "id": "nixpkgs-stable",
-        "type": "indirect"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1729413321,
@@ -394,7 +381,6 @@
         "hyprland-plugins": "hyprland-plugins",
         "nix-index-db": "nix-index-db",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-stable": "nixpkgs-stable_2",
         "zen-browser": "zen-browser"
       }
     },
