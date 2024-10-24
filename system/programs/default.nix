@@ -4,5 +4,6 @@
     ./hyprland.nix
     ./fonts.nix
     ./xdg.nix
+    ./qt.nix
   ];
 }
