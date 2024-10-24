@@ -35,7 +35,7 @@ in {
     enable = true;
     settings = {
       main = {
-        # font = "GeistMono NF SemiBold:size=12";
+        font = "Geist Mono SemiBold:size=12";
         horizontal-letter-offset = 0;
         vertical-letter-offset = 0;
         pad = "6x6 center";
