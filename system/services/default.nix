@@ -1,0 +1,5 @@
+{
+  impots = [
+    ./gnome-services.nix
+  ];
+}
