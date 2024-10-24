@@ -1,7 +1,7 @@
 {
   "CopilotChat.nvim": { "branch": "canary", "commit": "9333944fde3c65868818e245c73aa29eef826e9b" },
   "LazyVim": { "branch": "main", "commit": "7c7c196a78e936a1bc4cf28e7908e9bd96d75607" },
-  "SchemaStore.nvim": { "branch": "main", "commit": "3d9d5f5de8bf6b9a24814713826943973c05347f" },
+  "SchemaStore.nvim": { "branch": "main", "commit": "fa562602268fc7335fd2b7581ddf9e67e70f18b6" },
   "blame.nvim": { "branch": "main", "commit": "59cf695685c1d8d603d99b246cc8d42421937c09" },
   "bufferline.nvim": { "branch": "main", "commit": "5c528bee3dd797d5bd6bae5f229411939b25b203" },
   "catppuccin": { "branch": "main", "commit": "ea02cc8c3c053c6c1c574e0791d743338e3e788f" },
@@ -60,7 +60,7 @@
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "qmk.nvim": { "branch": "main", "commit": "ad51cb15e607da0983fcf9882d38a2aafac32149" },
   "refactoring.nvim": { "branch": "master", "commit": "c406fc5fb4d7ba5fce7b668637075fad6e75e9f8" },
-  "render-markdown.nvim": { "branch": "main", "commit": "5137b5e198ddff8a26f88df7000ff8ca336e6fcd" },
+  "render-markdown.nvim": { "branch": "main", "commit": "25eb261f0bb97c136864215bb90d191c189a6e08" },
   "rustaceanvim": { "branch": "master", "commit": "f9b22ae03946a1938288400841cb62ec53077973" },
   "stay-centered.nvim": { "branch": "main", "commit": "c28430fe49615680587458914070d7bd1d8782cc" },
   "tailwindcss-colorizer-cmp.nvim": { "branch": "main", "commit": "3d3cd95e4a4135c250faf83dd5ed61b8e5502b86" },

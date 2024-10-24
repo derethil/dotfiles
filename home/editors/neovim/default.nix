@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  linkNvim = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/home/editors/neovim/${path}";
+  createNvimLink = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nix/home/editors/neovim/${path}";
 in {
   programs.neovim = {
     enable = true;
@@ -51,8 +51,8 @@ in {
     '';
   };
 
-  xdg.configFile."nvim/lazy-lock.json".source = linkNvim "lazy-lock.json";
-  xdg.configFile."nvim/lazyvim.json".source = linkNvim "lazyvim.json";
+  xdg.configFile."nvim/lazy-lock.json".source = createNvimLink "lazy-lock.json";
+  xdg.configFile."nvim/lazyvim.json".source = createNvimLink "lazyvim.json";
   xdg.configFile."nvim/lua" = {
     source = ./lua;
     recursive = true;
