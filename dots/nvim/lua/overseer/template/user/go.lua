@@ -49,11 +49,14 @@ return {
       { args = { "fmt" } },
       { args = { "vet" } },
       { args = { "fix" } },
-      { cmd = "godoc", args = { "-http", ":8080" } },
     }
 
     for _, command in ipairs(commands) do
       build_task(task_list, command)
+    end
+
+    if vim.fn.executable("godoc") == 1 then
+      build_task(task_list, { cmd = "godoc", args = { "-http", ":8080" } })
     end
 
     cb(task_list)
