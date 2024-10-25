@@ -47,11 +47,8 @@ end, { desc = "Restart Last Task" })
 
 return {
   "stevearc/overseer.nvim",
-  config = function(opts)
-    local overseer = require("overseer")
-    overseer.setup(opts)
-  end,
   opts = {
+    templates = { "builtin", "user.go" },
     bundles = {
       autostart_on_load = true,
     },
