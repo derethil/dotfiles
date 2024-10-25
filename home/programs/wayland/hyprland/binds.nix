@@ -56,10 +56,10 @@ in {
         "$mod SHIFT, J, movewindow, d"
 
         # Resize Windows
-        "$mod CTRL, H, resizeactive, -${resize}, 0"
-        "$mod CTRL, L, resizeactive, ${resize}, 0"
-        "$mod CTRL, K, resizeactive, 0, -${resize}"
-        "$mod CTRL, J, resizeactive, 0, ${resize}"
+        "$mod CTRL, H, resizeactive, -${resize} 0"
+        "$mod CTRL, L, resizeactive, ${resize} 0"
+        "$mod CTRL, K, resizeactive, 0 -${resize}"
+        "$mod CTRL, J, resizeactive, 0 ${resize}"
 
         # Cycle Workspaces
         "$mod, backslash, workspace, previous_per_monitor"
