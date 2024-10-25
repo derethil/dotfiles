@@ -1,6 +1,6 @@
 {
-    imports = [
-     ./graphics.nix
-     ./swap.nix
-    ];
+  imports = [
+    ./graphics.nix
+    ./swap.nix
+  ];
 }

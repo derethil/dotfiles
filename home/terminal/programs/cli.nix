@@ -11,6 +11,7 @@
     # Utils
     ncdu
     tldr
+    jq
     xorg.xeyes
     fd
   ];
