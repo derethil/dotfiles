@@ -8,3 +8,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.bo.filetype = "gitconfig"
   end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitcommit",
+  callback = function()
+    vim.api.nvim_buf_clear_namespace(0, -1, 0, -1) -- Clears all buffer mappings for gitcommit
+  end,
+})
