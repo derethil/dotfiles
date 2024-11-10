@@ -36,13 +36,13 @@
     ~/.config/direnv/direnvrc: dots/direnvrc
     ~/.config/nvim: dots/nvim
     ~/.config/ags: dots/ags
-    ~/.config/foot/: dots/foot
     ~/.config/yazi/: dots/yazi
 
     # Config Files
     ~/.config/starship.toml: dots/starship.toml
     ~/.config/boxxy/boxxy.yaml: dots/boxxy.yaml
     ~/.config/mimeapps.list: dots/mimeapps.list
+    ~/.config/foot/foot.ini: dots/foot.ini
 
     # Local Files
     ~/.local/share/fonts/:
