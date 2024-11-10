@@ -42,6 +42,7 @@
     # Config Files
     ~/.config/starship.toml: dots/starship.toml
     ~/.config/boxxy/boxxy.yaml: dots/boxxy.yaml
+    ~/.config/mimeapps.list: dots/mimeapps.list
 
     # Local Files
     ~/.local/share/fonts/:

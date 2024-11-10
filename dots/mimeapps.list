@@ -1,0 +1,35 @@
+[Added Associations]
+text/plain=nvim.desktop
+x-scheme-handler/http=zen-alpha.desktop;
+x-scheme-handler/https=zen-alpha.desktop;
+x-scheme-handler/chrome=zen-alpha.desktop;
+text/html=zen-alpha.desktop;
+application/x-extension-htm=zen-alpha.desktop;
+application/x-extension-html=zen-alpha.desktop;
+application/x-extension-shtml=zen-alpha.desktop;
+application/xhtml+xml=zen-alpha.desktop;
+application/x-extension-xhtml=zen-alpha.desktop;
+application/x-extension-xht=zen-alpha.desktop;
+
+[Default Applications]
+x-scheme-handler/chrome=zen-alpha.desktop
+text/plain=nvim.desktop
+application/x-extension-htm=zen-alpha.desktop
+application/x-extension-html=zen-alpha.desktop
+application/x-extension-shtml=zen-alpha.desktop
+application/x-extension-xhtml=zen-alpha.desktop
+application/x-extension-xht=zen-alpha.desktop
+inode/directory=yazi.desktop
+x-scheme-handler/postman=Postman.desktop
+x-scheme-handler/about=zen-alpha.desktop
+x-scheme-handler/unknown=zen-alpha.desktop
+text/html=zen-alpha.desktop
+application/xml=zen-alpha.desktop
+x-scheme-handler/http=zen-alpha.desktop
+application/x-xpinstall=zen-alpha.desktop
+application/json=zen-alpha.desktop
+x-scheme-handler/https=zen-alpha.desktop
+application/pdf=zen-alpha.desktop
+application/xhtml+xml=zen-alpha.desktop
+x-scheme-handler/figma=figma-linux.desktop
+x-scheme-handler/ror2mm=r2modman.desktop
