@@ -24,7 +24,7 @@
       path: dots/gtk/icons/default/*
       force: true
       glob: true
-    ~/.gtkrc-2.0:
+    ~/.config/gtk-2.0/gtkrc:
       path: dots/gtk/gtkrc-2.0
       force: true
 
@@ -38,13 +38,10 @@
     ~/.config/ags: dots/ags
     ~/.config/foot/: dots/foot
     ~/.config/yazi/: dots/yazi
+
     # Config Files
     ~/.config/starship.toml: dots/starship.toml
-
-    # Electron App Flag Files
-    ~/.config/:
-      path: dots/*-flags.conf
-      glob: true
+    ~/.config/boxxy/boxxy.yaml: dots/boxxy.yaml
 
     # Local Files
     ~/.local/share/fonts/:

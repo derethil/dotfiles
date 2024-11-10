@@ -21,3 +21,7 @@ function refish
 end
 
 alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+
+# Boxxy
+alias xdg-open="boxxy xdg-open"
+alias open="boxxy open"

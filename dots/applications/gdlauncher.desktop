@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=GDLauncher
+Exec=/usr/bin/boxxy /usr/bin/gdlauncher --enable-features=UzeOzonePlatform --ozone-platform=wayland %U
+Terminal=false
+Type=Application
+Icon=gdlauncher
+StartupWMClass=GDLauncher
+Comment=GDLauncher Carbon.
+MimeType=x-scheme-handler/gdlauncher;
+Categories=Utility;

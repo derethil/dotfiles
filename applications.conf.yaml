@@ -5,6 +5,7 @@
 - yay:
     # CLI Applications
     - bottom
+    - boxxy
     - docker
     - docker-compose
     - docker-credential-secretservice-bin
@@ -40,9 +41,7 @@
     - steam
     - trashy-git
     - vesktop
-    - visual-studio-code-bin
     - xwaylandvideobridge-bin
-    - yuzu
     - zoom
 
 - flatpak:
