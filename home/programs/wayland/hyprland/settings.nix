@@ -34,12 +34,14 @@ in {
     decoration = {
       rounding = 8;
 
-      drop_shadow = true;
-      shadow_range = 100;
-      shadow_render_power = 4;
-      shadow_offset = "0 15";
-      shadow_scale = 0.97;
-      "col.shadow" = "rgba(1a1a1aaf)";
+      shadow = {
+        enabled = true;
+        range = 100;
+        render_power = 4;
+        offset = " 0 15";
+        scale = 0.97;
+        color = "rgba(1a1a1aaf)";
+      };
 
       blur = {
         enabled = true;
