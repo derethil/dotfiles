@@ -67,6 +67,9 @@
         - latest
 
 - shell:
+    - command: ./dots/builds/install.sh
+      description: Installing custom packages
+
     - command: rye install poetry
       description: Installing poetry
 
