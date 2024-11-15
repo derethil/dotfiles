@@ -36,6 +36,7 @@
     ~/.config/direnv/direnvrc: dots/direnvrc
     ~/.config/nvim: dots/nvim
     ~/.config/ags: dots/ags
+    ~/.config/agsv2: dots/agsv2
     ~/.config/yazi/: dots/yazi
 
     # Config Files

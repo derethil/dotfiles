@@ -8,6 +8,8 @@ alias nv="nvim"
 
 alias udb="sudo updatedb"
 
+alias agsv2="ags run --directory ~/.config/agsv2"
+
 function rm
     command rm $argv
 end
