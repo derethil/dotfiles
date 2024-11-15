@@ -11,4 +11,4 @@
 *.local.*
 .direnv/
 .python-version
-
+.typos.toml
