@@ -9,8 +9,6 @@ const findStyles = `fd --exclude "styles" ".scss" ${configPath}`;
 const bundleStyles = `sass --stdin --load-path ${configPath}`;
 
 async function resetStyles() {
-  if (!dependencies("sass", "fd")) return;
-
   const paths = await execAsync(findStyles);
   const imports = paths.split(/\s+/).map((file) => `@import "${file}";`);
   const scss = [variablesPath, ...imports].join("\n");
