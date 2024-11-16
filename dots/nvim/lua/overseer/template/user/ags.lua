@@ -1,23 +1,23 @@
-local snacks = require("snacks")
 local constants = require("overseer.constants")
 local TAG = constants.TAG
 
-local function build_task(tasks, command)
-  local cmd = command.cmd or "ags"
+local function build_task(tasks, template)
+  local cmd = template.cmd or "ags"
 
-  table.insert(command.components, "default")
+  table.insert(template.components or {}, "default")
 
   table.insert(tasks, {
-    name = string.format("%s %s", cmd, table.concat(command.args, " ")),
-    tags = command.tags,
+    name = string.format("%s %s", cmd, table.concat(template.args, " ")),
+    tags = template.tags,
     cwd = vim.fn.getcwd(),
-    params = command.params,
+    params = template.params,
+    priority = template.priority,
     builder = function(params)
-      table.insert(command.args, params.window)
+      table.insert(template.args, params.window)
       return {
         cmd = { cmd },
-        args = command.args,
-        components = command.components,
+        args = template.args,
+        components = template.components,
       }
     end,
   })
@@ -36,14 +36,22 @@ return {
     local commands = {
       {
         args = { "run", "--directory", "/home/derethil/.config/agsv2" },
+        priority = 2,
         tags = { TAG.RUN },
       },
       {
         args = { "inspect" },
+        priority = 1,
+        components = { { "on_complete_dispose", timeout = 0.1 } },
+      },
+      {
+        args = { "quit" },
+        priority = 3,
         components = { { "on_complete_dispose", timeout = 0.1 } },
       },
       {
         args = { "toggle" },
+        priority = 4,
         components = { { "on_complete_dispose", timeout = 0.1 } },
         params = {
           window = {
