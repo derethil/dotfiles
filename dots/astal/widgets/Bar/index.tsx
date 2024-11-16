@@ -1,14 +1,10 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
-import { Variable } from "astal";
+import { Time } from "../../state/time";
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
-  const time = Variable("").poll(1000, "date +%I%M");
-  App.apply_css("./bar.scss");
-
+export function Bar(gdkmonitor: Gdk.Monitor) {
   return (
     <window
       name="Bar"
-      widthRequest={200}
       className="Bar"
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
@@ -18,13 +14,16 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         Astal.WindowAnchor.LEFT
       }
       application={App}
-      onDestroy={() => time.drop()}
+      onDestroy={() => Time.drop()}
     >
       <centerbox vertical>
         <box />
         <box />
         <button onClicked="echo hello" halign={Gtk.Align.CENTER}>
-          {time()}
+          <box vertical valign={Gtk.Align.END}>
+            {Time((v) => v?.year)}
+            {Time((v) => v?.minutes)}
+          </box>
         </button>
       </centerbox>
     </window>

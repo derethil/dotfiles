@@ -35,7 +35,7 @@ return {
 
     local commands = {
       {
-        args = { "run", "--directory", "/home/derethil/.config/agsv2" },
+        args = { "run", "--directory", "/home/derethil/.config/astal" },
         priority = 2,
         tags = { TAG.RUN },
       },
