@@ -19,9 +19,10 @@ require("lazy").setup({
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
     },
+    -- AI
+    { import = "lazyvim.plugins.extras.ai.copilot" },
+    { import = "lazyvim.plugins.extras.ai.copilot-chat" },
     -- Coding Extras
-    { import = "lazyvim.plugins.extras.coding.copilot" },
-    { import = "lazyvim.plugins.extras.coding.copilot-chat" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     -- Debug Adapter Protocol Extras

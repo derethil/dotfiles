@@ -49,7 +49,7 @@ return {
     local overseer = require("overseer")
     status = { overseer.STATUS.RUNNING, overseer.STATUS.PENDING }
     return {
-      templates = { "builtin", "user.go", "user.nix" },
+      templates = { "builtin", "user.go", "user.nix", "user.ags" },
       bundles = {
         save_task_opts = {
           on_conflict = "overwrite",
