@@ -1,10 +1,12 @@
+@use "colors";
+
 window.Bar {
   background: transparent;
-  color: #{$theme_bg_color};
+  color: #{colors.$fg};
   font-weight: bold;
 
   > centerbox {
-    background: #{$theme_bg_color};
+    background: #{colors.$bg};
     border-radius: 10px;
     margin: 8px;
   }
