@@ -1,4 +1,4 @@
-import { exec, execAsync } from "astal";
+import { GLib, Gio, exec, execAsync } from "astal";
 import notify from "./notify";
 
 export async function bash(strings: string | string[]) {
@@ -30,4 +30,9 @@ export function dependencies(...bins: string[]): boolean {
   }
 
   return true;
+}
+
+export function ensureDirectory(path: string) {
+  if (GLib.file_test(path, GLib.FileTest.EXISTS)) return;
+  Gio.File.new_for_path(path).make_directory_with_parents(null);
 }

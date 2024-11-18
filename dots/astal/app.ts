@@ -1,10 +1,13 @@
 import { App } from "astal/gtk3";
+import { session } from "./lib/session";
+import { watchStyles } from "./lib/style";
 import style from "./styles/main.scss";
 import { Bar } from "./widgets/Bar";
-import { watchStyles } from "./lib/style";
 
 function init() {
+  session();
   watchStyles();
+  import("./options");
 }
 
 function createWidgets() {
