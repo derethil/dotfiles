@@ -16,7 +16,7 @@ export function dependencies(...bins: string[]): boolean {
     try {
       exec(`which ${bin}`);
       return false;
-    } catch (err) {
+    } catch {
       return true;
     }
   });
