@@ -8,7 +8,7 @@ interface NotifyOptions {
   timeout?: number;
 }
 
-export default function notify(message: string, options: NotifyOptions) {
+export function notify(message: string, options: NotifyOptions) {
   const log = logger[options.urgency ?? "normal"];
   log(message, options.body);
 

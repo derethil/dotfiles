@@ -1,5 +1,5 @@
-import { App } from "astal/gtk3";
 import { execAsync, GLib, monitorFile } from "astal";
+import { App } from "astal/gtk3";
 import { bash, dependencies } from "./util";
 
 const configPath = GLib.get_current_dir();

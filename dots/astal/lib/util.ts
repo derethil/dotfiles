@@ -1,5 +1,7 @@
 import { GLib, Gio, exec, execAsync } from "astal";
-import notify from "./notify";
+import { notify } from "./notify";
+
+export { notify };
 
 export async function bash(strings: string | string[]) {
   const command = Array.isArray(strings) ? strings.join(" ") : strings;
