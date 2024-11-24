@@ -1,4 +1,5 @@
 import { App } from "astal/gtk3";
+import { MessageHandler } from "lib/messages";
 import { session } from "./lib/session";
 import { watchStyles } from "./lib/style";
 import style from "./styles/main.scss";
@@ -16,6 +17,7 @@ function createWidgets() {
 
 App.start({
   css: style,
+  requestHandler: MessageHandler.handleMessage,
   main: async () => {
     init();
     createWidgets();

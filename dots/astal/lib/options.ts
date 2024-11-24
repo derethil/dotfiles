@@ -1,4 +1,5 @@
 import { GLib, Variable, monitorFile, readFile, writeFile } from "astal";
+import { MessageHandler } from "./messages";
 import { TEMP } from "./session";
 import { ensureDirectory } from "./util";
 
@@ -6,12 +7,23 @@ interface OptionProps {
   persistent?: boolean;
 }
 
+type Options = NestedRecord<string, Option> & {
+  configPath: string;
+  array: () => Option[];
+  reset: () => Promise<string>;
+  set: <T>(id: string, value: T) => void;
+  get: (id: string) => unknown;
+  handler: (deps: string[], callback: () => void) => void;
+};
+
 const sleep = (ms = 0) => new Promise((res) => setTimeout(res, ms));
 
 const fetchCache = (path: string) => {
   if (!GLib.file_test(path, GLib.FileTest.EXISTS)) return {};
   return JSON.parse(readFile(path));
 };
+
+let OPTIONS: Options | undefined;
 
 class Option<T = unknown> extends Variable<T> {
   private readonly initial: T;
@@ -113,10 +125,48 @@ export function constructOptions<T extends object>(cachePath: string, opts: T) {
     });
   };
 
-  return Object.assign(opts, {
+  const set = <T>(id: string, value: T) => {
+    let found = false;
+    getOptions(opts).forEach((option) => {
+      if (option.id !== id) return;
+      option.set(value);
+      found = true;
+    });
+    if (!found) throw new Error(`${id} is not a valid option`);
+  };
+
+  const get = (id: string): unknown => {
+    let value: unknown | undefined;
+    for (const option of getOptions(opts)) {
+      if (option.id !== id) continue;
+      value = option.get();
+      return value;
+    }
+    throw new Error(`${id} is not a valid option`);
+  };
+
+  const options = Object.assign(opts, {
     configPath,
     array: () => getOptions(opts),
     reset: async () => (await reset()).join("\n"),
+    set,
+    get,
     handler,
   });
+
+  OPTIONS = options as Options;
+
+  return options;
 }
+
+MessageHandler.registerMessage("get-option", (args) => {
+  if (!OPTIONS) throw new Error("options are not yet initialized");
+  if (args.length !== 1) throw new Error("expected 1 argument (id)");
+  return OPTIONS.get(args[0]);
+});
+
+MessageHandler.registerMessage("set-option", (args) => {
+  if (!OPTIONS) throw new Error("options are not yet initialized");
+  if (args.length !== 2) throw new Error("expected 2 arguments (id, value)");
+  return OPTIONS.set(args[0], args[1]);
+});
