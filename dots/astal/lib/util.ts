@@ -38,3 +38,7 @@ export function ensureDirectory(path: string) {
   if (GLib.file_test(path, GLib.FileTest.EXISTS)) return;
   Gio.File.new_for_path(path).make_directory_with_parents(null);
 }
+
+export function sleep(ms = 0) {
+  return new Promise((res) => setTimeout(res, ms));
+}

@@ -25,7 +25,7 @@ const fetchCache = (path: string) => {
 
 let OPTIONS: Options | undefined;
 
-class Option<T = unknown> extends Variable<T> {
+export class Option<T = unknown> extends Variable<T> {
   private readonly initial: T;
   private readonly persistent: boolean = false;
 
