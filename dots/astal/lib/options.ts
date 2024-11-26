@@ -168,5 +168,6 @@ MessageHandler.registerMessage("get-option", (args) => {
 MessageHandler.registerMessage("set-option", (args) => {
   if (!OPTIONS) throw new Error("options are not yet initialized");
   if (args.length !== 2) throw new Error("expected 2 arguments (id, value)");
-  return OPTIONS.set(args[0], args[1]);
+  OPTIONS.set(args[0], args[1]);
+  return "success";
 });
