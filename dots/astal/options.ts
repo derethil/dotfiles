@@ -1,11 +1,19 @@
-import { Astal } from "astal/gtk3";
+import { constructOptions, Opt } from "lib/options";
+import { OPTIONS_CACHE } from "lib/session";
 import { BarModule } from "widgets/Bar";
-import { constructOptions, Opt } from "./lib/options";
-import { OPTIONS_CACHE } from "./lib/session";
 
 export const options = constructOptions(OPTIONS_CACHE, {
   // General Options
   theme: {
+    layout: {
+      gap: Opt(9),
+      padding: Opt(14),
+      radius: Opt(8),
+    },
+    font: {
+      sans: { family: Opt("SF Pro Display"), size: Opt(13) },
+      mono: { family: Opt("Liga SFMono Nerd Font"), size: Opt(13) },
+    },
     color: {
       accent: {
         1: { muted: Opt("#C14A4A"), default: Opt("#EA6962") },
@@ -42,7 +50,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
   },
   // Widget Options
   bar: {
-    position: Opt(Astal.WindowAnchor.LEFT),
+    position: Opt<"LEFT" | "RIGHT">("LEFT"),
     modules: {
       end: Opt<BarModule[]>(["DateTime"]),
     },

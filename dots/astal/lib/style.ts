@@ -44,6 +44,15 @@ async function writeVariables() {
       // Border
       $("border", color.border.default),
       $("border-highlight", color.border.highlight),
+    ],
+    font: [
+      $("sans-family", options.theme.font.sans.family), $("sans-size", options.theme.font.sans.size),
+      $("mono-family", options.theme.font.mono.family), $("mono-size", options.theme.font.mono.size),
+    ],
+    layout: [
+      $("gap", options.theme.layout.gap),
+      $("padding", options.theme.layout.padding),
+      $("radius", options.theme.layout.radius),
     ]
   }
 
