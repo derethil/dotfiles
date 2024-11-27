@@ -11,7 +11,7 @@ export function DateTime() {
         {Time((v) => v?.hours)}
         {Time((v) => v?.minutes)}
       </box>
-      <box className="date">
+      <box className="date" halign={Gtk.Align.CENTER}>
         {Time((v) => v?.month)}
         {Time((v) => v?.day)}
       </box>

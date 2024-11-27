@@ -1,13 +1,17 @@
 import { App } from "astal/gtk3";
-import { MessageHandler } from "lib/messages";
+import { handleMessage } from "lib/messages";
 import { session } from "lib/session";
 import { watchStyles } from "lib/style";
 import { Bar } from "widgets/Bar";
 
 function init() {
   session();
-  watchStyles();
-  import("./options");
+  watchStyles().catch((err: unknown) => {
+    console.error(`Error watching styles: ${String(err)}`);
+  });
+  import("./options").catch((err: unknown) => {
+    console.error(`Error importing options: ${String(err)}`);
+  });
 }
 
 function createWidgets() {
@@ -15,8 +19,8 @@ function createWidgets() {
 }
 
 App.start({
-  requestHandler: MessageHandler.handleMessage,
-  main: async () => {
+  requestHandler: handleMessage,
+  main: () => {
     init();
     createWidgets();
   },

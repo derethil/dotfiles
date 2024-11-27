@@ -52,6 +52,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
   bar: {
     position: Opt<"LEFT" | "RIGHT">("LEFT"),
     modules: {
+      center: Opt<BarModule[]>([]),
       end: Opt<BarModule[]>(["DateTime"]),
     },
   },

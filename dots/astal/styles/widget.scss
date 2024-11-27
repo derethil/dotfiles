@@ -3,14 +3,10 @@
 @use "font";
 
 @mixin widget {
-  background: transparent;
   font-family: font.$sans-family;
-
-  > * {
-    color: color.$text;
-    background: #{color.$background};
-    border-radius: #{layout.$radius}px;
-    margin: #{layout.$gap}px;
-    padding: #{layout.$padding}px;
-  }
+  color: color.$text;
+  background: #{color.$background};
+  border-radius: #{layout.$radius}px;
+  margin: #{layout.$gap}px;
+  padding: #{layout.$padding}px;
 }

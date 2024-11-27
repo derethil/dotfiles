@@ -18,7 +18,7 @@ export function notify(message: string, options: NotifyOptions) {
     options.body,
     `--urgency=${options.urgency ?? "normal"}`,
     `--expire-time=${options.timeout ?? 5000}`,
-  ]);
+  ]).catch(() => console.error(`Failed to send notification for: ${message}`));
 }
 
 const logger: Record<Urgency, typeof console.log> = {

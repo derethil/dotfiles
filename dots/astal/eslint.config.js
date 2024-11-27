@@ -4,7 +4,8 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   eslint.configs.recommended,
-  tseslint.configs.recommended,
+  tseslint.configs.strictTypeChecked,
+  tseslint.configs.stylisticTypeChecked,
   importPlugin.flatConfigs.recommended,
   {
     ignores: ["**@girs/**", "env.d.ts", "eslint.config.js"],
@@ -16,16 +17,35 @@ export default tseslint.config(
   },
   {
     languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
       ecmaVersion: "latest",
       sourceType: "module",
     },
     rules: {
       camelcase: "warn",
       "import/no-nodejs-modules": "warn",
+      "@typescript-eslint/no-unnecessary-condition": "off",
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
+        {
+          allowArray: true,
+          allowNumber: true,
+          allowBoolean: true,
+          allowNullish: true,
+        },
+      ],
+      "@typescript-eslint/no-confusing-void-expression": [
+        "error",
+        { ignoreArrowShorthand: true },
+      ],
     },
   },
   {
     rules: {
+      "import/no-unresolved": "off",
       "import/no-deprecated": "warn",
       "import/no-empty-named-blocks": "error",
       "import/no-mutable-exports": "error",

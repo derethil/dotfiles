@@ -1,13 +1,8 @@
-import { App, Astal, Gdk } from "astal/gtk3";
+import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import { options } from "options";
-import { Time } from "state/time";
-import { DateTime } from "./modules/DateTime";
+import { modules } from "./modules";
 
 export type BarModule = keyof typeof modules;
-
-export const modules = {
-  DateTime: DateTime,
-};
 
 export function Bar(gdkmonitor: Gdk.Monitor) {
   return (
@@ -23,12 +18,19 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
           Astal.WindowAnchor[p],
       )}
       application={App}
-      onDestroy={() => Time.drop()}
     >
       <centerbox vertical>
-        <box />
-        <box />
-        <box>
+        <box valign={Gtk.Align.START} halign={Gtk.Align.CENTER} vertical>
+          {options.bar.modules.start((mods) =>
+            mods.map((mod) => modules[mod]()),
+          )}
+        </box>
+        <box valign={Gtk.Align.START} halign={Gtk.Align.CENTER} vertical>
+          {options.bar.modules.center((mods) =>
+            mods.map((mod) => modules[mod]()),
+          )}
+        </box>
+        <box valign={Gtk.Align.END} halign={Gtk.Align.CENTER} vertical>
           {options.bar.modules.end((mods) => mods.map((mod) => modules[mod]()))}
         </box>
       </centerbox>

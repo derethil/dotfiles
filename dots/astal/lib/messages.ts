@@ -2,36 +2,38 @@ import { App } from "astal/gtk3";
 
 type ResponseHandler = (response: string) => void;
 
-export class MessageHandler {
-  static handlers: Partial<
-    Record<string, (args: string[], res: ResponseHandler) => void>
-  > = {};
+const handlers: Partial<
+  Record<string, (params: string[], respond: ResponseHandler) => void>
+> = {};
 
-  static registerMessage(
-    message: string,
-    handler: (args: string[], response: ResponseHandler) => void,
-  ) {
-    MessageHandler.handlers[message] = handler;
+export function registerMessage(
+  message: string,
+  handler: (params: string[], respond: ResponseHandler) => void,
+) {
+  handlers[message] = handler;
+}
+
+export function handleMessage(message: string, respond: ResponseHandler) {
+  const [type, ...params] = message.split(" ");
+
+  if (!Object.keys(handlers).includes(type)) {
+    console.warn(`Unknown message: ${type}`);
+    respond(`No handler for ${type}`);
   }
 
-  static handleMessage(message: string, res: (response: unknown) => void) {
-    const [type, ...args] = message.split(" ");
+  try {
+    const response = handlers[type]?.(params, respond);
+    respond(response ?? "success");
+  } catch (error) {
+    let errorMessage = `${type} ${params}`;
 
-    if (!Object.keys(MessageHandler.handlers).includes(type)) {
-      console.warn(`Unknown message: ${type}`);
-      res(`${App.instanceName} has no handler for ${type}`);
+    if (error instanceof Error) {
+      errorMessage += `: ${error.message}`;
+    } else {
+      errorMessage += `: ${String(error)}`;
     }
 
-    try {
-      const response = MessageHandler.handlers[type]!(args, res);
-      res(response);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.warn(
-          `Error handling message: ${type} ${args}: ${error.message}`,
-        );
-        res(`[${App.instanceName}] ${type}: ${error.message}`);
-      }
-    }
+    console.warn(`Error handling message: ${errorMessage}`);
+    respond(`[${App.instanceName}] ${errorMessage}`);
   }
 }

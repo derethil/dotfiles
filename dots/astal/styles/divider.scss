@@ -1,12 +1,18 @@
 @use "color";
 @use "layout";
 
-@mixin divider($location, $width: 3px) {
+@mixin divider($location, $width: 3px, $gap: layout.$gap * 2.5) {
   @if $location == "top" {
     border-top: $width solid #{color.$background-highlight};
-    padding-top: #{layout.$gap * 2.5}px;
+    padding-top: #{$gap}px;
   } @else if $location == "bottom" {
     border-bottom: $width solid #{color.$background-highlight};
-    padding-bottom: #{layout.$gap * 2.5}px;
+    padding-bottom: #{$gap * 2.5}px;
+  } @else if $location == "left" {
+    border-left: $width solid #{color.$background-highlight};
+    padding-left: #{$gap}px;
+  } @else if $location == "right" {
+    border-right: $width solid #{color.$background-highlight};
+    padding-right: #{$gap}px;
   }
 }

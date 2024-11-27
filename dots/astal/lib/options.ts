@@ -1,5 +1,5 @@
 import { GLib, Variable, monitorFile, readFile, writeFile } from "astal";
-import { MessageHandler } from "./messages";
+import { registerMessage } from "./messages";
 import { TEMP } from "./session";
 import { ensureDirectory } from "./util";
 
@@ -11,16 +11,16 @@ type Options = NestedRecord<string, Option> & {
   configPath: string;
   array: () => Option[];
   reset: () => Promise<string>;
-  set: <T>(id: string, value: T) => void;
+  set: (id: string, value: unknown) => void;
   get: (id: string) => unknown;
   handler: (deps: string[], callback: () => void) => void;
 };
 
 const sleep = (ms = 0) => new Promise((res) => setTimeout(res, ms));
 
-const fetchCache = (path: string) => {
+const fetchCache = (path: string): Record<string, unknown> => {
   if (!GLib.file_test(path, GLib.FileTest.EXISTS)) return {};
-  return JSON.parse(readFile(path));
+  return JSON.parse(readFile(path)) as Record<string, unknown>;
 };
 
 let OPTIONS: Options | undefined;
@@ -29,7 +29,7 @@ export class Option<T = unknown> extends Variable<T> {
   private readonly initial: T;
   private readonly persistent: boolean = false;
 
-  id: string = "";
+  id = "";
 
   constructor(initial: T, options: OptionProps = {}) {
     super(initial);
@@ -38,14 +38,14 @@ export class Option<T = unknown> extends Variable<T> {
   }
 
   json() {
-    return `option:${this.get()}`;
+    return `option:${String(this.get())}`;
   }
 
   initialize(cachePath: string) {
     if (this.id === null) return;
     const cached = fetchCache(cachePath)[this.id];
 
-    if (cached !== undefined) this.set(cached);
+    if (cached !== undefined) this.set(cached as T);
 
     this.subscribe(() => {
       const cache = fetchCache(cachePath);
@@ -108,7 +108,7 @@ export function constructOptions<T extends object>(cachePath: string, opts: T) {
 
   const reset = async (
     [opt, ...list] = getOptions(opts),
-    id = opt?.reset(),
+    id = opt.reset(),
   ): Promise<string[]> => {
     if (!opt) return sleep().then(() => []);
     return id
@@ -125,7 +125,7 @@ export function constructOptions<T extends object>(cachePath: string, opts: T) {
     });
   };
 
-  const set = <T>(id: string, value: T) => {
+  const set = (id: string, value: unknown) => {
     let found = false;
     getOptions(opts).forEach((option) => {
       if (option.id !== id) return;
@@ -136,7 +136,7 @@ export function constructOptions<T extends object>(cachePath: string, opts: T) {
   };
 
   const get = (id: string): unknown => {
-    let value: unknown | undefined;
+    let value: unknown;
     for (const option of getOptions(opts)) {
       if (option.id !== id) continue;
       value = option.get();
@@ -159,13 +159,13 @@ export function constructOptions<T extends object>(cachePath: string, opts: T) {
   return options;
 }
 
-MessageHandler.registerMessage("get-option", (args) => {
+registerMessage("get-option", (args) => {
   if (!OPTIONS) throw new Error("options are not yet initialized");
   if (args.length !== 1) throw new Error("expected 1 argument (id)");
   return OPTIONS.get(args[0]);
 });
 
-MessageHandler.registerMessage("set-option", (args) => {
+registerMessage("set-option", (args) => {
   if (!OPTIONS) throw new Error("options are not yet initialized");
   if (args.length !== 2) throw new Error("expected 2 arguments (id, value)");
   OPTIONS.set(args[0], args[1]);

@@ -5,19 +5,22 @@ import { Option } from "./options";
 import { TEMP } from "./session";
 import { bash, dependencies } from "./util";
 
+// Commands
 const findWidgetStyles = `fd ".scss" --exclude "styles" ${GLib.get_current_dir()}`;
 const findSharedStyles = `fd ".scss" ${GLib.get_current_dir()}/styles`;
 const copySharedStyles = `${findSharedStyles} --exec cp {} ${TEMP}`;
 const bundleStyles = `sass --stdin --load-path ${TEMP}`;
 const deleteOldStyles = `rm -rf ${TEMP}/*.scss`;
 
+// SCSS Generators
 const use = (file: string) => `@use "${file}";`;
 const forward = (file: string) => `@forward "${file}";`;
 const $ = <T>(name: string, value: string | Option<T>) => {
   if (typeof value === "string") return `$${name}: ${value};`;
-  return `$${name}: ${value.get()};`;
+  return `$${name}: ${String(value.get())};`;
 };
 
+// Transform Astal Theme to SCSS
 async function writeVariables() {
   const { color, font, layout } = options.theme;
   // prettier-ignore
@@ -69,6 +72,7 @@ async function writeVariables() {
   return Promise.all(uses);
 }
 
+// Copy shared styles to temp folder
 async function writeSharedStyles() {
   const paths = await execAsync(findSharedStyles);
   const imports = paths.split(/\s+/).map((file) => forward(file));
@@ -77,6 +81,7 @@ async function writeSharedStyles() {
   await execAsync(copySharedStyles);
 }
 
+// Recompile and apply styles
 async function resetStyles() {
   await execAsync(deleteOldStyles);
   await writeSharedStyles();
@@ -90,13 +95,20 @@ async function resetStyles() {
   App.apply_css(css, true);
 }
 
+// Hot reload styles
 export async function watchStyles() {
   if (!dependencies("sass", "fd")) return;
 
   const paths = await execAsync(findWidgetStyles);
   paths.split(/\s+/).forEach((file) => {
-    monitorFile(file, () => resetStyles());
+    monitorFile(file, () => {
+      resetStyles().catch(() =>
+        console.error(`error: reloading styles failed on saving ${file}`),
+      );
+    });
   });
 
-  resetStyles();
+  resetStyles().catch(() =>
+    console.error(`error: initial styles compilation failed`),
+  );
 }
