@@ -5,17 +5,21 @@ import { Option } from "./options";
 import { TEMP } from "./session";
 import { bash, dependencies } from "./util";
 
-const findStyles = `fd ".scss" ${GLib.get_current_dir()}`;
+const findWidgetStyles = `fd ".scss" --exclude "styles" ${GLib.get_current_dir()}`;
+const findSharedStyles = `fd ".scss" ${GLib.get_current_dir()}/styles`;
+const copySharedStyles = `${findSharedStyles} --exec cp {} ${TEMP}`;
 const bundleStyles = `sass --stdin --load-path ${TEMP}`;
+const deleteOldStyles = `rm -rf ${TEMP}/*.scss`;
 
 const use = (file: string) => `@use "${file}";`;
+const forward = (file: string) => `@forward "${file}";`;
 const $ = <T>(name: string, value: string | Option<T>) => {
   if (typeof value === "string") return `$${name}: ${value};`;
   return `$${name}: ${value.get()};`;
 };
 
 async function writeVariables() {
-  const { color } = options.theme;
+  const { color, font, layout } = options.theme;
   // prettier-ignore
   const theme = {
     color: [
@@ -46,13 +50,13 @@ async function writeVariables() {
       $("border-highlight", color.border.highlight),
     ],
     font: [
-      $("sans-family", options.theme.font.sans.family), $("sans-size", options.theme.font.sans.size),
-      $("mono-family", options.theme.font.mono.family), $("mono-size", options.theme.font.mono.size),
+      $("sans-family", font.sans.family), $("sans-size", font.sans.size),
+      $("mono-family", font.mono.family), $("mono-size", font.mono.size),
     ],
     layout: [
-      $("gap", options.theme.layout.gap),
-      $("padding", options.theme.layout.padding),
-      $("radius", options.theme.layout.radius),
+      $("gap", layout.gap),
+      $("padding", layout.padding),
+      $("radius", layout.radius),
     ]
   }
 
@@ -64,9 +68,21 @@ async function writeVariables() {
 
   return Promise.all(uses);
 }
+
+async function writeSharedStyles() {
+  const paths = await execAsync(findSharedStyles);
+  const imports = paths.split(/\s+/).map((file) => forward(file));
+  const scss = imports.join("\n");
+  await writeFileAsync(`${TEMP}/mixins.scss`, scss);
+  await execAsync(copySharedStyles);
+}
+
 async function resetStyles() {
+  await execAsync(deleteOldStyles);
+  await writeSharedStyles();
+
   const themePaths = await writeVariables();
-  const paths = await execAsync(findStyles);
+  const paths = await execAsync(findWidgetStyles);
   const imports = paths.split(/\s+/).map((file) => use(file));
   const scss = [...themePaths, ...imports].join("\n");
 
@@ -77,7 +93,7 @@ async function resetStyles() {
 export async function watchStyles() {
   if (!dependencies("sass", "fd")) return;
 
-  const paths = await execAsync(findStyles);
+  const paths = await execAsync(findWidgetStyles);
   paths.split(/\s+/).forEach((file) => {
     monitorFile(file, () => resetStyles());
   });

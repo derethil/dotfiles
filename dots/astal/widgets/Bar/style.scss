@@ -1,21 +1,16 @@
 @use "color";
 @use "font";
 @use "layout";
+@use "mixins";
 
 window.Bar {
-  color: #{color.$text};
+  @include mixins.widget;
   font-weight: bold;
   font-family: font.$mono-family;
 
-  > centerbox {
-    background: #{color.$background};
-    border-radius: #{layout.$radius}px;
-    margin: #{layout.$gap}px;
-
-    padding: #{layout.$padding}px;
-  }
-
   .datetime {
+    @include mixins.divider(top);
+
     .day {
       font-family: font.$sans-family;
     }
