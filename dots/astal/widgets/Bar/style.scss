@@ -1,18 +1,32 @@
-@use "colors";
+@use "color";
+@use "font";
+@use "layout";
 
 window.Bar {
-  background: transparent;
-  color: #{colors.$fg};
+  color: #{color.$text};
   font-weight: bold;
+  font-family: font.$mono-family;
 
   > centerbox {
-    background: #{colors.$bg};
-    border-radius: 10px;
-    margin: 8px;
+    background: #{color.$background};
+    border-radius: #{layout.$radius}px;
+    margin: #{layout.$gap}px;
+
+    padding: #{layout.$padding}px;
   }
 
-  button {
-    border-radius: 8px;
-    margin: 2px;
+  .datetime {
+    .day {
+      font-family: font.$sans-family;
+    }
+
+    .time {
+      padding: #{layout.$padding * 0.33}px 0;
+      font-size: #{font.$mono-size * 1.75}px;
+    }
+
+    .date {
+      font-size: #{font.$mono-size * 0.9}px;
+    }
   }
 }
