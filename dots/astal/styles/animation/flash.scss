@@ -1,0 +1,16 @@
+@mixin flash($colorA, $colorB, $duration: 0.5s) {
+  @keyframes flash {
+    0% {
+      background-color: $colorA;
+    }
+    100% {
+      background-color: $colorB;
+    }
+  }
+
+  animation-name: flash;
+  animation-duration: $duration;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}

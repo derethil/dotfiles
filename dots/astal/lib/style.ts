@@ -6,9 +6,9 @@ import { TEMP } from "./session";
 import { bash, dependencies } from "./util";
 
 // Commands
-const findWidgetStyles = `fd ".scss" --exclude "styles" ${GLib.get_current_dir()}`;
-const findSharedStyles = `fd ".scss" ${GLib.get_current_dir()}/styles`;
-const copySharedStyles = `${findSharedStyles} --exec cp {} ${TEMP}`;
+const listStyles = `fd ".scss" --exclude "styles" ${GLib.get_current_dir()}`;
+const listSharedFolders = `fd . ${GLib.get_current_dir()}/styles --type directory  `;
+const listStylesInFolder = (f: string) => `fd ".scss" ${f} --maxdepth 1`;
 const bundleStyles = `sass --stdin --load-path ${TEMP}`;
 const deleteOldStyles = `rm -rf ${TEMP}/*.scss`;
 
@@ -72,22 +72,37 @@ async function writeVariables() {
   return Promise.all(uses);
 }
 
+async function writeStyleFolder(
+  path: string,
+  filename?: string,
+): Promise<string[]> {
+  const paths = (await execAsync(listStylesInFolder(path))).split(/\s+/);
+  const scss = paths.map((file) => forward(file)).join("\n");
+  const name = filename ?? (await bash(`basename ${path}`));
+  await writeFileAsync(`${TEMP}/${name}.scss`, scss);
+  return paths;
+}
+
 // Copy shared styles to temp folder
-async function writeSharedStyles() {
-  const paths = await execAsync(findSharedStyles);
-  const imports = paths.split(/\s+/).map((file) => forward(file));
-  const scss = imports.join("\n");
-  await writeFileAsync(`${TEMP}/mixins.scss`, scss);
-  await execAsync(copySharedStyles);
+async function writeMixinImports() {
+  const error = (error: unknown) =>
+    console.error(`writing scss failed: ${String(error)}`);
+
+  const folderPaths = await execAsync(listSharedFolders);
+  folderPaths.split(/\s+/).forEach((path) => {
+    writeStyleFolder(path).catch(error);
+  });
+
+  writeStyleFolder(`${GLib.get_current_dir()}/styles`, "mixins").catch(error);
 }
 
 // Recompile and apply styles
 async function resetStyles() {
   await execAsync(deleteOldStyles);
-  await writeSharedStyles();
+  await writeMixinImports();
 
   const themePaths = await writeVariables();
-  const paths = await execAsync(findWidgetStyles);
+  const paths = await execAsync(listStyles);
   const imports = paths.split(/\s+/).map((file) => use(file));
   const scss = [...themePaths, ...imports].join("\n");
 
@@ -99,16 +114,20 @@ async function resetStyles() {
 export async function watchStyles() {
   if (!dependencies("sass", "fd")) return;
 
-  const paths = await execAsync(findWidgetStyles);
+  const paths = await execAsync(listStyles);
   paths.split(/\s+/).forEach((file) => {
     monitorFile(file, () => {
-      resetStyles().catch(() =>
-        console.error(`error: reloading styles failed on saving ${file}`),
+      resetStyles().catch((error: unknown) =>
+        console.error(
+          `error: reloading styles failed on saving ${file}:\n${String(error)}`,
+        ),
       );
     });
   });
 
-  resetStyles().catch(() =>
-    console.error(`error: initial styles compilation failed`),
+  resetStyles().catch((error: unknown) =>
+    console.error(
+      `error: initial styles compilation failed:\n${String(error)}`,
+    ),
   );
 }

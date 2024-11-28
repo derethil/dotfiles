@@ -1,6 +1,7 @@
 @use "color";
 @use "font";
 @use "layout";
+@use "animation";
 @use "mixins";
 
 window.Bar {
@@ -40,20 +41,7 @@ window.Bar {
       background-color: color.$accent4;
     }
     &.urgent {
-      @keyframes flash {
-        0% {
-          background-color: color.$accent4;
-        }
-        100% {
-          background-color: color.$accent1;
-        }
-      }
-
-      animation-name: flash;
-      animation-duration: 0.5s;
-      animation-timing-function: ease-in-out;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
+      @include animation.flash(color.$accent4, color.$accent3);
     }
   }
 }
