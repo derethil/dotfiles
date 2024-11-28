@@ -7,7 +7,9 @@ export function isUrgent(workspace: Variable<Hyprland.Workspace>) {
 
   const urgencyHandlers = [
     hypr.connect("urgent", (_, client) => {
-      if (client && client.workspace === workspace.get()) {
+      const within = client.workspace === workspace.get();
+      const focused = hypr.get_focused_workspace() === workspace.get();
+      if (client && within && !focused) {
         urgent.set(true);
       }
     }),
