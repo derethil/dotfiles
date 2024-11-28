@@ -6,9 +6,10 @@
 
 - clean:
     - "~"
-    - "~/.config"
-    - "~/.local/share/fonts/"
-    - "~/.local/share/applications/"
+    - ~/.config
+    - ~/.local/share/fonts/
+    - ~/.local/share/applications/
+    - ~/.local/bin/
 
 - link:
     # GTK Settings

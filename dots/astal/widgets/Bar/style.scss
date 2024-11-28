@@ -22,4 +22,38 @@ window.Bar {
       font-size: #{font.$mono-size * 0.9}px;
     }
   }
+
+  .workspaces .indicator {
+    min-height: 1px;
+    padding: #{layout.$padding / 3}px #{layout.$padding * 0.8}px;
+    margin: #{layout.$gap / 2}px 0px;
+    border-radius: #{layout.$radius}px;
+    transition: background-color 0.33s;
+
+    &.occupied {
+      background-color: color.$accent3;
+    }
+    &.empty {
+      background-color: color.$background-highlight;
+    }
+    &.focused {
+      background-color: color.$accent4;
+    }
+    &.urgent {
+      @keyframes flash {
+        0% {
+          background-color: color.$accent4;
+        }
+        100% {
+          background-color: color.$accent1;
+        }
+      }
+
+      animation-name: flash;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+  }
 }
