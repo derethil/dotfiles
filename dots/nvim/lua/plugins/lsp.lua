@@ -22,6 +22,7 @@ return {
         end,
       },
       servers = {
+        glsl_analyzer = {},
         ruff_lsp = {},
         pyright = {},
         nil_ls = {},

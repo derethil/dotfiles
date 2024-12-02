@@ -9,7 +9,7 @@ key("v", "p", '"_dP', { desc = "Paste without yanking" })
 key("n", "<leader>j", "*``cgn", { desc = "Replace word under cursor" })
 key("nv", "B", "^", { desc = "Move to the beginning of the line" })
 key("nv", "E", "$", { desc = "Move to the end of the line" })
-key("nvi", "<C-a>", "<esc>ggVG", { desc = "Select all" })
+key("nvi", "<C-c>", "<esc>ggVG", { desc = "Select all" })
 
 key("n", "i", function()
   return #vim.fn.getline(".") == 0 and '"_cc' or "i"
