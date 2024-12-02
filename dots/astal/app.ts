@@ -3,6 +3,7 @@ import { handleMessage } from "lib/messages";
 import { session } from "lib/session";
 import { watchStyles } from "lib/style";
 import { Bar } from "widgets/Bar";
+import { Corners } from "widgets/Corners";
 
 function init() {
   session();
@@ -15,7 +16,10 @@ function init() {
 }
 
 function createWidgets() {
-  App.get_monitors().map(Bar);
+  App.get_monitors().map((monitor) => {
+    Corners(monitor);
+    Bar(monitor);
+  });
 }
 
 App.start({
