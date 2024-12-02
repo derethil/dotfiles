@@ -1,0 +1,47 @@
+@use "color";
+@use "font";
+@use "layout";
+@use "animation";
+@use "mixins";
+
+window.Bar {
+  > centerbox {
+    @include mixins.widget;
+    font-family: font.$mono-family;
+    font-weight: bold;
+  }
+
+  .datetime {
+    @include mixins.divider(top);
+
+    .time {
+      padding: #{layout.$padding * 0.33}px 0;
+      font-size: #{font.$mono-size * 1.75}px;
+    }
+
+    .date {
+      font-size: #{font.$mono-size * 0.9}px;
+    }
+  }
+
+  .workspaces .indicator {
+    min-height: 1px;
+    padding: #{layout.$padding / 3}px #{layout.$padding * 0.8}px;
+    margin: #{layout.$gap / 2}px 0px;
+    border-radius: #{layout.$radius}px;
+    transition: background-color 0.33s;
+
+    &.occupied {
+      background-color: color.$accent3;
+    }
+    &.empty {
+      background-color: color.$background-highlight;
+    }
+    &.focused {
+      background-color: color.$accent4;
+    }
+    &.urgent {
+      @include animation.flash(color.$accent4, color.$accent3);
+    }
+  }
+}
