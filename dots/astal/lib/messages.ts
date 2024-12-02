@@ -2,9 +2,7 @@ import { App } from "astal/gtk3";
 
 type ResponseHandler = (response: string) => void;
 
-const handlers: Partial<
-  Record<string, (params: string[], respond: ResponseHandler) => void>
-> = {};
+const handlers: Partial<Record<string, (params: string[], respond: ResponseHandler) => void>> = {};
 
 export function registerMessage(
   message: string,

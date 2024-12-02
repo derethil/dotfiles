@@ -12,23 +12,16 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={options.bar.position(
-        (p) =>
-          Astal.WindowAnchor.TOP |
-          Astal.WindowAnchor.BOTTOM |
-          Astal.WindowAnchor[p],
+        (p) => Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor[p],
       )}
       application={App}
     >
       <centerbox vertical>
         <box valign={Gtk.Align.START} halign={Gtk.Align.CENTER} vertical>
-          {options.bar.modules.start((mods) =>
-            mods.map((mod) => modules[mod]()),
-          )}
+          {options.bar.modules.start((mods) => mods.map((mod) => modules[mod]()))}
         </box>
         <box valign={Gtk.Align.START} halign={Gtk.Align.CENTER} vertical>
-          {options.bar.modules.center((mods) =>
-            mods.map((mod) => modules[mod]()),
-          )}
+          {options.bar.modules.center((mods) => mods.map((mod) => modules[mod]()))}
         </box>
         <box valign={Gtk.Align.END} halign={Gtk.Align.CENTER} vertical>
           {options.bar.modules.end((mods) => mods.map((mod) => modules[mod]()))}

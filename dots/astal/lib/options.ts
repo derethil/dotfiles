@@ -91,10 +91,7 @@ export function constructOptions<T extends object>(cachePath: string, opts: T) {
   getOptions(opts).forEach((option) => option.initialize(cachePath));
 
   const configPath = `${TEMP}/config.json`;
-  const values = getOptions(opts).reduce(
-    (acc, opt) => ({ [opt.id]: opt.get(), ...acc }),
-    {},
-  );
+  const values = getOptions(opts).reduce((acc, opt) => ({ [opt.id]: opt.get(), ...acc }), {});
 
   writeFile(configPath, JSON.stringify(values, null, 2));
   monitorFile(configPath, () => {
@@ -106,10 +103,7 @@ export function constructOptions<T extends object>(cachePath: string, opts: T) {
     });
   });
 
-  const reset = async (
-    [opt, ...list] = getOptions(opts),
-    id = opt.reset(),
-  ): Promise<string[]> => {
+  const reset = async ([opt, ...list] = getOptions(opts), id = opt.reset()): Promise<string[]> => {
     if (!opt) return sleep().then(() => []);
     return id
       ? [id, ...(await sleep(50).then(() => reset(list)))]

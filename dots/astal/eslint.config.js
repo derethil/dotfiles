@@ -37,10 +37,7 @@ export default tseslint.config(
           allowNullish: true,
         },
       ],
-      "@typescript-eslint/no-confusing-void-expression": [
-        "error",
-        { ignoreArrowShorthand: true },
-      ],
+      "@typescript-eslint/no-confusing-void-expression": ["error", { ignoreArrowShorthand: true }],
     },
   },
   {
@@ -72,15 +69,7 @@ export default tseslint.config(
             order: "asc",
             caseInsensitive: true,
           },
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "sibling",
-            "parent",
-            "type",
-            "index",
-          ],
+          groups: ["builtin", "external", "internal", "sibling", "parent", "type", "index"],
           pathGroups: [
             {
               pattern: "react",
