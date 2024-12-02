@@ -5,6 +5,7 @@ import { modules } from "./modules";
 export type BarModule = keyof typeof modules;
 
 export function Bar(gdkmonitor: Gdk.Monitor) {
+  const margin = options.bar.position.get() === "RIGHT" ? "margin-left" : "margin-right";
   return (
     <window
       name="Bar"
@@ -16,7 +17,12 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
       )}
       application={App}
     >
-      <centerbox vertical>
+      <centerbox
+        vertical
+        css={`
+          ${margin}: 0px;
+        `}
+      >
         <box valign={Gtk.Align.START} halign={Gtk.Align.CENTER} vertical>
           {options.bar.modules.start((mods) => mods.map((mod) => modules[mod]()))}
         </box>
