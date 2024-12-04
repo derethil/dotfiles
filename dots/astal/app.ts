@@ -2,7 +2,6 @@ import { App } from "astal/gtk3";
 import { handleMessage } from "lib/messages";
 import { session } from "lib/session";
 import { watchStyles } from "lib/style";
-import { Bar } from "widgets/Bar";
 import { Corners } from "widgets/Corners";
 
 function init() {
@@ -18,7 +17,6 @@ function init() {
 function createWidgets() {
   App.get_monitors().map((monitor) => {
     Corners(monitor);
-    Bar(monitor);
   });
 }
 

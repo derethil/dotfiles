@@ -1,5 +1,5 @@
 import { Astal, Gdk } from "astal/gtk3";
-import { Corner } from "./Corner";
+import { Corner } from "elements";
 
 type Location = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
