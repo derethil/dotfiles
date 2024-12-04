@@ -20,7 +20,6 @@
     - pnpm
     - plocate
     - proton-ge-custom-bin
-    - rye
     - scc
     - thefuck
     - tldr
@@ -43,6 +42,7 @@
     - vesktop
     - xwaylandvideobridge-bin
     - zoom
+    - uv
 
 - flatpak:
     - com.stremio.Stremio

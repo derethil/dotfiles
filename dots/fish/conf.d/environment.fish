@@ -61,7 +61,6 @@ set -x PASSWORD_STORE_DIR "$XDG_DATA_HOME"/pass
 
 # Python / Pip
 set -x PYTHON_HISTORY "$XDG_DATA_HOME"/python/history
-set -x RYE_HOME "$XDG_DATA_HOME"/rye
 
 # Wine
 set -x WINEPREFIX "$XDG_DATA_HOME"/wine
