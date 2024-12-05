@@ -1,4 +1,5 @@
-import { GLib, Gio, exec, execAsync } from "astal";
+import { Binding, GLib, Gio, Variable, exec, execAsync } from "astal";
+import { bind, Subscribable } from "astal/binding";
 import { notify } from "./notify";
 
 export { notify };
@@ -41,4 +42,18 @@ export function ensureDirectory(path: string) {
 
 export function sleep(ms = 0) {
   return new Promise((res) => setTimeout(res, ms));
+}
+
+export function toVariable<T>(value: Variable<T> | T): Variable<T> {
+  return value instanceof Variable ? value : new Variable(value);
+}
+
+export function toBinding<T>(value: Binding<T> | T) {
+  const subscribable = (value: T): Subscribable<T> => ({
+    get: () => value,
+    subscribe: () => () => value,
+  });
+
+  if (value instanceof Binding) return value;
+  return bind(subscribable(value));
 }

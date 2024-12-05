@@ -7,7 +7,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
   theme: {
     layout: {
       gap: Opt(9),
-      padding: Opt(14),
+      padding: Opt(11),
       radius: Opt(8),
     },
     font: {

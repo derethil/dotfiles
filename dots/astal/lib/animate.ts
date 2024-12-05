@@ -21,7 +21,9 @@ export function animate<T extends Gtk.Widget>(
   const direction = end > start ? 1 : -1;
 
   if (!startTime) {
-    throw new Error("Failed to get widget frame clock");
+    throw new Error(
+      `Failed to get widget frame clock for ${widget.constructor.name}, widget may not be realized`,
+    );
   }
 
   const id = widget.add_tick_callback(() => {
