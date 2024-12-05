@@ -1,6 +1,6 @@
 import { bind } from "astal";
 import WirePlumber from "gi://AstalWp";
-import { CircleProgress } from "elements/CircleProgress";
+import { CircleProgress } from "elements";
 import { options } from "options";
 
 export function Volume() {
@@ -17,7 +17,7 @@ export function Volume() {
       strokeWidth={5}
       child={<></>}
     >
-      <icon icon={bind(wp.audio.defaultSpeaker, "volumeIcon")} />
+      <icon icon={bind(wp.audio.defaultSpeaker, "volumeIcon")} css="font-size: 15px" />
     </CircleProgress>
   );
 }
