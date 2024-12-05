@@ -27,6 +27,7 @@ export function CircleProgress(props: Props) {
       background-color: ${trackColor ?? options.theme.color.background.highlight.get()};
       min-height: ${props.size ?? 36}px;
       min-width: ${props.size ?? 36}px;
+      transition: all 0.15s ease-in-out;
   `,
   );
 
@@ -35,7 +36,10 @@ export function CircleProgress(props: Props) {
       if (props.animationDuration === 0) {
         self.value = newValue;
       } else {
-        animate(self, "value", self.value, newValue, props.animationDuration ?? 100);
+        animate(self, "value", newValue, {
+          duration: props.animationDuration ?? 300,
+          bezier: [0.86, 0, 0.13, 1],
+        });
       }
     });
   };
