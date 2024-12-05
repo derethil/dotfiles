@@ -16,6 +16,7 @@ interface Props {
   disabled?: Binding<boolean> | boolean;
   size?: number;
   css?: string;
+  rounded?: boolean;
 }
 
 export function CircleProgress(props: Props) {
@@ -45,13 +46,22 @@ export function CircleProgress(props: Props) {
   };
 
   return (
-    <overlay overlay={<box halign={Gtk.Align.CENTER}>{toBinding(props.child)}</box>}>
-      <circularprogress
-        css={css((ss) => ss + (props.css ?? ""))}
-        onDestroy={() => css.drop()}
-        value={props.value.get()}
-        setup={handleSetup}
-      />
-    </overlay>
+    <box>
+      <overlay
+        overlay={
+          <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
+            {toBinding(props.child)}
+          </box>
+        }
+      >
+        <circularprogress
+          rounded={props.rounded ?? true}
+          css={css((ss) => ss + (props.css ?? ""))}
+          onDestroy={() => css.drop()}
+          value={props.value.get()}
+          setup={handleSetup}
+        />
+      </overlay>
+    </box>
   );
 }

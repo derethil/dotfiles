@@ -1,5 +1,6 @@
 import { GObject, register } from "astal";
 import { CPUMonitor } from "./cpu";
+import { GPUMonitor } from "./gpu";
 import { MemoryMonitor } from "./memory";
 
 @register({ GTypeName: "SystemResources" })
@@ -14,4 +15,5 @@ export class SystemResources extends GObject.Object {
 
   public cpu = CPUMonitor.get_default();
   public memory = MemoryMonitor.get_default();
+  public gpu = GPUMonitor.get_default();
 }

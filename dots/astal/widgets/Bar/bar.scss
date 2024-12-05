@@ -44,4 +44,17 @@ window.Bar {
       @include animation.flash(color.$accent4, color.$accent3);
     }
   }
+
+  .system-monitor {
+    margin-top: #{layout.$gap}px;
+
+    > box {
+      margin-top: #{layout.$gap / 2}px;
+      margin-bottom: #{layout.$gap / 2}px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
