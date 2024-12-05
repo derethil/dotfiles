@@ -24,6 +24,7 @@ function createWidgets() {
 
 App.start({
   requestHandler: handleMessage,
+  icons: `./assets/icons`,
   main: () => {
     init();
     createWidgets();
