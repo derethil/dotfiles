@@ -1,54 +1,22 @@
 import { GObject, property, register, Variable } from "astal";
-import { bash } from "utils";
+import GTop from "gi://GTop?version=2.0";
 
-interface CPUStats {
-  user: number;
-  nice: number;
-  system: number;
-  idle: number;
-  iowait: number;
-  irq: number;
-  softirq: number;
-  steal: number;
-  guest: number;
-  guestNice: number;
-}
+type CPU = GTop.glibtop_cpu;
 
-interface CPUOverTime {
-  prev: CPUStats;
-  curr: CPUStats;
+interface CPUDelta {
+  prev: CPU;
+  curr: CPU;
 }
 
 const POLL_INTERVAL = 1000;
 
-function parse(line: string): CPUStats {
-  const [, user, nice, system, idle, iowait, irq, softirq, steal, guest, guestNice] = line
-    .split(" ")
-    .map(Number)
-    .filter((n) => !isNaN(n));
-
-  return { user, nice, system, idle, iowait, irq, softirq, steal, guest, guestNice };
-}
-
-async function getCPUStats(): Promise<CPUStats> {
-  const data = (await bash("cat /proc/stat | grep '^cpu '")).split("\n")[0];
-  const stats = parse(data);
-  return stats;
-}
-
-function calculateUsage(prev: CPUStats, curr: CPUStats) {
-  const prevIdle = prev.idle + prev.iowait;
-  const currIdle = curr.idle + curr.iowait;
-
-  const prevTotal = (Object.values(prev) as number[]).reduce((acc, val) => acc + val, 0);
-  const currTotal = (Object.values(curr) as number[]).reduce((acc, val) => acc + val, 0);
-
-  const totalDiff = currTotal - prevTotal;
-  const idleDiff = currIdle - prevIdle;
+function getUsage(prev: CPU, curr: CPU) {
+  const totalDiff = curr.total - prev.total;
+  const idleDiff = curr.idle - prev.idle;
   return (totalDiff - idleDiff) / totalDiff;
 }
 
-@register({ GTypeName: "CPUStats" })
+@register({ GTypeName: "CPUMonitor" })
 export class CPUMonitor extends GObject.Object {
   static instance: CPUMonitor;
 
@@ -72,17 +40,18 @@ export class CPUMonitor extends GObject.Object {
   }
 
   private createPoll() {
-    return Variable<CPUOverTime | null>(null).poll(POLL_INTERVAL, async (previous) => {
-      const newStats = await getCPUStats();
-      if (!previous) return { prev: newStats, curr: newStats };
-      return { prev: previous.curr, curr: newStats };
+    return Variable<CPUDelta | null>(null).poll(POLL_INTERVAL, (previous) => {
+      const cpu = new GTop.glibtop_cpu();
+      GTop.glibtop_get_cpu(cpu);
+      if (!previous) return { prev: cpu, curr: cpu };
+      return { prev: previous.curr, curr: cpu };
     });
   }
 
-  private monitorUsage(stats: Variable<CPUOverTime | null>) {
+  private monitorUsage(stats: Variable<CPUDelta | null>) {
     stats.subscribe((state) => {
       if (!state) return;
-      const usage = calculateUsage(state.prev, state.curr);
+      const usage = getUsage(state.prev, state.curr);
       this.#usage = isNaN(usage) ? 0 : usage;
       this.notify("usage");
     });
