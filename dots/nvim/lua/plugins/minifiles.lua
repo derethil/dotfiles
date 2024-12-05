@@ -1,3 +1,21 @@
+vim.api.nvim_create_autocmd("User", {
+  pattern = { "MiniFilesActionDelete", "MiniFilesActionMove" },
+  callback = function(args)
+    local action = args.data.action
+    local from = args.data.from
+    local to = args.data.to
+
+    local bufnr = vim.fn.bufnr(from, true)
+
+    if bufnr ~= -1 then
+      vim.api.nvim_buf_delete(bufnr, { force = true })
+      if action == "move" then
+        vim.fn.bufadd(to)
+      end
+    end
+  end,
+})
+
 return {
   {
     "echasnovski/mini.files",
