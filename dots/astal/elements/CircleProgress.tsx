@@ -1,8 +1,8 @@
 import { Binding, Variable } from "astal";
 import { Gtk, Widget } from "astal/gtk3";
 import { animate } from "lib/animate";
-import { toBinding } from "lib/util";
 import { options } from "options";
+import { toBinding } from "utils";
 
 type Child = JSX.Element | Binding<JSX.Element>;
 

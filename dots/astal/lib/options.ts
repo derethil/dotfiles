@@ -1,7 +1,7 @@
 import { GLib, Variable, monitorFile, readFile, writeFile } from "astal";
+import { ensureDirectory } from "utils";
 import { registerMessage } from "./messages";
 import { TEMP } from "./session";
-import { ensureDirectory } from "./util";
 
 interface OptionProps {
   persistent?: boolean;

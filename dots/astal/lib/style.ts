@@ -1,9 +1,9 @@
 import { execAsync, GLib, monitorFile, writeFileAsync } from "astal";
 import { App } from "astal/gtk3";
 import { options } from "options";
+import { bash, dependencies } from "utils";
 import { Option } from "./options";
 import { TEMP } from "./session";
-import { bash, dependencies } from "./util";
 
 // Commands
 const listStyles = `fd ".scss" --exclude "styles" ${GLib.get_current_dir()}`;

@@ -1,8 +1,8 @@
 import { bind, Variable } from "astal";
 import { Gtk } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
-import { bash } from "lib/util";
 import { options } from "options";
+import { bash } from "utils";
 import { WorkspaceIndicator } from "./WorkspaceIndicator";
 
 function scroll(direction: "next" | "previous") {
