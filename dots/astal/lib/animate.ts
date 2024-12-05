@@ -1,15 +1,11 @@
 import { Gtk } from "astal/gtk3";
 
-export type NumberKeys<T> = {
-  [K in keyof T]: T[K] extends number ? K : never;
-}[keyof T];
-
 export function animate<T extends Gtk.Widget>(
   widget: T,
-  property: NumberKeys<T>,
-  start: number,
-  end: number,
-  duration: number,
+  property: KeysOfType<T, number>,
+  from: number,
+  to: number,
+  duration: Milliseconds,
 ) {
   type Property = T[typeof property];
 
@@ -18,7 +14,7 @@ export function animate<T extends Gtk.Widget>(
   }
 
   const startTime = widget.get_frame_clock()?.get_frame_time();
-  const direction = end > start ? 1 : -1;
+  const direction = to > from ? 1 : -1;
 
   if (!startTime) {
     throw new Error(
@@ -34,7 +30,7 @@ export function animate<T extends Gtk.Widget>(
 
     const t = Math.min(elapsed / duration, 1);
 
-    widget[property] = (start + direction * t * Math.abs(end - start)) as Property;
+    widget[property] = (from + direction * t * Math.abs(to - from)) as Property;
 
     if (t >= 1) {
       widget.remove_tick_callback(id);
