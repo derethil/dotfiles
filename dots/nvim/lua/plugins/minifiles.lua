@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("User", {
     local bufnr = vim.fn.bufnr(from, true)
 
     if bufnr ~= -1 then
-      vim.api.nvim_buf_delete(bufnr, { force = true })
+      require("bufdelete").bufdelete(bufnr, true)
       if action == "move" then
         vim.fn.bufadd(to)
       end
@@ -17,6 +17,7 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 return {
+  { "famiu/bufdelete.nvim", lazy = true },
   {
     "echasnovski/mini.files",
     event = "VeryLazy",
