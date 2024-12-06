@@ -14,11 +14,11 @@
     - fd
     - fish
     - fzf
-    - libgtop
     - glow
     - gnome-keyring
     - inotify-tools
     - jq
+    - libgtop
     - libva-nvidia-driver
     - neovim
     - netctl
