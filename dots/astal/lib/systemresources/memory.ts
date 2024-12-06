@@ -45,10 +45,10 @@ export class MemoryMonitor extends GObject.Object {
     const poll = this.createPoll();
 
     poll.subscribe((memory) => {
-      this.#free = memory.free;
+      this.#free = memory.free + memory.buffer + memory.cached;
       this.#used = memory.used;
       this.#total = memory.total;
-      this.#percent = memory.used / memory.total;
+      this.#percent = (this.#total - this.#free) / this.#total;
       this.notify("free");
       this.notify("used");
       this.notify("total");
