@@ -1,5 +1,6 @@
 import { GObject, property, register, Variable } from "astal";
 import GTop from "gi://GTop?version=2.0";
+import { ParentGObject } from "types/gir";
 
 type CPU = GTop.glibtop_cpu;
 
@@ -8,7 +9,7 @@ interface CPUDelta {
   curr: CPU;
 }
 
-const POLL_INTERVAL = 1000;
+const POLL_INTERVAL = 300;
 
 function getUsage(prev: CPU, curr: CPU) {
   const totalDiff = curr.total - prev.total;
@@ -18,25 +19,27 @@ function getUsage(prev: CPU, curr: CPU) {
 
 @register({ GTypeName: "CPUMonitor" })
 export class CPUMonitor extends GObject.Object {
+  @property(Number)
+  declare usage: number;
   static instance: CPUMonitor;
+  static parent: ParentGObject;
 
   // eslint-disable-next-line camelcase
-  static get_default() {
+  static get_default(parent?: ParentGObject) {
     if (!this.instance) this.instance = new CPUMonitor();
+    if (!this.parent && parent) this.parent = parent;
     return this.instance;
-  }
-
-  #usage = 0;
-
-  @property(Number)
-  get usage() {
-    return this.#usage;
   }
 
   constructor() {
     super();
     const poll = this.createPoll();
-    this.monitorUsage(poll);
+    poll.subscribe((state) => {
+      if (!state) return;
+      const usage = getUsage(state.prev, state.curr);
+      this.usage = isNaN(usage) ? 0 : usage;
+      CPUMonitor.parent?.object.notify(CPUMonitor.parent.prop);
+    });
   }
 
   private createPoll() {
@@ -45,15 +48,6 @@ export class CPUMonitor extends GObject.Object {
       GTop.glibtop_get_cpu(cpu);
       if (!previous) return { prev: cpu, curr: cpu };
       return { prev: previous.curr, curr: cpu };
-    });
-  }
-
-  private monitorUsage(stats: Variable<CPUDelta | null>) {
-    stats.subscribe((state) => {
-      if (!state) return;
-      const usage = getUsage(state.prev, state.curr);
-      this.#usage = isNaN(usage) ? 0 : usage;
-      this.notify("usage");
     });
   }
 }

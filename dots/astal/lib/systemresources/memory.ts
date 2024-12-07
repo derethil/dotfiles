@@ -1,43 +1,31 @@
 import { GObject, property, register, Variable } from "astal";
 import GTop from "gi://GTop?version=2.0";
-
-type Memory = GTop.glibtop_mem;
+import { ParentGObject } from "types/gir";
 
 const POLL_INTERVAL = 1000;
 
 @register({ GTypeName: "MemoryMonitor" })
 export class MemoryMonitor extends GObject.Object {
+  @property(Number)
+  declare free: number;
+
+  @property(Number)
+  declare used: number;
+
+  @property(Number)
+  declare total: number;
+
+  @property(Number)
+  declare percent: number;
+
+  static parent: ParentGObject;
   static instance: MemoryMonitor;
 
   // eslint-disable-next-line camelcase
-  static get_default() {
+  static get_default(parent?: ParentGObject) {
     if (!this.instance) this.instance = new MemoryMonitor();
+    if (!this.parent && parent) this.parent = parent;
     return this.instance;
-  }
-
-  #free = 0;
-  #used = 0;
-  #total = 0;
-  #percent = 0;
-
-  @property(Number)
-  get free() {
-    return this.#free;
-  }
-
-  @property(Number)
-  get used() {
-    return this.#used;
-  }
-
-  @property(Number)
-  get total() {
-    return this.#total;
-  }
-
-  @property(Number)
-  get percent() {
-    return this.#percent;
   }
 
   constructor() {
@@ -45,19 +33,16 @@ export class MemoryMonitor extends GObject.Object {
     const poll = this.createPoll();
 
     poll.subscribe((memory) => {
-      this.#free = memory.free + memory.buffer + memory.cached;
-      this.#used = memory.used;
-      this.#total = memory.total;
-      this.#percent = (this.#total - this.#free) / this.#total;
-      this.notify("free");
-      this.notify("used");
-      this.notify("total");
-      this.notify("percent");
+      this.free = memory.free + memory.buffer + memory.cached;
+      this.used = memory.used;
+      this.total = memory.total;
+      this.percent = (this.total - this.free) / this.total;
+      MemoryMonitor.parent?.object.notify(MemoryMonitor.parent.prop);
     });
   }
 
   private createPoll() {
-    return Variable<Memory>(new GTop.glibtop_mem()).poll(POLL_INTERVAL, () => {
+    return Variable<GTop.glibtop_mem>(new GTop.glibtop_mem()).poll(POLL_INTERVAL, () => {
       const memory = new GTop.glibtop_mem();
       GTop.glibtop_get_mem(memory);
       return memory;

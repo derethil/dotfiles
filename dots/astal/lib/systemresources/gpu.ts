@@ -1,9 +1,8 @@
 import { GObject, property, register, Variable } from "astal";
+import { ParentGObject } from "types/gir";
 import { bash } from "utils";
 
 const POLL_INTERVAL = 1000;
-
-type Megabytes = number;
 
 interface Properties {
   total: Megabytes;
@@ -18,37 +17,26 @@ const get = async (properties: string) => {
 
 @register({ GTypeName: "GPUMonitor" })
 export class GPUMonitor extends GObject.Object {
+  @property(Number)
+  declare free: number;
+
+  @property(Number)
+  declare used: number;
+
+  @property(Number)
+  declare total: number;
+
+  @property(Number)
+  declare percent: number;
+
   static instance: GPUMonitor;
+  static parent: ParentGObject;
 
   // eslint-disable-next-line camelcase
-  static get_default() {
+  static get_default(parent?: ParentGObject) {
     if (!this.instance) this.instance = new GPUMonitor();
+    if (!this.parent && parent) this.parent = parent;
     return this.instance;
-  }
-
-  #free = 0;
-  #used = 0;
-  #total = 0;
-  #percent = 0;
-
-  @property(Number)
-  get free() {
-    return this.#free;
-  }
-
-  @property(Number)
-  get used() {
-    return this.#used;
-  }
-
-  @property(Number)
-  get total() {
-    return this.#total;
-  }
-
-  @property(Number)
-  get percent() {
-    return this.#percent;
   }
 
   constructor() {
@@ -57,15 +45,11 @@ export class GPUMonitor extends GObject.Object {
 
     poll.subscribe((properties) => {
       if (!properties) return;
-      this.#total = properties.total;
-      this.#free = properties.free;
-      this.#used = properties.used;
-      this.#percent = this.#used / this.#total;
-
-      this.notify("total");
-      this.notify("free");
-      this.notify("used");
-      this.notify("percent");
+      this.total = properties.total;
+      this.free = properties.free;
+      this.used = properties.used;
+      this.percent = this.used / this.total;
+      GPUMonitor.parent?.object.notify(GPUMonitor.parent.prop);
     });
   }
 
