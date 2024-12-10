@@ -7,7 +7,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
   theme: {
     layout: {
       gap: Opt(9),
-      padding: Opt(11),
+      padding: Opt(10),
       radius: Opt(8),
     },
     font: {
@@ -56,13 +56,16 @@ export const options = constructOptions(OPTIONS_CACHE, {
   bar: {
     position: Opt<"LEFT" | "RIGHT">("LEFT"),
     modules: {
-      start: Opt<BarModule[]>(["Workspaces", "SystemMonitor"]),
+      start: Opt<BarModule[]>(["Workspaces", "SystemMonitor", "Tray"]),
       center: Opt<BarModule[]>([]),
       end: Opt<BarModule[]>(["Volume", "DateTime"]),
     },
     workspaces: {
       dynamic: Opt(false),
       count: Opt(5),
+    },
+    tray: {
+      hidden: Opt<string[]>(["Wayland to X11 Video bridge"]),
     },
   },
 });

@@ -27,7 +27,7 @@ export function WorkspaceIndicator(props: WorkspaceProps) {
       indicator
       ${urgent ? "urgent" : ""}
       ${focused === workspace ? "focused" : ""}
-      ${clients.filter((c) => c.workspace == workspace).length > 0 ? "occupied" : "empty"}
+      ${(clients?.filter((c) => c.workspace == workspace)?.length ?? 0 > 0) ? "occupied" : "empty"}
     `,
   );
 

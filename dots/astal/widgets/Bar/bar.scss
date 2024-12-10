@@ -47,6 +47,7 @@ window.Bar {
 
   .system-monitor {
     margin-top: #{layout.$gap}px;
+    margin-bottom: #{layout.$gap}px;
 
     > box {
       margin-top: #{layout.$gap / 2}px;
@@ -54,6 +55,30 @@ window.Bar {
 
       &:last-child {
         margin-bottom: 0;
+      }
+    }
+  }
+
+  .tray {
+    margin-top: #{layout.$gap}px;
+    margin-bottom: #{layout.$gap}px;
+    background-color: color.$background-surface;
+    border-radius: #{layout.$radius}px;
+
+    > button {
+      all: unset;
+      padding: #{layout.$gap / 2}px #{layout.$gap}px;
+
+      &:first-child {
+        padding-top: #{layout.$gap}px;
+      }
+
+      &:last-child {
+        padding-bottom: #{layout.$gap}px;
+      }
+
+      icon {
+        font-size: 16px;
       }
     }
   }

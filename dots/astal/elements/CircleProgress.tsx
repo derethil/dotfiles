@@ -9,6 +9,7 @@ type Child = JSX.Element | Binding<JSX.Element>;
 interface Props {
   child: Child;
   value: Binding<number>;
+  tooltip?: Binding<string> | string;
   animationDuration?: number;
   strokeWidth?: number;
   color: Binding<string> | string;
@@ -45,8 +46,19 @@ export function CircleProgress(props: Props) {
     });
   };
 
+  const tooltipSetup = (self: Widget.Box) => {
+    self.set_has_tooltip(true);
+    self.connect("query-tooltip", (...params) => {
+      const tooltip = params[4];
+      toBinding(props.tooltip).subscribe((text) => {
+        tooltip.set_text((text?.length ?? 0 > 0) ? text : null);
+      });
+      return true;
+    });
+  };
+
   return (
-    <box>
+    <box setup={tooltipSetup} hasTooltip={Boolean(props.tooltip)}>
       <overlay
         overlay={
           <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
