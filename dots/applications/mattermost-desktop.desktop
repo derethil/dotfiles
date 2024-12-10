@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Mattermost
+Comment=Mattermost Desktop Application
+Exec=env -u ELECTRON_PLATFORM_OZONE_HINT mattermost-desktop %U
+Icon=mattermost-desktop
+Terminal=false
+StartupWMClass=Mattermost
+MimeType=x-scheme-handler/mattermost;
+Categories=Network;InstantMessaging;
+
