@@ -19,8 +19,14 @@ export function Tray() {
   });
 
   return (
-    <box vertical halign={Gtk.Align.CENTER} className="tray" hexpand>
-      {items((items) => items.map((item) => <TrayItem item={item} />))}
-    </box>
+    <revealer
+      revealChild={items((items) => items.length > 0)}
+      transitionDuration={options.theme.transition()}
+      transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
+    >
+      <box vertical halign={Gtk.Align.CENTER} className="tray">
+        {items((items) => items.map((item) => <TrayItem item={item} />))}
+      </box>
+    </revealer>
   );
 }

@@ -5,6 +5,7 @@ import { BarModule } from "widgets/Bar";
 export const options = constructOptions(OPTIONS_CACHE, {
   // General Options
   theme: {
+    transition: Opt(200),
     layout: {
       gap: Opt(9),
       padding: Opt(10),
