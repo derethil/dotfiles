@@ -1,0 +1,10 @@
+@use "color";
+
+.overlay-transparent,
+.overlay-blur {
+  background: transparent;
+}
+
+.overlay-opaque {
+  background: transparentize(color.$background-dim, 0.79);
+}
