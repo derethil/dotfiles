@@ -1,4 +1,5 @@
 import { App } from "astal/gtk3";
+import { options } from "options";
 
 type ResponseHandler = (response: string) => void;
 
@@ -34,4 +35,25 @@ export function handleMessage(message: string, respond: ResponseHandler) {
     console.warn(`Error handling message: ${errorMessage}`);
     respond(`[${App.instanceName}] ${errorMessage}`);
   }
+}
+
+export function setupMessageHandlers() {
+  registerMessage("toggle", (args) => {
+    if (args.length !== 1) throw new Error("expected 1 argument (window name)");
+    App.toggle_window(args[0]);
+    return "success";
+  });
+
+  registerMessage("get-option", (args) => {
+    if (!options) throw new Error("options are not yet initialized");
+    if (args.length !== 1) throw new Error("expected 1 argument (id)");
+    return options.get(args[0]);
+  });
+
+  registerMessage("set-option", (args) => {
+    if (!options) throw new Error("options are not yet initialized");
+    if (args.length !== 2) throw new Error("expected 2 arguments (id, value)");
+    options.set(args[0], args[1]);
+    return "success";
+  });
 }

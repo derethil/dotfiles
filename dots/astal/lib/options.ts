@@ -1,6 +1,5 @@
 import { GLib, Variable, monitorFile, readFile, writeFile } from "astal";
 import { ensureDirectory } from "utils";
-import { registerMessage } from "./messages";
 import { TEMP } from "./session";
 
 interface OptionProps {
@@ -22,8 +21,6 @@ const fetchCache = (path: string): Record<string, unknown> => {
   if (!GLib.file_test(path, GLib.FileTest.EXISTS)) return {};
   return JSON.parse(readFile(path)) as Record<string, unknown>;
 };
-
-let OPTIONS: Options | undefined;
 
 export class Option<T = unknown> extends Variable<T> {
   private readonly initial: T;
@@ -148,20 +145,5 @@ export function constructOptions<T extends object>(cachePath: string, opts: T) {
     handler,
   });
 
-  OPTIONS = options as Options;
-
   return options;
 }
-
-registerMessage("get-option", (args) => {
-  if (!OPTIONS) throw new Error("options are not yet initialized");
-  if (args.length !== 1) throw new Error("expected 1 argument (id)");
-  return OPTIONS.get(args[0]);
-});
-
-registerMessage("set-option", (args) => {
-  if (!OPTIONS) throw new Error("options are not yet initialized");
-  if (args.length !== 2) throw new Error("expected 2 arguments (id, value)");
-  OPTIONS.set(args[0], args[1]);
-  return "success";
-});

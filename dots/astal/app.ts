@@ -1,5 +1,5 @@
 import { App } from "astal/gtk3";
-import { handleMessage } from "lib/messages";
+import { handleMessage, setupMessageHandlers } from "lib/messages";
 import { session } from "lib/session";
 import { watchStyles } from "lib/style";
 import { Bar } from "widgets/Bar";
@@ -7,6 +7,7 @@ import { Corners } from "widgets/Corners";
 
 function init() {
   session();
+  setupMessageHandlers();
   watchStyles().catch((err: unknown) => {
     console.error(`Error watching styles: ${String(err)}`);
   });
