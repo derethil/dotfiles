@@ -1,0 +1,5 @@
+@use "mixins";
+
+window.pulse .pulse {
+  @include mixins.widget;
+}

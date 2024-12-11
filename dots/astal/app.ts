@@ -6,6 +6,7 @@ import { OverlayType } from "state/overlay";
 import { Bar } from "widgets/Bar";
 import { Corners } from "widgets/Corners";
 import { Overlay } from "widgets/Overlay";
+import { Pulse } from "widgets/Pulse";
 
 function init() {
   session();
@@ -23,6 +24,7 @@ function createWidgets() {
     Corners(monitor);
     Bar(monitor);
   });
+  Pulse();
   Object.values(OverlayType).forEach((type) => {
     Overlay({ type, className: `overlay-${type}` });
   });
