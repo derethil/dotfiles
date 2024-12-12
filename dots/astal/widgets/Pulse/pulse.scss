@@ -19,9 +19,14 @@ window.pulse .pulse {
     font-size: #{font.$mono-size * 1.35}px;
     font-weight: 600;
 
+    .placeholder {
+      color: color.$text-muted;
+    }
+
     entry {
       all: unset;
       color: color.$text;
+      caret-color: color.$text-highlight;
     }
 
     button {
