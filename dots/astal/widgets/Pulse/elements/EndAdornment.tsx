@@ -32,6 +32,11 @@ export function EndAdornmentState() {
   };
 }
 
+interface EndAdornment extends Widget.Box {
+  hide: () => void;
+  setChild: (widget: Widget.Box) => void;
+}
+
 export function EndAdornment() {
   const endAdornment = EndAdornmentState();
 
@@ -47,8 +52,8 @@ export function EndAdornment() {
   );
 
   return {
-    revaler: widget,
+    widget: widget,
     hide: endAdornment.hide,
-    set: endAdornment.set,
+    setChild: endAdornment.set,
   };
 }

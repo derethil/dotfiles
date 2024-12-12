@@ -2,12 +2,13 @@ import { Variable } from "astal";
 import { App, Astal, Gdk, Widget } from "astal/gtk3";
 import { FloatingWindow } from "elements/FloatingWindow";
 import { OverlayType } from "state/overlay";
-import { EndAdornment } from "./EndAdornment";
+import { EndAdornment } from "./elements/EndAdornment";
+import { Entry } from "./elements/Entry";
 
 export function Pulse() {
-  const endAdornment = EndAdornment();
   const iconName = Variable("system-search");
   const query = Variable("");
+  const endAdornment = EndAdornment();
 
   const handleKeyPress = (self: Astal.Window, event: Gdk.Event) => {
     if (!(event.get_keyval()[1] === Gdk.KEY_Escape)) return;
@@ -19,7 +20,7 @@ export function Pulse() {
     if (text.length === 0) {
       endAdornment.hide();
     } else {
-      endAdornment.set(new Widget.Box({ child: new Widget.Label({ label: "hi" }) }));
+      endAdornment.setChild(new Widget.Box({ child: new Widget.Label({ label: "hi" }) }));
     }
   };
 
@@ -41,19 +42,10 @@ export function Pulse() {
         iconName.drop();
       }}
     >
-      <box className="pulse" widthRequest={400}>
+      <box className="pulse" widthRequest={500}>
         <icon icon={iconName()} />
-        <entry
-          text={query()}
-          expand
-          canFocus
-          onChanged={(self) => handleQueryChange(self.get_text())}
-          onActivate={() => {
-            console.log(query.get());
-          }}
-          setup={(self) => self.grab_focus()}
-        />
-        {endAdornment.revaler}
+        <Entry query={query} handleQueryChange={handleQueryChange} />
+        {endAdornment.widget}
       </box>
     </FloatingWindow>
   );

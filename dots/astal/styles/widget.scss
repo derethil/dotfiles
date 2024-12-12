@@ -2,11 +2,16 @@
 @use "layout";
 @use "font";
 
-@mixin widget {
+@mixin widget($surface: false) {
   font-family: font.$sans-family;
   color: color.$text;
-  background: #{color.$background};
   border-radius: #{layout.$radius}px;
-  margin: #{layout.$gap}px;
   padding: #{layout.$padding}px;
+
+  @if $surface == false {
+    background: #{color.$background};
+    margin: #{layout.$gap}px;
+  } @else {
+    background: #{color.$background-surface};
+  }
 }

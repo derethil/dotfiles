@@ -9,7 +9,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
     layout: {
       gap: Opt(9),
       padding: Opt(10),
-      radius: Opt(8),
+      radius: Opt(12),
     },
     font: {
       sans: { family: Opt("SF Pro Display"), size: Opt(13) },
