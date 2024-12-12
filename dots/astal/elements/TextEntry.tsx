@@ -1,8 +1,13 @@
 import { Variable } from "astal";
 import { Gtk } from "astal/gtk3";
 import { EntryProps } from "astal/gtk3/widget";
+import { animate } from "lib/animate";
 
-export function TextEntry({ setup, ...props }: EntryProps) {
+interface Props extends EntryProps {
+  placeholderTransitionDuration?: number;
+}
+
+export function TextEntry({ setup, ...props }: Props) {
   const showPlaceholder = Variable(false);
 
   return (
@@ -14,7 +19,14 @@ export function TextEntry({ setup, ...props }: EntryProps) {
           className="placeholder"
           halign={Gtk.Align.START}
           label={props.placeholderText}
-          visible={showPlaceholder()}
+          setup={(self) => {
+            showPlaceholder.subscribe((value) => {
+              const to = value ? 1 : 0;
+              animate(self, "opacity", to, {
+                duration: props.placeholderTransitionDuration ?? 75,
+              });
+            });
+          }}
         />
       }
     >

@@ -7,14 +7,12 @@ window.pulse .pulse {
   @include mixins.widget;
 
   > icon {
-    @include mixins.widget($surface: true);
     margin-right: #{layout.$padding}px;
     padding: #{layout.$padding}px #{layout.$padding * 1.5}px;
     font-size: #{font.$mono-size * 1.5}px;
   }
 
   .entry-wrapper {
-    @include mixins.widget($surface: true);
     font-family: font.$mono-family;
     font-size: #{font.$mono-size * 1.35}px;
     font-weight: 600;
@@ -31,6 +29,7 @@ window.pulse .pulse {
 
     button {
       all: unset;
+      padding: #{layout.$padding}px #{layout.$padding * 1.5}px;
     }
   }
 }
