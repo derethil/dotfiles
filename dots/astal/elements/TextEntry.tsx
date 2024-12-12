@@ -8,25 +8,33 @@ interface Props extends EntryProps {
 }
 
 export function TextEntry({ setup, ...props }: Props) {
-  const showPlaceholder = Variable(false);
+  const placeholderOpacity = Variable(0);
+
+  const handleAnimatePlaceholder = (self: Gtk.Label) => {
+    self.opacity = placeholderOpacity.get();
+    placeholderOpacity.subscribe((value) => {
+      animate(self, "opacity", value, {
+        duration: props.placeholderTransitionDuration ?? 75,
+      });
+    });
+  };
+
+  const handleKeyPress = (self: Gtk.Entry) => {
+    const get = () => (self.get_text().length === 0 ? 1 : 0);
+    placeholderOpacity.set(get());
+    self.connect("notify::text", () => placeholderOpacity.set(get()));
+  };
 
   return (
     <overlay
       passThrough
-      onDestroy={() => showPlaceholder.drop()}
+      onDestroy={() => placeholderOpacity.drop()}
       overlay={
         <label
           className="placeholder"
           halign={Gtk.Align.START}
           label={props.placeholderText}
-          setup={(self) => {
-            showPlaceholder.subscribe((value) => {
-              const to = value ? 1 : 0;
-              animate(self, "opacity", to, {
-                duration: props.placeholderTransitionDuration ?? 75,
-              });
-            });
-          }}
+          setup={(self) => self.connect("realize", handleAnimatePlaceholder)}
         />
       }
     >
@@ -34,10 +42,7 @@ export function TextEntry({ setup, ...props }: Props) {
         {...props}
         setup={(self) => {
           setup?.(self);
-          showPlaceholder.set(self.get_text().length === 0);
-          self.connect("notify::text", () => {
-            showPlaceholder.set(self.get_text().length === 0);
-          });
+          handleKeyPress(self);
         }}
       ></entry>
     </overlay>
