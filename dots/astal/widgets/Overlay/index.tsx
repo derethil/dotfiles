@@ -1,5 +1,5 @@
 import { App, Astal } from "astal/gtk3";
-import { activeOverlayWindows, OverlayType } from "state/overlay";
+import { activeOverlayWindows, isDismissable, OverlayType } from "state/overlay";
 
 interface OverlayProps {
   type: OverlayType;
@@ -7,6 +7,10 @@ interface OverlayProps {
 }
 
 export function Overlay({ type, className }: OverlayProps) {
+  const handleClick = (self: Astal.EventBox) => {
+    if (isDismissable(type)) self.parent.visible = false;
+  };
+
   return (
     <window
       visible={false}
@@ -32,7 +36,7 @@ export function Overlay({ type, className }: OverlayProps) {
         });
       }}
     >
-      <eventbox vexpand hexpand onClick={(self) => (self.parent.visible = false)} />
+      <eventbox vexpand hexpand onClick={handleClick} />
     </window>
   );
 }

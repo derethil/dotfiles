@@ -1,9 +1,15 @@
 import { App, Astal, Widget } from "astal/gtk3";
-import { activeOverlayWindows, OverlayType, OverlayWindows } from "state/overlay";
+import {
+  activeOverlayWindows,
+  DismissableWindows,
+  OverlayType,
+  OverlayWindows,
+} from "state/overlay";
 
 interface Props extends Widget.WindowProps {
   name: string;
   overlay?: OverlayType;
+  dismissable?: boolean;
 }
 
 const onChangeVisible = (overlay: OverlayType) => {
@@ -16,6 +22,7 @@ export function FloatingWindow({
   layer = Astal.Layer.OVERLAY,
   visible = false,
   overlay = OverlayType.TRANSPARENT,
+  dismissable = true,
   ...props
 }: Props) {
   return (
@@ -27,6 +34,7 @@ export function FloatingWindow({
       visible={visible}
       setup={(self) => {
         OverlayWindows[overlay].push(self.name);
+        if (dismissable) DismissableWindows.push(self.name);
         self.hook(self, "notify::visible", () => onChangeVisible(overlay));
         props.setup?.(self);
       }}

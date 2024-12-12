@@ -7,6 +7,8 @@ export enum OverlayType {
   BLUR = "blur",
 }
 
+export const DismissableWindows = VariableArray<string>([]);
+
 export const OverlayWindows: Record<OverlayType, VariableArray<string>> = {
   [OverlayType.TRANSPARENT]: VariableArray<string>([]),
   [OverlayType.OPAQUE]: VariableArray<string>([]),
@@ -23,4 +25,9 @@ export function getOverlayType(windowName: string) {
   for (const key of keys) {
     if (OverlayWindows[key].get().includes(windowName)) return key;
   }
+}
+
+export function isDismissable(type: OverlayType) {
+  const active = activeOverlayWindows(type);
+  return active.some((window) => DismissableWindows.get().includes(window.name));
 }
