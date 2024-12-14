@@ -1,15 +1,18 @@
-import { Variable } from "astal";
-import { Gtk } from "astal/gtk3";
+import { Gtk, Widget } from "astal/gtk3";
 import { TextEntry } from "elements";
+import { PulseState } from "../state";
 
-interface Props {
-  query: Variable<string>;
-  handleQueryChange: (text: string) => void;
-}
+export function Entry() {
+  const state = PulseState.get_default();
+  const handleClear = () => handleQueryChange("");
 
-export function Entry(props: Props) {
-  const handleClear = () => {
-    props.handleQueryChange("");
+  const handleQueryChange = (text: string) => {
+    state.query.set(text);
+    if (text.length === 0) {
+      state.setEndWidget(null);
+    } else {
+      state.setEndWidget(new Widget.Box({ child: new Widget.Label({ label: "hi" }) }));
+    }
   };
 
   return (
@@ -18,13 +21,13 @@ export function Entry(props: Props) {
         expand
         canFocus
         placeholderText={'Type ":" to list subcommands'}
-        text={props.query()}
-        onChanged={(self) => props.handleQueryChange(self.get_text())}
+        text={state.query()}
+        onChanged={(self) => handleQueryChange(self.get_text())}
         onActivate={(self) => console.log(self.get_text())}
         setup={(self) => self.grab_focus()}
       />
       <revealer
-        revealChild={props.query((text) => text.length > 0)}
+        revealChild={state.query((text) => text.length > 0)}
         transitionDuration={400}
         transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
       >
