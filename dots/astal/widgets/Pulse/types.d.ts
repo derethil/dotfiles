@@ -1,15 +1,14 @@
 import { Gtk } from "astal/gtk3";
 
-export interface PulseResult extends Gtk.Widget {
-  handleActivate: () => void;
-}
+export type PulseResult = Gtk.Widget;
 
 export type PulseCommand = `:${string}`;
 
 export interface PulsePlugin {
   command: PulseCommand;
   description: string;
-  process: (query: string) => PulseResult[];
+  process: (args: string[], explicit?: boolean) => PulseResult[];
+  default: boolean;
 }
 
 export interface StaticPulsePlugin {

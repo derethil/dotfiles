@@ -1,6 +1,7 @@
 import { bind, GObject, property, register } from "astal";
-import { Widget } from "astal/gtk3";
-import { PulsePlugin, StaticPulsePlugin } from "./types";
+import { App, Widget } from "astal/gtk3";
+import { PulsePlugin, PulseResult, StaticPulsePlugin } from "./types";
+import { WINDOW_NAME } from ".";
 
 export const END_ADORNMENT_TRANSITION_DURATION = 200;
 
@@ -8,7 +9,10 @@ export const END_ADORNMENT_TRANSITION_DURATION = 200;
 export class PulseState extends GObject.Object {
   // Meta properties
   static instance: PulseState;
+
   private plugins: PulsePlugin[] = [];
+  private _activePlugin: PulsePlugin | null = null;
+  private _results: PulseResult[] = [];
 
   // Properties
   declare private _endWidget: Widget.Box | null;
@@ -20,7 +24,12 @@ export class PulseState extends GObject.Object {
   declare public startIcon: string;
 
   @property(Boolean)
-  declare showEndWidget: boolean;
+  declare public showEndWidget: boolean;
+
+  @property(Widget.Box)
+  public get results() {
+    return this._results.slice(0, 11);
+  }
 
   // Initialization
 
@@ -31,14 +40,10 @@ export class PulseState extends GObject.Object {
 
   constructor() {
     // @ts-expect-error - GObject not typed for Astal subclasses
-    super({
-      query: "",
-      startIcon: "system-search",
-      endWidget: null,
-      showEndWidget: false,
-    });
+    super({ startIcon: "system-search" });
 
     this.handleChangeEndWidget();
+    this.handleChangeQuery();
   }
 
   // Public methods
@@ -67,6 +72,15 @@ export class PulseState extends GObject.Object {
     return this.plugins.map((plugin) => plugin.command);
   }
 
+  public get activePlugin() {
+    return this._activePlugin;
+  }
+
+  public activate(onActivate?: () => void) {
+    App.toggle_window(WINDOW_NAME);
+    if (onActivate) onActivate();
+  }
+
   // Private methods
 
   private handleChangeEndWidget() {
@@ -83,5 +97,33 @@ export class PulseState extends GObject.Object {
       this.showEndWidget = true;
       this.notify("show-end-widget");
     });
+  }
+
+  private handleChangeQuery() {
+    bind(this, "query").subscribe((rawQuery) => {
+      const { command, args } = this.parseQuery(rawQuery);
+      const plugin = this.plugins.find((plugin) => plugin.command === command);
+      if (!plugin) {
+        this._results = this.plugins.flatMap((plugin) => plugin.process(args));
+        this._activePlugin = null;
+      } else if (args.length > 0) {
+        this._results = plugin.process(args, true);
+        this._activePlugin = plugin;
+      }
+
+      this.notify("results");
+    });
+  }
+
+  private parseQuery(query: string) {
+    // Empty query
+    if (query.length === 0 || query === ":") return { command: undefined, args: [] };
+    // Default command
+    if (!query.startsWith(":")) return { command: undefined, args: query.split(" ") };
+    const [command, ...args] = query.split(" ");
+    // Explicit plugin command
+    if (this.commands.includes(command as `:${string}`)) return { command, args };
+    // No matching command
+    return { command: undefined, args: [] };
   }
 }

@@ -1,16 +1,17 @@
 import { bind } from "astal";
-import { App, Astal, Gdk, Widget } from "astal/gtk3";
+import { App, Astal, Gdk, Gtk, Widget } from "astal/gtk3";
 import { FloatingWindow, TextEntry } from "elements";
 import { OverlayType } from "state/overlay";
-import { EndAdornment } from "./elements/EndAdornment";
-import { StartAdornment } from "./elements/StartAdornment";
+import { StartAdornment, EndAdornment, Results } from "./elements";
+import { Applications } from "./plugins";
 import { PulseState } from "./state";
 
+export const WINDOW_NAME = "pulse";
+
 const state = PulseState.get_default();
+state.registerPlugin(Applications);
 
 export function Pulse() {
-  const onWindowVisible = () => (state.query = "");
-
   const handleKeyPress = (self: Astal.Window, event: Gdk.Event) => {
     if (!(event.get_keyval()[1] === Gdk.KEY_Escape)) return;
     App.toggle_window(self.name);
@@ -27,32 +28,36 @@ export function Pulse() {
 
   return (
     <FloatingWindow
-      name="pulse"
-      namespace="pulse"
-      className="pulse"
+      name={WINDOW_NAME}
+      namespace={WINDOW_NAME}
+      className={WINDOW_NAME}
       visible={false}
       overlay={OverlayType.BLUR}
       keymode={Astal.Keymode.ON_DEMAND}
       application={App}
       onKeyPressEvent={handleKeyPress}
+      heightRequest={700}
       setup={(self) => {
         self.hook(self, "notify::visible", () => {
-          if (self.visible) onWindowVisible();
+          if (self.visible) state.query = "";
         });
       }}
     >
-      <box className="pulse" widthRequest={500}>
-        <StartAdornment />
-        <TextEntry
-          expand
-          canFocus
-          placeholderText={'Type ":" to list subcommands'}
-          text={bind(state, "query")}
-          onChanged={(self) => handleQueryChange(self.get_text())}
-          onActivate={(self) => console.log(self.get_text())}
-          setup={(self) => self.grab_focus()}
-        />
-        <EndAdornment />
+      <box className="pulse" widthRequest={500} vertical valign={Gtk.Align.START}>
+        <box>
+          <StartAdornment />
+          <TextEntry
+            expand
+            canFocus
+            placeholderText={'Type ":" to list subcommands'}
+            text={bind(state, "query")}
+            onChanged={(self) => handleQueryChange(self.get_text())}
+            onActivate={() => state.activate()}
+            setup={(self) => self.grab_focus()}
+          />
+          <EndAdornment />
+        </box>
+        <Results />
       </box>
     </FloatingWindow>
   );

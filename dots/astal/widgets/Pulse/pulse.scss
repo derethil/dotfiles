@@ -6,9 +6,9 @@
 window.pulse .pulse {
   @include mixins.widget;
 
-  > icon {
+  .start-icon {
     margin-right: #{layout.$padding}px;
-    padding: #{layout.$padding}px #{layout.$padding * 1.5}px;
+    padding: #{layout.$padding}px #{layout.$padding}px;
     font-size: #{font.$mono-size * 1.5}px;
   }
 
@@ -30,6 +30,11 @@ window.pulse .pulse {
     button {
       all: unset;
       padding: #{layout.$padding}px #{layout.$padding * 1.5}px;
+      transition: color 0.2s ease;
+      &:hover,
+      &:focus {
+        color: color.$text-highlight;
+      }
     }
   }
 }

@@ -1,0 +1,9 @@
+@use "color";
+
+.application {
+  all: unset;
+
+  &:focus {
+    background-color: color.$background-surface;
+  }
+}
