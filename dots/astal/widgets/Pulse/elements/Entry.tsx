@@ -1,6 +1,6 @@
 import { Variable } from "astal";
 import { Gtk } from "astal/gtk3";
-import { TextEntry } from "elements/TextEntry";
+import { TextEntry } from "elements";
 
 interface Props {
   query: Variable<string>;

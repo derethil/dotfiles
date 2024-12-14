@@ -1,6 +1,6 @@
 import { Variable } from "astal";
 import { App, Astal, Gdk, Widget } from "astal/gtk3";
-import { FloatingWindow } from "elements/FloatingWindow";
+import { FloatingWindow } from "elements";
 import { OverlayType } from "state/overlay";
 import { EndAdornment } from "./elements/EndAdornment";
 import { Entry } from "./elements/Entry";
@@ -35,7 +35,7 @@ export function Pulse() {
       application={App}
       onKeyPressEvent={handleKeyPress}
       setup={(self) => {
-        self.hook(self, "notify::visible", () => !self.visible && query.set(""));
+        self.hook(self, "notify::visible", () => self.visible && query.set(""));
       }}
       onDestroy={() => {
         query.drop();
