@@ -43,3 +43,7 @@ export function ensureDirectory(path: string) {
 export function sleep(ms = 0) {
   return new Promise((res) => setTimeout(res, ms));
 }
+
+export function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value));
+}

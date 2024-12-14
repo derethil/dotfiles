@@ -1,8 +1,8 @@
 import { Binding, Variable } from "astal";
-import { Gtk, Widget } from "astal/gtk3";
+import { Astal, Gtk, Widget } from "astal/gtk3";
 import { animate } from "lib/animate";
 import { options } from "options";
-import { toBinding } from "utils";
+import { clamp, toBinding } from "utils";
 
 type Child = JSX.Element | Binding<JSX.Element>;
 
@@ -18,6 +18,8 @@ interface Props {
   size?: number;
   css?: string;
   rounded?: boolean;
+  onScroll?: (direction: number) => void;
+  onClick?: (event: Astal.ClickEvent) => void;
 }
 
 export function CircleProgress(props: Props) {
@@ -46,7 +48,7 @@ export function CircleProgress(props: Props) {
     });
   };
 
-  const tooltipSetup = (self: Widget.Box) => {
+  const tooltipSetup = (self: Widget.EventBox) => {
     self.set_has_tooltip(true);
     self.connect("query-tooltip", (...params) => {
       const tooltip = params[4];
@@ -57,9 +59,18 @@ export function CircleProgress(props: Props) {
     });
   };
 
+  const sursor = (props.onScroll ?? props.onClick) ? "pointer" : "default";
+
   return (
-    <box setup={tooltipSetup} hasTooltip={Boolean(props.tooltip)}>
+    <eventbox
+      setup={tooltipSetup}
+      hasTooltip={Boolean(props.tooltip)}
+      onScroll={(_, event) => props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)}
+      cursor={sursor}
+      onClick={(_, event) => props.onClick?.(event)}
+    >
       <overlay
+        cursor={sursor}
         overlay={
           <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
             {toBinding(props.child)}
@@ -74,6 +85,6 @@ export function CircleProgress(props: Props) {
           setup={handleSetup}
         />
       </overlay>
-    </box>
+    </eventbox>
   );
 }
