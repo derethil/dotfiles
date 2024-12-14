@@ -1,8 +1,7 @@
-import { App, Astal, Gdk } from "astal/gtk3";
-import { FloatingWindow } from "elements";
+import { App, Astal, Gdk, Widget } from "astal/gtk3";
+import { FloatingWindow, TextEntry } from "elements";
 import { OverlayType } from "state/overlay";
 import { EndAdornment } from "./elements/EndAdornment";
-import { Entry } from "./elements/Entry";
 import { StartAdornment } from "./elements/StartAdornment";
 import { PulseState } from "./state";
 
@@ -14,6 +13,15 @@ export function Pulse() {
   const handleKeyPress = (self: Astal.Window, event: Gdk.Event) => {
     if (!(event.get_keyval()[1] === Gdk.KEY_Escape)) return;
     App.toggle_window(self.name);
+  };
+
+  const handleQueryChange = (text: string) => {
+    state.query.set(text);
+    if (text.length === 0) {
+      state.setEndWidget(null);
+    } else {
+      state.setEndWidget(new Widget.Box({ child: new Widget.Label({ label: "hi" }) }));
+    }
   };
 
   return (
@@ -34,7 +42,15 @@ export function Pulse() {
     >
       <box className="pulse" widthRequest={500}>
         <StartAdornment />
-        <Entry />
+        <TextEntry
+          expand
+          canFocus
+          placeholderText={'Type ":" to list subcommands'}
+          text={state.query()}
+          onChanged={(self) => handleQueryChange(self.get_text())}
+          onActivate={(self) => console.log(self.get_text())}
+          setup={(self) => self.grab_focus()}
+        />
         <EndAdornment />
       </box>
     </FloatingWindow>
