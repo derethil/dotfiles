@@ -1,3 +1,4 @@
+import { bind } from "astal";
 import { App, Astal, Gdk, Widget } from "astal/gtk3";
 import { FloatingWindow, TextEntry } from "elements";
 import { OverlayType } from "state/overlay";
@@ -5,10 +6,10 @@ import { EndAdornment } from "./elements/EndAdornment";
 import { StartAdornment } from "./elements/StartAdornment";
 import { PulseState } from "./state";
 
-export function Pulse() {
-  const state = PulseState.get_default();
+const state = PulseState.get_default();
 
-  const onWindowVisible = () => state.query.set("");
+export function Pulse() {
+  const onWindowVisible = () => (state.query = "");
 
   const handleKeyPress = (self: Astal.Window, event: Gdk.Event) => {
     if (!(event.get_keyval()[1] === Gdk.KEY_Escape)) return;
@@ -16,11 +17,11 @@ export function Pulse() {
   };
 
   const handleQueryChange = (text: string) => {
-    state.query.set(text);
+    state.query = text;
     if (text.length === 0) {
-      state.setEndWidget(null);
+      state.endWidget = null;
     } else {
-      state.setEndWidget(new Widget.Box({ child: new Widget.Label({ label: "hi" }) }));
+      state.endWidget = new Widget.Box({ child: new Widget.Label({ label: "hi" }) });
     }
   };
 
@@ -46,7 +47,7 @@ export function Pulse() {
           expand
           canFocus
           placeholderText={'Type ":" to list subcommands'}
-          text={state.query()}
+          text={bind(state, "query")}
           onChanged={(self) => handleQueryChange(self.get_text())}
           onActivate={(self) => console.log(self.get_text())}
           setup={(self) => self.grab_focus()}
