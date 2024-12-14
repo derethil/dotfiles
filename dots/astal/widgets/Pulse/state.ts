@@ -12,7 +12,6 @@ export class PulseState {
   declare private endWidget: Variable<Widget.Box | null>;
   declare private showEndWidget: Variable<boolean>;
 
-  // eslint-disable-next-line camelcase
   static get_default() {
     if (!this.instance) this.instance = new PulseState();
     return this.instance;

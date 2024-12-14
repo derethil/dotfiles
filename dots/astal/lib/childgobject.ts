@@ -12,7 +12,6 @@ export class ChildGObject extends GObject.Object {
   static parent: ParentGObject;
   static instance: ChildGObject;
 
-  // eslint-disable-next-line camelcase
   static get_default(parent: ParentGObject) {
     if (!this.parent && parent) this.parent = parent;
     if (!this.instance) this.instance = new this();

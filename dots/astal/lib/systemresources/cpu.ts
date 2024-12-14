@@ -24,7 +24,6 @@ export class CPUMonitor extends GObject.Object {
   static instance: CPUMonitor;
   static parent: ParentGObject;
 
-  // eslint-disable-next-line camelcase
   static get_default(parent?: ParentGObject) {
     if (!this.instance) this.instance = new CPUMonitor();
     if (!this.parent && parent) this.parent = parent;

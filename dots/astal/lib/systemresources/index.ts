@@ -7,7 +7,6 @@ import { MemoryMonitor } from "./memory";
 export class SystemResources extends GObject.Object {
   static instance: SystemResources;
 
-  // eslint-disable-next-line camelcase
   static get_default() {
     if (!this.instance) this.instance = new SystemResources();
     return this.instance;

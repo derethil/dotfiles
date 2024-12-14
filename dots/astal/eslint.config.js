@@ -25,7 +25,12 @@ export default tseslint.config(
       sourceType: "module",
     },
     rules: {
-      camelcase: "warn",
+      camelcase: [
+        "warn",
+        {
+          allow: ["^get_default"],
+        },
+      ],
       "import/no-nodejs-modules": "warn",
       "@typescript-eslint/no-unnecessary-condition": "off",
       "@typescript-eslint/restrict-template-expressions": [

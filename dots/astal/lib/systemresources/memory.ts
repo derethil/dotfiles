@@ -21,7 +21,6 @@ export class MemoryMonitor extends GObject.Object {
   static parent: ParentGObject;
   static instance: MemoryMonitor;
 
-  // eslint-disable-next-line camelcase
   static get_default(parent?: ParentGObject) {
     if (!this.instance) this.instance = new MemoryMonitor();
     if (!this.parent && parent) this.parent = parent;

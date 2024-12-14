@@ -32,7 +32,6 @@ export class GPUMonitor extends GObject.Object {
   static instance: GPUMonitor;
   static parent: ParentGObject;
 
-  // eslint-disable-next-line camelcase
   static get_default(parent?: ParentGObject) {
     if (!this.instance) this.instance = new GPUMonitor();
     if (!this.parent && parent) this.parent = parent;
