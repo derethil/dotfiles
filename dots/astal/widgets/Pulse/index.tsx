@@ -33,7 +33,7 @@ export function Pulse() {
       className={WINDOW_NAME}
       visible={false}
       overlay={OverlayType.BLUR}
-      keymode={Astal.Keymode.ON_DEMAND}
+      keymode={Astal.Keymode.EXCLUSIVE}
       application={App}
       onKeyPressEvent={handleKeyPress}
       heightRequest={700}

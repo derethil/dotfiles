@@ -5,10 +5,10 @@ export type PulseResult = Gtk.Widget;
 export type PulseCommand = `:${string}`;
 
 export interface PulsePlugin {
-  command: PulseCommand;
-  description: string;
+  readonly command: PulseCommand;
+  readonly description: string;
+  readonly default: boolean;
   process: (args: string[], explicit?: boolean) => PulseResult[];
-  default: boolean;
 }
 
 export interface StaticPulsePlugin {

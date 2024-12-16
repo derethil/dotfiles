@@ -14,9 +14,9 @@ export class Applications implements PulsePlugin {
     minScore: 0.75,
   });
 
-  public command: PulseCommand = ":app";
-  public description = "Launch Applications";
-  public default = true;
+  public readonly command: PulseCommand = ":app";
+  public readonly description = "Launch Applications";
+  public readonly default = true;
 
   public static get_default() {
     if (!this.instance) this.instance = new Applications();
