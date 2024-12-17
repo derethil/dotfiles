@@ -1,5 +1,6 @@
 # Simple Aliases
-alias ls="eza -la --icons --group-directories-first"
+alias l="eza -la --icons --group-directories-first"
+alias ls="echo 'Use l instead of ls'"
 alias lt="eza --tree --icons --group-directories-first --level=3"
 alias cat="bat"
 alias btm="btm --enable_gpu"
