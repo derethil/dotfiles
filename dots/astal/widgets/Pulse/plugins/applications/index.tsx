@@ -1,4 +1,7 @@
+import { App } from "astal/gtk3";
 import Apps from "gi://AstalApps";
+import { WINDOW_NAME } from "widgets/Pulse";
+import { PulseResult } from "widgets/Pulse/elements/PulseResult";
 import { AppButton } from "./AppButton";
 import { PulsePlugin, PulseCommand } from "../../types";
 
@@ -23,12 +26,21 @@ export class Applications implements PulsePlugin {
     return this.instance;
   }
 
+  public activate(app: Apps.Application) {
+    app.launch();
+    App.toggle_window(WINDOW_NAME);
+  }
+
   public process(args: string[]) {
     if (args.length === 0) return [];
     const appResults = this.apps.fuzzy_query(args.join(" "));
 
     const results = appResults.map((app) => {
-      return <AppButton app={app} />;
+      return (
+        <PulseResult handleActivate={() => app.launch()}>
+          <AppButton app={app} />
+        </PulseResult>
+      ) as PulseResult;
     });
 
     return results;

@@ -1,9 +1,11 @@
 @use "color";
 
-.application {
-  all: unset;
+.pulse-result {
+  button {
+    all: unset;
+  }
 
-  &:focus {
+  &.focused {
     background-color: color.$background-surface;
   }
 }

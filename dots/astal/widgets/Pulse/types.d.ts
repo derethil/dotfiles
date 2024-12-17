@@ -1,6 +1,4 @@
-import { Gtk } from "astal/gtk3";
-
-export type PulseResult = Gtk.Widget;
+import { PulseResult } from "./elements/PulseResult";
 
 export type PulseCommand = `:${string}`;
 

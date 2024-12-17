@@ -6,7 +6,7 @@ export function Results() {
 
   return (
     <box className="results" vertical>
-      {bind(state, "results")}
+      {bind(state.pluginManager, "results").as((r) => r.widgets)}
     </box>
   );
 }
