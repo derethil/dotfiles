@@ -11,7 +11,6 @@ export class PulseState extends GObject.Object {
   static instance: PulseState;
 
   private plugins: PulsePlugin[] = [];
-  private _activePlugin: PulsePlugin | null = null;
   private _results: PulseResult[] = [];
 
   // Properties
@@ -72,13 +71,15 @@ export class PulseState extends GObject.Object {
     return this.plugins.map((plugin) => plugin.command);
   }
 
-  public get activePlugin() {
-    return this._activePlugin;
-  }
-
-  public activate(onActivate?: () => void) {
+  public activate(onActivate: () => void) {
     App.toggle_window(WINDOW_NAME);
     if (onActivate) onActivate();
+  }
+
+  public clickFirst() {
+    if (this._results.length === 0) return;
+    const widget = this._results[0];
+    widget.emit("clicked");
   }
 
   // Private methods
@@ -103,27 +104,20 @@ export class PulseState extends GObject.Object {
     bind(this, "query").subscribe((rawQuery) => {
       const { command, args } = this.parseQuery(rawQuery);
       const plugin = this.plugins.find((plugin) => plugin.command === command);
-      if (!plugin) {
-        this._results = this.plugins.flatMap((plugin) => plugin.process(args));
-        this._activePlugin = null;
-      } else if (args.length > 0) {
-        this._results = plugin.process(args, true);
-        this._activePlugin = plugin;
-      }
-
+      const plugins = plugin ? [plugin] : this.plugins;
+      this._results = plugins.flatMap((plugin) => plugin.process(args));
       this.notify("results");
     });
   }
 
   private parseQuery(query: string) {
-    // Empty query
-    if (query.length === 0 || query === ":") return { command: undefined, args: [] };
-    // Default command
-    if (!query.startsWith(":")) return { command: undefined, args: query.split(" ") };
+    const empty = { command: undefined, args: [] };
     const [command, ...args] = query.split(" ");
-    // Explicit plugin command
+
+    if (query.length === 0 || query === ":") return empty;
+    if (!query.startsWith(":")) return { command: undefined, args: query.split(" ") };
     if (this.commands.includes(command as `:${string}`)) return { command, args };
-    // No matching command
-    return { command: undefined, args: [] };
+
+    return empty;
   }
 }

@@ -27,7 +27,8 @@ export function AppButton(props: Props) {
     <button
       className="pulse-result application"
       onClick={activate}
-      onKeyPressEvent={(_, event) => handleKeyPress(event)}
+      onKeyPressEvent={handleKeyPress}
+      setup={(self) => self.connect("clicked", activate)}
     >
       {props.app.name}
     </button>

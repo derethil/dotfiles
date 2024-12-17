@@ -1,13 +1,13 @@
-import { Gdk } from "astal/gtk3";
+import { Gdk, Gtk } from "astal/gtk3";
 
 interface Bind {
   key: number;
   mod?: Gdk.ModifierType;
-  action: () => void;
+  action: (widget: Gtk.Widget, event: Gdk.Event) => unknown;
 }
 
 export function createKeyHandler(...binds: Bind[]) {
-  return (event: Gdk.Event) => {
+  return (widget: Gtk.Widget, event: Gdk.Event) => {
     const eventKey = event.get_keyval()[1];
     const eventMod = event.get_state()[1];
     const bind = binds.find((bind) => {
@@ -15,6 +15,6 @@ export function createKeyHandler(...binds: Bind[]) {
       if (bind.mod && bind.mod !== eventMod) return false;
       return true;
     });
-    if (bind) bind.action();
+    if (bind) bind.action(widget, event);
   };
 }
