@@ -12,8 +12,10 @@ export function createKeyHandler(...binds: Bind[]) {
     const eventMod = event.get_state()[1];
     const bind = binds.find((bind) => {
       if (bind.key !== eventKey) return false;
-      if (!Array.isArray(bind.mod) && bind.mod !== eventMod) return false;
-      if (Array.isArray(bind.mod) && !bind.mod.includes(eventMod)) return false;
+      if (bind.mod) {
+        if (!Array.isArray(bind.mod) && bind.mod !== eventMod) return false;
+        if (Array.isArray(bind.mod) && !bind.mod.includes(eventMod)) return false;
+      }
       return true;
     });
     if (bind) bind.action(widget, event);
