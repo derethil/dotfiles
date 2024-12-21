@@ -29,13 +29,21 @@ export function Pulse() {
     },
     {
       key: Gdk.KEY_n,
-      mod: Gdk.ModifierType.CONTROL_MASK,
+      mod: [
+        Gdk.ModifierType.CONTROL_MASK,
+        Gdk.ModifierType.CONTROL_MASK + Gdk.ModifierType.MOD2_MASK,
+      ],
       action: (window) => window.child_focus(Gtk.DirectionType.DOWN),
     },
     {
       key: Gdk.KEY_p,
-      mod: Gdk.ModifierType.CONTROL_MASK,
-      action: (window) => window.child_focus(Gtk.DirectionType.UP),
+      mod: [
+        Gdk.ModifierType.CONTROL_MASK,
+        Gdk.ModifierType.CONTROL_MASK + Gdk.ModifierType.MOD2_MASK,
+      ],
+      action: (window) => {
+        window.child_focus(Gtk.DirectionType.UP);
+      },
     },
   );
 

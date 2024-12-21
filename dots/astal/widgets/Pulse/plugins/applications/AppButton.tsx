@@ -18,7 +18,10 @@ export function AppButton(props: Props) {
     },
     {
       key: Gdk.KEY_y,
-      mod: Gdk.ModifierType.CONTROL_MASK,
+      mod: [
+        Gdk.ModifierType.CONTROL_MASK,
+        Gdk.ModifierType.CONTROL_MASK + Gdk.ModifierType.MOD2_MASK,
+      ],
       action: activate,
     },
   );
@@ -28,7 +31,12 @@ export function AppButton(props: Props) {
       className="pulse-result application"
       onClick={activate}
       onKeyPressEvent={handleKeyPress}
-      setup={(self) => self.connect("clicked", activate)}
+      setup={(self) => {
+        self.connect("clicked", activate);
+        self.connect("focus", () => {
+          console.log("focus");
+        });
+      }}
     >
       {props.app.name}
     </button>
