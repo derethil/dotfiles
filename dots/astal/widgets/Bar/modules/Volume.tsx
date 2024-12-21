@@ -23,7 +23,7 @@ export function Volume() {
   return (
     <CircleProgress
       value={bind(speaker, "volume")}
-      color={options.theme.color.accent[1].default()}
+      color={options.theme.color.accent[4].default()}
       disabled={bind(speaker, "mute")}
       strokeWidth={5}
       child={<></>}
