@@ -54,7 +54,7 @@
     - hyprshot
     - hyprutils
     - hyprwayland-scanner
-    - morewaita
+    - morewaita-icon-theme
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
     - swww
     - ttf-icomoon-feather-git
