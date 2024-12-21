@@ -1,6 +1,6 @@
 import { GObject, property, register, Variable } from "astal";
 import { ParentGObject } from "types/gir";
-import { bash } from "utils";
+import { bash, dependencies } from "utils";
 
 const POLL_INTERVAL = 1000;
 
@@ -17,6 +17,9 @@ const get = async (properties: string) => {
 
 @register({ GTypeName: "GPUMonitor" })
 export class GPUMonitor extends GObject.Object {
+  @property(Boolean)
+  declare enabled: boolean;
+
   @property(Number)
   declare free: number;
 
@@ -40,6 +43,10 @@ export class GPUMonitor extends GObject.Object {
 
   constructor() {
     super();
+
+    if (!dependencies("nvidia-smi")) return;
+
+    this.enabled = true;
     const poll = this.createPoll();
 
     poll.subscribe((properties) => {
