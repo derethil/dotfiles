@@ -1,5 +1,5 @@
 import { bind } from "astal";
-import { PulseState } from "../state";
+import { PulseState, TRANSITION_DURATION } from "../state";
 import { DynamicRevealer } from "elements";
 import { Gtk } from "astal/gtk3";
 
@@ -8,10 +8,11 @@ export function Results() {
 
   return (
     <DynamicRevealer
-      revealChild={bind(state, "results").as((r) => r.length > 0)}
-      transitionDuration={150}
+      transitionDuration={TRANSITION_DURATION}
       transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
       contents={bind(state, "results")}
+      className="results"
+      wrapperProps={{ vertical: true }}
     />
   );
 }

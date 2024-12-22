@@ -14,16 +14,14 @@ export class PulseState extends GObject.Object {
   private _results: PulseResult[] = [];
 
   // Properties
-  declare private _endWidget: Gtk.Widget | null;
+  @property(Widget.Box)
+  declare public endWidget: Gtk.Widget | null;
 
   @property(String)
   declare public query: string;
 
   @property(String)
   declare public startIcon: string;
-
-  @property(Boolean)
-  declare public showEndWidget: boolean;
 
   @property(Widget.Box)
   public get results() {
@@ -40,8 +38,6 @@ export class PulseState extends GObject.Object {
   constructor() {
     // @ts-expect-error - GObject not typed for Astal subclasses
     super({ startIcon: "system-search" });
-
-    this.handleChangeEndWidget();
     this.handleChangeQuery();
   }
 
@@ -49,22 +45,6 @@ export class PulseState extends GObject.Object {
   public registerPlugin(plugin: StaticPulsePlugin) {
     const command = plugin.get_default().command;
     if (!this.commands.includes(command)) this.plugins.push(plugin.get_default());
-  }
-
-  @property(Gtk.Widget)
-  public get endWidget() {
-    return this._endWidget;
-  }
-
-  public set endWidget(widget: Gtk.Widget | null) {
-    if (widget === this._endWidget) return;
-    if (widget === null) {
-      this.showEndWidget = false;
-      this.notify("show-end-widget");
-    } else {
-      this._endWidget = widget;
-      this.notify("end-widget");
-    }
   }
 
   public get commands() {
@@ -84,22 +64,6 @@ export class PulseState extends GObject.Object {
 
   // Private methods
 
-  private handleChangeEndWidget() {
-    bind(this, "showEndWidget").subscribe((shown) => {
-      if (shown) return;
-      setTimeout(() => {
-        this._endWidget = null;
-        this.notify("end-widget");
-      }, TRANSITION_DURATION);
-    });
-
-    bind(this, "endWidget").subscribe((widget) => {
-      if (widget === null) return;
-      this.showEndWidget = true;
-      this.notify("show-end-widget");
-    });
-  }
-
   private handleChangeQuery() {
     bind(this, "query").subscribe((rawQuery) => {
       const { command, args } = this.parseQuery(rawQuery);
@@ -113,8 +77,11 @@ export class PulseState extends GObject.Object {
 
   private handlePluginAdornment(plugin: PulsePlugin | undefined) {
     if (!plugin && !this.endWidget) return;
-    if (!plugin && this.endWidget) this.showEndWidget = false;
-    this.endWidget = plugin!.endAdornment(true);
+    if (!plugin && this.endWidget) {
+      this.endWidget = null;
+    } else {
+      this.endWidget = plugin!.endAdornment(true);
+    }
   }
 
   private parseQuery(query: string) {
