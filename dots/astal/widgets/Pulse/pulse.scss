@@ -6,6 +6,10 @@
 window.pulse .pulse {
   @include mixins.widget;
 
+  > box {
+    border-bottom: 1px solid #{color.$background-surface};
+  }
+
   .start-icon {
     margin-right: #{layout.$padding}px;
     padding: #{layout.$padding}px #{layout.$padding}px;
@@ -13,7 +17,6 @@ window.pulse .pulse {
   }
 
   .entry-wrapper {
-    font-family: font.$mono-family;
     font-size: #{font.$mono-size * 1.35}px;
     font-weight: 600;
 
@@ -36,5 +39,9 @@ window.pulse .pulse {
         color: color.$text-highlight;
       }
     }
+  }
+
+  .end-adornment {
+    padding-right: #{layout.$padding}px;
   }
 }

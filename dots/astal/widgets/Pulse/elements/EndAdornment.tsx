@@ -7,6 +7,7 @@ export function EndAdornment() {
 
   return (
     <revealer
+      className="end-adornment"
       revealChild={bind(state, "showEndWidget")}
       transitionDuration={END_ADORNMENT_TRANSITION_DURATION}
       transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}

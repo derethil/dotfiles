@@ -1,4 +1,4 @@
-import { Gdk } from "astal/gtk3";
+import { Gdk, Gtk } from "astal/gtk3";
 import Apps from "gi://AstalApps";
 import { createKeyHandler } from "utils/binds";
 import { PulseState } from "widgets/Pulse/state";
@@ -33,7 +33,10 @@ export function AppButton(props: Props) {
       onKeyPressEvent={handleKeyPress}
       setup={(self) => self.connect("clicked", activate)}
     >
-      {props.app.name}
+      <box>
+        <label label={props.app.name} halign={Gtk.Align.START} />
+        <icon icon={props.app.iconName} expand halign={Gtk.Align.END} />
+      </box>
     </button>
   );
 }

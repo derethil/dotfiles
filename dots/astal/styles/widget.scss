@@ -3,7 +3,8 @@
 @use "font";
 
 @mixin widget($surface: false) {
-  font-family: font.$sans-family;
+  font-family: font.$mono-family;
+  font-size: font.$mono-size;
   color: color.$text;
   border-radius: #{layout.$radius}px;
   padding: #{layout.$padding}px;

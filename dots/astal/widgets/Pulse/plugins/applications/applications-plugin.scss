@@ -1,9 +1,27 @@
 @use "color";
+@use "mixins";
+@use "layout";
+@use "font";
+
+.apps-adornment {
+  font-size: 24px;
+  color: color.$accent6;
+}
 
 .application {
   all: unset;
+  @include mixins.widget;
+  margin: #{layout.$gap / 2}px 0px;
+  border-bottom: 1px solid #{color.$background-surface};
+  font-size: #{font.$mono-size * 1.3}px;
 
   &:focus {
+    font-weight: 600;
     background-color: color.$background-surface;
+    color: color.$text-highlight;
+  }
+
+  icon {
+    font-size: 28px;
   }
 }

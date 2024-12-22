@@ -1,5 +1,5 @@
 import { bind } from "astal";
-import { App, Astal, Gdk, Gtk, Widget } from "astal/gtk3";
+import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import { FloatingWindow, TextEntry } from "elements";
 import { OverlayType } from "state/overlay";
 import { createKeyHandler } from "utils/binds";
@@ -15,11 +15,6 @@ state.registerPlugin(Applications);
 export function Pulse() {
   const handleQueryChange = (text: string) => {
     state.query = text;
-    if (text.length === 0) {
-      state.endWidget = null;
-    } else {
-      state.endWidget = new Widget.Box({ child: new Widget.Label({ label: "hi" }) });
-    }
   };
 
   const handleKeyPress = createKeyHandler(
