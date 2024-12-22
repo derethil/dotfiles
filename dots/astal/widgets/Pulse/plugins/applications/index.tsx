@@ -33,4 +33,9 @@ export class Applications implements PulsePlugin {
 
     return results;
   }
+
+  public endAdornment(explicit?: boolean) {
+    if (!explicit) return null;
+    return <icon icon="view-grid-symbolic" className="apps-adornment" />;
+  }
 }

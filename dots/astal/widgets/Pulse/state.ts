@@ -1,5 +1,5 @@
 import { bind, GObject, property, register } from "astal";
-import { App, Widget } from "astal/gtk3";
+import { App, Gtk, Widget } from "astal/gtk3";
 import { PulsePlugin, PulseResult, StaticPulsePlugin } from "./types";
 import { WINDOW_NAME } from ".";
 
@@ -14,7 +14,7 @@ export class PulseState extends GObject.Object {
   private _results: PulseResult[] = [];
 
   // Properties
-  declare private _endWidget: Widget.Box | null;
+  declare private _endWidget: Gtk.Widget | null;
 
   @property(String)
   declare public query: string;
@@ -51,12 +51,12 @@ export class PulseState extends GObject.Object {
     if (!this.commands.includes(command)) this.plugins.push(plugin.get_default());
   }
 
-  @property(Widget.Box)
+  @property(Gtk.Widget)
   public get endWidget() {
     return this._endWidget;
   }
 
-  public set endWidget(widget: Widget.Box | null) {
+  public set endWidget(widget: Gtk.Widget | null) {
     if (widget === this._endWidget) return;
     if (widget === null) {
       this.showEndWidget = false;
@@ -107,7 +107,14 @@ export class PulseState extends GObject.Object {
       const plugins = plugin ? [plugin] : this.plugins;
       this._results = plugins.flatMap((plugin) => plugin.process(args));
       this.notify("results");
+      this.handlePluginAdornment(plugin);
     });
+  }
+
+  private handlePluginAdornment(plugin: PulsePlugin | undefined) {
+    if (!plugin && !this.endWidget) return;
+    if (!plugin && this.endWidget) this.showEndWidget = false;
+    this.endWidget = plugin!.endAdornment(true);
   }
 
   private parseQuery(query: string) {

@@ -1,4 +1,4 @@
-import { Gtk } from "astal/gtk3";
+import { Gtk, Widget } from "astal/gtk3";
 
 export type PulseResult = Gtk.Widget;
 
@@ -9,6 +9,7 @@ export interface PulsePlugin {
   readonly description: string;
   readonly default: boolean;
   process: (args: string[], explicit?: boolean) => PulseResult[];
+  endAdornment: (explicit?: boolean) => Gtk.Widget | null;
 }
 
 export interface StaticPulsePlugin {
