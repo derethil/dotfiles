@@ -1,6 +1,6 @@
 import { bind } from "astal";
 import { Gtk } from "astal/gtk3";
-import { END_ADORNMENT_TRANSITION_DURATION, PulseState } from "../state";
+import { TRANSITION_DURATION, PulseState } from "../state";
 
 export function EndAdornment() {
   const state = PulseState.get_default();
@@ -9,7 +9,7 @@ export function EndAdornment() {
     <revealer
       className="end-adornment"
       revealChild={bind(state, "showEndWidget")}
-      transitionDuration={END_ADORNMENT_TRANSITION_DURATION}
+      transitionDuration={TRANSITION_DURATION}
       transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
     >
       {bind(state, "endWidget")}

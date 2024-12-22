@@ -3,7 +3,7 @@ import { App, Gtk, Widget } from "astal/gtk3";
 import { PulsePlugin, PulseResult, StaticPulsePlugin } from "./types";
 import { WINDOW_NAME } from ".";
 
-export const END_ADORNMENT_TRANSITION_DURATION = 200;
+export const TRANSITION_DURATION = 200;
 
 @register({ GTypeName: "PulseState" })
 export class PulseState extends GObject.Object {
@@ -90,7 +90,7 @@ export class PulseState extends GObject.Object {
       setTimeout(() => {
         this._endWidget = null;
         this.notify("end-widget");
-      }, END_ADORNMENT_TRANSITION_DURATION);
+      }, TRANSITION_DURATION);
     });
 
     bind(this, "endWidget").subscribe((widget) => {
@@ -107,7 +107,7 @@ export class PulseState extends GObject.Object {
       const plugins = plugin ? [plugin] : this.plugins;
       this._results = plugins.flatMap((plugin) => plugin.process(args));
       this.notify("results");
-      this.handlePluginAdornment(plugin);
+      if (plugin) this.handlePluginAdornment(plugin);
     });
   }
 

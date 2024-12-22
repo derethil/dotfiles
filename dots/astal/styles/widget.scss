@@ -4,7 +4,7 @@
 
 @mixin widget($surface: false) {
   font-family: font.$mono-family;
-  font-size: font.$mono-size;
+  font-size: #{font.$mono-size}px;
   color: color.$text;
   border-radius: #{layout.$radius}px;
   padding: #{layout.$padding}px;
