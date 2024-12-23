@@ -18,10 +18,7 @@ export function AppButton(props: Props) {
     },
     {
       key: Gdk.KEY_y,
-      mod: [
-        Gdk.ModifierType.CONTROL_MASK,
-        Gdk.ModifierType.CONTROL_MASK + Gdk.ModifierType.MOD2_MASK,
-      ],
+      mod: Gdk.ModifierType.CONTROL_MASK,
       action: activate,
     },
   );

@@ -13,10 +13,6 @@ const state = PulseState.get_default();
 state.registerPlugin(Applications);
 
 export function Pulse() {
-  const handleQueryChange = (text: string) => {
-    state.query = text;
-  };
-
   const handleKeyPress = createKeyHandler(
     {
       key: Gdk.KEY_Escape,
@@ -24,23 +20,17 @@ export function Pulse() {
     },
     {
       key: Gdk.KEY_n,
-      mod: [
-        Gdk.ModifierType.CONTROL_MASK,
-        Gdk.ModifierType.CONTROL_MASK + Gdk.ModifierType.MOD2_MASK,
-      ],
+      mod: Gdk.ModifierType.CONTROL_MASK,
       action: (window) => window.child_focus(Gtk.DirectionType.DOWN),
     },
     {
       key: Gdk.KEY_p,
-      mod: [
-        Gdk.ModifierType.CONTROL_MASK,
-        Gdk.ModifierType.CONTROL_MASK + Gdk.ModifierType.MOD2_MASK,
-      ],
-      action: (window) => {
-        window.child_focus(Gtk.DirectionType.UP);
-      },
+      mod: Gdk.ModifierType.CONTROL_MASK,
+      action: (window) => window.child_focus(Gtk.DirectionType.UP),
     },
   );
+
+  const handleQueryChange = (text: string) => (state.query = text);
 
   return (
     <FloatingWindow
