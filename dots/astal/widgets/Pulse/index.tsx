@@ -6,11 +6,13 @@ import { createKeyHandler } from "utils/binds";
 import { StartAdornment, EndAdornment, Results } from "./elements";
 import { Applications } from "./plugins";
 import { PulseState } from "./state";
+import { Wallpapers } from "./plugins/wallpapers";
 
 export const WINDOW_NAME = "pulse";
 
 const state = PulseState.get_default();
 state.registerPlugin(Applications);
+state.registerPlugin(Wallpapers);
 
 export function Pulse() {
   const handleKeyPress = createKeyHandler(

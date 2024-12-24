@@ -42,13 +42,18 @@ export class PulseState extends GObject.Object {
   }
 
   // Public methods
-  public registerPlugin(plugin: StaticPulsePlugin) {
-    const command = plugin.get_default().command;
-    if (!this.commands.includes(command)) this.plugins.push(plugin.get_default());
+  public registerPlugin(p: StaticPulsePlugin) {
+    const plugin = p.get_default();
+    if (!this.commands.includes(plugin.command)) return this.plugins.push(plugin);
+    console.warn(`plugin ${plugin.command} is already registered`);
   }
 
   public get commands() {
     return this.plugins.map((plugin) => plugin.command);
+  }
+
+  public get defaultPlugins() {
+    return this.plugins.filter((plugin) => plugin.default);
   }
 
   public activate(onActivate: () => void) {
@@ -68,10 +73,10 @@ export class PulseState extends GObject.Object {
     bind(this, "query").subscribe((rawQuery) => {
       const { command, args } = this.parseQuery(rawQuery);
       const plugin = this.plugins.find((plugin) => plugin.command === command);
-      const plugins = plugin ? [plugin] : this.plugins;
+      const plugins = plugin ? [plugin] : this.defaultPlugins;
       this._results = plugins.flatMap((plugin) => plugin.process(args));
       this.notify("results");
-      if (plugin) this.handlePluginAdornment(plugin);
+      this.handlePluginAdornment(plugin);
     });
   }
 
@@ -79,8 +84,8 @@ export class PulseState extends GObject.Object {
     if (!plugin && !this.endWidget) return;
     if (!plugin && this.endWidget) {
       this.endWidget = null;
-    } else {
-      this.endWidget = plugin!.endAdornment(true);
+    } else if (plugin) {
+      this.endWidget = plugin!.endAdornment?.(true) ?? null;
     }
   }
 

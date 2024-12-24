@@ -9,7 +9,7 @@ export interface PulsePlugin {
   readonly description: string;
   readonly default: boolean;
   process: (args: string[], explicit?: boolean) => PulseResult[];
-  endAdornment: (explicit?: boolean) => Gtk.Widget | null;
+  endAdornment?: (explicit?: boolean) => Gtk.Widget | null;
 }
 
 export interface StaticPulsePlugin {
