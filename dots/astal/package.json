@@ -21,6 +21,7 @@
     "typescript-eslint": "^8.15.0"
   },
   "dependencies": {
-    "bezier-easing": "^2.1.0"
+    "bezier-easing": "^2.1.0",
+    "fzf": "^0.5.2"
   }
 }

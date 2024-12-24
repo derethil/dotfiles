@@ -15,7 +15,8 @@
 			"bezier-easing": [
 				"./node_modules/bezier-easing/src/index.d.ts",
 				"./node_modules/bezier-easing/dist/bezier-easing.js"
-			]
+			],
+			"fzf": ["./node_modules/fzf/dist/types"]
 		}
 	}
 }
