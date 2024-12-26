@@ -74,9 +74,14 @@ export class PulseState extends GObject.Object {
       const { command, args } = this.parseQuery(rawQuery);
       const plugin = this.plugins.find((plugin) => plugin.command === command);
       const plugins = plugin ? [plugin] : this.defaultPlugins;
-      this._results = plugins.flatMap((plugin) => plugin.process(args));
-      this.notify("results");
-      this.handlePluginAdornment(plugin);
+
+      const pluginPromises = Promise.all(plugins.map((p) => p.process(args)));
+
+      pluginPromises.then((results) => {
+        this._results = results.flat();
+        this.notify("results");
+        this.handlePluginAdornment(plugin);
+      });
     });
   }
 

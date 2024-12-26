@@ -8,7 +8,7 @@ export interface PulsePlugin {
   readonly command: PulseCommand;
   readonly description: string;
   readonly default: boolean;
-  process: (args: string[], explicit?: boolean) => PulseResult[];
+  process: (args: string[], explicit?: boolean) => Promise<PulseResult[]>;
   endAdornment?: (explicit?: boolean) => Gtk.Widget | null;
 }
 
