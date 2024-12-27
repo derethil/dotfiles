@@ -1,4 +1,5 @@
 import { Gtk, Widget } from "astal/gtk3";
+import { PulseState } from "./state";
 
 export type PulseResult = Gtk.Widget;
 
@@ -13,5 +14,5 @@ export interface PulsePlugin {
 }
 
 export interface StaticPulsePlugin {
-  get_default: () => PulsePlugin;
+  get_default: (state?: PulseState) => PulsePlugin;
 }

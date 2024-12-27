@@ -10,7 +10,7 @@ export class PulseState extends GObject.Object {
   // Meta properties
   static instance: PulseState;
 
-  private plugins: PulsePlugin[] = [];
+  private _plugins: PulsePlugin[] = [];
   private _results: PulseResult[] = [];
 
   // Properties
@@ -22,6 +22,9 @@ export class PulseState extends GObject.Object {
 
   @property(String)
   declare public startIcon: string;
+
+  @property(Widget.Entry)
+  declare public entry: Widget.Entry | null;
 
   @property(Widget.Box)
   public get results() {
@@ -43,17 +46,17 @@ export class PulseState extends GObject.Object {
 
   // Public methods
   public registerPlugin(p: StaticPulsePlugin) {
-    const plugin = p.get_default();
-    if (!this.commands.includes(plugin.command)) return this.plugins.push(plugin);
+    const plugin = p.get_default(this);
+    if (!this.commands.includes(plugin.command)) return this._plugins.push(plugin);
     console.warn(`plugin ${plugin.command} is already registered`);
   }
 
   public get commands() {
-    return this.plugins.map((plugin) => plugin.command);
+    return this._plugins.map((plugin) => plugin.command);
   }
 
-  public get defaultPlugins() {
-    return this.plugins.filter((plugin) => plugin.default);
+  public get plugins() {
+    return this._plugins;
   }
 
   public activate(onActivate: () => void) {
@@ -72,16 +75,18 @@ export class PulseState extends GObject.Object {
   private handleChangeQuery() {
     bind(this, "query").subscribe((rawQuery) => {
       const { command, args } = this.parseQuery(rawQuery);
-      const plugin = this.plugins.find((plugin) => plugin.command === command);
-      const plugins = plugin ? [plugin] : this.defaultPlugins;
+      const plugin = this._plugins.find((plugin) => plugin.command === command);
+      const plugins = plugin ? [plugin] : this.plugins.filter((plugin) => plugin.default);
 
-      const pluginPromises = Promise.all(plugins.map((p) => p.process(args)));
-
-      pluginPromises.then((results) => {
-        this._results = results.flat();
-        this.notify("results");
-        this.handlePluginAdornment(plugin);
-      });
+      Promise.all(plugins.map((p) => p.process(args)))
+        .then((results) => {
+          this._results = results.flat();
+          this.notify("results");
+          this.handlePluginAdornment(plugin);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     });
   }
 
@@ -98,7 +103,7 @@ export class PulseState extends GObject.Object {
     const empty = { command: undefined, args: [] };
     const [command, ...args] = query.split(" ");
 
-    if (query.length === 0 || query === ":") return empty;
+    if (query.length === 0) return empty;
     if (!query.startsWith(":")) return { command: undefined, args: query.split(" ") };
     if (this.commands.includes(command as `:${string}`)) return { command, args };
 

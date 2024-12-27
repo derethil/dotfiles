@@ -4,15 +4,14 @@ import { FloatingWindow, TextEntry } from "elements";
 import { OverlayType } from "state/overlay";
 import { createKeyHandler } from "utils/binds";
 import { StartAdornment, EndAdornment, Results } from "./elements";
-import { Applications } from "./plugins";
+import { Applications, PluginAutocomplete } from "./plugins";
 import { PulseState } from "./state";
-import { Wallpapers } from "./plugins/wallpapers";
 
 export const WINDOW_NAME = "pulse";
 
 const state = PulseState.get_default();
 state.registerPlugin(Applications);
-state.registerPlugin(Wallpapers);
+state.registerPlugin(PluginAutocomplete);
 
 export function Pulse() {
   const handleKeyPress = createKeyHandler(
@@ -63,6 +62,7 @@ export function Pulse() {
             onChanged={(self) => handleQueryChange(self.get_text())}
             setup={(self) => {
               self.grab_focus();
+              state.entry = self;
             }}
           />
           <EndAdornment />
