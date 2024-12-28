@@ -9,25 +9,25 @@ interface Props {
 export function TrayItem({ item }: Props) {
   if (item.iconThemePath) App.add_icons(item.iconThemePath);
 
-  const menu = item.create_menu();
-
-  const handleClick = (self: Gtk.Button, event: Astal.ClickEvent) => {
-    if (event.button === Gdk.BUTTON_PRIMARY) {
-      item.activate(0, 0);
-    } else {
-      menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null);
-    }
-  };
+  // const menu = item.create_menu();
+  //
+  // const handleClick = (self: Gtk.Button, event: Astal.ClickEvent) => {
+  //   if (event.button === Gdk.BUTTON_PRIMARY) {
+  //     item.activate(0, 0);
+  //   } else {
+  //     menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null);
+  //   }
+  // };
 
   return (
     <button
       halign={Gtk.Align.CENTER}
       tooltipMarkup={bind(item, "tooltipMarkup")}
       hasTooltip
-      onDestroy={() => menu?.destroy()}
-      onClick={handleClick}
+      // onDestroy={() => menu?.destroy()}
+      // onClick={handleClick}
     >
-      <icon gIcon={bind(item, "gicon").as((gicon) => gicon)} />
+      <icon gicon={bind(item, "gicon").as((gicon) => gicon)} />
     </button>
   );
 }
