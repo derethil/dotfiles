@@ -7,7 +7,8 @@
   "scripts": {
     "format": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "generate-types": "ags types -d  ~/.config/astal"
   },
   "keywords": [],
   "author": "",
