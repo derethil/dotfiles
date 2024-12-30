@@ -76,10 +76,16 @@ export class PulseState extends GObject.Object {
   private handleChangeQuery() {
     bind(this, "query").subscribe((rawQuery) => {
       const { command, args } = this.parseQuery(rawQuery);
+
+      if (command === undefined && args.length === 0) {
+        this._results = [];
+        this.notify("results");
+        this.handlePluginAdornment(undefined);
+        return;
+      }
+
       const plugin = this._plugins.find((plugin) => plugin.command === command);
-      const plugins = plugin
-        ? [plugin]
-        : this.plugins.filter((plugin) => plugin.default);
+      const plugins = plugin ? [plugin] : this.plugins.filter((p) => p.default);
 
       Promise.all(plugins.map((p) => p.process(args)))
         .then((results) => {
@@ -103,15 +109,16 @@ export class PulseState extends GObject.Object {
   }
 
   private parseQuery(query: string) {
-    const empty = { command: undefined, args: [] };
     const [command, ...args] = query.split(" ");
 
-    if (query.length === 0) return empty;
+    if (query.length === 0) return { command: undefined, args: [] };
+
     if (!query.startsWith(":"))
       return { command: undefined, args: query.split(" ") };
+
     if (this.commands.includes(command as `:${string}`))
       return { command, args };
 
-    return empty;
+    return { command: undefined, args: [] };
   }
 }

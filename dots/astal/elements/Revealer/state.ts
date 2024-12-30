@@ -1,11 +1,13 @@
 import { Binding, GObject, property, register } from "astal";
 import { Gtk } from "astal/gtk3";
+import { toBinding } from "utils";
 
 type Children = Gtk.Widget[] | Gtk.Widget | null;
 
 @register({ GTypeName: "RevealerState" })
 export class RevealerState extends GObject.Object {
   private _children: Children;
+  private transitionDuration: Binding<number | undefined>;
 
   @property(Boolean)
   declare reveal: boolean;
@@ -15,10 +17,17 @@ export class RevealerState extends GObject.Object {
     return this._children;
   }
 
-  constructor(children: Binding<Gtk.Widget[]> | Binding<Gtk.Widget | null>) {
+  constructor(
+    children: Binding<Gtk.Widget[]> | Binding<Gtk.Widget | null>,
+    duration: Binding<number | undefined> | number,
+  ) {
     super();
     this._children = children.get();
     children.subscribe((children) => this.handleNewChildren(children));
+
+    const d = toBinding(duration);
+    this.transitionDuration = d;
+    d.subscribe(() => this.notify("transition-duration"));
   }
 
   private shouldReveal(c: Children) {
@@ -43,7 +52,7 @@ export class RevealerState extends GObject.Object {
       this.notify("children");
     } else {
       this.reveal = false;
-      setTimeout(() => this.destroyChildren());
+      setTimeout(() => this.destroyChildren(), this.transitionDuration.get());
     }
   }
 }

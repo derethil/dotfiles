@@ -1,5 +1,6 @@
 import { bind, Binding } from "astal";
 import { Gtk, Widget } from "astal/gtk3";
+import { options } from "options";
 import { RevealerState } from "./state";
 
 interface Props extends Omit<Widget.RevealerProps, "child" | "revealChild"> {
@@ -8,7 +9,10 @@ interface Props extends Omit<Widget.RevealerProps, "child" | "revealChild"> {
 }
 
 export function Revealer(props: Props) {
-  const state = new RevealerState(props.content);
+  const state = new RevealerState(
+    props.content,
+    props.transitionDuration ?? options.theme.transition(),
+  );
 
   const wrapperSetup = (self: Widget.Box) => {
     self.noImplicitDestroy = true;
