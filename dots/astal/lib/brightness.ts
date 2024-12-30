@@ -1,5 +1,5 @@
-import GObject, { register, property } from "astal/gobject";
 import { monitorFile, readFileAsync } from "astal/file";
+import GObject, { register, property } from "astal/gobject";
 import { exec, execAsync } from "astal/process";
 
 const get = (args: string) => Number(exec(`brightnessctl ${args}`));
@@ -28,10 +28,12 @@ export class Brightness extends GObject.Object {
   set kbd(value) {
     if (value < 0 || value > this.#kbdMax) return;
 
-    execAsync(`brightnessctl -d ${kbd} s ${value} -q`).then(() => {
-      this.#kbd = value;
-      this.notify("kbd");
-    });
+    execAsync(`brightnessctl -d ${kbd} s ${value} -q`)
+      .then(() => {
+        this.#kbd = value;
+        this.notify("kbd");
+      })
+      .catch((error: unknown) => console.error(error));
   }
 
   @property(Number)
@@ -44,10 +46,12 @@ export class Brightness extends GObject.Object {
 
     if (percent > 1) percent = 1;
 
-    execAsync(`brightnessctl set ${Math.floor(percent * 100)}% -q`).then(() => {
-      this.#screen = percent;
-      this.notify("screen");
-    });
+    execAsync(`brightnessctl set ${Math.floor(percent * 100)}% -q`)
+      .then(() => {
+        this.#screen = percent;
+        this.notify("screen");
+      })
+      .catch((error: unknown) => console.error(error));
   }
 
   constructor() {
@@ -56,16 +60,22 @@ export class Brightness extends GObject.Object {
     const screenPath = `/sys/class/backlight/${screen}/brightness`;
     const kbdPath = `/sys/class/leds/${kbd}/brightness`;
 
-    monitorFile(screenPath, async (f) => {
-      const v = await readFileAsync(f);
-      this.#screen = Number(v) / this.#screenMax;
-      this.notify("screen");
+    monitorFile(screenPath, (f) => {
+      readFileAsync(f)
+        .then((v) => {
+          this.#screen = Number(v) / this.#screenMax;
+          this.notify("screen");
+        })
+        .catch((error: unknown) => console.error(error));
     });
 
-    monitorFile(kbdPath, async (f) => {
-      const v = await readFileAsync(f);
-      this.#kbd = Number(v) / this.#kbdMax;
-      this.notify("kbd");
+    monitorFile(kbdPath, (f) => {
+      readFileAsync(f)
+        .then((v) => {
+          this.#kbd = Number(v) / this.#kbdMax;
+          this.notify("kbd");
+        })
+        .catch((error: unknown) => console.error(error));
     });
   }
 }

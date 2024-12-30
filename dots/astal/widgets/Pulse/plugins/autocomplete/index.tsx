@@ -1,7 +1,7 @@
-import { PulseState } from "widgets/Pulse/state";
-import { PulseCommand, PulsePlugin } from "../../types";
 import { Fzf } from "fzf";
+import { PulseState } from "widgets/Pulse/state";
 import { PluginEntry } from "./PluginEntry";
+import { PulseCommand, PulsePlugin } from "../../types";
 
 export class PluginAutocomplete implements PulsePlugin {
   private static instance: PluginAutocomplete;
@@ -15,9 +15,15 @@ export class PluginAutocomplete implements PulsePlugin {
     return this.instance;
   }
 
-  public async process(args: string[]) {
-    const all = PulseState.get_default().plugins.filter(({ command }) => command !== this.command);
-    const fzf = new Fzf(all, { selector: (plugin) => `${plugin.command} ${plugin.description}` });
+  public process(args: string[]) {
+    const all = PulseState.get_default().plugins.filter(
+      ({ command }) => command !== this.command,
+    );
+
+    const fzf = new Fzf(all, {
+      selector: (p) => `${p.command} ${p.description}`,
+    });
+
     const filtered = fzf.find(args.join(" ")).map(({ item }) => item);
     return filtered.map((plugin) => <PluginEntry plugin={plugin} />);
   }

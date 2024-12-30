@@ -29,10 +29,19 @@ export function PluginEntry({ plugin }: Props) {
   );
 
   return (
-    <button onClick={activate} onKeyPressEvent={keyHandler} className="command-entry">
+    <button
+      onClick={activate}
+      onKeyPressEvent={keyHandler}
+      className="command-entry"
+    >
       <box expand>
         <label className="command" label={plugin.command} />
-        <label className="description" label={plugin.description} expand halign={Gtk.Align.START} />
+        <label
+          className="description"
+          label={plugin.description}
+          expand
+          halign={Gtk.Align.START}
+        />
       </box>
     </button>
   );

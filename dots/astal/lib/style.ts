@@ -72,7 +72,10 @@ async function writeVariables() {
   return Promise.all(uses);
 }
 
-async function writeStyleFolder(path: string, filename?: string): Promise<string[]> {
+async function writeStyleFolder(
+  path: string,
+  filename?: string,
+): Promise<string[]> {
   const paths = (await execAsync(listStylesInFolder(path))).split(/\s+/);
   const scss = paths.map((file) => forward(file)).join("\n");
   const name = filename ?? (await bash(`basename ${path}`));
@@ -82,7 +85,8 @@ async function writeStyleFolder(path: string, filename?: string): Promise<string
 
 // Copy shared styles to temp folder
 async function writeMixinImports() {
-  const error = (error: unknown) => console.error(`writing scss failed: ${String(error)}`);
+  const error = (error: unknown) =>
+    console.error(`writing scss failed: ${String(error)}`);
 
   const folderPaths = await execAsync(listSharedFolders);
   folderPaths.split(/\s+/).forEach((path) => {
@@ -114,12 +118,16 @@ export async function watchStyles() {
   paths.split(/\s+/).forEach((file) => {
     monitorFile(file, () => {
       resetStyles().catch((error: unknown) =>
-        console.error(`error: reloading styles failed on saving ${file}:\n${String(error)}`),
+        console.error(
+          `error: reloading styles failed on saving ${file}:\n${String(error)}`,
+        ),
       );
     });
   });
 
   resetStyles().catch((error: unknown) =>
-    console.error(`error: initial styles compilation failed:\n${String(error)}`),
+    console.error(
+      `error: initial styles compilation failed:\n${String(error)}`,
+    ),
   );
 }

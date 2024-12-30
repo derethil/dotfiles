@@ -40,40 +40,53 @@ export function Corner(props: Props) {
       valign={isTop ? Gtk.Align.START : Gtk.Align.END}
       css={`
         padding: 1px;
-        margin: ${isTop ? "-1px" : "0"} ${isRight ? "-1px" : "0"} ${isBottom ? "-1px" : "0"}
-          ${isLeft ? "-1px" : "0"};
+        margin: ${isTop ? "-1px" : "0"} ${isRight ? "-1px" : "0"}
+          ${isBottom ? "-1px" : "0"} ${isLeft ? "-1px" : "0"};
       `}
     >
-      {Variable.derive([options.corners.radius, options.corners.color], (radius, color) => {
-        return (
-          <drawingarea
-            css={`
-              border-radius: ${radius}px;
-              background-color: ${color};
-            `}
-            setup={(self) => {
-              const style = self.get_style_context();
+      {Variable.derive(
+        [options.corners.radius, options.corners.color],
+        (radius, color) => {
+          return (
+            <drawingarea
+              css={`
+                border-radius: ${radius}px;
+                background-color: ${color};
+              `}
+              setup={(self) => {
+                const style = self.get_style_context();
 
-              const getRadius = () =>
-                style.get_property("border-radius", Gtk.StateFlags.NORMAL) as number;
+                const getRadius = () =>
+                  style.get_property(
+                    "border-radius",
+                    Gtk.StateFlags.NORMAL,
+                  ) as number;
 
-              let radius = getRadius();
-              self.set_size_request(radius, radius);
-
-              self.connect("draw", (_, cairo: Cairo.Context) => {
-                radius = getRadius();
+                let radius = getRadius();
                 self.set_size_request(radius, radius);
 
-                const bgColor = style.get_background_color(Gtk.StateFlags.NORMAL);
-                drawCornerShape(cairo, radius);
-                cairo.closePath();
-                cairo.setSourceRGBA(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
-                cairo.fill();
-              });
-            }}
-          />
-        );
-      })()}
+                self.connect("draw", (_, cairo: Cairo.Context) => {
+                  radius = getRadius();
+                  self.set_size_request(radius, radius);
+
+                  const bgColor = style.get_background_color(
+                    Gtk.StateFlags.NORMAL,
+                  );
+                  drawCornerShape(cairo, radius);
+                  cairo.closePath();
+                  cairo.setSourceRGBA(
+                    bgColor.red,
+                    bgColor.green,
+                    bgColor.blue,
+                    bgColor.alpha,
+                  );
+                  cairo.fill();
+                });
+              }}
+            />
+          );
+        },
+      )()}
     </box>
   );
 }

@@ -9,7 +9,8 @@ interface WorkspaceProps {
 function observeWorkspace(id: number) {
   const hypr = Hyprland.get_default();
 
-  const get = () => hypr.get_workspace(id) ?? Hyprland.Workspace.dummy(id, null);
+  const get = () =>
+    hypr.get_workspace(id) ?? Hyprland.Workspace.dummy(id, null);
 
   return Variable(get())
     .observe(hypr, "workspace-added", get)

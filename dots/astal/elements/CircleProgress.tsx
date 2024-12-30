@@ -24,7 +24,11 @@ interface Props {
 
 export function CircleProgress(props: Props) {
   const css = Variable.derive(
-    [toBinding(props.color), toBinding(props.trackColor), toBinding(props.disabled)],
+    [
+      toBinding(props.color),
+      toBinding(props.trackColor),
+      toBinding(props.disabled),
+    ],
     (color, trackColor, disabled) => `
       font-size: ${props.strokeWidth ?? 4}px;
       color: ${disabled ? options.theme.color.text.muted.get() : color};
@@ -65,7 +69,9 @@ export function CircleProgress(props: Props) {
     <eventbox
       setup={tooltipSetup}
       hasTooltip={Boolean(props.tooltip)}
-      onScroll={(_, event) => props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)}
+      onScroll={(_, event) =>
+        props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)
+      }
       cursor={sursor}
       onClick={(_, event) => props.onClick?.(event)}
     >

@@ -47,7 +47,8 @@ export class PulseState extends GObject.Object {
   // Public methods
   public registerPlugin(p: StaticPulsePlugin) {
     const plugin = p.get_default(this);
-    if (!this.commands.includes(plugin.command)) return this._plugins.push(plugin);
+    if (!this.commands.includes(plugin.command))
+      return this._plugins.push(plugin);
     console.warn(`plugin ${plugin.command} is already registered`);
   }
 
@@ -76,7 +77,9 @@ export class PulseState extends GObject.Object {
     bind(this, "query").subscribe((rawQuery) => {
       const { command, args } = this.parseQuery(rawQuery);
       const plugin = this._plugins.find((plugin) => plugin.command === command);
-      const plugins = plugin ? [plugin] : this.plugins.filter((plugin) => plugin.default);
+      const plugins = plugin
+        ? [plugin]
+        : this.plugins.filter((plugin) => plugin.default);
 
       Promise.all(plugins.map((p) => p.process(args)))
         .then((results) => {
@@ -84,7 +87,7 @@ export class PulseState extends GObject.Object {
           this.notify("results");
           this.handlePluginAdornment(plugin);
         })
-        .catch((error) => {
+        .catch((error: unknown) => {
           console.error(error);
         });
     });
@@ -95,7 +98,7 @@ export class PulseState extends GObject.Object {
     if (!plugin && this.endWidget) {
       this.endWidget = null;
     } else if (plugin) {
-      this.endWidget = plugin!.endAdornment?.(true) ?? null;
+      this.endWidget = plugin.endAdornment?.(true) ?? null;
     }
   }
 
@@ -104,8 +107,10 @@ export class PulseState extends GObject.Object {
     const [command, ...args] = query.split(" ");
 
     if (query.length === 0) return empty;
-    if (!query.startsWith(":")) return { command: undefined, args: query.split(" ") };
-    if (this.commands.includes(command as `:${string}`)) return { command, args };
+    if (!query.startsWith(":"))
+      return { command: undefined, args: query.split(" ") };
+    if (this.commands.includes(command as `:${string}`))
+      return { command, args };
 
     return empty;
   }

@@ -1,6 +1,6 @@
 import { bind } from "astal";
-import { Brightness } from "lib/brightness";
 import { CircleProgress } from "elements";
+import { Brightness } from "lib/brightness";
 import { options } from "options";
 
 export function Backlight() {

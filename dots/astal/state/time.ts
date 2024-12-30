@@ -9,7 +9,11 @@ interface Time {
   abbrWeekday: string;
 }
 
-export const Time = Variable<Time | null>(null).poll(1000, "date '+%d!%m!%Y!%I!%M!%a'", (v) => {
-  const [day, month, year, hours, minutes, abbrWeekday] = v.split("!");
-  return { day, month, year, hours, minutes, abbrWeekday };
-});
+export const Time = Variable<Time | null>(null).poll(
+  1000,
+  "date '+%d!%m!%Y!%I!%M!%a'",
+  (v) => {
+    const [day, month, year, hours, minutes, abbrWeekday] = v.split("!");
+    return { day, month, year, hours, minutes, abbrWeekday };
+  },
+);

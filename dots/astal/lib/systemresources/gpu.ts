@@ -11,7 +11,9 @@ interface Properties {
 }
 
 const get = async (properties: string) => {
-  const output = await bash(`nvidia-smi --query-gpu=${properties} --format=csv,noheader,nounits`);
+  const output = await bash(
+    `nvidia-smi --query-gpu=${properties} --format=csv,noheader,nounits`,
+  );
   return output.split(",");
 };
 
@@ -61,7 +63,9 @@ export class GPUMonitor extends GObject.Object {
 
   private createPoll() {
     return Variable<Properties | null>(null).poll(POLL_INTERVAL, async () => {
-      const [total, free, used] = await get("memory.total,memory.free,memory.used");
+      const [total, free, used] = await get(
+        "memory.total,memory.free,memory.used",
+      );
       return {
         total: Number(total),
         free: Number(free),

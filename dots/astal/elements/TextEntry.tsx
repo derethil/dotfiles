@@ -54,7 +54,11 @@ export function TextEntry({ setup, ...props }: Props) {
         transitionDuration={400}
         transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
       >
-        <button onClick={() => entry.set_text("")} cursor="pointer" canFocus={false}>
+        <button
+          onClick={() => entry.set_text("")}
+          cursor="pointer"
+          canFocus={false}
+        >
           <icon icon="edit-clear-symbolic" />
         </button>
       </revealer>

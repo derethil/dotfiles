@@ -41,10 +41,13 @@ export class MemoryMonitor extends GObject.Object {
   }
 
   private createPoll() {
-    return Variable<GTop.glibtop_mem>(new GTop.glibtop_mem()).poll(POLL_INTERVAL, () => {
-      const memory = new GTop.glibtop_mem();
-      GTop.glibtop_get_mem(memory);
-      return memory;
-    });
+    return Variable<GTop.glibtop_mem>(new GTop.glibtop_mem()).poll(
+      POLL_INTERVAL,
+      () => {
+        const memory = new GTop.glibtop_mem();
+        GTop.glibtop_get_mem(memory);
+        return memory;
+      },
+    );
   }
 }

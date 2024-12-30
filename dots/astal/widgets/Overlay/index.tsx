@@ -1,5 +1,9 @@
 import { App, Astal } from "astal/gtk3";
-import { activeOverlayWindows, isDismissable, OverlayType } from "state/overlay";
+import {
+  activeOverlayWindows,
+  isDismissable,
+  OverlayType,
+} from "state/overlay";
 
 interface OverlayProps {
   type: OverlayType;

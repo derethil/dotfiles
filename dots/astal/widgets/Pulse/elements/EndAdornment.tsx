@@ -1,7 +1,7 @@
 import { bind } from "astal";
 import { Gtk } from "astal/gtk3";
-import { TRANSITION_DURATION, PulseState } from "../state";
 import { Revealer } from "elements";
+import { TRANSITION_DURATION, PulseState } from "../state";
 
 export function EndAdornment() {
   const state = PulseState.get_default();

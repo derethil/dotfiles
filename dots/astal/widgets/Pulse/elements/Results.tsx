@@ -1,7 +1,7 @@
 import { bind } from "astal";
-import { PulseState, TRANSITION_DURATION } from "../state";
-import { Revealer } from "elements";
 import { Gtk } from "astal/gtk3";
+import { Revealer } from "elements";
+import { PulseState, TRANSITION_DURATION } from "../state";
 
 export function Results() {
   const state = PulseState.get_default();

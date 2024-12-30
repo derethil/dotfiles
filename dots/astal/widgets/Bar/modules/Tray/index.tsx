@@ -1,9 +1,9 @@
 import { bind, Variable } from "astal";
 import { Gtk } from "astal/gtk3";
 import AstalTray from "gi://AstalTray";
+import { Revealer } from "elements";
 import { options } from "options";
 import { TrayItem } from "./TrayItem";
-import { Revealer } from "elements";
 
 export function Tray() {
   const tray = AstalTray.Tray.get_default();

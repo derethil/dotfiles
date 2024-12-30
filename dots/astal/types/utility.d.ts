@@ -5,3 +5,5 @@ type NestedRecord<K extends string | number | symbol, V> = {
 type KeysOfType<T, V> = {
   [K in keyof T]: T[K] extends V ? K : never;
 }[keyof T];
+
+type PromiseOption<T> = T | Promise<T>;

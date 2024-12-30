@@ -50,7 +50,12 @@ export function Pulse() {
         });
       }}
     >
-      <box className="pulse" widthRequest={500} vertical valign={Gtk.Align.START}>
+      <box
+        className="pulse"
+        widthRequest={500}
+        vertical
+        valign={Gtk.Align.START}
+      >
         <box>
           <StartAdornment />
           <TextEntry
