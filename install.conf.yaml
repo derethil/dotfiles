@@ -39,6 +39,7 @@
     ~/.config/ags: dots/ags
     ~/.config/astal: dots/astal
     ~/.config/yazi/: dots/yazi
+    ~/.config/ghostty/: dots/ghostty
 
     # Config Files
     ~/.config/starship.toml: dots/starship.toml

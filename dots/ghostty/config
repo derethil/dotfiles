@@ -1,0 +1,31 @@
+# Fons
+font-family = "GeistMono NF"
+font-style = "SemiBold"
+font-size = 12
+adjust-underline-thickness = 1
+adjust-strikethrough-thickness = 1
+
+# Cursor
+mouse-hide-while-typing = true
+cursor-style = block
+cursor-style-blink = false
+
+# Theme
+bold-is-bright = true
+window-theme = ghostty
+theme = gruvbox-material
+
+# Window
+gtk-single-instance = true
+gtk-tabs-location = bottom
+gtk-wide-tabs = false
+window-padding-y = 4
+window-padding-x = 4
+window-padding-balance = true
+window-decoration = false
+window-vsync = false
+
+# Other
+copy-on-select = clipboard 
+shell-integration-features = cursor,sudo,no-title
+confirm-close-surface = false
