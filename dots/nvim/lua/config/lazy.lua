@@ -55,6 +55,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.linting.eslint" },
     -- Util Extras
     { import = "lazyvim.plugins.extras.util.dot" },
+    -- UI Extras
+    { import = "lazyvim.plugins.extras.ui.smear-cursor" },
     -- Custom Plugins
     { import = "plugins" },
   },
