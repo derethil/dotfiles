@@ -57,9 +57,9 @@ export const options = constructOptions(OPTIONS_CACHE, {
   bar: {
     position: Opt<"LEFT" | "RIGHT">("LEFT"),
     modules: {
-      start: Opt<BarModule[]>(["Workspaces", "SystemMonitor", "Tray"]),
+      start: Opt<BarModule[]>(["Workspaces", "SystemMonitor"]),
       center: Opt<BarModule[]>([]),
-      end: Opt<BarModule[]>(["Volume",   "DateTime"]),
+      end: Opt<BarModule[]>(["Volume", "DateTime"]),
     },
     workspaces: {
       dynamic: Opt(false),

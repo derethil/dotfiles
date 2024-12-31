@@ -56,7 +56,7 @@ export function Pulse() {
         vertical
         valign={Gtk.Align.START}
       >
-        <box>
+        <box className={bind(state, "query").as((q) => (q ? "inactive" : ""))}>
           <StartAdornment />
           <TextEntry
             expand

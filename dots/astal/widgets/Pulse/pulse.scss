@@ -7,7 +7,11 @@ window.pulse .pulse {
   @include mixins.widget;
 
   > box {
-    border-bottom: 1px solid #{color.$background-surface};
+    transition: all 0.2s ease-in-out;
+    border-bottom: 1px solid transparent;
+    &.inactive {
+      border-color: color.$background-surface;
+    }
   }
 
   .start-icon {
