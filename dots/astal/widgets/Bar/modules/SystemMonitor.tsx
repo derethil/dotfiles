@@ -11,7 +11,7 @@ export function SystemMonitor() {
   tooltip.set_text("CPU");
 
   return (
-    <box vertical className="system-monitor" halign={Gtk.Align.CENTER}>
+    <box className="system-monitor" halign={Gtk.Align.CENTER} vertical>
       <CircleProgress
         color={options.theme.color.accent[1].default()}
         child={<icon icon="cpu-symbolic" css="font-size: 18px;" />}
