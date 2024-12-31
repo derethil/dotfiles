@@ -5,16 +5,23 @@
 @mixin action($color, $color-muted) {
   color: $color;
   border-bottom: 2px solid transparent;
-  &:focus {
+  &:focus,
+  &:hover {
     border-bottom: 2px solid $color-muted;
     color: $color-muted;
+  }
+  &:not(:first-child) {
+    border-left: 1px solid #{color.$background-surface};
   }
 }
 
 window.pulse .powermenu {
+  margin-top: #{layout.$gap}px;
+
   .action {
     all: unset;
     transition: all 0.2s;
+    border: 2px solid transparent;
 
     icon {
       font-size: 32px;

@@ -15,7 +15,8 @@
   border-bottom: 1px solid #{color.$background-surface};
   font-size: #{font.$mono-size * 1.3}px;
 
-  &:focus {
+  &:focus,
+  &:hover {
     font-weight: 700;
     background-color: color.$background-surface;
     color: color.$text-highlight;
