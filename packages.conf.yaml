@@ -33,6 +33,7 @@
     - tmux
     - wezterm
     - wl-clipboard
+    - wlsunset
     - wofi
     - wtype
     - yazi
@@ -52,7 +53,6 @@
     - hyprpicker
     - hyprland-qtutils
     - hyprprop-git
-    - hyprshade-git
     - hyprshot
     - hyprutils
     - hyprwayland-scanner
@@ -81,9 +81,6 @@
 
     - command: gsettings set org.gnome.desktop.interface icon-theme 'MoreWaita'
       description: Setting icon theme to Adwaita/MoreWaita
-
-    - command: hyprshade install; systemctl --user enable --now hyprshade.timer
-      description: Installing systemd timer for Hyprshade
 
     - command: systemctl --user enable --now arch-update.timer
       description: Enabling arch-update timer
