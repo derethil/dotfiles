@@ -16,7 +16,7 @@ export class Applications implements PulsePlugin {
   });
 
   public readonly command: PulseCommand = ":app";
-  public readonly description = "Launch Applications";
+  public readonly description = "Application Launcher";
   public readonly default = true;
 
   public static get_default() {

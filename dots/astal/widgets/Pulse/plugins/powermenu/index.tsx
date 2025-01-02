@@ -5,7 +5,7 @@ export class PluginPowerMenu implements PulsePlugin {
   private static instance: PluginPowerMenu;
 
   public readonly command: PulseCommand = ":pm";
-  public readonly description = "Power Menu";
+  public readonly description = "Power Management";
   public readonly default = false;
 
   public static get_default() {

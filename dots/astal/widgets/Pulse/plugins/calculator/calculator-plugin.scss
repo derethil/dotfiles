@@ -1,0 +1,8 @@
+@use "mixins";
+@use "font";
+
+.pulse .calculator-result {
+  @include mixins.widget;
+  margin: 0px;
+  font-size: #{font.$mono-size * 2}px;
+}

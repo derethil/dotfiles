@@ -24,7 +24,13 @@ export class PluginAutocomplete implements PulsePlugin {
       selector: (p) => `${p.command} ${p.description}`,
     });
 
-    const filtered = fzf.find(args.join(" ")).map(({ item }) => item);
+    const filtered = fzf
+      .find(args.join(" "))
+      .map(({ item }) => item)
+      .sort((a, b) =>
+        String.prototype.localeCompare.call(a.command, b.command),
+      );
+
     return filtered.map((plugin) => <PluginEntry plugin={plugin} />);
   }
 }
