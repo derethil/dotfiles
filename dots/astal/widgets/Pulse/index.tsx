@@ -3,7 +3,7 @@ import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import { FloatingWindow, TextEntry } from "elements";
 import { OverlayType } from "state/overlay";
 import { createKeyHandler } from "utils/binds";
-import { StartAdornment, EndAdornment, Results } from "./elements";
+import { SearchAdornment, Results } from "./elements";
 import { Applications, PluginAutocomplete, PluginPowerMenu } from "./plugins";
 import { PulseState } from "./state";
 
@@ -58,7 +58,7 @@ export function Pulse() {
         valign={Gtk.Align.START}
       >
         <box className={bind(state, "query").as((q) => (q ? "inactive" : ""))}>
-          <StartAdornment />
+          <icon className="start-icon" icon="system-search" />
           <TextEntry
             expand
             canFocus
@@ -71,7 +71,7 @@ export function Pulse() {
               state.entry = self;
             }}
           />
-          <EndAdornment />
+          <SearchAdornment />
         </box>
         <Results />
       </box>

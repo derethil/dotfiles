@@ -15,13 +15,10 @@ export class PulseState extends GObject.Object {
 
   // Properties
   @property(Widget.Box)
-  declare public endWidget: Gtk.Widget | null;
+  declare public end: Gtk.Widget | null;
 
   @property(String)
   declare public query: string;
-
-  @property(String)
-  declare public startIcon: string;
 
   @property(Widget.Entry)
   declare public entry: Widget.Entry | null;
@@ -39,8 +36,7 @@ export class PulseState extends GObject.Object {
   }
 
   constructor() {
-    // @ts-expect-error - GObject not typed for Astal subclasses
-    super({ startIcon: "system-search" });
+    super();
     this.handleChangeQuery();
   }
 
@@ -100,11 +96,11 @@ export class PulseState extends GObject.Object {
   }
 
   private handlePluginAdornment(plugin: PulsePlugin | undefined) {
-    if (!plugin && !this.endWidget) return;
-    if (!plugin && this.endWidget) {
-      this.endWidget = null;
+    if (!plugin && !this.end) return;
+    if (!plugin && this.end) {
+      this.end = null;
     } else if (plugin) {
-      this.endWidget = plugin.endAdornment?.(true) ?? null;
+      this.end = plugin.searchAdornment?.(true) ?? null;
     }
   }
 
