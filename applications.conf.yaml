@@ -5,7 +5,6 @@
 - yay:
     # CLI Applications
     - bottom
-    - boxxy
     - docker
     - docker-compose
     - docker-credential-secretservice-bin

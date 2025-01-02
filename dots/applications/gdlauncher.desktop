@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=GDLauncher
-Exec=/usr/bin/boxxy /usr/bin/gdlauncher --enable-features=UzeOzonePlatform --ozone-platform=wayland %U
+Exec=/usr/bin/gdlauncher --enable-features=UzeOzonePlatform --ozone-platform=wayland %U
 Terminal=false
 Type=Application
 Icon=gdlauncher
