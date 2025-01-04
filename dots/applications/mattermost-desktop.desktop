@@ -3,7 +3,7 @@ Version=1.0
 Type=Application
 Name=Mattermost
 Comment=Mattermost Desktop Application
-Exec=env -u ELECTRON_PLATFORM_OZONE_HINT mattermost-desktop %U
+Exec=env ELECTRON_PLATFORM_OZONE_HINT=x11 env QT_QPA_PLATFORM=xcb mattermost-desktop --ozone-platform=x11 %U
 Icon=mattermost-desktop
 Terminal=false
 StartupWMClass=Mattermost
