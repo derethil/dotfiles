@@ -50,7 +50,7 @@ const PowerActions: PowerAction[] = [
 
 export function Wrapper() {
   return (
-    <box className="powermenu">
+    <box className="pulse-result powermenu">
       {PowerActions.map((action) => (
         <Action type={action.label} activate={action.activate}>
           <icon icon={action.icon} />

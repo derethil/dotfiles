@@ -1,5 +1,5 @@
-import { Gdk, Gtk } from "astal/gtk3";
-import { createKeyHandler } from "utils/binds";
+import { Gtk } from "astal/gtk3";
+import { PulseResult } from "widgets/Pulse/elements/PulseResult";
 import { PulseState } from "widgets/Pulse/state";
 import { PulsePlugin } from "widgets/Pulse/types";
 
@@ -16,33 +16,15 @@ export function PluginEntry({ plugin }: Props) {
     state.entry?.set_position(-1);
   };
 
-  const keyHandler = createKeyHandler(
-    {
-      key: Gdk.KEY_Return,
-      action: activate,
-    },
-    {
-      key: Gdk.KEY_y,
-      mod: Gdk.ModifierType.CONTROL_MASK,
-      action: activate,
-    },
-  );
-
   return (
-    <button
-      onClick={activate}
-      onKeyPressEvent={keyHandler}
-      className="command-entry"
-    >
-      <box expand>
-        <label className="command" label={plugin.command} />
-        <label
-          className="description"
-          label={plugin.description}
-          expand
-          halign={Gtk.Align.START}
-        />
-      </box>
-    </button>
+    <PulseResult activate={activate} className="command-entry">
+      <label className="command" label={plugin.command} />
+      <label
+        className="description"
+        label={plugin.description}
+        expand
+        halign={Gtk.Align.START}
+      />
+    </PulseResult>
   );
 }

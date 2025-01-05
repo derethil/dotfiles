@@ -20,6 +20,6 @@ export class Calculate implements PulsePlugin {
   public async process(args: string[]) {
     const result = Number(await this.calculate(args.join(" ")));
     const rounded = Math.round(result * 1000) / 1000;
-    return [<box className="calculator-result">{rounded}</box>];
+    return [<box className="pulse-result calculator">{rounded}</box>];
   }
 }

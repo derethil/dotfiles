@@ -1,4 +1,6 @@
-import { GLib, Gio, exec, execAsync } from "astal";
+import { Binding, GLib, Gio, exec, execAsync } from "astal";
+import { Gtk } from "astal/gtk3";
+import { ChildProps } from "types/children";
 import { notify } from "./notify";
 import { toBinding, toVariable } from "./state";
 
