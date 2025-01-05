@@ -12,7 +12,6 @@ export function Battery() {
       value={bind(battery, "percentage")}
       color={options.theme.color.accent[7].default()}
       strokeWidth={5}
-      child={<></>}
     >
       <icon icon={bind(battery, "iconName")} css="font-size: 15px" />
     </CircleProgress>

@@ -12,7 +12,6 @@ export function Backlight() {
       value={bind(backlight, "screen")}
       color={options.theme.color.accent[6].default()}
       strokeWidth={5}
-      child={<></>}
     >
       <icon icon="brightness-symbolic" css="font-size: 15px" />
     </CircleProgress>

@@ -3,11 +3,10 @@ import { Astal, Gtk, Widget } from "astal/gtk3";
 import { animate } from "lib/animate";
 import { options } from "options";
 import { clamp, toBinding } from "utils";
-
-type Child = JSX.Element | Binding<JSX.Element>;
+import { ChildProps } from "utils/children";
 
 interface Props {
-  child: Child;
+  child?: ChildProps["child"];
   value: Binding<number>;
   tooltip?: Binding<string> | string;
   animationDuration?: number;
@@ -79,7 +78,7 @@ export function CircleProgress(props: Props) {
         cursor={sursor}
         overlay={
           <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
-            {toBinding(props.child)}
+            {toBinding<ChildProps["child"]>(props.child)}
           </box>
         }
       >

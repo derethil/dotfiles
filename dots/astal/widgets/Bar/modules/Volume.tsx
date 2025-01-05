@@ -26,7 +26,6 @@ export function Volume() {
       color={options.theme.color.accent[4].default()}
       disabled={bind(speaker, "mute")}
       strokeWidth={5}
-      child={<></>}
       tooltip={tooltip()}
       onScroll={(direction) => handleScroll(direction)}
       onClick={() => (speaker.mute = !speaker.mute)}
