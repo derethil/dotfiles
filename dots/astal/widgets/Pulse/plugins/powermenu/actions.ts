@@ -1,44 +1,49 @@
 import { Gtk } from "astal/gtk3";
 import { bash, notify } from "utils";
-import { Action } from "./Action";
 
-interface PowerAction {
+export interface PowerAction {
   label: string;
+  className: string;
   icon: string;
-  activate: (button: Gtk.Widget) => void;
+  activate: (button: Gtk.Widget) => void | Promise<void>;
 }
 
-const PowerActions: PowerAction[] = [
+export const PowerActions: PowerAction[] = [
   {
-    label: "shutdown",
+    label: "Shut Down",
+    className: "shutdown",
     icon: "system-shutdown-symbolic",
     activate: () => {
       bash("shutdown -h now").catch(console.error);
     },
   },
   {
-    label: "reboot",
+    label: "Reboot",
+    className: "reboot",
     icon: "system-reboot-symbolic",
     activate: () => {
       bash("shutdown -r now").catch(console.error);
     },
   },
   {
-    label: "logout",
+    label: "Log Out",
+    className: "logout",
     icon: "application-exit-symbolic",
     activate: () => {
       bash("hyprctl dispatch exit").catch(console.error);
     },
   },
   {
-    label: "suspend",
+    label: "Suspend",
+    className: "suspend",
     icon: "system-suspend-symbolic",
     activate: () => {
       bash("systemctl suspend").catch(console.error);
     },
   },
   {
-    label: "lock",
+    label: "Lock",
+    className: "lock",
     icon: "system-lock-screen-symbolic",
     activate: () => {
       notify("Lock", {
@@ -47,15 +52,3 @@ const PowerActions: PowerAction[] = [
     },
   },
 ];
-
-export function Wrapper() {
-  return (
-    <box className="pulse-result powermenu">
-      {PowerActions.map((action) => (
-        <Action type={action.label} activate={action.activate}>
-          <icon icon={action.icon} />
-        </Action>
-      ))}
-    </box>
-  );
-}

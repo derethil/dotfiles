@@ -16,36 +16,33 @@
   }
 }
 
-window.pulse .powermenu {
-  @include pulse.result($border-color: transparent);
+window.pulse .pulse-result {
+  @include pulse.result;
+  font-weight: 700;
+  transition: all 0.2s;
 
-  .action {
-    all: unset;
-    transition: all 0.2s;
-    border: 2px solid transparent;
+  icon {
+    font-size: 24px;
+    margin-right: #{layout.$padding}px;
+  }
 
-    icon {
-      font-size: 32px;
-    }
+  &.shutdown icon {
+    @include action(color.$accent1, color.$accent1-muted);
+  }
 
-    &.shutdown {
-      @include action(color.$accent1, color.$accent1-muted);
-    }
+  &.reboot icon {
+    @include action(color.$accent2, color.$accent2-muted);
+  }
 
-    &.reboot {
-      @include action(color.$accent2, color.$accent2-muted);
-    }
+  &.logout icon {
+    @include action(color.$accent3, color.$accent3-muted);
+  }
 
-    &.logout {
-      @include action(color.$accent3, color.$accent3-muted);
-    }
+  &.suspend icon {
+    @include action(color.$accent4, color.$accent4-muted);
+  }
 
-    &.suspend {
-      @include action(color.$accent4, color.$accent4-muted);
-    }
-
-    &.lock {
-      @include action(color.$accent5, color.$accent5-muted);
-    }
+  &.lock icon {
+    @include action(color.$accent5, color.$accent5-muted);
   }
 }

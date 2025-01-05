@@ -1,10 +1,12 @@
+import { Fzf } from "fzf";
 import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
-import { Wrapper } from "./Wrapper";
+import { Action } from "./Action";
+import { PowerActions } from "./actions";
 
 export class PowerMenu implements PulsePlugin {
   private static instance: PowerMenu;
 
-  public readonly command: PulseCommand = ":pm";
+  public readonly command: PulseCommand = ":p";
   public readonly description = "Power Management";
   public readonly default = false;
 
@@ -13,7 +15,11 @@ export class PowerMenu implements PulsePlugin {
     return this.instance;
   }
 
-  public process() {
-    return [<Wrapper />];
+  public process(args: string[]) {
+    const fzf = new Fzf(PowerActions, {
+      selector: (action) => action.label,
+    });
+
+    return fzf.find(args.join(" ")).map(({ item }) => <Action {...item} />);
   }
 }

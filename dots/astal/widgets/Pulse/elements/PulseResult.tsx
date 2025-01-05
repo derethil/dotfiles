@@ -1,10 +1,10 @@
-import { Gdk } from "astal/gtk3";
+import { Gdk, Gtk } from "astal/gtk3";
 import { createKeyHandler } from "utils/binds";
 import { getChildren, ChildProps } from "utils/children";
 
 interface Props extends ChildProps {
   className?: string;
-  activate: () => void;
+  activate: (button: Gtk.Widget, event?: Gdk.Event) => void;
 }
 
 export function PulseResult(props: Props) {
@@ -24,7 +24,7 @@ export function PulseResult(props: Props) {
     <button
       className={`pulse-result ${props.className}`}
       setup={(self) => self.connect("clicked", props.activate)}
-      onClick={props.activate}
+      onClick={(self) => props.activate(self)}
       onKeyPressEvent={keyHandler}
     >
       <box expand>{getChildren(props)}</box>
