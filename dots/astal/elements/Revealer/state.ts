@@ -37,6 +37,7 @@ export class RevealerState extends GObject.Object {
   }
 
   private destroyChildren() {
+    if (this.reveal) return; // Check if we re-revealed before hide duration completed
     if (!this._children) return;
     const c = this._children;
     const array = c instanceof Array ? c : [c];
