@@ -1,6 +1,7 @@
 @use "color";
 @use "layout";
 @use "font";
+@use "pulse";
 
 @mixin action($color, $color-muted) {
   color: $color;
@@ -16,7 +17,7 @@
 }
 
 window.pulse .powermenu {
-  margin-top: #{layout.$gap}px;
+  @include pulse.result($border-color: transparent);
 
   .action {
     all: unset;

@@ -1,8 +1,8 @@
-@use "mixins";
+@use "pulse";
 @use "font";
 
 .pulse .calculator-result {
-  @include mixins.widget;
+  @include pulse.result($border-color: transparent);
   margin: 0px;
-  font-size: #{font.$mono-size * 2}px;
+  border-color: transparent;
 }

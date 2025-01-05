@@ -1,13 +1,9 @@
-@use "mixins";
 @use "color";
 @use "layout";
-@use "font";
+@use "pulse";
 
 .pulse .command-entry {
-  all: unset;
-  @include mixins.widget;
-  font-size: #{font.$mono-size * 1.3}px;
-  margin: #{layout.$gap / 2}px 0px;
+  @include pulse.result;
 
   .command {
     font-weight: 700;
@@ -16,14 +12,5 @@
 
   .description {
     color: color.$text-muted;
-  }
-
-  &:focus {
-    background-color: color.$background-surface;
-    color: color.$text-highlight;
-  }
-
-  &:first-child {
-    margin-top: #{layout.$gap}px;
   }
 }

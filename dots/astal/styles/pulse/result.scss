@@ -1,0 +1,30 @@
+@use "color";
+@use "layout";
+@use "font";
+
+@mixin result($border-color: color.$background-surface) {
+  all: unset;
+  font-family: font.$mono-family;
+  font-size: #{font.$mono-size * 1.3}px;
+  font-weight: 500;
+  border-radius: #{layout.$radius}px;
+  margin: #{layout.$gap / 2}px 0px;
+  padding: #{layout.$padding}px;
+  color: color.$text;
+  border-bottom: 1px solid #{$border-color};
+
+  &:focus,
+  &:hover {
+    font-weight: 700;
+    background-color: color.$background-surface;
+    color: color.$text-highlight;
+  }
+
+  &:first-child {
+    margin-top: #{layout.$gap}px;
+  }
+
+  icon {
+    font-size: 28px;
+  }
+}
