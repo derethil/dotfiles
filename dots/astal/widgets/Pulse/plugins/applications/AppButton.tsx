@@ -12,9 +12,16 @@ export function AppButton(props: Props) {
   const activate = () => state.activate(() => props.app.launch());
 
   return (
-    <PulseResult className="pulse-result application" activate={activate}>
-      <label label={props.app.name} halign={Gtk.Align.START} />
-      <icon icon={props.app.iconName} expand halign={Gtk.Align.END} />
+    <PulseResult className="application" activate={activate}>
+      <icon icon={props.app.iconName} />
+      <box vertical halign={Gtk.Align.START}>
+        <label label={props.app.name} halign={Gtk.Align.START} />
+        <label
+          wrap
+          justify={Gtk.Justification.FILL}
+          label={props.app.description}
+        />
+      </box>
     </PulseResult>
   );
 }

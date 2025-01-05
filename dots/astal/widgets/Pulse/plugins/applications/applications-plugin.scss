@@ -5,6 +5,15 @@
 
 .application {
   @include pulse.result;
+
+  icon {
+    margin-right: #{layout.$padding * 2}px;
+  }
+
+  box label:nth-child(2) {
+    font-size: #{font.$mono-size}px;
+    color: #{color.$text-muted};
+  }
 }
 
 .apps-adornment {

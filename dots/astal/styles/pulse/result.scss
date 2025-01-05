@@ -2,7 +2,13 @@
 @use "layout";
 @use "font";
 
-@mixin result($border-color: color.$background-surface) {
+@mixin focus {
+  font-weight: 700;
+  background-color: color.$background-surface;
+  color: color.$text-highlight;
+}
+
+@mixin result($border-color: color.$background-surface, $surface: false) {
   all: unset;
   font-family: font.$mono-family;
   font-size: #{font.$mono-size * 1.3}px;
@@ -13,11 +19,13 @@
   color: color.$text;
   border-bottom: 1px solid #{$border-color};
 
-  &:focus,
-  &:hover {
-    font-weight: 700;
-    background-color: color.$background-surface;
-    color: color.$text-highlight;
+  @if $surface {
+    @include focus;
+  } @else {
+    &:focus,
+    &:hover {
+      @include focus;
+    }
   }
 
   &:first-child {

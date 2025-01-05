@@ -1,8 +1,8 @@
 @use "pulse";
 @use "font";
 
-.pulse .calculator-result {
-  @include pulse.result($border-color: transparent);
+.pulse .calculator {
+  @include pulse.result($border-color: transparent, $surface: true);
   margin: 0px;
   border-color: transparent;
 }
