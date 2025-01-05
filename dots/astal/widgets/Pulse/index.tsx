@@ -4,21 +4,11 @@ import { FloatingWindow, TextEntry } from "elements";
 import { OverlayType } from "state/overlay";
 import { createKeyHandler } from "utils/binds";
 import { SearchAdornment, Results } from "./elements";
-import {
-  Applications,
-  PluginAutocomplete,
-  PluginCalculator,
-  PluginPowerMenu,
-} from "./plugins";
 import { PulseState } from "./state";
 
 export const WINDOW_NAME = "pulse";
 
 const state = PulseState.get_default();
-state.registerPlugin(Applications);
-state.registerPlugin(PluginAutocomplete);
-state.registerPlugin(PluginPowerMenu);
-state.registerPlugin(PluginCalculator);
 
 export function Pulse() {
   const handleKeyPress = createKeyHandler(

@@ -1,5 +1,6 @@
 import { bind, GObject, property, register } from "astal";
 import { App, Gtk, Widget } from "astal/gtk3";
+import { PulsePlugins } from "./plugins";
 import { PulsePlugin, PulseResult, StaticPulsePlugin } from "./types";
 import { WINDOW_NAME } from ".";
 
@@ -118,3 +119,6 @@ export class PulseState extends GObject.Object {
     return { command: undefined, args: [] };
   }
 }
+
+const state = PulseState.get_default();
+PulsePlugins.forEach((plugin) => state.registerPlugin(plugin));

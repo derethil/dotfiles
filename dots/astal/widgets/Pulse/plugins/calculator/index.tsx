@@ -1,15 +1,15 @@
 import { bash } from "utils";
 import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 
-export class PluginCalculator implements PulsePlugin {
-  private static instance: PluginCalculator;
+export class Calculate implements PulsePlugin {
+  private static instance: Calculate;
 
   public readonly command: PulseCommand = ":calc";
   public readonly description = "Quick Access Calculator";
   public readonly default = false;
 
   public static get_default() {
-    if (!this.instance) this.instance = new PluginCalculator();
+    if (!this.instance) this.instance = new Calculate();
     return this.instance;
   }
 

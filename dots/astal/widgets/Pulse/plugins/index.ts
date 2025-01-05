@@ -1,6 +1,11 @@
 import { Applications } from "./applications";
-import { PluginAutocomplete } from "./autocomplete";
-import { PluginCalculator } from "./calculator";
-import { PluginPowerMenu } from "./powermenu";
+import { PulseAutocomplete } from "./autocomplete";
+import { Calculate } from "./calculator";
+import { PowerMenu } from "./powermenu";
 
-export { Applications, PluginAutocomplete, PluginPowerMenu, PluginCalculator };
+export const PulsePlugins = [
+  Applications,
+  PulseAutocomplete,
+  PowerMenu,
+  Calculate,
+];

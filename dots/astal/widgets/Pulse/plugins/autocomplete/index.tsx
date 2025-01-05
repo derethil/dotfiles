@@ -3,15 +3,15 @@ import { PulseState } from "widgets/Pulse/state";
 import { PluginEntry } from "./PluginEntry";
 import { PulseCommand, PulsePlugin } from "../../types";
 
-export class PluginAutocomplete implements PulsePlugin {
-  private static instance: PluginAutocomplete;
+export class PulseAutocomplete implements PulsePlugin {
+  private static instance: PulseAutocomplete;
 
   public readonly command: PulseCommand = ":";
   public readonly description = "View Commands";
   public readonly default = false;
 
   public static get_default() {
-    if (!this.instance) this.instance = new PluginAutocomplete();
+    if (!this.instance) this.instance = new PulseAutocomplete();
     return this.instance;
   }
 
