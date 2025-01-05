@@ -15,7 +15,7 @@ export class Applications implements PulsePlugin {
     minScore: 0.75,
   });
 
-  public readonly command: PulseCommand = ":app";
+  public readonly command: PulseCommand = ":a";
   public readonly description = "Application Launcher";
   public readonly default = true;
 
