@@ -4,7 +4,7 @@ import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 export class Calculate implements PulsePlugin {
   private static instance: Calculate;
 
-  public readonly command: PulseCommand = ":c";
+  public readonly command: PulseCommand = ":cal";
   public readonly description = "Quick Access Calculator";
   public readonly default = false;
 
