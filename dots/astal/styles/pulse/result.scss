@@ -17,7 +17,7 @@
   margin: #{layout.$gap / 2}px 0px;
   padding: #{layout.$padding}px;
   color: color.$text;
-  border-bottom: 1px solid #{$border-color};
+  border-top: 1px solid #{$border-color};
 
   @if $surface {
     @include focus;
@@ -30,6 +30,7 @@
 
   &:first-child {
     margin-top: #{layout.$gap}px;
+    border-color: transparent;
   }
 
   icon {

@@ -17,6 +17,10 @@ export class Calculate implements PulsePlugin {
     return bash(`echo "${expression}" | bc -l`);
   }
 
+  public searchAdornment() {
+    return <icon icon="math-symbolic" />;
+  }
+
   public async process(args: string[]) {
     const result = Number(await this.calculate(args.join(" ")));
     const rounded = Math.round(result * 1000) / 1000;

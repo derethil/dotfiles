@@ -47,7 +47,7 @@ export function Pulse() {
     >
       <box
         className="pulse"
-        widthRequest={500}
+        widthRequest={550}
         vertical
         valign={Gtk.Align.START}
       >

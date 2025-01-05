@@ -47,5 +47,8 @@ window.pulse .pulse {
 
   .end-adornment {
     padding-right: #{layout.$padding}px;
+    icon {
+      font-size: 20px;
+    }
   }
 }
