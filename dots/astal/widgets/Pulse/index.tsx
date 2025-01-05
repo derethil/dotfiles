@@ -28,8 +28,6 @@ export function Pulse() {
     },
   );
 
-  const handleQueryChange = (text: string) => (state.query = text);
-
   return (
     <FloatingWindow
       name={WINDOW_NAME}
@@ -59,9 +57,12 @@ export function Pulse() {
             expand
             canFocus
             placeholderText={'Type ":" to list subcommands'}
-            onActivate={() => state.clickFirst()}
+            onKeyPressEvent={createKeyHandler({
+              key: Gdk.KEY_Return,
+              action: () => state.clickFirst(),
+            })}
             text={bind(state, "query")}
-            onChanged={(self) => handleQueryChange(self.get_text())}
+            onChanged={(self) => (state.query = self.get_text())}
             setup={(self) => {
               self.grab_focus();
               state.entry = self;
