@@ -30,7 +30,7 @@ return {
     opts = {
       transparent_background = 2,
       foreground = "material",
-      background = "hard",
+      background = "medium",
       enable_italic = true,
       enable_bold = true,
       ui_contrast = "high",

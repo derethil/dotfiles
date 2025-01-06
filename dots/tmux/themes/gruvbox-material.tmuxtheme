@@ -2,7 +2,7 @@
 # WARNING: hex colors can't contain capital letters
 
 # --> Kanagawa (Wave)
-thm_bg="#32302f"
+thm_bg="#282828"
 thm_fg="#e2cca9"
 thm_cyan="#89b482"
 thm_black="#16161d"
