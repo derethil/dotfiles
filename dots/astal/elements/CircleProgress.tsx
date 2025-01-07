@@ -23,6 +23,7 @@ interface Props {
 }
 
 export function CircleProgress(props: Props) {
+  let destroyed = false;
   const value = toBinding(props.value);
   const css = Variable.derive(
     [
@@ -42,6 +43,7 @@ export function CircleProgress(props: Props) {
 
   const handleSetup = (self: Widget.CircularProgress) => {
     value.subscribe((newValue) => {
+      if (destroyed) return;
       if (props.animationDuration === 0) {
         self.value = newValue;
       } else {
@@ -66,8 +68,14 @@ export function CircleProgress(props: Props) {
 
   const sursor = (props.onScroll ?? props.onClick) ? "pointer" : "default";
 
+  const handleDestroy = () => {
+    props.onDestroy?.();
+    css.drop();
+    destroyed = true;
+  };
+
   return (
-    <box className="circle-progress" onDestroy={props.onDestroy}>
+    <box className="circle-progress">
       <eventbox
         setup={tooltipSetup}
         hasTooltip={Boolean(props.tooltip)}
@@ -90,7 +98,7 @@ export function CircleProgress(props: Props) {
           <circularprogress
             rounded={props.rounded ?? true}
             css={css((ss) => ss + (props.css ?? ""))}
-            onDestroy={() => css.drop()}
+            onDestroy={handleDestroy}
             value={value.get()}
             setup={handleSetup}
           />
