@@ -1,6 +1,4 @@
-import { Binding, GLib, Gio, exec, execAsync } from "astal";
-import { Gtk } from "astal/gtk3";
-import { ChildProps } from "types/children";
+import { GLib, Gio, exec, execAsync } from "astal";
 import { notify } from "./notify";
 import { toBinding, toVariable } from "./state";
 
@@ -48,4 +46,9 @@ export function sleep(ms = 0) {
 
 export function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
+}
+
+export function launchInTerminal(command: string) {
+  const launchfoot = `${GLib.get_user_config_dir()}/hypr/scripts/launchfoot`;
+  bash(`${launchfoot} "${command}"`).catch(console.error);
 }

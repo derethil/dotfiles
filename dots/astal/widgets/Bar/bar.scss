@@ -11,6 +11,16 @@ window.Bar {
     font-weight: bold;
   }
 
+  .circle-progress {
+    padding: #{layout.$gap / 2}px 0px;
+    &:first-child {
+      padding-top: #{layout.$gap}px;
+    }
+    &:last-child {
+      padding-bottom: #{layout.$gap}px;
+    }
+  }
+
   .datetime {
     @include mixins.divider(top);
 
@@ -45,20 +55,6 @@ window.Bar {
     }
   }
 
-  .system-monitor {
-    margin-top: #{layout.$gap}px;
-    margin-bottom: #{layout.$gap}px;
-
-    > box {
-      margin-top: #{layout.$gap / 2}px;
-      margin-bottom: #{layout.$gap / 2}px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-
   .tray {
     margin-top: #{layout.$gap}px;
     margin-bottom: #{layout.$gap}px;
@@ -81,5 +77,9 @@ window.Bar {
         font-size: 16px;
       }
     }
+  }
+
+  .updates {
+    font-size: 15px;
   }
 }

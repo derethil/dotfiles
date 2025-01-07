@@ -1,6 +1,7 @@
 import { Backlight } from "./Backlight";
 import { Battery } from "./Battery";
 import { DateTime } from "./DateTime";
+import { PackageUpdates } from "./PackageUpdates";
 import { SystemMonitor } from "./SystemMonitor";
 import { Tray } from "./Tray";
 import { Volume } from "./Volume";
@@ -13,5 +14,6 @@ export const modules = {
   Workspaces,
   Volume,
   SystemMonitor,
+  PackageUpdates,
   Tray,
 };

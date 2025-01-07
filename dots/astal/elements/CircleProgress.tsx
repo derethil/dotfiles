@@ -7,11 +7,11 @@ import { ChildProps } from "utils/children";
 
 interface Props {
   child?: ChildProps["child"];
-  value: Binding<number>;
+  value: Binding<number> | number;
   tooltip?: Binding<string> | string;
   animationDuration?: number;
   strokeWidth?: number;
-  color: Binding<string> | string;
+  color?: Binding<string> | string;
   trackColor?: Binding<string> | string;
   disabled?: Binding<boolean> | boolean;
   size?: number;
@@ -22,6 +22,7 @@ interface Props {
 }
 
 export function CircleProgress(props: Props) {
+  const value = toBinding(props.value);
   const css = Variable.derive(
     [
       toBinding(props.color),
@@ -39,7 +40,7 @@ export function CircleProgress(props: Props) {
   );
 
   const handleSetup = (self: Widget.CircularProgress) => {
-    props.value.subscribe((newValue) => {
+    value.subscribe((newValue) => {
       if (props.animationDuration === 0) {
         self.value = newValue;
       } else {
@@ -65,31 +66,33 @@ export function CircleProgress(props: Props) {
   const sursor = (props.onScroll ?? props.onClick) ? "pointer" : "default";
 
   return (
-    <eventbox
-      setup={tooltipSetup}
-      hasTooltip={Boolean(props.tooltip)}
-      onScroll={(_, event) =>
-        props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)
-      }
-      cursor={sursor}
-      onClick={(_, event) => props.onClick?.(event)}
-    >
-      <overlay
-        cursor={sursor}
-        overlay={
-          <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
-            {toBinding<ChildProps["child"]>(props.child)}
-          </box>
+    <box className="circle-progress">
+      <eventbox
+        setup={tooltipSetup}
+        hasTooltip={Boolean(props.tooltip)}
+        onScroll={(_, event) =>
+          props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)
         }
+        cursor={sursor}
+        onClick={(_, event) => props.onClick?.(event)}
       >
-        <circularprogress
-          rounded={props.rounded ?? true}
-          css={css((ss) => ss + (props.css ?? ""))}
-          onDestroy={() => css.drop()}
-          value={props.value.get()}
-          setup={handleSetup}
-        />
-      </overlay>
-    </eventbox>
+        <overlay
+          cursor={sursor}
+          overlay={
+            <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
+              {toBinding<ChildProps["child"]>(props.child)}
+            </box>
+          }
+        >
+          <circularprogress
+            rounded={props.rounded ?? true}
+            css={css((ss) => ss + (props.css ?? ""))}
+            onDestroy={() => css.drop()}
+            value={value.get()}
+            setup={handleSetup}
+          />
+        </overlay>
+      </eventbox>
+    </box>
   );
 }
