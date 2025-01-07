@@ -26,6 +26,7 @@ export function MediaProgress({ player }: Props) {
       value={bind(progress)}
       color={options.theme.color.accent[2].default()}
       onClick={() => player.play_pause()}
+      onScroll={(direction) => (player.volume += 0.1 * direction)}
       disabled={bind(player, "playbackStatus").as(() => !isPlaying(player))}
     >
       <box className="cover-art" css={coverArt} />
