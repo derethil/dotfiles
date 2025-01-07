@@ -14,9 +14,6 @@ function init() {
   watchStyles().catch((err: unknown) => {
     console.error(`Error watching styles: ${String(err)}`);
   });
-  import("./options").catch((err: unknown) => {
-    console.error(`Error importing options: ${String(err)}`);
-  });
 }
 
 function createWidgets() {
