@@ -7,6 +7,7 @@ export type BarModule = keyof typeof modules;
 export function Bar(gdkmonitor: Gdk.Monitor) {
   const margin =
     options.bar.position.get() === "RIGHT" ? "margin-left" : "margin-right";
+
   return (
     <window
       name="Bar"

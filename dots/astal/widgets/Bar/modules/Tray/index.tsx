@@ -26,12 +26,13 @@ export function Tray() {
     <Revealer
       transitionDuration={options.theme.transition()}
       transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-      content={items((items) => items.map((item) => <TrayItem item={item} />))}
       wrapperProps={{
         vertical: true,
         className: "tray",
         halign: Gtk.Align.CENTER,
       }}
-    />
+    >
+      {items((items) => items.map((item) => <TrayItem item={item} />))}
+    </Revealer>
   );
 }

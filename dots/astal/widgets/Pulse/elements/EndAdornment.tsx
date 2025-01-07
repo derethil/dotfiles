@@ -11,7 +11,8 @@ export function SearchAdornment() {
       className="end-adornment"
       transitionDuration={TRANSITION_DURATION}
       transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-      content={bind(state, "end")}
-    />
+    >
+      {bind(state, "end")}
+    </Revealer>
   );
 }

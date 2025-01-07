@@ -10,9 +10,10 @@ export function Results() {
     <Revealer
       transitionDuration={TRANSITION_DURATION}
       transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-      content={bind(state, "results")}
       className="results"
       wrapperProps={{ vertical: true }}
-    />
+    >
+      {bind(state, "results")}
+    </Revealer>
   );
 }

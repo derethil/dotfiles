@@ -1,16 +1,18 @@
-import { bind, Binding } from "astal";
-import { Gtk, Widget } from "astal/gtk3";
+import { bind } from "astal";
+import { Widget } from "astal/gtk3";
 import { options } from "options";
+import { ChildProps } from "utils/children";
 import { RevealerState } from "./state";
 
-interface Props extends Omit<Widget.RevealerProps, "child" | "revealChild"> {
-  content: Binding<Gtk.Widget[]> | Binding<Gtk.Widget | null>;
+type RevealerProps = Omit<Widget.RevealerProps, "child"> & ChildProps;
+
+interface Props extends RevealerProps {
   wrapperProps?: Omit<Widget.BoxProps, "children" | "child">;
 }
 
 export function Revealer(props: Props) {
   const state = new RevealerState(
-    props.content,
+    props,
     props.transitionDuration ?? options.theme.transition(),
   );
 
@@ -19,9 +21,11 @@ export function Revealer(props: Props) {
     props.wrapperProps?.setup?.(self);
   };
 
+  const { child: _, ...rest } = props;
+
   return (
     <revealer
-      {...props}
+      {...rest}
       transitionDuration={props.transitionDuration}
       revealChild={bind(state, "reveal")}
     >
