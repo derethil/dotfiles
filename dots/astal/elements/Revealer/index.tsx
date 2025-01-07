@@ -1,27 +1,22 @@
 import { bind } from "astal";
 import { Widget } from "astal/gtk3";
-import { options } from "options";
 import { ChildProps } from "utils/children";
 import { RevealerState } from "./state";
 
-type RevealerProps = Omit<Widget.RevealerProps, "child"> & ChildProps;
+type BaseProps = Omit<Widget.RevealerProps, "child"> & ChildProps;
 
-interface Props extends RevealerProps {
+export interface RevealerProps extends BaseProps {
   wrapperProps?: Omit<Widget.BoxProps, "children" | "child">;
 }
 
-export function Revealer(props: Props) {
-  const state = new RevealerState(
-    props,
-    props.transitionDuration ?? options.theme.transition(),
-  );
+export function Revealer(props: RevealerProps) {
+  const { child: _, ...rest } = props;
+  const state = new RevealerState(props);
 
   const wrapperSetup = (self: Widget.Box) => {
     self.noImplicitDestroy = true;
     props.wrapperProps?.setup?.(self);
   };
-
-  const { child: _, ...rest } = props;
 
   return (
     <revealer

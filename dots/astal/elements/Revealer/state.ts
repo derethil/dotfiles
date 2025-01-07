@@ -1,12 +1,14 @@
-import { Binding, GObject, property, register } from "astal";
+import { GObject, property, register } from "astal";
 import { Gtk } from "astal/gtk3";
+import { options } from "options";
 import { toBinding } from "utils";
-import { bindChildren, ChildProps, getChildrenValues } from "utils/children";
+import { bindChildren, getChildrenValues } from "utils/children";
+import { RevealerProps } from ".";
 
 @register({ GTypeName: "RevealerState" })
 export class RevealerState extends GObject.Object {
   private _children: Gtk.Widget[] = [];
-  private transitionDuration: Binding<number | undefined>;
+  private transitionDuration: number;
 
   @property(Boolean)
   declare reveal: boolean;
@@ -16,19 +18,20 @@ export class RevealerState extends GObject.Object {
     return this._children;
   }
 
-  constructor(
-    children: ChildProps,
-    duration: Binding<number | undefined> | number,
-  ) {
+  constructor(props: RevealerProps) {
     super();
-    this._children = getChildrenValues(children);
-    bindChildren(children).subscribe((children) =>
-      this.handleNewChildren(children),
-    );
 
-    const d = toBinding(duration);
-    this.transitionDuration = d;
-    d.subscribe(() => this.notify("transition-duration"));
+    this._children = getChildrenValues(props);
+    bindChildren(props).subscribe((c) => this.handleNewChildren(c));
+
+    const r = toBinding(props.revealChild);
+    this.reveal = r.get() ?? false;
+    toBinding(props.revealChild).subscribe((r) => (this.reveal = r ?? false));
+
+    const d = toBinding(props.transitionDuration);
+    const defaultDuration = options.theme.transition().get();
+    this.transitionDuration = d.get() ?? defaultDuration;
+    d.subscribe((d) => (this.transitionDuration = d ?? defaultDuration));
   }
 
   private destroyChildren() {
@@ -47,7 +50,7 @@ export class RevealerState extends GObject.Object {
       this.notify("children");
     } else {
       this.reveal = false;
-      setTimeout(() => this.destroyChildren(), this.transitionDuration.get());
+      setTimeout(() => this.destroyChildren(), this.transitionDuration);
     }
   }
 }
