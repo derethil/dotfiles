@@ -57,7 +57,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
   bar: {
     position: Opt<"LEFT" | "RIGHT">("LEFT"),
     modules: {
-      start: Opt<BarModule[]>(["Workspaces", "SystemMonitor"]),
+      start: Opt<BarModule[]>(["Workspaces", "SystemMonitor", "Tray"]),
       center: Opt<BarModule[]>([]),
       end: Opt<BarModule[]>(["Volume", "PackageUpdates", "DateTime"]),
     },

@@ -1,7 +1,6 @@
 import { bind, Variable } from "astal";
 import { Gtk } from "astal/gtk3";
 import AstalTray from "gi://AstalTray";
-import { Revealer } from "elements";
 import { options } from "options";
 import { TrayItem } from "./TrayItem";
 
@@ -23,16 +22,14 @@ export function Tray() {
   );
 
   return (
-    <Revealer
+    <revealer
+      revealChild={bind(items).as((items) => items.length > 0)}
       transitionDuration={options.theme.transition()}
       transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-      wrapperProps={{
-        vertical: true,
-        className: "tray",
-        halign: Gtk.Align.CENTER,
-      }}
     >
-      {items((items) => items.map((item) => <TrayItem item={item} />))}
-    </Revealer>
+      <box vertical className="tray" halign={Gtk.Align.CENTER}>
+        {items((items) => items.map((item) => <TrayItem item={item} />))}
+      </box>
+    </revealer>
   );
 }

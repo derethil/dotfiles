@@ -4,6 +4,16 @@
 @use "animation";
 @use "mixins";
 
+@mixin wrap-padding {
+  padding: #{layout.$gap / 2}px 0px;
+  &:first-child {
+    padding-top: #{layout.$gap}px;
+  }
+  &:last-child {
+    padding-bottom: #{layout.$gap}px;
+  }
+}
+
 window.Bar {
   > centerbox {
     @include mixins.widget;
@@ -12,13 +22,7 @@ window.Bar {
   }
 
   .circle-progress {
-    padding: #{layout.$gap / 2}px 0px;
-    &:first-child {
-      padding-top: #{layout.$gap}px;
-    }
-    &:last-child {
-      padding-bottom: #{layout.$gap}px;
-    }
+    @include wrap-padding;
   }
 
   .datetime {
@@ -59,22 +63,16 @@ window.Bar {
     margin-top: #{layout.$gap}px;
     margin-bottom: #{layout.$gap}px;
     background-color: color.$background-surface;
-    border-radius: #{layout.$radius}px;
+    border-radius: #{layout.$radius * 2}px;
 
     > button {
       all: unset;
-      padding: #{layout.$gap / 2}px #{layout.$gap}px;
-
-      &:first-child {
-        padding-top: #{layout.$gap}px;
-      }
-
-      &:last-child {
-        padding-bottom: #{layout.$gap}px;
-      }
+      @include wrap-padding;
+      padding-left: #{layout.$padding}px;
+      padding-right: #{layout.$padding}px;
 
       icon {
-        font-size: 16px;
+        font-size: 17px;
       }
     }
   }
