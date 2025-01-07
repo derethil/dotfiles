@@ -1,7 +1,7 @@
 import { bind, Variable } from "astal";
 import { Gtk, Widget } from "astal/gtk3";
 import { EntryProps } from "astal/gtk3/widget";
-import { animate } from "lib/animate";
+import { animate } from "utils/animate";
 
 interface Props extends EntryProps {
   placeholderTransitionDuration?: number;

@@ -14,9 +14,12 @@ const isPlaying = (player: Mpris.Player) =>
 export function MediaProgress({ player }: Props) {
   const progress = ProgressState(player);
 
-  const coverArt = bind(player, "coverArt").as(
-    (c) => `background-image: url("${c}");`,
-  );
+  const coverArt = bind(player, "coverArt").as((c) => {
+    let url = c;
+    const youtubeLogo = `${SRC}/assets/images/youtube-logo.png`;
+    if (player.identity === "Mozilla firefox") url = youtubeLogo;
+    return `background-image: url("${url}");`;
+  });
 
   return (
     <CircleProgress

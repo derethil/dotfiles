@@ -1,8 +1,8 @@
 import { Binding, Variable } from "astal";
 import { Astal, Gtk, Widget } from "astal/gtk3";
-import { animate } from "lib/animate";
 import { options } from "options";
 import { clamp, toBinding } from "utils";
+import { animate } from "utils/animate";
 import { ChildProps } from "utils/children";
 
 interface Props {
