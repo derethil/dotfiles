@@ -1,4 +1,5 @@
 import { GLib, Gio, exec, execAsync } from "astal";
+import { Astal } from "astal/gtk3";
 import { notify } from "./notify";
 import { toBinding, toVariable } from "./state";
 
@@ -51,4 +52,9 @@ export function clamp(value: number, min: number, max: number) {
 export function launchInTerminal(command: string) {
   const launchfoot = `${GLib.get_user_config_dir()}/hypr/scripts/launchfoot`;
   bash(`${launchfoot} "${command}"`).catch(console.error);
+}
+
+export function icon(icon: string, fallback: string) {
+  if (Astal.Icon.lookup_icon(icon)) return icon;
+  return fallback;
 }

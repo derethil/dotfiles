@@ -1,5 +1,6 @@
 import { Gtk } from "astal/gtk3";
 import Apps from "gi://AstalApps";
+import { icon } from "utils";
 import { PulseResult } from "widgets/Pulse/elements/PulseResult";
 import { PulseState } from "widgets/Pulse/state";
 
@@ -13,14 +14,18 @@ export function AppButton(props: Props) {
 
   return (
     <PulseResult className="application" activate={activate}>
-      <icon icon={props.app.iconName} />
-      <box vertical halign={Gtk.Align.START}>
+      <icon
+        icon={icon(props.app.iconName, "application-x-executable-symbolic")}
+      />
+      <box vertical halign={Gtk.Align.START} valign={Gtk.Align.CENTER}>
         <label label={props.app.name} halign={Gtk.Align.START} />
-        <label
-          wrap
-          justify={Gtk.Justification.FILL}
-          label={props.app.description}
-        />
+        {props.app.description && (
+          <label
+            wrap
+            justify={Gtk.Justification.FILL}
+            label={props.app.description}
+          />
+        )}
       </box>
     </PulseResult>
   );

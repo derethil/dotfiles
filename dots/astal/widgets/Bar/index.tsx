@@ -30,16 +30,18 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
       >
         <box valign={Gtk.Align.START} halign={Gtk.Align.CENTER} vertical>
           {options.bar.modules.start((mods) =>
-            mods.map((mod) => modules[mod]()),
+            mods?.map((mod) => modules[mod]()),
           )}
         </box>
         <box valign={Gtk.Align.START} halign={Gtk.Align.CENTER} vertical>
           {options.bar.modules.center((mods) =>
-            mods.map((mod) => modules[mod]()),
+            mods?.map((mod) => modules[mod]()),
           )}
         </box>
         <box valign={Gtk.Align.END} halign={Gtk.Align.CENTER} vertical>
-          {options.bar.modules.end((mods) => mods.map((mod) => modules[mod]()))}
+          {options.bar.modules.end((mods) =>
+            mods?.map((mod) => modules[mod]()),
+          )}
         </box>
       </centerbox>
     </window>

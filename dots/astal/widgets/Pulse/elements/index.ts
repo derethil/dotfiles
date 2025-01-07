@@ -1,4 +1,4 @@
-import { SearchAdornment } from "./EndAdornment";
 import { Results } from "./Results";
+import { SearchAdornment } from "./SearchAdornment";
 
 export { SearchAdornment, Results };
