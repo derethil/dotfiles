@@ -79,5 +79,8 @@ window.Bar {
 
   .updates {
     font-size: 15px;
+    .circle-progress {
+      padding-top: #{layout.$gap / 2}px;
+    }
   }
 }

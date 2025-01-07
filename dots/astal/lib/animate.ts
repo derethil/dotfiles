@@ -16,6 +16,7 @@ export function animate<T extends Gtk.Widget>(
   options: Options,
 ) {
   type Property = T[typeof property];
+
   const from = options.from ?? (widget[property] as number);
   const duration = options.duration;
 
@@ -31,6 +32,11 @@ export function animate<T extends Gtk.Widget>(
     );
 
   const id = widget.add_tick_callback(() => {
+    if (widget.destroyed(widget)) {
+      widget.remove_tick_callback(id);
+      return false;
+    }
+
     const currentTime = widget.get_frame_clock()?.get_frame_time();
     if (!currentTime) return false;
 

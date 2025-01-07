@@ -21,6 +21,7 @@ export class RevealerState extends GObject.Object {
   constructor(props: RevealerProps) {
     super();
 
+    console.log(getChildrenValues(props).length);
     this._children = getChildrenValues(props);
     bindChildren(props).subscribe((c) => this.handleNewChildren(c));
 

@@ -19,6 +19,7 @@ interface Props {
   rounded?: boolean;
   onScroll?: (direction: number) => void;
   onClick?: (event: Astal.ClickEvent) => void;
+  onDestroy?: () => void;
 }
 
 export function CircleProgress(props: Props) {
@@ -29,9 +30,9 @@ export function CircleProgress(props: Props) {
       toBinding(props.trackColor),
       toBinding(props.disabled),
     ],
-    (color, trackColor, disabled) => `
-      font-size: ${props.strokeWidth ?? 4}px;
-      color: ${disabled ? options.theme.color.text.muted.get() : color};
+    (color, trackColor, disabled) =>
+      `font-size: ${props.strokeWidth ?? 4}px;
+      color: ${disabled ? options.theme.color.text.muted.get() : (color ?? "transparent")};
       background-color: ${trackColor ?? options.theme.color.background.highlight.get()};
       min-height: ${props.size ?? 36}px;
       min-width: ${props.size ?? 36}px;
@@ -66,7 +67,7 @@ export function CircleProgress(props: Props) {
   const sursor = (props.onScroll ?? props.onClick) ? "pointer" : "default";
 
   return (
-    <box className="circle-progress">
+    <box className="circle-progress" onDestroy={props.onDestroy}>
       <eventbox
         setup={tooltipSetup}
         hasTooltip={Boolean(props.tooltip)}
@@ -80,7 +81,9 @@ export function CircleProgress(props: Props) {
           cursor={sursor}
           overlay={
             <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
-              {toBinding<ChildProps["child"]>(props.child)}
+              {toBinding<ChildProps["child"]>(props.child).as(
+                (child) => child ?? "",
+              )}
             </box>
           }
         >
