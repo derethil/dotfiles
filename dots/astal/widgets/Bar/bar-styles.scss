@@ -17,7 +17,7 @@ window.Bar {
   }
 
   .datetime {
-    @include mixins.divider(top);
+    @include mixins.divider(top, $gap: layout.$gap);
 
     .time {
       padding: #{layout.$padding * 0.33}px 0;
@@ -32,7 +32,7 @@ window.Bar {
   .updates {
     font-size: 15px;
     .circle-progress {
-      padding-top: #{layout.$gap / 2}px;
+      padding-bottom: #{layout.$gap / 2}px;
     }
   }
 }
