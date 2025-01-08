@@ -15,6 +15,19 @@ export async function bash(strings: string | string[]) {
   }
 }
 
+export function testDependencies(...bins: string[]): boolean {
+  const missing = bins.filter((bin) => {
+    try {
+      exec(`which ${bin}`);
+      return false;
+    } catch {
+      return true;
+    }
+  });
+
+  return missing.length === 0;
+}
+
 export function dependencies(...bins: string[]): boolean {
   const missing = bins.filter((bin) => {
     try {

@@ -3,9 +3,11 @@ import { Gtk } from "astal/gtk3";
 import { CircleProgress } from "elements";
 import { SystemResources } from "lib/systemresources";
 import { options } from "options";
+import { testDependencies } from "utils";
 
 export function SystemMonitor() {
   const sr = SystemResources.get_default();
+  const isNvidia = testDependencies("nvidia-smi");
 
   return (
     <box className="system-monitor" halign={Gtk.Align.CENTER} vertical>
@@ -23,12 +25,14 @@ export function SystemMonitor() {
         <icon icon="memory-symbolic" css="font-size: 18px;" />
       </CircleProgress>
 
-      <CircleProgress
-        color={options.theme.color.accent[6].default()}
-        value={bind(sr.gpu, "percent")}
-      >
-        <icon icon="gpu-symbolic" css="font-size: 18px; padding-top: 2px;" />
-      </CircleProgress>
+      {isNvidia && (
+        <CircleProgress
+          color={options.theme.color.accent[6].default()}
+          value={bind(sr.gpu, "percent")}
+        >
+          <icon icon="gpu-symbolic" css="font-size: 18px; padding-top: 2px;" />
+        </CircleProgress>
+      )}
     </box>
   );
 }
