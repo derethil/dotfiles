@@ -1,0 +1,21 @@
+@use "color";
+@use "layout";
+@use "bar";
+
+window.Bar .tray {
+  margin-top: #{layout.$gap}px;
+  margin-bottom: #{layout.$gap}px;
+  background-color: color.$background-surface;
+  border-radius: #{layout.$radius * 2}px;
+
+  > button {
+    all: unset;
+    @include bar.list-padding;
+    padding-left: #{layout.$padding}px;
+    padding-right: #{layout.$padding}px;
+
+    icon {
+      font-size: 17px;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@use "color";
+@use "font";
+@use "layout";
+@use "animation";
+@use "bar";
+@use "mixins";
+
+window.Bar {
+  > centerbox {
+    @include mixins.widget;
+    font-family: font.$mono-family;
+    font-weight: bold;
+  }
+
+  .circle-progress {
+    @include bar.list-padding;
+  }
+
+  .datetime {
+    @include mixins.divider(top);
+
+    .time {
+      padding: #{layout.$padding * 0.33}px 0;
+      font-size: #{font.$mono-size * 1.75}px;
+    }
+
+    .date {
+      font-size: #{font.$mono-size * 0.9}px;
+    }
+  }
+
+  .updates {
+    font-size: 15px;
+    .circle-progress {
+      padding-top: #{layout.$gap / 2}px;
+    }
+  }
+}

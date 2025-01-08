@@ -1,0 +1,11 @@
+@use "layout";
+
+@mixin list-padding($padding: layout.$gap) {
+  padding: #{$padding / 2}px 0px;
+  &:first-child {
+    padding-top: #{$padding}px;
+  }
+  &:last-child {
+    padding-bottom: #{$padding}px;
+  }
+}

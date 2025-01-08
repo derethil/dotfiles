@@ -1,0 +1,25 @@
+@use "color";
+@use "layout";
+@use "animation";
+@use "bar";
+
+window.Bar .workspaces .indicator {
+  min-height: 1px;
+  padding: #{layout.$padding / 3}px #{layout.$padding * 0.8}px;
+  margin: #{layout.$gap / 2}px 0px;
+  border-radius: #{layout.$radius}px;
+  transition: background-color 0.33s;
+
+  &.occupied {
+    background-color: color.$accent3;
+  }
+  &.empty {
+    background-color: color.$background-highlight;
+  }
+  &.focused {
+    background-color: color.$accent4;
+  }
+  &.urgent {
+    @include animation.flash(color.$accent4, color.$accent3);
+  }
+}

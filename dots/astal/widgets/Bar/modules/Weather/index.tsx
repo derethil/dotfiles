@@ -14,6 +14,7 @@ export function Weather() {
   const imageCss = bind(openMeteo, "current").as((current) => {
     const result = fromCode(current.weatherCode);
     if (result) return `background-image: url("${result.iconPath}");`;
+    return "";
   });
 
   return (
@@ -22,10 +23,7 @@ export function Weather() {
       value={value}
     >
       <box className="weather">
-        {bind(imageCss).as((path) => {
-          if (path) return <box className="icon" css={imageCss} />;
-          return <icon icon="question-round-outline-symbolic" />;
-        })}
+        <box className="icon" css={imageCss} />
       </box>
     </CircleProgress>
   );
