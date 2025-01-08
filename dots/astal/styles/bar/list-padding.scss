@@ -3,9 +3,9 @@
 @mixin list-padding($padding: layout.$gap) {
   padding: #{$padding / 2}px 0px;
   &:first-child {
-    padding-top: #{$padding}px;
+    padding-top: 0px;
   }
   &:last-child {
-    padding-bottom: #{$padding}px;
+    padding-bottom: 0px;
   }
 }

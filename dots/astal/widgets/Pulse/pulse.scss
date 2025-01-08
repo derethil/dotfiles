@@ -5,6 +5,7 @@
 
 window.pulse .pulse {
   @include mixins.widget;
+  background-color: color.$background-muted;
 
   > box {
     transition: all 0.2s ease-in-out;

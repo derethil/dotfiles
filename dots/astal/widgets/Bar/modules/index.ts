@@ -1,6 +1,7 @@
 import { Backlight } from "./Backlight";
 import { Battery } from "./Battery";
 import { DateTime } from "./DateTime";
+import { Divider } from "./Divider";
 import { Media } from "./Media";
 import { PackageUpdates } from "./PackageUpdates";
 import { SystemMonitor } from "./SystemMonitor";
@@ -13,6 +14,7 @@ export const modules = {
   Backlight,
   Battery,
   DateTime,
+  Divider,
   Media,
   PackageUpdates,
   SystemMonitor,

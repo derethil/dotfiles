@@ -4,7 +4,6 @@
 @use "mixins";
 
 window.Bar .tray {
-  @include mixins.divider("top", $gap: layout.$gap);
   margin-bottom: #{layout.$gap}px;
 
   > button {

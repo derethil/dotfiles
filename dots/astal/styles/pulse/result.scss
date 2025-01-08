@@ -4,7 +4,7 @@
 
 @mixin focus {
   font-weight: 700;
-  background-color: color.$background-surface;
+  background-color: color.$background;
   color: color.$text-highlight;
 }
 
