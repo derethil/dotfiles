@@ -1,0 +1,10 @@
+@use "color";
+
+window.Bar .weather {
+  .icon {
+    min-width: 26px;
+    min-height: 26px;
+    background-size: contain;
+    background-position: center;
+  }
+}

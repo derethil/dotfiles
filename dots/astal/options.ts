@@ -59,7 +59,13 @@ export const options = constructOptions(OPTIONS_CACHE, {
     modules: {
       start: Opt<BarModule[]>(["Workspaces", "SystemMonitor", "Tray"]),
       center: Opt<BarModule[]>([]),
-      end: Opt<BarModule[]>(["Media", "Volume", "PackageUpdates", "DateTime"]),
+      end: Opt<BarModule[]>([
+        "Media",
+        "Weather",
+        "Volume",
+        "PackageUpdates",
+        "DateTime",
+      ]),
     },
     workspaces: {
       dynamic: Opt(false),
@@ -67,6 +73,13 @@ export const options = constructOptions(OPTIONS_CACHE, {
     },
     tray: {
       hidden: Opt<string[]>(["Wayland to X11 Video bridge"]),
+    },
+    weather: {
+      latitude: Opt(38.8951),
+      longitude: Opt(-77.0364),
+      temperatureUnit: Opt<"celsius" | "fahrenheit">("fahrenheit"),
+      windSpeedUnit: Opt<"ms" | "kmh" | "mph" | "kn">("mph"),
+      precipitationUnit: Opt<"mm" | "inch">("inch"),
     },
   },
 });

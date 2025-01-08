@@ -6,6 +6,7 @@ import { PackageUpdates } from "./PackageUpdates";
 import { SystemMonitor } from "./SystemMonitor";
 import { Tray } from "./Tray";
 import { Volume } from "./Volume";
+import { Weather } from "./Weather";
 import { Workspaces } from "./Workspaces";
 
 export const modules = {
@@ -17,5 +18,6 @@ export const modules = {
   SystemMonitor,
   Tray,
   Volume,
+  Weather,
   Workspaces,
 };
