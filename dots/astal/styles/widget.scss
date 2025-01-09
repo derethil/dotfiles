@@ -11,7 +11,7 @@
   padding: #{layout.$padding}px;
 
   @if $surface == false {
-    background: #{color.$background};
+    background: #{color.$background-muted};
     margin: #{layout.$gap}px;
   } @else {
     background: #{color.$background-surface};

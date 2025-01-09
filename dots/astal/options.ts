@@ -51,7 +51,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
   },
   // Widget Options
   corners: {
-    radius: Opt(20),
+    radius: Opt(16),
     color: Opt("#000000"),
   },
   bar: {
