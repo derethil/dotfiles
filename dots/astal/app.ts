@@ -6,6 +6,7 @@ import { OverlayType } from "state/overlay";
 import { Bar } from "widgets/Bar";
 import { Corners } from "widgets/Corners";
 import { Overlay } from "widgets/Overlay";
+import { PopupNotifications } from "widgets/PopupNotifications";
 import { Pulse } from "widgets/Pulse";
 
 function init() {
@@ -20,6 +21,7 @@ function createWidgets() {
   App.get_monitors().map((monitor) => {
     Corners(monitor);
     Bar(monitor);
+    PopupNotifications(monitor);
   });
   Pulse();
   Object.values(OverlayType).forEach((type) => {

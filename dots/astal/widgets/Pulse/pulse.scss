@@ -10,12 +10,16 @@ window.pulse .pulse {
   > box {
     transition: all 0.2s ease-in-out;
     border-bottom: 1px solid transparent;
+    padding-bottom: 0px;
     &.inactive {
+      padding-bottom: #{layout.$padding}px;
       border-color: color.$background-surface;
     }
   }
 
   .start-icon {
+    background-color: color.$background;
+    border-radius: #{layout.$radius / 2}px;
     margin-right: #{layout.$padding}px;
     padding: #{layout.$padding}px #{layout.$padding}px;
     font-size: #{font.$mono-size * 1.5}px;

@@ -17,6 +17,8 @@ interface Props {
   size?: number;
   css?: string;
   rounded?: boolean;
+  asTimeout?: boolean;
+  linear?: boolean;
   onScroll?: (direction: number) => void;
   onClick?: (event: Astal.ClickEvent) => void;
   onDestroy?: () => void;
@@ -35,24 +37,31 @@ export function CircleProgress(props: Props) {
       `font-size: ${props.strokeWidth ?? 4}px;
       color: ${disabled ? options.theme.color.text.muted.get() : (color ?? "transparent")};
       background-color: ${trackColor ?? options.theme.color.background.highlight.get()};
-      min-height: ${props.size ?? 36}px;
       min-width: ${props.size ?? 36}px;
       transition: all 0.15s ease-in-out;
   `,
   );
 
+  const handleAnimate = (self: Widget.CircularProgress, value: number) => {
+    if (props.animationDuration === 0) {
+      self.value = value;
+    } else {
+      animate(self, "value", value, {
+        duration: props.animationDuration ?? 300,
+        ...(props.linear ? {} : { bezier: [0.86, 0, 0.13, 1] }),
+      });
+    }
+  };
+
   const handleSetup = (self: Widget.CircularProgress) => {
-    value.subscribe((newValue) => {
-      if (destroyed) return;
-      if (props.animationDuration === 0) {
-        self.value = newValue;
-      } else {
-        animate(self, "value", newValue, {
-          duration: props.animationDuration ?? 300,
-          bezier: [0.86, 0, 0.13, 1],
-        });
-      }
-    });
+    if (props.asTimeout) {
+      self.connect("realize", () => handleAnimate(self, 0));
+    } else {
+      value.subscribe((newValue) => {
+        if (destroyed) return;
+        handleAnimate(self, newValue);
+      });
+    }
   };
 
   const tooltipSetup = (self: Widget.EventBox) => {
