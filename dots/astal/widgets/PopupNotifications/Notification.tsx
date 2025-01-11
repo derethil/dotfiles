@@ -20,6 +20,13 @@ function getUrgencyColor(urgency: AstalNotifd.Urgency) {
   }
 }
 
+function bodyText(body: string) {
+  if (body.length <= 60) {
+    return body;
+  }
+  return `${body.substring(0, 60)}...`;
+}
+
 export function Notification({ notification }: Props) {
   const reveal = Variable(true);
   const expires = notification.expireTimeout > 0;
@@ -41,12 +48,11 @@ export function Notification({ notification }: Props) {
     >
       <button
         className="notification"
-        widthRequest={600}
         onClick={handleClick}
         onDestroy={() => reveal.drop()}
         cursor="pointer"
       >
-        <box>
+        <box widthRequest={600}>
           <Icon notification={notification} />
           <box className="text" vertical valign={Gtk.Align.CENTER} hexpand>
             <label
@@ -56,7 +62,7 @@ export function Notification({ notification }: Props) {
             />
             <label
               className="body"
-              label={notification.body}
+              label={bodyText(notification.body)}
               halign={Gtk.Align.START}
             />
           </box>
