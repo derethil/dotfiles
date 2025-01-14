@@ -1,4 +1,4 @@
-import { Binding, Variable } from "astal";
+import { bind, Binding, Variable } from "astal";
 import { Astal, Gtk, Widget } from "astal/gtk3";
 import { options } from "options";
 import { clamp, toBinding } from "utils";
@@ -22,6 +22,7 @@ interface Props {
   onScroll?: (direction: number) => void;
   onClick?: (event: Astal.ClickEvent) => void;
   onDestroy?: () => void;
+  onChange?: (value: number) => void;
 }
 
 export function CircleProgress(props: Props) {
@@ -54,6 +55,7 @@ export function CircleProgress(props: Props) {
   };
 
   const handleSetup = (self: Widget.CircularProgress) => {
+    self.connect("notify::value", () => props.onChange?.(self.value));
     if (props.asTimeout) {
       self.connect("realize", () => handleAnimate(self, 0));
     } else {

@@ -4,42 +4,27 @@ import AstalNotifd from "gi://AstalNotifd";
 import { CircleProgress, Revealer } from "elements";
 import { options } from "options";
 import { Icon } from "./Icon";
+import { bodyText, getUrgencyColor, processTime } from "./util";
 
 interface Props {
   notification: AstalNotifd.Notification;
 }
 
-function getUrgencyColor(urgency: AstalNotifd.Urgency) {
-  switch (urgency) {
-    case AstalNotifd.Urgency.LOW:
-      return options.theme.color.status.success.default.get();
-    case AstalNotifd.Urgency.NORMAL:
-      return options.theme.color.status.warning.default.get();
-    case AstalNotifd.Urgency.CRITICAL:
-      return options.theme.color.status.critical.default.get();
-  }
-}
-
-function bodyText(body: string) {
-  if (body.length <= 60) {
-    return body;
-  }
-  return `${body.substring(0, 60)}...`;
-}
-
 export function Notification({ notification }: Props) {
-  const reveal = Variable(true);
-  const expires = notification.expireTimeout > 0;
-  const timeout = expires ? notification.expireTimeout : 5000;
+  const [timeout, msLeft, startValue] = processTime(notification);
+  if (timeout === null) return <></>;
 
-  const handleClick = () => {
+  const reveal = Variable(true);
+
+  const handleDismiss = () => {
     reveal.set(false);
     setTimeout(() => notification.dismiss(), options.theme.transition.get());
   };
 
-  setTimeout(() => {
-    reveal.set(false);
-  }, timeout - options.theme.transition.get());
+  const handleFinished = (value: number) => {
+    if (value > 0 || !reveal) return;
+    handleDismiss();
+  };
 
   return (
     <Revealer
@@ -48,7 +33,7 @@ export function Notification({ notification }: Props) {
     >
       <button
         className="notification"
-        onClick={handleClick}
+        onClick={handleDismiss}
         onDestroy={() => reveal.drop()}
         cursor="pointer"
       >
@@ -67,12 +52,13 @@ export function Notification({ notification }: Props) {
             />
           </box>
           <CircleProgress
-            value={1}
+            value={startValue}
+            onChange={handleFinished}
             size={10}
             linear
             color={getUrgencyColor(notification.urgency)}
             asTimeout
-            animationDuration={timeout}
+            animationDuration={msLeft}
           />
         </box>
       </button>
