@@ -18,9 +18,12 @@ export function bodyText(body: string) {
   return `${body.substring(0, 60)}...`;
 }
 
-export function processTime(notification: AstalNotifd.Notification) {
+export function processTime(
+  notification: AstalNotifd.Notification,
+  defaultTimeout: Milliseconds = 5000,
+) {
   const expires = notification.expireTimeout > 0;
-  const timeout = expires ? notification.expireTimeout : 5000;
+  const timeout = expires ? notification.expireTimeout : defaultTimeout;
 
   const endTime = notification.time * 1000 + timeout;
   const msLeft = endTime - Date.now();

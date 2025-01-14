@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function Notification({ notification }: Props) {
-  const [timeout, msLeft, startValue] = processTime(notification);
+  const [timeout, msLeft, startValue] = processTime(notification, 8000);
   if (timeout === null) return <></>;
 
   const reveal = Variable(true);
@@ -22,6 +22,7 @@ export function Notification({ notification }: Props) {
   };
 
   const handleFinished = (value: number) => {
+    // TODO: Once a notification history widget is implemented, this should not dismiss the notification
     if (value > 0 || !reveal) return;
     handleDismiss();
   };

@@ -4,7 +4,7 @@ import { Revealer } from "elements";
 import { ArchUpdate } from "lib/archupdate";
 import { options } from "options";
 import { launchInTerminal } from "utils";
-import { CircleButton } from "../elements";
+import { CircleButton } from "../../elements";
 
 const FOOT_ARGS = "--title 'terminal-arch-update' arch-update -d";
 

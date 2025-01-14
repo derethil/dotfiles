@@ -3,8 +3,8 @@ import { Battery } from "./Battery";
 import { DateTime } from "./DateTime";
 import { Divider } from "./Divider";
 import { Media } from "./Media";
-import { PackageUpdates } from "./PackageUpdates";
 import { SystemMonitor } from "./SystemMonitor";
+import { Tools } from "./Tools";
 import { Tray } from "./Tray";
 import { Volume } from "./Volume";
 import { Weather } from "./Weather";
@@ -16,9 +16,9 @@ export const modules = {
   DateTime,
   Divider,
   Media,
-  PackageUpdates,
   SystemMonitor,
   Tray,
+  Tools,
   Volume,
   Weather,
   Workspaces,

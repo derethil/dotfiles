@@ -7,6 +7,7 @@ import { ChildProps } from "utils/children";
 
 interface Props {
   child?: ChildProps["child"];
+  className?: string;
   value: Binding<number> | number;
   tooltip?: Binding<string> | string;
   animationDuration?: number;
@@ -91,6 +92,7 @@ export function CircleProgress(props: Props) {
   return (
     <box className="circle-progress">
       <eventbox
+        className={props.className}
         setup={tooltipSetup}
         hasTooltip={Boolean(props.tooltip)}
         onScroll={(_, event) =>

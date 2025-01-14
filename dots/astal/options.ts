@@ -68,7 +68,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
         "Media",
         "Weather",
         "Volume",
-        "PackageUpdates",
+        "Tools",
         "Divider",
         "DateTime",
       ]),
