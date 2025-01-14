@@ -1,0 +1,6 @@
+#!/bin/sh
+
+responmse=$(curl -s http://ip-api.com/json/)
+longitude=$(echo "$responmse" | jq .lon)
+latitude=$(echo "$responmse" | jq .lat)
+wlsunset -l "$latitude" -L "$longitude" -t 3200
