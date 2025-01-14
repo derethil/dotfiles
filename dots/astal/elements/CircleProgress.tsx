@@ -1,4 +1,4 @@
-import { bind, Binding, Variable } from "astal";
+import { Binding, Variable } from "astal";
 import { Astal, Gtk, Widget } from "astal/gtk3";
 import { options } from "options";
 import { clamp, toBinding } from "utils";
@@ -47,23 +47,26 @@ export function CircleProgress(props: Props) {
     if (props.animationDuration === 0) {
       self.value = value;
     } else {
-      animate(self, "value", value, {
+      const options: Parameters<typeof animate>[3] = {
         duration: props.animationDuration ?? 300,
-        ...(props.linear ? {} : { bezier: [0.86, 0, 0.13, 1] }),
-      });
+      };
+      if (!props.linear) options.bezier = [0.86, 0, 0.13, 1];
+      animate(self, "value", value, options);
     }
   };
 
   const handleSetup = (self: Widget.CircularProgress) => {
     self.connect("notify::value", () => props.onChange?.(self.value));
+
     if (props.asTimeout) {
       self.connect("realize", () => handleAnimate(self, 0));
-    } else {
-      value.subscribe((newValue) => {
-        if (destroyed) return;
-        handleAnimate(self, newValue);
-      });
+      return;
     }
+
+    value.subscribe((newValue) => {
+      if (destroyed) return;
+      handleAnimate(self, newValue);
+    });
   };
 
   const tooltipSetup = (self: Widget.EventBox) => {

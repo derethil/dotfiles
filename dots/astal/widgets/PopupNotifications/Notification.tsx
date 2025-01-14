@@ -4,7 +4,7 @@ import AstalNotifd from "gi://AstalNotifd";
 import { CircleProgress, Revealer } from "elements";
 import { options } from "options";
 import { Icon } from "./Icon";
-import { bodyText, getUrgencyColor, processTime } from "./util";
+import { bodyText, formatTime, getUrgencyColor, processTime } from "./util";
 
 interface Props {
   notification: AstalNotifd.Notification;
@@ -40,11 +40,19 @@ export function Notification({ notification }: Props) {
         <box widthRequest={600}>
           <Icon notification={notification} />
           <box className="text" vertical valign={Gtk.Align.CENTER} hexpand>
-            <label
-              className="summary"
-              label={notification.summary}
-              halign={Gtk.Align.START}
-            />
+            <box>
+              <label
+                hexpand
+                className="summary"
+                label={notification.summary}
+                halign={Gtk.Align.START}
+              />
+              <label
+                className="time"
+                label={formatTime(notification.time)}
+                halign={Gtk.Align.END}
+              />
+            </box>
             <label
               className="body"
               label={bodyText(notification.body)}

@@ -23,16 +23,23 @@ window.PopupNotifications {
     }
 
     .text {
+      margin-right: #{layout.$gap}px;
+      font-weight: 500;
+
       .summary {
         font-weight: 700;
         font-size: #{font.$mono-size * 1.2}px;
       }
 
-      .body {
-        font-weight: 500;
+      .time {
         font-size: #{font.$mono-size * 1}px;
         color: color.$text-muted;
         margin-right: #{layout.$gap}px;
+      }
+
+      .body {
+        font-size: #{font.$mono-size * 1}px;
+        color: color.$text-muted;
         margin-top: #{layout.$gap / 2}px;
       }
     }

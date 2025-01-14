@@ -1,3 +1,4 @@
+import { GLib } from "astal";
 import AstalNotifd from "gi://AstalNotifd?version=0.1";
 import { options } from "options";
 
@@ -29,3 +30,14 @@ export function processTime(notification: AstalNotifd.Notification) {
 
   return [timeout, msLeft, startValue] as const;
 }
+
+export const formatTime = (time: number): string => {
+  const datetime = GLib.DateTime.new_from_unix_local(time);
+  const now = GLib.DateTime.new_now_local();
+  const microseconds = now.difference(datetime);
+  const minutes = microseconds / 1000000 / 60;
+
+  if (minutes < 1) return "now";
+  if (minutes < 60) return `${Math.floor(minutes)}m ago`;
+  return `${Math.floor(minutes / 60)}h ago`;
+};
