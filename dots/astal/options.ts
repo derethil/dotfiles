@@ -87,5 +87,8 @@ export const options = constructOptions(OPTIONS_CACHE, {
       windSpeedUnit: Opt<"ms" | "kmh" | "mph" | "kn">("mph"),
       precipitationUnit: Opt<"mm" | "inch">("inch"),
     },
+    tools: {
+      colorPicker: Opt<string>("hyprpicker -a"),
+    },
   },
 });
