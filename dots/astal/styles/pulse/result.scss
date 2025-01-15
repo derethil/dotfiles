@@ -7,33 +7,38 @@
   background-color: color.$background;
   color: color.$text-highlight;
 }
-
 @mixin result($border-color: color.$background-surface, $surface: false) {
   all: unset;
+  background-color: color.$background-muted;
   font-family: font.$mono-family;
   font-size: #{font.$mono-size * 1.3}px;
   font-weight: 500;
-  border-radius: #{layout.$radius}px;
-  margin: #{layout.$gap / 2}px 0px;
-  padding: #{layout.$padding}px;
-  color: color.$text;
   border-top: 1px solid #{$border-color};
 
-  @if $surface {
-    @include focus;
-  } @else {
-    &:focus,
-    &:hover {
+  button {
+    all: unset;
+    border-radius: #{layout.$radius}px;
+    margin: #{layout.$gap / 2}px 0px;
+    padding: #{layout.$padding}px;
+    color: color.$text;
+
+    @if $surface {
       @include focus;
+    } @else {
+      &:focus,
+      &:hover {
+        @include focus;
+      }
+    }
+
+    icon {
+      font-size: 28px;
     }
   }
-
   &:first-child {
-    margin-top: #{layout.$gap}px;
     border-color: transparent;
-  }
-
-  icon {
-    font-size: 28px;
+    button {
+      margin-top: #{layout.$gap}px;
+    }
   }
 }

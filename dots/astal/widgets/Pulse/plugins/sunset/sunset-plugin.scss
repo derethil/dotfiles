@@ -5,7 +5,7 @@
 window.pulse .toggle-sunset {
   background-color: color.$accent3-muted;
   transition: background-color 0.3s;
-  border-radius: layout.$radius;
+  border-radius: #{layout.$radius}px;
 
   &.enabled {
     background-color: color.$accent6-muted;

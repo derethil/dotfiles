@@ -7,7 +7,7 @@ export class Shell implements PulsePlugin {
 
   public readonly command: PulseCommand = ":e";
   public readonly description = "Run Exeutable";
-  public readonly default = false;
+  public readonly default = true;
 
   private bins = "";
 
@@ -23,7 +23,8 @@ export class Shell implements PulsePlugin {
   public async process(query: string[]) {
     this.updateBins().catch(console.error);
 
-    if (query.length === 0) return this.renderBins(this.bins);
+    const emptyQuery = query.join("").replaceAll(" ", "").length === 0;
+    if (emptyQuery) return this.renderBins(this.bins);
 
     const [search, ...args] = query;
     const filterToSearch = `echo -e "${this.bins}" | rg -i ${search}`;

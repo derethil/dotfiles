@@ -1,7 +1,12 @@
 import { bind, GObject, property, register } from "astal";
 import { App, Gtk, Widget } from "astal/gtk3";
 import { PulsePlugins } from "./plugins";
-import { PulsePlugin, PulseResult, StaticPulsePlugin } from "./types";
+import {
+  PulseCommand,
+  PulsePlugin,
+  PulseResult,
+  StaticPulsePlugin,
+} from "./types";
 import { WINDOW_NAME } from ".";
 
 export const TRANSITION_DURATION = 200;
@@ -107,20 +112,20 @@ export class PulseState extends GObject.Object {
 
   private parseQuery(query: string) {
     // Parse query
-    const split = query.split(" ");
-    const command = split[0] as `:${string}`;
-    let args = split.slice(1);
-    if (args.length === 1 && args[0] === " ") args = [];
+    const [command, ...args] = query.trim().split(" ");
 
     // No query
-    if (query.length === 0) return { command: undefined, args: [] };
+    const emptyQuery = command.length === 0 && args.length === 0;
+    if (emptyQuery) return { command: undefined, args: [] };
 
     // Default command
     if (!query.startsWith(":"))
       return { command: undefined, args: query.split(" ") };
 
     // Command with arguments
-    if (this.commands.includes(command)) return { command, args };
+    const nonAutocomplete = this.commands.filter((c) => c !== ":");
+    if (nonAutocomplete.includes(command as PulseCommand))
+      return { command, args };
 
     // Autocomplete
     return { command: ":", args: [command] };

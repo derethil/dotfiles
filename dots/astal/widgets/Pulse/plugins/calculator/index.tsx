@@ -1,3 +1,4 @@
+import { Gtk } from "astal/gtk3";
 import { bash } from "utils";
 import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 
@@ -24,6 +25,10 @@ export class Calculate implements PulsePlugin {
   public async process(args: string[]) {
     const result = Number(await this.calculate(args.join(" ")));
     const rounded = Math.round(result * 1000) / 1000;
-    return [<box className="pulse-result calculator">{rounded}</box>];
+    return [
+      <box className="pulse-result calculator" hexpand>
+        <label label={String(rounded)} hexpand halign={Gtk.Align.CENTER} />
+      </box>,
+    ];
   }
 }

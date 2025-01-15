@@ -1,4 +1,3 @@
-import { Gtk } from "astal/gtk3";
 import Apps from "gi://AstalApps";
 import { AppButton } from "./AppButton";
 import { PulsePlugin, PulseCommand } from "../../types";
@@ -24,11 +23,14 @@ export class Applications implements PulsePlugin {
     return this.instance;
   }
 
+  public renderApps(apps: Apps.Application[]) {
+    return apps.map((app) => <AppButton app={app} />);
+  }
+
   public process(args: string[]) {
-    if (args.length === 0) return new Promise<Gtk.Widget[]>(() => []);
+    if (args.length === 0) return [];
     const appResults = this.apps.fuzzy_query(args.join(" "));
-    const results = appResults.sort().map((app) => <AppButton app={app} />);
-    return results;
+    return this.renderApps(appResults.sort());
   }
 
   public searchAdornment(explicit?: boolean) {

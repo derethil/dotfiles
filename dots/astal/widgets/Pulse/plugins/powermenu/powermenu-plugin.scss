@@ -16,7 +16,7 @@
   }
 }
 
-window.pulse .pulse-result {
+window.pulse .pulse-result-wrapper {
   @include pulse.result;
   font-weight: 700;
   transition: all 0.2s;

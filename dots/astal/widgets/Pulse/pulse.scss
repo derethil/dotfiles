@@ -5,15 +5,28 @@
 
 window.pulse .pulse {
   @include mixins.widget;
-  background-color: color.$background-muted;
+  background-color: transparent;
 
   > box {
+    @include mixins.widget;
+    margin: 0;
+    background-color: color.$background-muted;
+    padding-bottom: #{layout.$padding}px;
+
     transition: all 0.2s ease-in-out;
     border-bottom: 1px solid transparent;
-    padding-bottom: 0px;
+    border-radius: #{layout.$radius}px;
+
     &.inactive {
-      padding-bottom: #{layout.$padding}px;
       border-color: color.$background-surface;
+      border-radius: #{layout.$radius}px #{layout.$radius}px 0 0;
+    }
+  }
+
+  scrollable viewport {
+    all: unset;
+    .results {
+      border-radius: #{layout.$radius}px;
     }
   }
 

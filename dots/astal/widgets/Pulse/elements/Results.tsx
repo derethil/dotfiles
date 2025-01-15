@@ -8,12 +8,16 @@ export function Results() {
 
   return (
     <Revealer
+      revealChild={bind(state, "results").as((r) => r.length > 0)}
       transitionDuration={TRANSITION_DURATION}
       transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-      className="results"
       wrapperProps={{ vertical: true }}
     >
-      {bind(state, "results")}
+      <scrollable heightRequest={500}>
+        <box vertical className="results" expand={false}>
+          {bind(state, "results")}
+        </box>
+      </scrollable>
     </Revealer>
   );
 }

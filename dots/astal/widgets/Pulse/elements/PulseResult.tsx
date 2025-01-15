@@ -21,13 +21,15 @@ export function PulseResult(props: Props) {
   );
 
   return (
-    <button
-      className={`pulse-result ${props.className}`}
-      setup={(self) => self.connect("clicked", props.activate)}
-      onClick={(self) => props.activate(self)}
-      onKeyPressEvent={keyHandler}
-    >
-      <box expand>{getChildren(props)}</box>
-    </button>
+    <box className={`pulse-result-wrapper ${props.className}`}>
+      <button
+        setup={(self) => self.connect("clicked", props.activate)}
+        onClick={(self) => props.activate(self)}
+        onKeyPressEvent={keyHandler}
+        vexpand={false}
+      >
+        <box expand>{getChildren(props)}</box>
+      </button>
+    </box>
   );
 }
