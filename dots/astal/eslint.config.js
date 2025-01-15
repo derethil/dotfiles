@@ -36,7 +36,7 @@ export default tseslint.config(
       camelcase: [
         "warn",
         {
-          allow: ["^get_default"],
+          allow: ["^(g|s)et_default"],
         },
       ],
       "import/no-nodejs-modules": "warn",

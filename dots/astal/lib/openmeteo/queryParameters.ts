@@ -3,7 +3,7 @@ import { bind, Variable } from "astal";
 import { options } from "options";
 import { Location } from "state/location";
 
-const location = new Location();
+const location = Location.get_default();
 
 export const queryParameters = Variable.derive(
   [

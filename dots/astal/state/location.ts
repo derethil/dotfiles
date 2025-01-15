@@ -23,8 +23,15 @@ interface LocationResponse {
 
 @register({ GTypeName: "Location" })
 export class Location extends GObject.Object {
+  static instance: Location;
+
   @property(Object)
-  declare location: LocationResponse | null;
+  declare location: LocationResponse;
+
+  static get_default() {
+    if (!this.instance) this.instance = new Location();
+    return this.instance;
+  }
 
   constructor() {
     super();
@@ -36,7 +43,7 @@ export class Location extends GObject.Object {
     if (cached) this.location = cached;
 
     const location = await this.fetchLocation().catch(console.error);
-    if (!location) return (this.location = null);
+    if (!location) return;
 
     this.cacheLocationResponse(location);
     this.location = location;

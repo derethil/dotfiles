@@ -2,6 +2,7 @@ import { App } from "astal/gtk3";
 import { handleMessage, setupMessageHandlers } from "lib/messages";
 import { session } from "lib/session";
 import { watchStyles } from "lib/style";
+import { WLSunset } from "lib/wlsunset";
 import { OverlayType } from "state/overlay";
 import { Bar } from "widgets/Bar";
 import { Corners } from "widgets/Corners";
@@ -9,8 +10,9 @@ import { Overlay } from "widgets/Overlay";
 import { PopupNotifications } from "widgets/PopupNotifications";
 import { Pulse } from "widgets/Pulse";
 
-function init() {
+function initialize() {
   session();
+  WLSunset.set_default();
   setupMessageHandlers();
   watchStyles().catch((err: unknown) => {
     console.error(`Error watching styles: ${String(err)}`);
@@ -33,7 +35,7 @@ App.start({
   requestHandler: handleMessage,
   icons: `./assets/icons`,
   main: () => {
-    init();
+    initialize();
     createWidgets();
   },
 });
