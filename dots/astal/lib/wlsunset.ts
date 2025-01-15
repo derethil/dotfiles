@@ -1,12 +1,15 @@
 import { bind, property, register, Variable, GObject } from "astal";
 import { Location } from "state/location";
-import { bash } from "utils";
+import { bash, dependencies } from "utils";
 
 @register({ GTypeName: "WaylandSunset" })
 export class WLSunset extends GObject.Object {
   static instance: WLSunset;
 
   static get_default() {
+    if (!dependencies("wlsunset"))
+      throw new Error("wlsunset not found on PATH");
+
     if (!this.instance) this.instance = new WLSunset();
     return this.instance;
   }
