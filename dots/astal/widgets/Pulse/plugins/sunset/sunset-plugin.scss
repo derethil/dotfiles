@@ -1,0 +1,25 @@
+@use "color";
+@use "layout";
+@use "animation";
+
+window.pulse .toggle-sunset {
+  background-color: color.$accent3-muted;
+  transition: background-color 0.3s;
+  border-radius: layout.$radius;
+
+  &.enabled {
+    background-color: color.$accent6-muted;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: color.$accent3;
+    &.enabled {
+      background-color: color.$accent6;
+    }
+  }
+
+  icon {
+    color: color.$background;
+  }
+}

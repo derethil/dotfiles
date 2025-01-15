@@ -3,6 +3,7 @@ import { PulseAutocomplete } from "./autocomplete";
 import { Calculate } from "./calculator";
 import { PowerMenu } from "./powermenu";
 import { Shell } from "./shell";
+import { Sunset } from "./sunset";
 
 export const PulsePlugins = [
   Applications,
@@ -10,4 +11,5 @@ export const PulsePlugins = [
   PowerMenu,
   PulseAutocomplete,
   Shell,
+  Sunset,
 ];
