@@ -1,6 +1,6 @@
 import { GObject, property, readFile, register, writeFileAsync } from "astal";
 import { CACHE } from "lib/session";
-import { bash } from "utils";
+import { fetchAsync } from "utils/fetch";
 
 const LOCATION_CACHE = `${CACHE}/location.json`;
 
@@ -42,7 +42,7 @@ export class Location extends GObject.Object {
     const cached = this.getLocationFromCache();
     if (cached) this.location = cached;
 
-    const location = await this.fetchLocation().catch(console.error);
+    const location = await this.fetchLocation();
     if (!location) return;
 
     this.cacheLocationResponse(location);
@@ -61,10 +61,7 @@ export class Location extends GObject.Object {
   }
 
   private async fetchLocation() {
-    const getLocationCommand = "curl -s http://ip-api.com/json/";
-    const response = await bash(getLocationCommand).catch(console.error);
-    if (!response) return;
-
-    return JSON.parse(response) as LocationResponse;
+    const response = await fetchAsync("http://ip-api.com/json/");
+    if (response) return JSON.parse(response) as LocationResponse;
   }
 }
