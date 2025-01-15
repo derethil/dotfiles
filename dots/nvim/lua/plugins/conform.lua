@@ -1,3 +1,21 @@
+local function detect_prettier_formatter()
+  local path = vim.fn.findfile("package.json", ".;")
+
+  if path == "" then
+    return { "rubocop" }
+  end
+
+  local json = vim.fn.json_decode(vim.fn.readfile(path))
+
+  if not json or not json.devDependencies then
+    return { "rubocop" }
+  end
+
+  local hasPlugin = json.devDependencies["prettier"] and json.devDependencies["@prettier/plugin-ruby"]
+
+  return { hasPlugin and "prettierd" or "rubocop" }
+end
+
 return {
   {
     "stevearc/conform.nvim",
@@ -32,6 +50,7 @@ return {
         graphql = { "prettierd" },
         handlebars = { "prettierd" },
         rust = { "rustfmt" },
+        ruby = detect_prettier_formatter(),
       },
     },
   },
