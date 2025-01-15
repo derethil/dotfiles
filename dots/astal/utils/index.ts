@@ -71,3 +71,15 @@ export function icon(icon: string, fallback: string) {
   if (Astal.Icon.lookup_icon(icon)) return icon;
   return fallback;
 }
+
+export function addLineNumbers(message: string) {
+  const lines = message.split("\n");
+  const numbered = lines
+    .map((line, i) => {
+      const padded = String(i + 1).padStart(3, "0");
+      return `${padded} | ${line}`;
+    })
+    .join("\n");
+
+  return `\n${numbered}`;
+}
