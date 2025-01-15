@@ -3,19 +3,19 @@ import { execAsync } from "astal";
 type Urgency = "low" | "normal" | "critical";
 
 interface NotifyOptions {
-  body: string;
+  body?: string;
   urgency?: Urgency;
   timeout?: number;
 }
 
-export function notify(message: string, options: NotifyOptions) {
+export function notify(message: string, options: NotifyOptions = {}) {
   const log = logger[options.urgency ?? "normal"];
   log(message, options.body);
 
   execAsync([
     "notify-send",
     message,
-    options.body,
+    options.body ?? "",
     `--urgency=${options.urgency ?? "normal"}`,
     `--expire-time=${options.timeout ?? 5000}`,
   ]).catch(() => console.error(`Failed to send notification for: ${message}`));

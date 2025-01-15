@@ -1,6 +1,8 @@
 import { constructOptions, Opt } from "lib/options";
-import { OPTIONS_CACHE } from "lib/session";
+import { CACHE } from "lib/session";
 import { BarModule } from "widgets/Bar";
+
+const OPTIONS_CACHE = `${CACHE}/options.json`;
 
 export const options = constructOptions(OPTIONS_CACHE, {
   // General Options
@@ -81,8 +83,6 @@ export const options = constructOptions(OPTIONS_CACHE, {
       hidden: Opt<string[]>(["Wayland to X11 Video bridge"]),
     },
     weather: {
-      latitude: Opt(38.8951),
-      longitude: Opt(-77.0364),
       temperatureUnit: Opt<"celsius" | "fahrenheit">("fahrenheit"),
       windSpeedUnit: Opt<"ms" | "kmh" | "mph" | "kn">("mph"),
       precipitationUnit: Opt<"mm" | "inch">("inch"),
