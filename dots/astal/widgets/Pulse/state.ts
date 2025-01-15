@@ -26,7 +26,7 @@ export class PulseState extends GObject.Object {
 
   @property(Widget.Box)
   public get results() {
-    return this._results.slice(0, 11);
+    return this._results;
   }
 
   // Initialization
@@ -106,7 +106,11 @@ export class PulseState extends GObject.Object {
   }
 
   private parseQuery(query: string) {
-    const [command, ...args] = query.split(" ");
+    // Parse query
+    const split = query.split(" ");
+    const command = split[0] as `:${string}`;
+    let args = split.slice(1);
+    if (args.length === 1 && args[0] === " ") args = [];
 
     // No query
     if (query.length === 0) return { command: undefined, args: [] };
@@ -116,8 +120,7 @@ export class PulseState extends GObject.Object {
       return { command: undefined, args: query.split(" ") };
 
     // Command with arguments
-    if (this.commands.includes(command as `:${string}`))
-      return { command, args };
+    if (this.commands.includes(command)) return { command, args };
 
     // Autocomplete
     return { command: ":", args: [command] };

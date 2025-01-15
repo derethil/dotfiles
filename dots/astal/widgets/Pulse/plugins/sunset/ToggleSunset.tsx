@@ -5,15 +5,12 @@ import { createKeyHandler } from "utils/binds";
 
 export function ToggleSunset() {
   const sunset = WLSunset.get_default();
+  const handleClick = () => (sunset.enabled = !sunset.enabled);
 
   const icon = bind(sunset, "enabled").as((enabled) => {
     if (enabled) return "moon-symbolic";
     return "brightness-symbolic";
   });
-
-  const handleClick = () => {
-    sunset.enabled = !sunset.enabled;
-  };
 
   const onKeyPress = createKeyHandler({
     key: Gdk.KEY_Return,

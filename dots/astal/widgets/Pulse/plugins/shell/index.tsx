@@ -1,4 +1,3 @@
-import { Fzf } from "fzf";
 import { bash } from "utils";
 import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 import { Binary } from "./Binary";
@@ -10,7 +9,7 @@ export class Shell implements PulsePlugin {
   public readonly description = "Run Exeutable";
   public readonly default = false;
 
-  private bins = new Set<string>();
+  private bins = "";
 
   public static get_default() {
     if (!this.instance) this.instance = new Shell();
@@ -21,20 +20,31 @@ export class Shell implements PulsePlugin {
     this.updateBins().catch(console.error);
   }
 
-  public process(args: string[]) {
+  public async process(query: string[]) {
     this.updateBins().catch(console.error);
-    const fzf = new Fzf([...this.bins]);
-    return fzf.find(args.join(" ")).map(({ item }) => <Binary binary={item} />);
+
+    if (query.length === 0) return this.renderBins(this.bins);
+
+    const [search, ...args] = query;
+    const filterToSearch = `echo -e "${this.bins}" | rg -i ${search}`;
+    const filtered = await bash(filterToSearch);
+
+    return this.renderBins(filtered, args);
   }
 
-  private async listBins() {
-    const r = await bash(
-      "fish -c 'for dir in $PATH; l -1 $dir; end | sort | uniq'",
-    );
-    return new Set(r.split("\n").filter((bin) => !bin.includes("->")));
+  private renderBins(bins: string, args?: string[]) {
+    return bins
+      .split("\n")
+      .slice(0, 100)
+      .map((bin) => <Binary binary={bin} arguments={args} />);
   }
 
   private async updateBins() {
-    this.bins = await this.listBins();
+    const command = "fish -c 'for dir in $PATH; l -1 $dir; end | sort | uniq'";
+    const result = await bash(command);
+    this.bins = result
+      .split("\n")
+      .filter((bin) => !bin.includes("->"))
+      .join("\n");
   }
 }
