@@ -27,7 +27,7 @@ export class Applications implements PulsePlugin {
   public process(args: string[]) {
     if (args.length === 0) return new Promise<Gtk.Widget[]>(() => []);
     const appResults = this.apps.fuzzy_query(args.join(" "));
-    const results = appResults.map((app) => <AppButton app={app} />);
+    const results = appResults.sort().map((app) => <AppButton app={app} />);
     return results;
   }
 
