@@ -1,5 +1,5 @@
 import { bind, GObject, property, register } from "astal";
-import { App, Gtk, Widget } from "astal/gtk3";
+import { App, Astal, Gtk, Widget } from "astal/gtk3";
 import { PulsePlugins } from "./plugins";
 import {
   PulseCommand,
@@ -70,7 +70,7 @@ export class PulseState extends GObject.Object {
   public clickFirst() {
     if (this._results.length === 0) return;
     const widget = this._results[0];
-    widget.emit("clicked");
+    widget.emit("click", new Astal.ClickEvent());
   }
 
   // Private methods
