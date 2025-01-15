@@ -23,6 +23,12 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
 
 return {
   {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = { "graphql-language-service-cli" },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = false },
@@ -38,6 +44,7 @@ return {
         glsl_analyzer = {},
         ruff_lsp = {},
         pyright = {},
+        graphql = {},
         nil_ls = {},
         tailwindcss = {
           settings = {

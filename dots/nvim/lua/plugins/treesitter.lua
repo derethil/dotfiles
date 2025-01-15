@@ -1,6 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   opts = {
-    ensure_installed = { "glsl" },
+    ensure_installed = { "glsl", "graphql" },
   },
 }
