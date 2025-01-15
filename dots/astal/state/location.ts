@@ -1,5 +1,6 @@
-import { GObject, property, readFile, register, writeFileAsync } from "astal";
+import { GObject, property, register, writeFileAsync } from "astal";
 import { CACHE } from "lib/session";
+import { readFileIfExists } from "utils";
 import { fetchAsync } from "utils/fetch";
 
 const LOCATION_CACHE = `${CACHE}/location.json`;
@@ -55,7 +56,7 @@ export class Location extends GObject.Object {
   }
 
   private getLocationFromCache(): LocationResponse | undefined {
-    const location = readFile(LOCATION_CACHE);
+    const location = readFileIfExists(LOCATION_CACHE);
     if (!location) return;
     return JSON.parse(location) as LocationResponse;
   }

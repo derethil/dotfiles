@@ -1,4 +1,4 @@
-import { GLib, Gio, exec, execAsync } from "astal";
+import { GLib, Gio, exec, execAsync, readFile } from "astal";
 import { Astal } from "astal/gtk3";
 import { notify } from "./notify";
 import { toBinding, toVariable } from "./state";
@@ -52,6 +52,11 @@ export function dependencies(...bins: string[]): boolean {
 export function ensureDirectory(path: string) {
   if (GLib.file_test(path, GLib.FileTest.EXISTS)) return;
   Gio.File.new_for_path(path).make_directory_with_parents(null);
+}
+
+export function readFileIfExists(path: string) {
+  if (!GLib.file_test(path, GLib.FileTest.EXISTS)) return undefined;
+  return readFile(path);
 }
 
 export function sleep(ms = 0) {

@@ -1,5 +1,6 @@
-import { exec, monitorFile, property, readFile, register } from "astal";
+import { exec, monitorFile, property, register } from "astal";
 import GObject from "gi://GObject?version=2.0";
+import { readFileIfExists } from "utils";
 
 const ARCH_UPDATE_CACHE_PATH = "~/.local/state/arch-update";
 
@@ -42,7 +43,9 @@ export class ArchUpdate extends GObject.Object {
   }
 
   private syncStatus(file: string) {
-    const status = readFile(file).trim();
+    const status = readFileIfExists(file)?.trim();
+    if (!status) return;
+
     const containsUpdates = status.includes("updates-available");
     this._status = containsUpdates
       ? ArchUpdateStatus.UPDATES_AVAILABLE
@@ -51,7 +54,9 @@ export class ArchUpdate extends GObject.Object {
   }
 
   private syncUpdates(file: string) {
-    const contents = readFile(file).split("\n");
+    const contents = readFileIfExists(file)?.split("\n");
+    if (!contents) return;
+
     this._available = contents.filter((l) => l).length;
     this.notify("available");
   }
