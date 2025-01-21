@@ -11,6 +11,8 @@ alias udb="sudo updatedb"
 
 alias agsv2="ags run --directory ~/.config/astal"
 
+abbr -a be "bundle exec"
+
 function rm
     command rm $argv
 end
