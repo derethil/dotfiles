@@ -24,6 +24,12 @@ interface Props {
   onClick?: (event: Astal.ClickEvent) => void;
   onDestroy?: () => void;
   onChange?: (value: number) => void;
+  zeroPosition?: Degrees;
+}
+
+function degreesToClamped(degrees: number) {
+  const float = degrees / 360;
+  return clamp(float, 0, 1);
 }
 
 export function CircleProgress(props: Props) {
@@ -112,6 +118,8 @@ export function CircleProgress(props: Props) {
           }
         >
           <circularprogress
+            startAt={degreesToClamped(props.zeroPosition ?? 270)}
+            endAt={degreesToClamped(props.zeroPosition ?? 270)}
             rounded={props.rounded ?? true}
             css={css((ss) => ss + (props.css ?? ""))}
             onDestroy={handleDestroy}

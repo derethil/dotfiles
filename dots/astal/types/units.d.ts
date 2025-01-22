@@ -4,3 +4,5 @@ type Minutes = number;
 type Hours = number;
 
 type Megabytes = number;
+
+type Degrees = number;

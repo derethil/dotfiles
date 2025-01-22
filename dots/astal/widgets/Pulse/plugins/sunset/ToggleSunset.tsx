@@ -19,6 +19,7 @@ export function ToggleSunset() {
 
   return (
     <button
+      cursor="pointer"
       onClick={handleClick}
       onKeyPressEvent={onKeyPress}
       className="toggle-sunset"
