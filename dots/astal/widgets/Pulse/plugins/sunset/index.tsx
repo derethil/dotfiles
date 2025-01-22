@@ -1,4 +1,3 @@
-import { Slider } from "astal/gtk3/widget";
 import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 import { ToggleSunset } from "./ToggleSunset";
 
@@ -15,7 +14,7 @@ export class Sunset implements PulsePlugin {
   }
 
   public process() {
-    return [<Slider></Slider>];
+    return [];
   }
 
   public searchAdornment() {

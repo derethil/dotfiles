@@ -20,7 +20,7 @@ export function Overlay({ type, className }: OverlayProps) {
       visible={false}
       name={`overlay-${type}`}
       namespace={`overlay-${type}`}
-      layer={Astal.Layer.OVERLAY}
+      layer={Astal.Layer.TOP}
       exclusivity={Astal.Exclusivity.IGNORE}
       anchor={
         Astal.WindowAnchor.TOP |
