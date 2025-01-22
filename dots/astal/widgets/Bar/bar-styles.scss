@@ -6,10 +6,15 @@
 @use "mixins";
 
 window.Bar {
-  > centerbox {
+  .bar-wrapper {
     @include mixins.widget;
     font-family: font.$mono-family;
     font-weight: bold;
+    padding: 0;
+
+    .bar-modules {
+      padding: #{layout.$padding}px;
+    }
   }
 
   .circle-progress {

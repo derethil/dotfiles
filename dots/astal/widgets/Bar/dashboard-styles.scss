@@ -1,0 +1,11 @@
+@use "mixins";
+@use "color";
+@use "layout";
+
+window.Bar .dashboard {
+  @include mixins.widget;
+  background-color: color.$background-dim;
+  margin: 0px;
+  border-radius: #{layout.$radius}px 0 0 #{layout.$radius}px;
+  border-right: 2px solid color.$background-surface;
+}

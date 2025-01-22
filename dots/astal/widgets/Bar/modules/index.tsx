@@ -34,6 +34,7 @@ export const margin = isRightAligned ? "margin-left" : "margin-right";
 export function BarModules() {
   return (
     <centerbox
+      className="bar-modules"
       vertical
       css={`
         ${margin}: 0px;
