@@ -1,11 +1,13 @@
-import { Variable } from "astal";
+import { bind } from "astal";
 import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import { Revealer } from "elements";
 import { options } from "options";
+import { DashboardState } from "./dashboardState";
+import { DashboardPage } from "./elements/DashboardPage";
 import { BarModules } from "./modules";
 
 export function Bar(gdkmonitor: Gdk.Monitor) {
-  const reveal = Variable(false);
+  const dashboard = DashboardState.get_default();
 
   return (
     <window
@@ -21,16 +23,15 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
           Astal.WindowAnchor[p],
       )}
       application={App}
-      onDestroy={() => reveal.drop()}
     >
-      <eventbox onHoverLost={() => reveal.set(false)}>
+      <eventbox onHoverLost={() => (dashboard.reveal = false)}>
         <box>
-          <eventbox onHover={() => reveal.set(true)} />
+          <eventbox onHover={() => (dashboard.reveal = true)} />
           <box className="bar-wrapper">
             <Revealer
-              transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-              transitionDuration={100}
-              revealChild={reveal()}
+              transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+              transitionDuration={options.theme.transition()}
+              revealChild={bind(dashboard, "reveal")}
             >
               <box className="dashboard" vertical widthRequest={350}>
                 hi
