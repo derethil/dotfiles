@@ -1,6 +1,6 @@
 import { constructOptions, Opt } from "lib/options";
 import { CACHE } from "lib/session";
-import { BarModule } from "widgets/Bar";
+import { BarModule } from "widgets/Bar/modules";
 
 const OPTIONS_CACHE = `${CACHE}/options.json`;
 

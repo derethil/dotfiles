@@ -20,9 +20,7 @@ export function createKeyHandler(...binds: Bind[]) {
   return (widget: Gtk.Widget, event: Gdk.Event) => {
     const eventKey = event.get_keyval()[1];
     const eventMod = event.get_state()[1];
-    const pressedBind = binds.find((bind) =>
-      isEventBound(bind, eventKey, eventMod),
-    );
-    if (pressedBind) pressedBind.action(widget, event);
+    const boundTo = binds.find((b) => isEventBound(b, eventKey, eventMod));
+    if (boundTo) boundTo.action(widget, event);
   };
 }
