@@ -1,7 +1,7 @@
 import { execAsync, GLib, monitorFile, writeFileAsync } from "astal";
 import { App } from "astal/gtk3";
 import { options } from "options";
-import { bash, dependencies } from "utils";
+import { addLineNumbers, bash, dependencies } from "utils";
 import { Option } from "./options";
 import { TEMP } from "./session";
 
@@ -60,6 +60,10 @@ async function writeVariables() {
       $("gap", layout.gap),
       $("padding", layout.padding),
       $("radius", layout.radius),
+      $("border-width", layout.borderWidth),
+    ],
+    misc: [
+      $("transition", options.theme.transition),
     ]
   }
 

@@ -1,13 +1,14 @@
 import { GLib, GObject, property, register } from "astal";
 import { bash } from "utils";
+import { Group } from "./group";
 
 const HUEADM_CONFIG_PATH = `${GLib.get_user_config_dir()}/.hueadm.json`;
 
 @register({ GTypeName: "Hue" })
 export class Hue extends GObject.Object {
   private static instance: Hue;
-  private _groups: HueGroup[] = [];
-  private _lights: HueLight[] = [];
+  private _lights: HueLights = {};
+  private _groups: Group[] = [];
 
   @property(Object)
   get groups() {
@@ -24,19 +25,23 @@ export class Hue extends GObject.Object {
     return this.instance;
   }
 
-  public async huectl<T extends object>(subcommand: string, ...args: string[]) {
+  constructor() {
+    super();
+    this.fetchData().catch(console.error);
+  }
+
+  public async cli<T extends object>(subcommand: string, ...args: string[]) {
     // prettier-ignore
     const result = await bash(["hueadm", "--config", HUEADM_CONFIG_PATH, subcommand, "-j", ...args]);
     return JSON.parse(result) as T;
   }
 
-  constructor() {
-    super();
-    this.loadData().catch(console.error);
-  }
+  public async fetchData() {
+    this._lights = await this.cli<HueLights>("lights");
 
-  private async loadData() {
-    this._groups = Object.values(await this.huectl<HueGroups>("groups"));
-    this._lights = Object.values(await this.huectl<HueLights>("lights"));
+    const groups = await this.cli<HueGroups>("groups");
+    this._groups = Object.entries(groups).map(
+      (entry) => new Group(this, ...entry),
+    );
   }
 }
