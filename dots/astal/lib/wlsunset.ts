@@ -31,6 +31,8 @@ export class WLSunset extends GObject.Object {
     // @ts-expect-error not typed correctly
     super({ enabled: true, lowTemperature: 2800, highTemperature: 6500 });
 
+    let first = true;
+
     Variable.derive(
       [
         bind(this, "enabled"),
@@ -38,8 +40,9 @@ export class WLSunset extends GObject.Object {
         bind(this, "highTemperature"),
       ],
       async (enabled, low, high) => {
-        await this.killProcess();
+        if (!first) await this.killProcess();
         if (enabled) this.startProcess(low, high);
+        first = false;
       },
     );
   }
