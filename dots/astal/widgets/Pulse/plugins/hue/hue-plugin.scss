@@ -1,0 +1,19 @@
+@use "mixins";
+@use "color";
+@use "misc";
+
+.pulse-result-wrapper.group-button {
+  &.on icon {
+    color: color.$accent5;
+  }
+
+  icon {
+    transition: all #{misc.$transition}ms ease-in-out;
+    font-size: 28px;
+    color: color.$accent5-muted;
+  }
+
+  switch {
+    @include mixins.switch;
+  }
+}

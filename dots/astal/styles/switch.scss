@@ -1,0 +1,29 @@
+@use "color";
+@use "layout";
+@use "misc";
+
+@mixin switch {
+  all: unset;
+  color: color.$text-muted;
+  transition: #{misc.$transition}ms;
+  border-radius: #{layout.$radius}px;
+  background-color: color.$background-muted;
+
+  &:active,
+  &:checked,
+  &:hover {
+    background-color: color.$accent5;
+  }
+
+  slider {
+    box-shadow: 0 0 2px 0 color.$text-muted;
+    background-color: color.$text;
+    border-radius: #{layout.$radius}px;
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  image {
+    color: transparent;
+  }
+}
