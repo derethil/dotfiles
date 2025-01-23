@@ -58,6 +58,7 @@
     - hyprutils
     - hyprwayland-scanner
     - morewaita-icon-theme
+    - nodejs-hueadm
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
     - ttf-icomoon-feather-git
     - ueberzugpp

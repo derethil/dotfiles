@@ -26,3 +26,5 @@ function refish
 end
 
 alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+
+alias hueadm="hueadm --config ~/.config/.hueadm.json"
