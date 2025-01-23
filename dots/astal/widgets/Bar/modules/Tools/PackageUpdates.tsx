@@ -23,7 +23,7 @@ export function PackageUpdates() {
         <CircleButton
           onClick={() => launchInTerminal(FOOT_ARGS)}
           tooltip={bind(updates, "available").as(
-            (updates) => `${updates} aviailable updates`,
+            (updates) => `${updates} available updates`,
           )}
         >
           <icon icon="package-down-symbolic" />
