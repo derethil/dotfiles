@@ -1,5 +1,17 @@
 local M = {}
 
+local function read_packagejson()
+  local path = vim.fn.findfile("package.json", ".;")
+
+  if path == "" then
+    return nil
+  end
+
+  local json = vim.fn.json_decode(vim.fn.readfile(path))
+
+  return json
+end
+
 function M.rustywindRegex(regexList)
   local flattenedRegex = require("util.table").flatten(regexList)
   local returnList = {}
@@ -36,6 +48,34 @@ function M.format_diff(buf_id)
       format({ range = range })
     end
   end
+end
+
+function M.get_ruby_formatter()
+  local json = read_packagejson()
+
+  if not json or not json.devDependencies then
+    return { "rubocop" }
+  end
+
+  local hasPlugin = json.devDependencies["prettier"] and json.devDependencies["@prettier/plugin-ruby"]
+
+  return { hasPlugin and "prettierd" or "rubocop" }
+end
+
+function M.eslint_d(formatters)
+  local json = read_packagejson()
+
+  if not json then
+    return formatters
+  end
+
+  local hasEslint = json.devDependencies and json.devDependencies.eslint
+
+  if hasEslint then
+    table.insert(formatters, "eslint_d")
+  end
+
+  return formatters
 end
 
 return M

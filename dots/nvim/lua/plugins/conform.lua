@@ -1,20 +1,4 @@
-local function detect_prettier_formatter()
-  local path = vim.fn.findfile("package.json", ".;")
-
-  if path == "" then
-    return { "rubocop" }
-  end
-
-  local json = vim.fn.json_decode(vim.fn.readfile(path))
-
-  if not json or not json.devDependencies then
-    return { "rubocop" }
-  end
-
-  local hasPlugin = json.devDependencies["prettier"] and json.devDependencies["@prettier/plugin-ruby"]
-
-  return { hasPlugin and "prettierd" or "rubocop" }
-end
+local util = require("util.formatting")
 
 return {
   {
@@ -25,7 +9,7 @@ return {
         "<leader>fd",
         function()
           local bufnr = vim.api.nvim_get_current_buf()
-          require("util.formatting").format_diff(bufnr)
+          util.format_diff(bufnr)
         end,
         { desc = "Format diff" },
       },
@@ -33,10 +17,10 @@ return {
     opts = {
       formatters_by_ft = {
         nix = { "alejandra" },
-        javascript = { "prettierd" },
-        javascriptreact = { "prettierd" },
-        typescript = { "prettierd" },
-        typescriptreact = { "prettierd" },
+        javascript = util.eslint_d({ "prettierd" }),
+        javascriptreact = util.eslint_d({ "prettierd" }),
+        typescript = util.eslint_d({ "prettierd" }),
+        typescriptreact = util.eslint_d({ "prettierd" }),
         vue = { "biome" },
         css = { "biome" },
         scss = { "prettierd" },
@@ -50,7 +34,7 @@ return {
         graphql = { "prettierd" },
         handlebars = { "prettierd" },
         rust = { "rustfmt" },
-        ruby = detect_prettier_formatter(),
+        ruby = util.get_ruby_formatter(),
       },
     },
   },

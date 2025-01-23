@@ -36,22 +36,27 @@ return {
     local commands = {
       {
         args = { "run", "--directory", "/home/derethil/.config/astal" },
+        priority = 1,
+        tags = { TAG.RUN },
+      },
+      {
+        args = { "run", "--directory", "/home/derethil/.config/astal", "--gtk4" },
         priority = 2,
         tags = { TAG.RUN },
       },
       {
         args = { "inspect" },
-        priority = 1,
-        components = { { "on_complete_dispose", timeout = 0.1 } },
-      },
-      {
-        args = { "quit" },
         priority = 3,
         components = { { "on_complete_dispose", timeout = 0.1 } },
       },
       {
-        args = { "toggle" },
+        args = { "quit" },
         priority = 4,
+        components = { { "on_complete_dispose", timeout = 0.1 } },
+      },
+      {
+        args = { "toggle" },
+        priority = 5,
         components = { { "on_complete_dispose", timeout = 0.1 } },
         params = {
           window = {
