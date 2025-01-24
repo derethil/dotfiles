@@ -14,6 +14,13 @@ export class Group extends GObject.Object {
     return this._data.name;
   }
 
+  @property(Object)
+  get lights() {
+    return this.hue.lights.filter((light) =>
+      this._data.lights.includes(light.id),
+    );
+  }
+
   constructor(hue: Hue, id: string, group: HueGroup) {
     // @ts-expect-error not typed properly
     super({ id });
@@ -33,6 +40,8 @@ export class Group extends GObject.Object {
 
     this.hue.cli("group", this.id, value).catch(console.error);
     this.reload().catch(console.error);
+
+    this.lights.forEach((light) => (light.on = bool));
   }
 
   public toggle(bool?: boolean) {
