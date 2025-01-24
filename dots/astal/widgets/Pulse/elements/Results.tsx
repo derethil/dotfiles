@@ -1,5 +1,5 @@
 import { bind } from "astal";
-import { Gtk } from "astal/gtk3";
+import { App, Gtk } from "astal/gtk3";
 import { Revealer } from "elements";
 import { PulseState, TRANSITION_DURATION } from "../state";
 
@@ -14,9 +14,15 @@ export function Results() {
       wrapperProps={{ vertical: true }}
     >
       <scrollable heightRequest={500}>
-        <box vertical className="results" expand={false}>
-          {bind(state, "results")}
-        </box>
+        <eventbox
+          expand={true}
+          onClick={() => App.toggle_window("pulse")}
+          clickThrough={false}
+        >
+          <box vertical className="results" expand={false}>
+            {bind(state, "results")}
+          </box>
+        </eventbox>
       </scrollable>
     </Revealer>
   );
