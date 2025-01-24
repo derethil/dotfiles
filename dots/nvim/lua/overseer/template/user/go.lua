@@ -2,9 +2,9 @@ local constants = require("overseer.constants")
 local TAG = constants.TAG
 
 local function get_main()
-  local matches = vim.fn.globpath(vim.fn.getcwd(), "main.go", true, true)
-  if #matches ~= 0 then
-    return matches[1]
+  local path = vim.fn.findfile("main.go", vim.fn.expand("%:p:h") .. ";")
+  if path then
+    return path
   end
 end
 
