@@ -1,9 +1,7 @@
-import { bind } from "astal";
-import { App, Astal, Gdk, Gtk } from "astal/gtk3";
-import { Revealer } from "elements";
+import { App, Astal, Gdk } from "astal/gtk3";
 import { options } from "options";
 import { DashboardState } from "./dashboardState";
-import { DashboardPage } from "./elements/DashboardPage";
+import { Dashboard } from "./elements/Dashboard";
 import { BarModules } from "./modules";
 
 export function Bar(gdkmonitor: Gdk.Monitor) {
@@ -28,15 +26,7 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
         <box>
           <eventbox onHover={() => (dashboard.reveal = true)} />
           <box className="bar-wrapper">
-            <Revealer
-              transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-              transitionDuration={options.theme.transition()}
-              revealChild={bind(dashboard, "reveal")}
-            >
-              <box className="dashboard" vertical widthRequest={350}>
-                hi
-              </box>
-            </Revealer>
+            <Dashboard />
             <BarModules />
           </box>
         </box>
