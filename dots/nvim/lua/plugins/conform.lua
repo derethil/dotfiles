@@ -1,5 +1,24 @@
 local util = require("util.formatting")
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.js,*.jsx,*.ts,*.tsx",
+  callback = function()
+    local hasEslint = util.has_eslint()
+    local conform = require("conform")
+
+    if hasEslint and conform then
+      conform.setup({
+        formatters_by_ft = {
+          javascript = { "prettierd", "eslint_d" },
+          javascriptreact = { "prettierd", "eslint_d" },
+          typescript = { "prettierd", "eslint_d" },
+          typescriptreact = { "prettierd", "eslint_d" },
+        },
+      })
+    end
+  end,
+})
+
 return {
   {
     "stevearc/conform.nvim",
@@ -17,10 +36,10 @@ return {
     opts = {
       formatters_by_ft = {
         nix = { "alejandra" },
-        javascript = util.eslint_d({ "prettierd" }),
-        javascriptreact = util.eslint_d({ "prettierd" }),
-        typescript = util.eslint_d({ "prettierd" }),
-        typescriptreact = util.eslint_d({ "prettierd" }),
+        javascript = { "prettierd" },
+        javascriptreact = { "prettierd" },
+        typescript = { "prettierd" },
+        typescriptreact = { "prettierd" },
         vue = { "biome" },
         css = { "biome" },
         scss = { "prettierd" },
