@@ -73,7 +73,7 @@ export function launchInTerminal(command: string) {
 }
 
 export function icon(icon: string, fallback: string) {
-  if (Astal.Icon.lookup_icon(icon)) return icon;
+  if (icon && Astal.Icon.lookup_icon(icon)) return icon;
   return fallback;
 }
 

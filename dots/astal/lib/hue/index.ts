@@ -1,13 +1,14 @@
 import { GLib, GObject, property, register } from "astal";
 import { bash } from "utils";
 import { Group } from "./group";
+import { Light } from "./light";
 
 const HUEADM_CONFIG_PATH = `${GLib.get_user_config_dir()}/.hueadm.json`;
 
 @register({ GTypeName: "Hue" })
 export class Hue extends GObject.Object {
   private static instance: Hue;
-  private _lights: HueLights = {};
+  private _lights: Light[] = [];
   private _groups: Group[] = [];
 
   @property(Object)
@@ -37,11 +38,17 @@ export class Hue extends GObject.Object {
   }
 
   public async fetchData() {
-    this._lights = await this.cli<HueLights>("lights");
-
+    const lights = await this.cli<HueLights>("lights");
     const groups = await this.cli<HueGroups>("groups");
+
+    this._lights = Object.entries(lights).map(
+      (entry) => new Light(this, ...entry),
+    );
+
     this._groups = Object.entries(groups).map(
       (entry) => new Group(this, ...entry),
     );
   }
 }
+
+export { Group, Light };
