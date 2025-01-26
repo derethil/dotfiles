@@ -3,6 +3,7 @@ import { Hue } from ".";
 
 @register({ GTypeName: "HueGroup" })
 export class Group extends GObject.Object {
+  private POLL_INTERVAL = 1000;
   private hue: Hue;
   private _data: HueGroup;
 
@@ -26,6 +27,7 @@ export class Group extends GObject.Object {
     super({ id });
     this.hue = hue;
     this._data = group;
+    setInterval(() => this.reload(), this.POLL_INTERVAL);
   }
 
   @property(Boolean)
@@ -54,5 +56,6 @@ export class Group extends GObject.Object {
 
   private async reload() {
     this._data = await this.hue.cli<HueGroup>("group", this.id);
+    this.notify("on");
   }
 }

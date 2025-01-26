@@ -3,6 +3,7 @@ import { Hue } from ".";
 
 @register({ GTypeName: "HueLight" })
 export class Light extends GObject.Object {
+  private POLL_INTERVAL = 1000;
   private hue: Hue;
   private _data: HueLight;
 
@@ -19,6 +20,7 @@ export class Light extends GObject.Object {
     super({ id });
     this.hue = hue;
     this._data = light;
+    setInterval(() => this.reload(), this.POLL_INTERVAL);
   }
 
   @property(Boolean)
