@@ -32,8 +32,7 @@ export class CPUMonitor extends GObject.Object {
 
   constructor() {
     super();
-    const poll = this.createPoll();
-    poll.subscribe((state) => {
+    this.poll().subscribe((state) => {
       if (!state) return;
       const usage = getUsage(state.prev, state.curr);
       this.usage = isNaN(usage) ? 0 : usage;
@@ -41,7 +40,7 @@ export class CPUMonitor extends GObject.Object {
     });
   }
 
-  private createPoll() {
+  private poll() {
     return Variable<CPUDelta | null>(null).poll(POLL_INTERVAL, (previous) => {
       const cpu = new GTop.glibtop_cpu();
       GTop.glibtop_get_cpu(cpu);

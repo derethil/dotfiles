@@ -49,9 +49,8 @@ export class GPUMonitor extends GObject.Object {
     if (!dependencies("nvidia-smi")) return;
 
     this.enabled = true;
-    const poll = this.createPoll();
 
-    poll.subscribe((properties) => {
+    this.poll().subscribe((properties) => {
       if (!properties) return;
       this.total = properties.total;
       this.free = properties.free;
@@ -61,7 +60,7 @@ export class GPUMonitor extends GObject.Object {
     });
   }
 
-  private createPoll() {
+  private poll() {
     return Variable<Properties | null>(null).poll(POLL_INTERVAL, async () => {
       const [total, free, used] = await get(
         "memory.total,memory.free,memory.used",
