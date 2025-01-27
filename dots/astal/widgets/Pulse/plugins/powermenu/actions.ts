@@ -38,7 +38,7 @@ export const PowerActions: PowerAction[] = [
     className: "suspend",
     icon: "system-suspend-symbolic",
     activate: () => {
-      bash("systemctl suspend").catch(console.error);
+      bash("systemctl suspend -i").catch(console.error);
     },
   },
   {
