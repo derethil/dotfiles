@@ -29,6 +29,7 @@ export class Applications implements PulsePlugin {
 
   public process(args: string[]) {
     if (args.length === 0) return [];
+    this.apps.reload();
     const appResults = this.apps.fuzzy_query(args.join(" "));
     return this.renderApps(appResults.sort());
   }
