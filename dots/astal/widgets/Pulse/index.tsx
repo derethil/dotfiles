@@ -34,7 +34,7 @@ export function Pulse() {
       namespace={WINDOW_NAME}
       className={WINDOW_NAME}
       visible={false}
-      overlay={OverlayType.BLUR}
+      overlay={OverlayType.TRANSPARENT}
       keymode={Astal.Keymode.EXCLUSIVE}
       application={App}
       heightRequest={700}
