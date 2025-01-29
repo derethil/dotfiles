@@ -1,19 +1,22 @@
 import { Gtk } from "astal/gtk3";
 import { bash } from "utils";
-import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
+import { PluginOptions, PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 
 export class Calculate implements PulsePlugin {
   private static instance: Calculate;
 
-  public readonly command: PulseCommand = ":cal";
+  public readonly command: PulseCommand;
   public readonly description = "Quick Access Calculator";
   public readonly default = false;
 
-  public static get_default() {
-    if (!this.instance) this.instance = new Calculate();
+  public static get_default(options: PluginOptions) {
+    if (!this.instance) this.instance = new Calculate(options);
     return this.instance;
   }
 
+  public constructor(options: PluginOptions) {
+    this.command = options.command;
+  }
   private calculate(expression: string) {
     return bash(`echo "${expression}" | bc -l`);
   }

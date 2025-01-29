@@ -1,12 +1,8 @@
 import { bind, GObject, property, register } from "astal";
 import { App, Astal, Gtk, Widget } from "astal/gtk3";
-import { PulsePlugins } from "./plugins";
-import {
-  PulseCommand,
-  PulsePlugin,
-  PulseResult,
-  StaticPulsePlugin,
-} from "./types";
+import { options } from "options";
+import { plugins } from "./plugins";
+import { PluginOption, PulseCommand, PulsePlugin, PulseResult } from "./types";
 import { WINDOW_NAME } from ".";
 
 export const TRANSITION_DURATION = 200;
@@ -47,11 +43,10 @@ export class PulseState extends GObject.Object {
   }
 
   // Public methods
-  public registerPlugin(p: StaticPulsePlugin) {
-    const plugin = p.get_default(this);
-    if (!this.commands.includes(plugin.command))
-      return this._plugins.push(plugin);
-    console.warn(`plugin ${plugin.command} is already registered`);
+  public registerPlugin({ plugin, ...options }: PluginOption) {
+    const p = plugins[plugin].get_default(options);
+    if (!this.commands.includes(p.command)) return this._plugins.push(p);
+    console.warn(`plugin ${p.command} is already registered`);
   }
 
   public get commands() {
@@ -133,4 +128,5 @@ export class PulseState extends GObject.Object {
 }
 
 const state = PulseState.get_default();
-PulsePlugins.forEach((plugin) => state.registerPlugin(plugin));
+state.registerPlugin({ plugin: "PulseAutocomplete", command: ":" });
+options.pulse.plugins.get().forEach((p) => state.registerPlugin(p));

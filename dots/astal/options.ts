@@ -1,6 +1,7 @@
 import { constructOptions, Opt } from "lib/options";
 import { CACHE } from "lib/session";
 import { BarModule } from "widgets/Bar/modules";
+import { PluginOption } from "widgets/Pulse/types";
 
 const OPTIONS_CACHE = `${CACHE}/options.json`;
 
@@ -91,5 +92,15 @@ export const options = constructOptions(OPTIONS_CACHE, {
     tools: {
       colorPicker: Opt<string>("hyprpicker -a"),
     },
+  },
+  pulse: {
+    plugins: Opt<PluginOption[]>([
+      { plugin: "Applications", command: ":a" },
+      { plugin: "Calculate", command: ":cal" },
+      { plugin: "PowerMenu", command: ":p" },
+      { plugin: "HueControl", command: ":h" },
+      { plugin: "Shell", command: ":e" },
+      { plugin: "Sunset", command: ":s" },
+    ]),
   },
 });

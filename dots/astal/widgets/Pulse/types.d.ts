@@ -1,5 +1,5 @@
 import { Gtk } from "astal/gtk3";
-import { PulseState } from "./state";
+import { plugins } from "./plugins";
 
 export type PulseResult = Gtk.Widget;
 export type PulseCommand = `:${string}`;
@@ -12,6 +12,13 @@ export interface PulsePlugin {
   searchAdornment?: (explicit?: boolean) => Gtk.Widget | null;
 }
 
+export interface PluginOption {
+  plugin: keyof typeof plugins;
+  command: PulseCommand;
+}
+
+export type PluginOptions = Omit<PluginOption, "plugin">;
+
 export interface StaticPulsePlugin {
-  get_default: (state?: PulseState) => PulsePlugin;
+  get_default: (options: PluginOptions) => PulsePlugin;
 }

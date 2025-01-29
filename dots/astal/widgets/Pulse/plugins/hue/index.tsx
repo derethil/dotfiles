@@ -2,22 +2,25 @@ import { Fzf } from "fzf";
 import { Group, Hue, Light } from "lib/hue";
 import { GroupButton } from "./GroupButton";
 import { LightButton } from "./LightButton";
-import { PulsePlugin, PulseCommand } from "../../types";
+import { PulsePlugin, PulseCommand, PluginOptions } from "../../types";
 
 const hue = Hue.get_default();
 
 export class HueControl implements PulsePlugin {
   private static instance: HueControl;
 
-  public readonly command: PulseCommand = ":h";
+  public readonly command: PulseCommand;
   public readonly description = "Philips Hue";
   public readonly default = false;
 
-  public static get_default() {
-    if (!this.instance) this.instance = new HueControl();
+  public static get_default(options: PluginOptions) {
+    if (!this.instance) this.instance = new HueControl(options);
     return this.instance;
   }
 
+  public constructor(options: PluginOptions) {
+    this.command = options.command;
+  }
   public process(args: string[]) {
     const items = [...hue.lights, ...hue.groups];
 

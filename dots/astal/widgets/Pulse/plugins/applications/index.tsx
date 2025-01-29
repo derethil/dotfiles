@@ -1,9 +1,13 @@
 import Apps from "gi://AstalApps";
 import { AppButton } from "./AppButton";
-import { PulsePlugin, PulseCommand } from "../../types";
+import { PulsePlugin, PulseCommand, PluginOptions } from "../../types";
 
 export class Applications implements PulsePlugin {
   private static instance: Applications;
+
+  public readonly command: PulseCommand;
+  public readonly description = "Application Launcher";
+  public readonly default = true;
 
   private apps = new Apps.Apps({
     nameMultiplier: 2,
@@ -14,13 +18,13 @@ export class Applications implements PulsePlugin {
     minScore: 0.75,
   });
 
-  public readonly command: PulseCommand = ":a";
-  public readonly description = "Application Launcher";
-  public readonly default = true;
-
-  public static get_default() {
-    if (!this.instance) this.instance = new Applications();
+  public static get_default(options: PluginOptions) {
+    if (!this.instance) this.instance = new Applications(options);
     return this.instance;
+  }
+
+  public constructor(options: PluginOptions) {
+    this.command = options.command;
   }
 
   public renderApps(apps: Apps.Application[]) {

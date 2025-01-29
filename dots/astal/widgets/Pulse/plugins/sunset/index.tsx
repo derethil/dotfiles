@@ -1,16 +1,20 @@
-import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
+import { PluginOptions, PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 import { ToggleSunset } from "./ToggleSunset";
 
 export class Sunset implements PulsePlugin {
   private static instance: Sunset;
 
-  public readonly command: PulseCommand = ":s";
+  public readonly command: PulseCommand;
   public readonly description = "Temperature Control";
   public readonly default = false;
 
-  public static get_default() {
-    if (!this.instance) this.instance = new Sunset();
+  public static get_default(options: PluginOptions) {
+    if (!this.instance) this.instance = new Sunset(options);
     return this.instance;
+  }
+
+  public constructor(options: PluginOptions) {
+    this.command = options.command;
   }
 
   public process() {

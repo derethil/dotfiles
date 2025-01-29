@@ -6,7 +6,7 @@ import { PowerMenu } from "./powermenu";
 import { Shell } from "./shell";
 import { Sunset } from "./sunset";
 
-export const PulsePlugins = [
+export const plugins = {
   Applications,
   Calculate,
   HueControl,
@@ -14,4 +14,4 @@ export const PulsePlugins = [
   PulseAutocomplete,
   Shell,
   Sunset,
-];
+};

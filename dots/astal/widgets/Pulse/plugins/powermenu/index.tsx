@@ -1,18 +1,22 @@
 import { Fzf } from "fzf";
-import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
+import { PluginOptions, PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 import { Action } from "./Action";
 import { PowerActions } from "./actions";
 
 export class PowerMenu implements PulsePlugin {
   private static instance: PowerMenu;
 
-  public readonly command: PulseCommand = ":p";
+  public readonly command: PulseCommand;
   public readonly description = "Power Management";
   public readonly default = false;
 
-  public static get_default() {
-    if (!this.instance) this.instance = new PowerMenu();
+  public static get_default(options: PluginOptions) {
+    if (!this.instance) this.instance = new PowerMenu(options);
     return this.instance;
+  }
+
+  public constructor(options: PluginOptions) {
+    this.command = options.command;
   }
 
   public process(args: string[]) {

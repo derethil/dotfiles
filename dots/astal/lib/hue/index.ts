@@ -1,5 +1,5 @@
 import { GLib, GObject, property, register } from "astal";
-import { bash } from "utils";
+import { bash, dependencies } from "utils";
 import { Group } from "./group";
 import { Light } from "./light";
 
@@ -10,6 +10,9 @@ export class Hue extends GObject.Object {
   private static instance: Hue;
   private _lights: Light[] = [];
   private _groups: Group[] = [];
+
+  @property(Boolean)
+  declare enabled: boolean;
 
   @property(Object)
   get groups() {
@@ -28,7 +31,10 @@ export class Hue extends GObject.Object {
 
   constructor() {
     super();
-    this.fetchData().catch(console.error);
+    if (dependencies("hueadm")) {
+      this.fetchData().catch(console.error);
+      this.enabled = true;
+    }
   }
 
   public async cli<T extends object>(subcommand: string, ...args: string[]) {

@@ -1,22 +1,23 @@
 import { bash } from "utils";
-import { PulseCommand, PulsePlugin } from "widgets/Pulse/types";
+import { PluginOptions, PulseCommand, PulsePlugin } from "widgets/Pulse/types";
 import { Binary } from "./Binary";
 
 export class Shell implements PulsePlugin {
   private static instance: Shell;
 
-  public readonly command: PulseCommand = ":e";
+  public readonly command: PulseCommand;
   public readonly description = "Run Exeutable";
   public readonly default = true;
 
   private bins = "";
 
-  public static get_default() {
-    if (!this.instance) this.instance = new Shell();
+  public static get_default(options: PluginOptions) {
+    if (!this.instance) this.instance = new Shell(options);
     return this.instance;
   }
 
-  public constructor() {
+  public constructor(options: PluginOptions) {
+    this.command = options.command;
     this.updateBins().catch(console.error);
   }
 
