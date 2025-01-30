@@ -41,7 +41,8 @@ export function Pulse() {
       onKeyPressEvent={handleKeyPress}
       setup={(self) => {
         self.hook(self, "notify::visible", () => {
-          if (self.visible) state.query = "";
+          if (!self.visible) return (state.query = "");
+          if (self.visible) state.entry?.grab_focus();
         });
       }}
     >
