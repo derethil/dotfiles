@@ -1,4 +1,5 @@
 import { App } from "astal/gtk3";
+import { loadDotenv } from "lib/env";
 import { handleMessage, setupMessageHandlers } from "lib/messages";
 import { session } from "lib/session";
 import { watchStyles } from "lib/style";
@@ -11,6 +12,7 @@ import { PopupNotifications } from "widgets/PopupNotifications";
 import { Pulse } from "widgets/Pulse";
 
 function initialize() {
+  loadDotenv();
   session();
   WLSunset.set_default();
   setupMessageHandlers();
