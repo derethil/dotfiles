@@ -6,6 +6,7 @@ interface CurlOptions {
   headers?: Record<string, string>;
   data?: object;
   params?: object;
+  cacheTimeout?: Milliseconds;
 }
 
 const DEFAULT_OPTIONS: CurlOptions = {
@@ -13,7 +14,8 @@ const DEFAULT_OPTIONS: CurlOptions = {
 };
 
 function buildCurlCommand(url: string, options: CurlOptions): string {
-  if (!dependencies("curl")) throw new Error("Could not find curl on PATH");
+  if (!dependencies("curl", "bkt"))
+    throw new Error("Could not find curl and bkt on PATH");
   let command = `curl -s ${url}`;
 
   if (options.params && Object.keys(options.params).length > 0) {
@@ -38,7 +40,9 @@ function buildCurlCommand(url: string, options: CurlOptions): string {
     command += ` -d '${JSON.stringify(options.data)}'`;
   }
 
-  return command;
+  if (!options.cacheTimeout || options.cacheTimeout < 1) return command;
+
+  return `bkt --ttl=${options.cacheTimeout}ms -- ${command}`;
 }
 
 export function fetch(url: string, options: CurlOptions = DEFAULT_OPTIONS) {

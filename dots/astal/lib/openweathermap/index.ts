@@ -7,7 +7,7 @@ import { WEATHER_ICON_MAP } from "./weatherIcons";
 export class OpenWeatherMap extends GObject.Object {
   static instance: OpenWeatherMap;
   private api = createApi("https://api.openweathermap.org/data/3.0/");
-  private interval: Milliseconds = 1000 * 60 * 30; // 30 minutes
+  private interval: Milliseconds = 1000 * 60 * 5; // 5 minutes
 
   private _current: CurrentWeather | null = null;
 
@@ -49,6 +49,7 @@ export class OpenWeatherMap extends GObject.Object {
   private async fetch() {
     const result = await this.api.fetchAsync("/onecall", {
       params: queryParameters.get(),
+      cacheTimeout: this.interval,
     });
 
     if (!result) return;
