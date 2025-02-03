@@ -7,6 +7,7 @@ import { DashboardState } from "../dashboardState";
 
 export function Dashboard() {
   const dashboard = DashboardState.get_default();
+  dashboard.page = "page1";
 
   return (
     <Revealer
