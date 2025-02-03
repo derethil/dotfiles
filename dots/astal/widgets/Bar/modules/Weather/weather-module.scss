@@ -1,8 +1,6 @@
 @use "color";
 
-window.Bar .weather .icon {
-  min-width: 26px;
-  min-height: 26px;
-  background-size: contain;
-  background-position: center;
+window.Bar .weather icon {
+  font-size: 28px;
+  color: color.$text;
 }

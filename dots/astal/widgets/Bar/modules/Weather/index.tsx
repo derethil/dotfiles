@@ -1,20 +1,19 @@
 import { bind } from "astal";
 import { CircleProgress } from "elements";
-import { OpenMeteo } from "lib/openmeteo";
-import { fromCode } from "lib/openmeteo/wmo";
+import { OpenWeatherMap } from "lib/openweathermap";
 import { options } from "options";
+import { icon } from "utils";
 
 export function Weather() {
-  const openMeteo = OpenMeteo.get_default();
+  const weather = OpenWeatherMap.get_default();
 
-  const value = bind(openMeteo, "current").as(
-    (current) => current.temperature / 100,
+  const value = bind(weather, "current").as((current) =>
+    current ? current.temperature / 100 : 0,
   );
 
-  const imageCss = bind(openMeteo, "current").as((current) => {
-    const result = fromCode(current.weatherCode);
-    if (result) return `background-image: url("${result.iconPath}");`;
-    return "";
+  const weatherIcon = bind(weather, "current").as((current) => {
+    if (!current) return "dialog-question";
+    return icon(`${weather.getIconFromCode(current.code)}`, "dialog-question");
   });
 
   return (
@@ -23,7 +22,7 @@ export function Weather() {
         color={options.theme.color.accent[2].default()}
         value={value}
       >
-        <box className="icon" css={imageCss} />
+        <icon icon={weatherIcon} />
       </CircleProgress>
     </box>
   );

@@ -85,9 +85,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
       hidden: Opt<string[]>(["Wayland to X11 Video bridge"]),
     },
     weather: {
-      temperatureUnit: Opt<"celsius" | "fahrenheit">("fahrenheit"),
-      windSpeedUnit: Opt<"ms" | "kmh" | "mph" | "kn">("mph"),
-      precipitationUnit: Opt<"mm" | "inch">("inch"),
+      units: Opt<"standard" | "metric" | "imperial">("imperial"),
     },
     tools: {
       colorPicker: Opt<string>("hyprpicker -a"),
