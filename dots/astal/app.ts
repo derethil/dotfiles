@@ -11,9 +11,9 @@ import { Overlay } from "widgets/Overlay";
 import { PopupNotifications } from "widgets/PopupNotifications";
 import { Pulse } from "widgets/Pulse";
 
-function initialize() {
+async function initialize() {
   loadDotenv();
-  session();
+  await session();
   WLSunset.set_default();
   setupMessageHandlers();
   watchStyles().catch((err: unknown) => {
@@ -36,7 +36,6 @@ function createWidgets() {
 App.start({
   requestHandler: handleMessage,
   main: () => {
-    initialize();
-    createWidgets();
+    initialize().then(createWidgets).catch(console.error);
   },
 });
