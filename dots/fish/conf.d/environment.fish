@@ -49,6 +49,9 @@ set -x GTK2_RC_FILES "$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 # Histfile
 set -x HISTFILE "$XDG_DATA_HOME"/bash/history
 
+# IRB
+set -x IRBRC "$XDG_CONFIG_HOME"/irb/irbrc
+
 # NPM / PNPM
 set -x NPM_CONFIG_USERCONFIG "$XDG_CONFIG_HOME"/npm/npmrc
 set -x PNPM_HOME "$XDG_DATA_HOME"/pnpm

@@ -45,6 +45,7 @@
     ~/.config/starship.toml: dots/starship.toml
     ~/.config/mimeapps.list: dots/mimeapps.list
     ~/.config/foot/foot.ini: dots/foot.ini
+    ~/.config/irb/irbrc: dots/.irbrc
 
     # Local Files
     ~/.local/share/fonts/:
