@@ -2,7 +2,6 @@ return {
   "NeogitOrg/neogit",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "sindrets/diffview.nvim",
     "ibhagwan/fzf-lua",
   },
   config = function(_, opts)
@@ -58,7 +57,6 @@ return {
     },
     integrations = {
       telescope = true,
-      diffview = true,
     },
     graph_style = "unicode",
     git_services = {
