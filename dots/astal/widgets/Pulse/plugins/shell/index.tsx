@@ -6,7 +6,7 @@ export class Shell implements PulsePlugin {
   private static instance: Shell;
 
   public readonly command: PulseCommand;
-  public readonly description = "Run Exeutable";
+  public readonly description = "Run Executable";
   public readonly default = true;
 
   private bins = "";
@@ -37,7 +37,7 @@ export class Shell implements PulsePlugin {
   private renderBins(bins: string, args?: string[]) {
     return bins
       .split("\n")
-      .slice(0, 100)
+      .slice(0, 50)
       .map((bin) => <Binary binary={bin} arguments={args} />);
   }
 
