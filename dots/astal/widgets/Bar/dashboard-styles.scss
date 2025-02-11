@@ -12,4 +12,16 @@ window.Bar .dashboard {
   margin: 0px;
   border-radius: #{layout.$radius}px 0 0 #{layout.$radius}px;
   border-right: 2px solid color.$background-surface;
+
+  .page-selector {
+    button {
+      // background-color: color.$background-surface;
+      padding: #{layout.$padding / 2}px 0px;
+      color: #{color.$text};
+      border-radius: 50%;
+      icon {
+        font-size: 16px;
+      }
+    }
+  }
 }
