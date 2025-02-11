@@ -1,4 +1,5 @@
 import { PluginOptions, PulseCommand, PulsePlugin } from "widgets/Pulse/types";
+import { TemperatureSliders } from "./TemperatureSliders";
 import { ToggleSunset } from "./ToggleSunset";
 
 export class Sunset implements PulsePlugin {
@@ -18,7 +19,7 @@ export class Sunset implements PulsePlugin {
   }
 
   public process() {
-    return [];
+    return [<TemperatureSliders />];
   }
 
   public searchAdornment() {

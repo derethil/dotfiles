@@ -88,3 +88,11 @@ export function addLineNumbers(message: string) {
 
   return `\n${numbered}`;
 }
+
+export function debounce(fn: (...args: unknown[]) => void, delay: number) {
+  let timeout: GLib.Source;
+  return (...args: unknown[]) => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+}

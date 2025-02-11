@@ -1,6 +1,7 @@
 @use "color";
 @use "layout";
 @use "animation";
+@use "pulse";
 
 window.pulse .toggle-sunset {
   background-color: color.$accent3-muted;
@@ -22,4 +23,8 @@ window.pulse .toggle-sunset {
   icon {
     color: color.$background;
   }
+}
+
+window.pulse .sunset-sliders {
+  @include pulse.result;
 }
