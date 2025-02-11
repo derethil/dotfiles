@@ -3,8 +3,12 @@
 @use "font";
 @use "misc";
 
-.pulse-result-wrapper.group-button {
-  &.on icon {
+.pulse-result-wrapper.hue-button {
+  &:focus-within {
+    background-color: color.$background-surface;
+  }
+
+  &.on .label icon {
     color: color.$accent5;
     &.light {
       color: color.$accent3;
@@ -16,7 +20,7 @@
     color: color.$text-muted;
   }
 
-  icon {
+  .label icon {
     transition: all #{misc.$transition}ms ease-in-out;
     font-size: 28px;
     color: color.$accent5-muted;
@@ -27,5 +31,13 @@
 
   switch {
     @include mixins.switch;
+  }
+
+  .toggle-details {
+    all: unset;
+    icon {
+      font-size: 20px;
+      color: color.$text;
+    }
   }
 }

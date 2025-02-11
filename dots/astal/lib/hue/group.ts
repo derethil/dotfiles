@@ -1,4 +1,5 @@
-import { GObject, property, register } from "astal";
+import { GObject, property, register, signal } from "astal";
+import { clamp } from "utils";
 import { Hue } from ".";
 
 @register({ GTypeName: "HueGroup" })
@@ -52,6 +53,28 @@ export class Group extends GObject.Object {
     } else {
       this.on = bool;
     }
+  }
+
+  @property(Number)
+  public get brightness() {
+    return this._data.action.bri;
+  }
+
+  public set brightness(value: number) {
+    const clamped = clamp(Math.round(value), 0, 255);
+
+    this._data.action.bri = clamped;
+    this.notify("brightness");
+
+    this.hue.cli("group", this.id, `=${clamped}`).catch(console.error);
+    this.reload().catch(console.error);
+
+    this.lights.forEach((light) => (light.brightness = clamped));
+  }
+
+  @signal()
+  public flash() {
+    this.hue.rawCli("group", this.id, "select").catch(console.error);
   }
 
   private async reload() {

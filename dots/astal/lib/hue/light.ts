@@ -1,4 +1,5 @@
-import { GObject, property, register } from "astal";
+import { GObject, property, register, signal } from "astal";
+import { clamp } from "utils";
 import { Hue } from ".";
 
 @register({ GTypeName: "HueLight" })
@@ -45,8 +46,27 @@ export class Light extends GObject.Object {
     }
   }
 
+  @property(Number)
+  public get brightness() {
+    return this._data.state.bri;
+  }
+
+  public set brightness(value: number) {
+    const clamped = clamp(Math.round(value), 0, 255);
+    this._data.state.bri = clamped;
+    this.notify("brightness");
+
+    this.hue.cli("light", this.id, `=${clamped}`).catch(console.error);
+    this.reload().catch(console.error);
+  }
+
   private async reload() {
     this._data = await this.hue.cli<HueLight>("light", this.id);
+  }
+
+  @signal()
+  public flash() {
+    this.hue.rawCli("light", this.id, "select").catch(console.error);
   }
 
   private poll() {

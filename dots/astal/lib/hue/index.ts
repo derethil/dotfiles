@@ -43,6 +43,11 @@ export class Hue extends GObject.Object {
     return JSON.parse(result) as T;
   }
 
+  public rawCli(subcommand: string, ...args: string[]) {
+    // prettier-ignore
+    return bash(["hueadm", "--config", HUEADM_CONFIG_PATH, subcommand, ...args]);
+  }
+
   public async fetchData() {
     const lights = await this.cli<HueLights>("lights");
     const groups = await this.cli<HueGroups>("groups");
