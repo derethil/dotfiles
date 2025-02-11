@@ -16,6 +16,13 @@ return {
       desc = "Neogit (Root Dir)",
     },
     {
+      "<leader>gd",
+      function()
+        require("neogit").open({ cwd = vim.g.dotfiles_path })
+      end,
+      desc = "Neogit (Dotfiles)",
+    },
+    {
       "<leader>gG",
       function()
         require("neogit").open({ cwd = vim.fn.expand("%:p:h") })
