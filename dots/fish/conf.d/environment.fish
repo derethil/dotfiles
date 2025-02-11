@@ -18,6 +18,11 @@ set -x AWS_CONFIG_FILE "$XDG_CONFIG_HOME"/aws/config
 # Bun
 set -x BUN_INSTALL "$XDG_DATA_HOME"/bun
 
+# Ruby Bundle
+set -x BUNDLE_USER_CACHE "$XDG_CACHE_HOME"/bundle
+set -x BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle/config
+set -x BUNDLE_USER_PLUGIN "$XDG_DATA_HOME"/bundle
+
 # Cargo / Rust
 set -x CARGO_HOME "$XDG_DATA_HOME"/cargo
 set -x RUSTUP_HOME "$XDG_DATA_HOME"/rustup
