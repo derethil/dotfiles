@@ -4,7 +4,7 @@ import { Hue } from ".";
 
 @register({ GTypeName: "HueGroup" })
 export class Group extends GObject.Object {
-  private POLL_INTERVAL = 1000;
+  private POLL_INTERVAL = 1000 * 60 * 5;
   private hue: Hue;
   private _data: HueGroup;
 

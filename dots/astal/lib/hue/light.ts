@@ -4,7 +4,7 @@ import { Hue } from ".";
 
 @register({ GTypeName: "HueLight" })
 export class Light extends GObject.Object {
-  private POLL_INTERVAL = 1000;
+  private POLL_INTERVAL = 1000 * 60 * 5;
   private hue: Hue;
   private _data: HueLight;
 
@@ -14,6 +14,11 @@ export class Light extends GObject.Object {
   @property(String)
   get name() {
     return this._data.name;
+  }
+
+  @property(String)
+  get groups() {
+    return this.hue.groups.filter((group) => group.lights.includes(this));
   }
 
   constructor(hue: Hue, id: string, light: HueLight) {

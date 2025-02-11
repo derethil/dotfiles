@@ -40,4 +40,17 @@
       color: color.$text;
     }
   }
+
+  scale {
+    trough {
+      min-height: 12px;
+      background-color: color.$background-surface;
+      highlight {
+        background-color: color.$accent6-muted;
+      }
+      slider {
+        all: unset;
+      }
+    }
+  }
 }

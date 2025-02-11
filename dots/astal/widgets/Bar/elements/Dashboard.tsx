@@ -15,6 +15,7 @@ export function Dashboard() {
       revealChild={bind(dashboard, "reveal")}
     >
       <box vertical widthRequest={350} className="dashboard">
+        <slider />
         <PageSelector />
         <stack
           visibleChildName={bind(dashboard, "page")}
