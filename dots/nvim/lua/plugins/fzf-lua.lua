@@ -8,6 +8,7 @@ return {
     keys = {
       { "<leader>fb", "<cmd>FzfLua builtin<cr>", desc = "Find Telescope builtins" },
       { "<leader>fy", "<cmd>FzfLua filetypes<cr>", desc = "Find Filestypes" },
+      { "<leader>fd", "<cmd>FzfLua files cwd=~/.dotfiles/<cr>", desc = "Find Dotfiles" },
     },
     opts = {
       defaults = {
