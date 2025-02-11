@@ -64,6 +64,8 @@
     - ttf-icomoon-feather-git
     - ueberzugpp
     - xdg-desktop-portal-hyprland
+    - yaycache
+    - yaycache-hook
 
 - asdf:
     - plugin: nodejs
