@@ -27,7 +27,7 @@ export class Group extends GObject.Object {
     super({ id });
     this.hue = hue;
     this._data = group;
-    setInterval(() => this.reload(), this.POLL_INTERVAL);
+    this.poll();
   }
 
   @property(Boolean)
@@ -56,6 +56,12 @@ export class Group extends GObject.Object {
 
   private async reload() {
     this._data = await this.hue.cli<HueGroup>("group", this.id);
-    this.notify("on");
+  }
+
+  private poll() {
+    setInterval(() => {
+      this.reload().catch(console.error);
+      this.notify("on");
+    }, this.POLL_INTERVAL);
   }
 }

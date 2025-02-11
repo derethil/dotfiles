@@ -1,6 +1,8 @@
-interface Response {
-  success: Record<string, string>;
-}
+type HueResponse<T = unknown> = [
+  {
+    success: Record<string, T>;
+  },
+];
 
 // Lights
 

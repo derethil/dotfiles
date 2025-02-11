@@ -20,7 +20,7 @@ export class Light extends GObject.Object {
     super({ id });
     this.hue = hue;
     this._data = light;
-    setInterval(() => this.reload(), this.POLL_INTERVAL);
+    this.poll();
   }
 
   @property(Boolean)
@@ -47,5 +47,12 @@ export class Light extends GObject.Object {
 
   private async reload() {
     this._data = await this.hue.cli<HueLight>("light", this.id);
+  }
+
+  private poll() {
+    setInterval(() => {
+      this.reload().catch(console.error);
+      this.notify("on");
+    }, this.POLL_INTERVAL);
   }
 }
