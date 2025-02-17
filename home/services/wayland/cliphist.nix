@@ -3,6 +3,6 @@
     enable = true;
     package = pkgs.cliphist;
     allowImages = true;
-    systemdTarget = "hyprland-session.target";
+    systemdTargets = "hyprland-session.target";
   };
 }
