@@ -21,6 +21,7 @@ in {
     extraPackages = with pkgs; [
       # Dependencies
       fd
+      bash
       fzf
       gcc
       gnutar
@@ -55,8 +56,4 @@ in {
   xdg.configFile."nvim/lazy-lock.json".source = createNvimLink "lazy-lock.json";
   xdg.configFile."nvim/lazyvim.json".source = createNvimLink "lazyvim.json";
   xdg.configFile."nvim/lua".source = createNvimLink "lua";
-  # xdg.configFile."nvim/lua" = {
-  #   source = ./lua;
-  #   recursive = true;
-  # };
 }

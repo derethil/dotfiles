@@ -1,5 +1,23 @@
 local M = {}
 
+-- HELPERS
+
+local function read_packagejson()
+  local path = vim.fn.findfile("package.json", vim.fn.expand("%:p:h") .. ";")
+
+  vim.notify(path)
+
+  if path == "" then
+    return nil
+  end
+
+  local json = vim.fn.json_decode(vim.fn.readfile(path))
+
+  return json
+end
+
+-- TAILWIND
+
 function M.rustywindRegex(regexList)
   local flattenedRegex = require("util.table").flatten(regexList)
   local returnList = {}
@@ -13,6 +31,8 @@ function M.rustywindRegex(regexList)
 end
 
 local range_ignore_filetypes = { "lua" }
+
+-- DIFF
 
 function M.format_diff(buf_id)
   -- Get diff data
@@ -36,6 +56,42 @@ function M.format_diff(buf_id)
       format({ range = range })
     end
   end
+end
+
+-- RUBY
+
+function M.get_ruby_formatter()
+  local json = read_packagejson()
+
+  if not json or not json.devDependencies then
+    return { "rubocop" }
+  end
+
+  local hasPlugin = json.devDependencies["prettier"] and json.devDependencies["@prettier/plugin-ruby"]
+
+  return { hasPlugin and "prettierd" or "rubocop" }
+end
+
+-- JAVASCRIPT
+
+function M.has_eslint()
+  local json = read_packagejson()
+
+  if not json then
+    return false
+  end
+
+  return json.devDependencies and json.devDependencies.eslint
+end
+
+function M.eslint_d(formatters)
+  local hasEslint = M.has_eslint()
+
+  if hasEslint then
+    table.insert(formatters, "eslint_d")
+  end
+
+  return formatters
 end
 
 return M

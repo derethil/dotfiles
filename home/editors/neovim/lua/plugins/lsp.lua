@@ -1,3 +1,16 @@
+-- Hyprlang LSP
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.hl", "hypr*.conf", "**/hypr/conf.d/**.conf" },
+  callback = function(event)
+    vim.notify(string.format("starting hyprls for %s", vim.inspect(event["file"])))
+    vim.lsp.start({
+      name = "hyprlang",
+      cmd = { "hyprls" },
+      root_dir = vim.fn.getcwd(),
+    })
+  end,
+})
+
 -- Enable inlay hints for specific filetypes
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
   desc = "Enable inlay hints for specific filetypes",
@@ -9,6 +22,12 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
 })
 
 return {
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = { "graphql-language-service-cli" },
+    },
+  },
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -22,8 +41,10 @@ return {
         end,
       },
       servers = {
+        glsl_analyzer = {},
         ruff_lsp = {},
         pyright = {},
+        graphql = {},
         nil_ls = {},
         tailwindcss = {
           settings = {

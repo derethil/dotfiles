@@ -2,7 +2,6 @@ return {
   "NeogitOrg/neogit",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "sindrets/diffview.nvim",
     "ibhagwan/fzf-lua",
   },
   config = function(_, opts)
@@ -15,6 +14,13 @@ return {
         require("neogit").open()
       end,
       desc = "Neogit (Root Dir)",
+    },
+    {
+      "<leader>gd",
+      function()
+        require("neogit").open({ cwd = vim.g.dotfiles_path })
+      end,
+      desc = "Neogit (Dotfiles)",
     },
     {
       "<leader>gG",
@@ -58,7 +64,6 @@ return {
     },
     integrations = {
       telescope = true,
-      diffview = true,
     },
     graph_style = "unicode",
     git_services = {
