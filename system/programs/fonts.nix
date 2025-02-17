@@ -13,7 +13,7 @@
       geist-font
 
       # Nerd Fonts
-      (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+      nerd-fonts.symbols-only
     ];
 
     enableDefaultPackages = false;
