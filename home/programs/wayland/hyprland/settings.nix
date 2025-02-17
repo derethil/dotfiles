@@ -9,7 +9,7 @@ in {
     ];
 
     monitor = [
-      "DP-3, 3440x1440@144, 0x0, 1"
+      "DP-5, 3440x1440@144, 0x0, 1"
     ];
 
     general = {
@@ -27,7 +27,6 @@ in {
     master = {
       orientation = "left";
       new_status = "slave";
-      always_center_master = true;
       mfact = 0.5;
     };
 

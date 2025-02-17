@@ -21,6 +21,7 @@ in {
     extraPackages = with pkgs; [
       # Dependencies
       fd
+      fzf
       gcc
       gnutar
       ripgrep

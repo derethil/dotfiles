@@ -1,5 +1,18 @@
-{
+let
+  workspaces = builtins.concatLists (builtins.genList (
+      x: let
+        ws = let
+          c = (x + 1) / 10;
+        in
+          builtins.toString (x + 1 - (c * 10));
+      in [
+        "${ws}, monitor:DP-5"
+      ]
+    )
+    20);
+in {
   wayland.windowManager.hyprland.settings = {
+    workspace = workspaces;
     windowrulev2 = [
       # Suppress Events
       "suppressevent maximize, class:.*"
@@ -27,6 +40,7 @@
       "fullscreen,class:^(steam_app_[0-9]+)$"
 
       # Application Default Workspaces
+      "workspace 1, class:firefox"
       "workspace 1, title:Zen Browser"
       "workspace 1, class:code-url-handler"
 
