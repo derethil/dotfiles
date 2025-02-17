@@ -11,6 +11,9 @@
     ./substituters.nix
   ];
 
+  programs.nix-ld.enable = true;
+  services.envfs.enable = true;
+
   environment.systemPackages = [pkgs.git];
 
   nix = let
