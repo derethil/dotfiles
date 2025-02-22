@@ -5,7 +5,7 @@ import { bash, ensureDirectory } from "utils";
 export const TEMP = `${GLib.get_tmp_dir()}/${App.get_instance_name()}`;
 export const CACHE = `${GLib.get_user_cache_dir()}/${App.get_instance_name()}`;
 
-export async function session() {
+export async function loadSessionFiles() {
   await addIcons();
   ensureDirectory(TEMP);
   ensureDirectory(CACHE);

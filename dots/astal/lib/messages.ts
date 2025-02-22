@@ -39,7 +39,7 @@ export function handleMessage(message: string, respond: ResponseHandler) {
   }
 }
 
-export function setupMessageHandlers() {
+export function loadMessageHandlers() {
   registerMessage("toggle", (args) => {
     if (args.length !== 1) throw new Error("expected 1 argument (window name)");
     App.toggle_window(args[0]);

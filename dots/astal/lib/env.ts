@@ -1,9 +1,9 @@
 import { readFile } from "astal";
 
-class dotenv {
+class Env {
   env: Record<string, string> = {};
 
-  loadDotenv(this: dotenv) {
+  loadEnv(this: Env) {
     const contents = readFile(`${SRC}/.env`);
 
     if (contents === "") {
@@ -22,8 +22,8 @@ class dotenv {
     this.env = loaded;
   }
 
-  getEnv(this: dotenv, key: string): string | undefined {
-    if (Object.keys(this.env).length === 0) this.loadDotenv();
+  getEnv(this: Env, key: string): string | undefined {
+    if (Object.keys(this.env).length === 0) this.loadEnv();
     if (!this.env[key]) {
       console.error(`No env variable found for ${key}`);
       return;
@@ -32,8 +32,8 @@ class dotenv {
   }
 }
 
-const env = new dotenv();
-const loadDotenv = () => env.loadDotenv();
+const env = new Env();
+const loadEnv = () => env.loadEnv();
 const getEnv = (key: string) => env.getEnv(key);
 
-export { loadDotenv, getEnv };
+export { loadEnv, getEnv };

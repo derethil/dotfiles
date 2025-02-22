@@ -14,7 +14,7 @@ export class WLSunset extends GObject.Object {
     return this.instance;
   }
 
-  static set_default() {
+  static load() {
     this.get_default();
   }
 

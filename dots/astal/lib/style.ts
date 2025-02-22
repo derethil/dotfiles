@@ -1,7 +1,7 @@
 import { execAsync, GLib, monitorFile, writeFileAsync } from "astal";
 import { App } from "astal/gtk3";
 import { options } from "options";
-import { addLineNumbers, bash, dependencies } from "utils";
+import { bash, dependencies } from "utils";
 import { Option } from "./options";
 import { TEMP } from "./session";
 
@@ -115,7 +115,7 @@ async function resetStyles() {
 }
 
 // Hot reload styles
-export async function watchStyles() {
+export async function styles() {
   if (!dependencies("sass", "fd")) return;
 
   const paths = await execAsync(listStyles);
