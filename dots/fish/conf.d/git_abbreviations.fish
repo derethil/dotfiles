@@ -52,3 +52,28 @@ abbr -a gtd "git log --tags --simplify-by-decoration --pretty=\"format:%ai %d\""
 abbr -a grs "git shortlog -s -n --all --no-merges"
 # open current repo and branch in browser
 abbr -a gop "git open"
+# prune branches
+abbr -a gpr git_prune_merged
+
+# prune merged branches
+function git_prune_merged
+    if test (count $argv) -ne 1
+        echo "Usage: prune_merged <branch>"
+        return 1
+    end
+
+    set branch $argv[1]
+
+    if not git rev-parse --verify $branch >/dev/null 2>&1
+        echo "Branch '$branch' does not exist"
+        return 1
+    end
+
+    if test (count (git branch --merged=$branch)) -eq 0
+        echo "No branches to prune"
+        return 1
+    end
+
+    git branch --merged=$branch | grep -v "$branch" | xargs -n 1 git branch -d
+    git fetch --prune
+end
