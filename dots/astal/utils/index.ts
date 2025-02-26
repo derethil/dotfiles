@@ -1,4 +1,4 @@
-import { GLib, Gio, exec, execAsync, readFile } from "astal";
+import { Binding, GLib, Gio, exec, execAsync, readFile } from "astal";
 import { Astal } from "astal/gtk3";
 import { notify } from "./notify";
 import { toBinding, toVariable } from "./state";
@@ -95,4 +95,9 @@ export function debounce(fn: (...args: unknown[]) => void, delay: number) {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => fn(...args), delay);
   };
+}
+
+export function watch<T>(bind: Binding<T>, transform?: (value: T) => unknown) {
+  console.log(transform?.(bind.get()) ?? bind.get());
+  bind.subscribe(() => console.log(transform?.(bind.get()) ?? bind.get()));
 }

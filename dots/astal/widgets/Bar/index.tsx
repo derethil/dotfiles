@@ -1,7 +1,7 @@
 import { App, Astal, Gdk } from "astal/gtk3";
 import { options } from "options";
+import { Dashboard } from "./Dashboard";
 import { DashboardState } from "./dashboardState";
-import { Dashboard } from "./elements/Dashboard";
 import { BarModules } from "./modules";
 
 export function Bar(gdkmonitor: Gdk.Monitor) {

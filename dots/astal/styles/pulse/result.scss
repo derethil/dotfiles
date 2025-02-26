@@ -7,7 +7,7 @@
   background-color: color.$background;
   color: color.$text-highlight;
 }
-@mixin result($border-color: color.$background-surface, $surface: false) {
+@mixin result($border-color: color.$background-surface) {
   all: unset;
   background-color: color.$background-muted;
   font-family: font.$mono-family;
@@ -22,13 +22,9 @@
     padding: #{layout.$padding}px;
     color: color.$text;
 
-    @if $surface {
+    &:focus,
+    &:hover {
       @include focus;
-    } @else {
-      &:focus,
-      &:hover {
-        @include focus;
-      }
     }
 
     icon {

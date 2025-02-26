@@ -1,0 +1,31 @@
+import { Binding } from "astal";
+import { Astal } from "astal/gtk3";
+import { toBinding } from "utils";
+import { ChildProps } from "utils/children";
+
+interface Props extends ChildProps {
+  icon?: string;
+  active: Binding<boolean> | boolean;
+  onClick?: (self: Astal.Button) => void;
+}
+
+export function OptionButton(props: Props) {
+  const active = toBinding(props.active);
+
+  return (
+    <button
+      className="option-button"
+      cursor="pointer"
+      expand
+      onClick={props.onClick}
+      setup={(self) => {
+        self.toggleClassName("active", active.get());
+        active.subscribe((active) => {
+          self.toggleClassName("active", active);
+        });
+      }}
+    >
+      {props.child}
+    </button>
+  );
+}

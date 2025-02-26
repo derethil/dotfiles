@@ -1,6 +1,7 @@
 @use "mixins";
 @use "color";
 @use "layout";
+@use "font";
 
 window.Bar .bar-wrapper > revealer {
   transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
@@ -22,6 +23,22 @@ window.Bar .dashboard {
       icon {
         font-size: 16px;
       }
+    }
+  }
+
+  .heading {
+    font-weight: 600;
+    font-size: #{font.$mono-size * 1.25}px;
+    margin-bottom: #{layout.$gap}px;
+    margin-top: #{layout.$gap}px;
+  }
+
+  .section {
+    margin-top: #{layout.$gap / 2}px;
+    margin-bottom: #{layout.$gap / 2}px;
+
+    &:first-child {
+      margin-top: 0px;
     }
   }
 }
