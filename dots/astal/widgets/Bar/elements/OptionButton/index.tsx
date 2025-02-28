@@ -1,6 +1,6 @@
 import { Binding } from "astal";
 import { Astal } from "astal/gtk3";
-import { toBinding } from "utils";
+import { attach, toBinding } from "utils";
 import { ChildProps } from "utils/children";
 
 interface Props extends ChildProps {
@@ -18,12 +18,9 @@ export function OptionButton(props: Props) {
       cursor="pointer"
       expand
       onClick={props.onClick}
-      setup={(self) => {
-        self.toggleClassName("active", active.get());
-        active.subscribe((active) => {
-          self.toggleClassName("active", active);
-        });
-      }}
+      setup={(self) =>
+        attach(active, (active) => self.toggleClassName("active", active))
+      }
     >
       {props.child}
     </button>

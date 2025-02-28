@@ -1,6 +1,7 @@
 import { bind } from "astal";
 import Gdk from "gi://Gdk?version=3.0";
 import { WLSunset } from "lib/wlsunset";
+import { attach } from "utils";
 import { createKeyHandler } from "utils/binds";
 
 export function ToggleSunset() {
@@ -17,6 +18,8 @@ export function ToggleSunset() {
     action: handleClick,
   });
 
+  const enabled = bind(sunset, "enabled");
+
   return (
     <button
       cursor="pointer"
@@ -24,10 +27,7 @@ export function ToggleSunset() {
       onKeyPressEvent={onKeyPress}
       className="toggle-sunset"
       setup={(self) => {
-        self.toggleClassName("enabled", sunset.enabled);
-        bind(sunset, "enabled").subscribe((enabled) => {
-          self.toggleClassName("enabled", enabled);
-        });
+        attach(enabled, (enabled) => self.toggleClassName("enabled", enabled));
       }}
     >
       <icon icon={icon} />

@@ -101,3 +101,8 @@ export function watch<T>(bind: Binding<T>, transform?: (value: T) => unknown) {
   console.log(transform?.(bind.get()) ?? bind.get());
   bind.subscribe(() => console.log(transform?.(bind.get()) ?? bind.get()));
 }
+
+export function attach<T>(bind: Binding<T>, callback: (value: T) => unknown) {
+  callback(bind.get());
+  return bind.subscribe(callback);
+}

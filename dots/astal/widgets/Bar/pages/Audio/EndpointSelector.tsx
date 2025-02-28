@@ -24,7 +24,7 @@ export function EndpointSelector(props: Props) {
         (endpoints ?? []).map((endpoint) => (
           <OptionButton
             active={defaultEndpointId.as((id) => id === endpoint.id)}
-            onClick={() => endpoint.set_is_default(true)}
+            onClick={() => (endpoint.isDefault = true)}
           >
             <label label={description(endpoint.description)} />
           </OptionButton>
