@@ -1,18 +1,20 @@
-import { bind } from "astal";
+import { bind, Variable } from "astal";
 import Mpris from "gi://AstalMpris";
 import { CircleProgress } from "elements";
 import { options } from "options";
-import { ProgressState } from "./ProgressState";
 
 interface Props {
   player: Mpris.Player;
 }
 
-const isPlaying = (player: Mpris.Player) =>
-  player.playbackStatus === Mpris.PlaybackStatus.PLAYING;
-
 export function MediaProgress({ player }: Props) {
-  const progress = ProgressState(player);
+  const progress = Variable.derive(
+    [bind(player, "position"), bind(player, "length")],
+    (position, length) => {
+      if (length === 0) return 0;
+      return position / length;
+    },
+  );
 
   const coverArt = bind(player, "coverArt").as((c) => {
     let url = c;
@@ -21,13 +23,17 @@ export function MediaProgress({ player }: Props) {
     return `background-image: url("${url}");`;
   });
 
+  const paused = bind(player, "playbackStatus").as(() => {
+    return player.playbackStatus !== Mpris.PlaybackStatus.PLAYING;
+  });
+
   return (
     <CircleProgress
       value={bind(progress)}
       color={options.theme.color.accent[1].default()}
       onClick={() => player.play_pause()}
       onScroll={(direction) => (player.volume += 0.1 * direction)}
-      disabled={bind(player, "playbackStatus").as(() => !isPlaying(player))}
+      disabled={paused}
     >
       <box className="cover-art" css={coverArt} />
     </CircleProgress>
