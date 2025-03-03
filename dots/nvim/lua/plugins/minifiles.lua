@@ -16,12 +16,32 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+---@param options (table) - Regex filter options to exclude files
+--- - <hidden> (table) - List of hidden files to exclude
+---@return function - Filter function to exclude files
+---
+local function filter_files(options)
+  return function(fs_entry)
+    for _, pattern in ipairs(options.hidden) do
+      if string.match(fs_entry.name, pattern) then
+        return false
+      end
+    end
+    return true
+  end
+end
+
 return {
   { "famiu/bufdelete.nvim", lazy = true },
   {
     "echasnovski/mini.files",
     event = "VeryLazy",
     opts = {
+      content = {
+        filter = filter_files({
+          hidden = { "__pycache__" },
+        }),
+      },
       windows = {
         preview = false,
       },
