@@ -6,7 +6,6 @@
     - arch-update
     - bat
     - bkt
-    - bc
     - brightnessctl
     - cliphist
     - dart-sass
@@ -58,6 +57,8 @@
     - hyprshot
     - hyprutils
     - hyprwayland-scanner
+    - icon-theme-browser-git
+    - libqalculate
     - morewaita-icon-theme
     - nodejs-hueadm
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)

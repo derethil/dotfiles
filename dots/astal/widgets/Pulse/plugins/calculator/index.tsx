@@ -18,7 +18,8 @@ export class Calculate implements PulsePlugin {
     this.command = options.command;
   }
   private calculate(expression: string) {
-    return bash(`echo "${expression}" | bc -l`);
+    if (expression === "") return "";
+    return bash(`qalc "${expression}"`);
   }
 
   public searchAdornment() {
@@ -26,11 +27,10 @@ export class Calculate implements PulsePlugin {
   }
 
   public async process(args: string[]) {
-    const result = Number(await this.calculate(args.join(" ")));
-    const rounded = Math.round(result * 1000) / 1000;
+    const result = await this.calculate(args.join(" "));
     return [
       <box className="pulse-result calculator" hexpand>
-        <label label={String(rounded)} hexpand halign={Gtk.Align.CENTER} />
+        <label label={result} hexpand halign={Gtk.Align.CENTER} />
       </box>,
     ];
   }
