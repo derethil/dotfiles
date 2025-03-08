@@ -14,9 +14,10 @@ export function Details({ item }: DetailsProps) {
       setup={(self) => {
         if (item instanceof Group) return;
         item.groups.forEach((group) => {
-          bind(group, "brightness").subscribe((groupBrightness) => {
+          const unregister = bind(group, "brightness").subscribe((groupBrightness) => {
             self.value = groupBrightness / 255;
           });
+          self.connect("destroy", unregister);
         });
       }}
     />

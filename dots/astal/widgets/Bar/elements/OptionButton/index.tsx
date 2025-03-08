@@ -18,7 +18,10 @@ export function OptionButton(props: Props) {
       cursor="pointer"
       expand
       onClick={props.onClick}
-      setup={(self) => attach(active, (active) => self.toggleClassName("active", active))}
+      setup={(self) => {
+        const detach = attach(active, (active) => self.toggleClassName("active", active));
+        self.connect("destroy", detach);
+      }}
     >
       {props.child}
     </button>

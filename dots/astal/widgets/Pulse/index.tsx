@@ -63,8 +63,14 @@ export function Pulse() {
               self.grab_focus();
               state.entry = self;
 
-              self.connect("focus-in-event", () => (state.entryFocused = true));
-              self.connect("focus-out-event", () => (state.entryFocused = false));
+              const connections = [
+                self.connect("focus-in-event", () => (state.entryFocused = true)),
+                self.connect("focus-out-event", () => (state.entryFocused = false)),
+              ];
+
+              self.connect("destroy", () =>
+                connections.forEach((c) => self.disconnect(c)),
+              );
             }}
           />
           <SearchAdornment />

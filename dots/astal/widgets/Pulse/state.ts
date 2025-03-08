@@ -14,6 +14,7 @@ export class PulseState extends GObject.Object {
 
   private _plugins: PulsePlugin[] = [];
   private _results: PulseResult[] = [];
+  private _unregisters: (() => void)[] = [];
 
   // Properties
   @property(Widget.Box)
@@ -74,7 +75,7 @@ export class PulseState extends GObject.Object {
   // Private methods
 
   private handleChangeQuery() {
-    bind(this, "query").subscribe((rawQuery) => {
+    const unregister = bind(this, "query").subscribe((rawQuery) => {
       const { command, args } = this.parseQuery(rawQuery);
 
       if (command === undefined && args.length === 0) {
@@ -97,6 +98,8 @@ export class PulseState extends GObject.Object {
           console.error(error);
         });
     });
+
+    this._unregisters.push(unregister);
   }
 
   private handlePluginAdornment(plugin: PulsePlugin | undefined) {

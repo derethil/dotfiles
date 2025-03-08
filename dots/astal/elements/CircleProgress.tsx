@@ -35,6 +35,7 @@ function degreesToClamped(degrees: number) {
 export function CircleProgress(props: Props) {
   let destroyed = false;
   const value = toBinding(props.value);
+
   const css = Variable.derive(
     [toBinding(props.color), toBinding(props.trackColor), toBinding(props.disabled)],
     (color, trackColor, disabled) =>
@@ -59,28 +60,35 @@ export function CircleProgress(props: Props) {
   };
 
   const handleSetup = (self: Widget.CircularProgress) => {
-    self.connect("notify::value", () => props.onChange?.(self.value));
+    const valueConn = self.connect("notify::value", () => props.onChange?.(self.value));
+    self.connect("destroy", () => self.disconnect(valueConn));
 
     if (props.asTimeout) {
-      self.connect("realize", () => handleAnimate(self, 0));
+      const realizeConn = self.connect("realize", () => handleAnimate(self, 0));
+      self.connect("destroy", () => self.disconnect(realizeConn));
       return;
     }
 
-    value.subscribe((newValue) => {
+    const unregister = value.subscribe((newValue) => {
       if (destroyed) return;
       handleAnimate(self, newValue);
     });
+
+    self.connect("destroy", unregister);
   };
 
   const tooltipSetup = (self: Widget.EventBox) => {
+    if (!props.tooltip) return;
     self.set_has_tooltip(true);
-    self.connect("query-tooltip", (...params) => {
+    const conn = self.connect("query-tooltip", (...params) => {
       const tooltip = params[4];
-      toBinding(props.tooltip).subscribe((text) => {
+      const unregister = toBinding(props.tooltip).subscribe((text) => {
         tooltip.set_text((text?.length ?? 0 > 0) ? text : null);
       });
+      self.connect("destroy", unregister);
       return true;
     });
+    self.connect("destroy", () => self.disconnect(conn));
   };
 
   const sursor = (props.onScroll ?? props.onClick) ? "pointer" : "default";
@@ -96,7 +104,7 @@ export function CircleProgress(props: Props) {
       <eventbox
         className={props.className}
         setup={tooltipSetup}
-        hasTooltip={Boolean(props.tooltip)}
+        hasTooltip={toBinding(props.tooltip).as((text) => (text?.length ?? 0) > 0)}
         onScroll={(_, event) => props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)}
         cursor={sursor}
         onClick={(_, event) => props.onClick?.(event)}

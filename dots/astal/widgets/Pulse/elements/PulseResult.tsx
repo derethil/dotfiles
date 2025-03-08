@@ -35,9 +35,10 @@ export function PulseResult(props: Props) {
       className={className}
       setup={(self) => {
         self.connect("click", props.activate);
-        attach(bind(state, "entryFocused"), (entryFocused) =>
+        const unregister = attach(bind(state, "entryFocused"), (entryFocused) =>
           self.toggleClassName("entry-focused", entryFocused),
         );
+        self.connect("destroy", unregister);
       }}
     >
       <button

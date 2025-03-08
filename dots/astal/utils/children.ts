@@ -38,8 +38,7 @@ export function bindChildren(props: ChildProps): Subscribable<JSX.Element[]> {
     get: () => getChildrenValues(props),
     subscribe: (callback) => {
       const binds = getChildrenBinds(props);
-      Variable.derive(binds).subscribe((value) => callback(value.flat()));
-      return () => getChildrenValues(props);
+      return Variable.derive(binds).subscribe((value) => callback(value.flat()));
     },
   };
 }

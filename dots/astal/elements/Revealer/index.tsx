@@ -22,6 +22,7 @@ export function Revealer(props: RevealerProps) {
     <revealer
       {...rest}
       transitionDuration={props.transitionDuration}
+      onDestroy={() => state.onDestroy()}
       revealChild={bind(state, "reveal")}
     >
       <box {...props.wrapperProps} setup={wrapperSetup}>

@@ -62,7 +62,7 @@ export function Corner(props: Props) {
                 let radius = getRadius();
                 self.set_size_request(radius, radius);
 
-                self.connect("draw", (_, cairo: Cairo.Context) => {
+                const conn = self.connect("draw", (_, cairo: Cairo.Context) => {
                   radius = getRadius();
                   self.set_size_request(radius, radius);
 
@@ -77,6 +77,8 @@ export function Corner(props: Props) {
                   );
                   cairo.fill();
                 });
+
+                self.connect("destroy", () => self.disconnect(conn));
               }}
             />
           );

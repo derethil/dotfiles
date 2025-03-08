@@ -12,17 +12,19 @@ export function TextEntry({ setup, ...props }: Props) {
 
   const handleAnimatePlaceholder = (self: Gtk.Label) => {
     self.opacity = placeholderOpacity.get();
-    placeholderOpacity.subscribe((value) => {
+    const unregister = placeholderOpacity.subscribe((value) => {
       animate(self, "opacity", value, {
         duration: props.placeholderTransitionDuration ?? 75,
       });
     });
+    self.connect("destroy", unregister);
   };
 
   const handleKeyPress = (self: Gtk.Entry) => {
     const get = () => (self.get_text().length === 0 ? 1 : 0);
     placeholderOpacity.set(get());
-    self.connect("notify::text", () => placeholderOpacity.set(get()));
+    const conn = self.connect("notify::text", () => placeholderOpacity.set(get()));
+    self.connect("destroy", () => self.disconnect(conn));
   };
 
   const entry = new Widget.Entry({
@@ -43,7 +45,10 @@ export function TextEntry({ setup, ...props }: Props) {
             className="placeholder"
             halign={Gtk.Align.START}
             label={props.placeholderText}
-            setup={(self) => self.connect("realize", handleAnimatePlaceholder)}
+            setup={(self) => {
+              const conn = self.connect("realize", handleAnimatePlaceholder);
+              self.connect("destroy", () => self.disconnect(conn));
+            }}
           />
         }
       >

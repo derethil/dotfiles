@@ -8,6 +8,7 @@ import { RevealerProps } from ".";
 @register({ GTypeName: "RevealerState" })
 export class RevealerState extends GObject.Object {
   private _children: Gtk.Widget[] = [];
+  private _unregisters: (() => void)[] = [];
   private transitionDuration: number;
 
   @property(Boolean)
@@ -18,20 +19,28 @@ export class RevealerState extends GObject.Object {
     return this._children;
   }
 
+  public onDestroy() {
+    this._unregisters.forEach((u) => u());
+    this.destroyChildren();
+  }
+
   constructor(props: RevealerProps) {
     super();
 
+    const childrenBind = bindChildren(props);
     this._children = getChildrenValues(props);
-    bindChildren(props).subscribe((c) => this.handleNewChildren(c));
+    this._unregisters.push(childrenBind.subscribe((c) => this.handleNewChildren(c)));
 
-    const r = toBinding(props.revealChild);
-    this.reveal = r.get() ?? false;
-    toBinding(props.revealChild).subscribe((r) => (this.reveal = r ?? false));
+    const revealBind = toBinding(props.revealChild);
+    this.reveal = revealBind.get() ?? false;
+    this._unregisters.push(revealBind.subscribe((r) => (this.reveal = r ?? false)));
 
-    const d = toBinding(props.transitionDuration);
+    const tBind = toBinding(props.transitionDuration);
     const defaultDuration = options.theme.transition().get();
-    this.transitionDuration = d.get() ?? defaultDuration;
-    d.subscribe((d) => (this.transitionDuration = d ?? defaultDuration));
+    this.transitionDuration = tBind.get() ?? defaultDuration;
+    this._unregisters.push(
+      tBind.subscribe((d) => (this.transitionDuration = d ?? defaultDuration)),
+    );
   }
 
   private destroyChildren() {
