@@ -62,6 +62,9 @@ export function Pulse() {
             setup={(self) => {
               self.grab_focus();
               state.entry = self;
+
+              self.connect("focus-in-event", () => (state.entryFocused = true));
+              self.connect("focus-out-event", () => (state.entryFocused = false));
             }}
           />
           <SearchAdornment />

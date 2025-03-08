@@ -1,8 +1,9 @@
-import { Binding } from "astal";
+import { bind, Binding } from "astal";
 import { Gdk, Gtk } from "astal/gtk3";
-import { toBinding } from "utils";
+import { attach, toBinding } from "utils";
 import { createKeyHandler } from "utils/binds";
 import { getChildren, ChildProps } from "utils/children";
+import { PulseState } from "../state";
 
 interface Props extends ChildProps {
   className?: string | Binding<string>;
@@ -11,6 +12,8 @@ interface Props extends ChildProps {
 }
 
 export function PulseResult(props: Props) {
+  const state = PulseState.get_default();
+
   const keyHandler = createKeyHandler(
     {
       key: Gdk.KEY_Return,
@@ -30,7 +33,12 @@ export function PulseResult(props: Props) {
   return (
     <eventbox
       className={className}
-      setup={(self) => self.connect("click", props.activate)}
+      setup={(self) => {
+        self.connect("click", props.activate);
+        attach(bind(state, "entryFocused"), (entryFocused) =>
+          self.toggleClassName("entry-focused", entryFocused),
+        );
+      }}
     >
       <button
         tooltipText={props.tooltip}

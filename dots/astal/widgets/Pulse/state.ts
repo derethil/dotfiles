@@ -30,6 +30,9 @@ export class PulseState extends GObject.Object {
     return this._results;
   }
 
+  @property(Boolean)
+  declare public entryFocused: boolean;
+
   // Initialization
 
   static get_default() {
