@@ -31,7 +31,5 @@ export function getOverlayType(windowName: string) {
 
 export function isDismissable(type: OverlayType) {
   const active = activeOverlayWindows(type);
-  return active.some((window) =>
-    DismissableWindows.get().includes(window.name),
-  );
+  return active.some((window) => DismissableWindows.get().includes(window.name));
 }

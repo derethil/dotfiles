@@ -114,13 +114,11 @@ export class PulseState extends GObject.Object {
     if (emptyQuery) return { command: undefined, args: [] };
 
     // Default command
-    if (!query.startsWith(":"))
-      return { command: undefined, args: query.split(" ") };
+    if (!query.startsWith(":")) return { command: undefined, args: query.split(" ") };
 
     // Command with arguments
     const nonAutocomplete = this.commands.filter((c) => c !== ":");
-    if (nonAutocomplete.includes(command as PulseCommand))
-      return { command, args };
+    if (nonAutocomplete.includes(command as PulseCommand)) return { command, args };
 
     // Autocomplete
     return { command: ":", args: [command] };

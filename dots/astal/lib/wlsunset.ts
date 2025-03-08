@@ -7,8 +7,7 @@ export class WLSunset extends GObject.Object {
   static instance: WLSunset;
 
   static get_default() {
-    if (!dependencies("wlsunset"))
-      throw new Error("wlsunset not found on PATH");
+    if (!dependencies("wlsunset")) throw new Error("wlsunset not found on PATH");
 
     if (!this.instance) this.instance = new WLSunset();
     return this.instance;

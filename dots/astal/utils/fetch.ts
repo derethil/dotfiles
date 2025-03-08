@@ -57,10 +57,7 @@ export function fetch(url: string, options: CurlOptions = DEFAULT_OPTIONS) {
   }
 }
 
-export function fetchAsync(
-  url: string,
-  options: CurlOptions = DEFAULT_OPTIONS,
-) {
+export function fetchAsync(url: string, options: CurlOptions = DEFAULT_OPTIONS) {
   const command = buildCurlCommand(url, options);
 
   try {
@@ -77,10 +74,7 @@ type Endpoint = `/${string}`;
 
 interface Api {
   fetch: (endpoint: Endpoint, options: CurlOptions) => string | undefined;
-  fetchAsync: (
-    endpoint: Endpoint,
-    options: CurlOptions,
-  ) => Promise<string> | undefined;
+  fetchAsync: (endpoint: Endpoint, options: CurlOptions) => Promise<string> | undefined;
 }
 
 export function createApi(url: string): Api {

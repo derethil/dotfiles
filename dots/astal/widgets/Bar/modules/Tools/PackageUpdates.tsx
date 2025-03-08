@@ -16,9 +16,7 @@ export function PackageUpdates() {
       <Revealer
         transitionType={Gtk.RevealerTransitionType.SLIDE_UP}
         transitionDuration={options.theme.transition()}
-        revealChild={bind(updates, "available").as(
-          (available) => available > 0,
-        )}
+        revealChild={bind(updates, "available").as((available) => available > 0)}
       >
         <CircleButton
           onClick={() => launchInTerminal(FOOT_ARGS)}

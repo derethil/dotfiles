@@ -76,10 +76,7 @@ async function writeVariables() {
   return Promise.all(uses);
 }
 
-async function writeStyleFolder(
-  path: string,
-  filename?: string,
-): Promise<string[]> {
+async function writeStyleFolder(path: string, filename?: string): Promise<string[]> {
   const paths = (await execAsync(listStylesInFolder(path))).split(/\s+/);
   const scss = paths.map((file) => forward(file)).join("\n");
   const name = filename ?? (await bash(`basename ${path}`));
@@ -130,8 +127,6 @@ export async function styles() {
   });
 
   resetStyles().catch((error: unknown) =>
-    console.error(
-      `error: initial styles compilation failed:\n${String(error)}`,
-    ),
+    console.error(`error: initial styles compilation failed:\n${String(error)}`),
   );
 }

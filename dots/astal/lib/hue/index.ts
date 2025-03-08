@@ -52,13 +52,9 @@ export class Hue extends GObject.Object {
     const lights = await this.cli<HueLights>("lights");
     const groups = await this.cli<HueGroups>("groups");
 
-    this._lights = Object.entries(lights).map(
-      (entry) => new Light(this, ...entry),
-    );
+    this._lights = Object.entries(lights).map((entry) => new Light(this, ...entry));
 
-    this._groups = Object.entries(groups).map(
-      (entry) => new Group(this, ...entry),
-    );
+    this._groups = Object.entries(groups).map((entry) => new Group(this, ...entry));
   }
 }
 

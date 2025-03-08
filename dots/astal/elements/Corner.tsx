@@ -57,10 +57,7 @@ export function Corner(props: Props) {
                 const style = self.get_style_context();
 
                 const getRadius = () =>
-                  style.get_property(
-                    "border-radius",
-                    Gtk.StateFlags.NORMAL,
-                  ) as number;
+                  style.get_property("border-radius", Gtk.StateFlags.NORMAL) as number;
 
                 let radius = getRadius();
                 self.set_size_request(radius, radius);
@@ -69,9 +66,7 @@ export function Corner(props: Props) {
                   radius = getRadius();
                   self.set_size_request(radius, radius);
 
-                  const bgColor = style.get_background_color(
-                    Gtk.StateFlags.NORMAL,
-                  );
+                  const bgColor = style.get_background_color(Gtk.StateFlags.NORMAL);
                   drawCornerShape(cairo, radius);
                   cairo.closePath();
                   cairo.setSourceRGBA(

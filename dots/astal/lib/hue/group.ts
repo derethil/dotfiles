@@ -18,9 +18,7 @@ export class Group extends GObject.Object {
 
   @property(Object)
   get lights() {
-    return this.hue.lights.filter((light) =>
-      this._data.lights.includes(light.id),
-    );
+    return this.hue.lights.filter((light) => this._data.lights.includes(light.id));
   }
 
   constructor(hue: Hue, id: string, group: HueGroup) {

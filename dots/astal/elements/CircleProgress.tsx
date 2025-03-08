@@ -36,11 +36,7 @@ export function CircleProgress(props: Props) {
   let destroyed = false;
   const value = toBinding(props.value);
   const css = Variable.derive(
-    [
-      toBinding(props.color),
-      toBinding(props.trackColor),
-      toBinding(props.disabled),
-    ],
+    [toBinding(props.color), toBinding(props.trackColor), toBinding(props.disabled)],
     (color, trackColor, disabled) =>
       `font-size: ${props.strokeWidth ?? 4}px;
       color: ${disabled ? options.theme.color.text.muted.get() : (color ?? "transparent")};
@@ -101,9 +97,7 @@ export function CircleProgress(props: Props) {
         className={props.className}
         setup={tooltipSetup}
         hasTooltip={Boolean(props.tooltip)}
-        onScroll={(_, event) =>
-          props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)
-        }
+        onScroll={(_, event) => props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)}
         cursor={sursor}
         onClick={(_, event) => props.onClick?.(event)}
       >
@@ -111,9 +105,7 @@ export function CircleProgress(props: Props) {
           cursor={sursor}
           overlay={
             <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
-              {toBinding<ChildProps["child"]>(props.child).as(
-                (child) => child ?? "",
-              )}
+              {toBinding<ChildProps["child"]>(props.child).as((child) => child ?? "")}
             </box>
           }
         >

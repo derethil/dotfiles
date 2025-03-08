@@ -10,8 +10,7 @@ function isEventBound(bind: Bind, eventKey: number, eventMod: number) {
   if (bind.key !== eventKey) return false;
   if (bind.mod) {
     if (!Array.isArray(bind.mod) && !(bind.mod & eventMod)) return false;
-    if (Array.isArray(bind.mod) && !bind.mod.some((mod) => mod & eventMod))
-      return false;
+    if (Array.isArray(bind.mod) && !bind.mod.some((mod) => mod & eventMod)) return false;
   }
   return true;
 }

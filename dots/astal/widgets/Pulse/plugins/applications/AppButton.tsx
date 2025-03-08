@@ -14,17 +14,11 @@ export function AppButton(props: Props) {
 
   return (
     <PulseResult className="application" activate={activate}>
-      <icon
-        icon={icon(props.app.iconName, "application-x-executable-symbolic")}
-      />
+      <icon icon={icon(props.app.iconName, "application-x-executable-symbolic")} />
       <box vertical halign={Gtk.Align.START} valign={Gtk.Align.CENTER}>
         <label label={props.app.name} halign={Gtk.Align.START} />
         {props.app.description && (
-          <label
-            wrap
-            justify={Gtk.Justification.FILL}
-            label={props.app.description}
-          />
+          <label wrap justify={Gtk.Justification.FILL} label={props.app.description} />
         )}
       </box>
     </PulseResult>

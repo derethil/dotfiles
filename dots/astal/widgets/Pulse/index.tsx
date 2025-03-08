@@ -46,12 +46,7 @@ export function Pulse() {
         });
       }}
     >
-      <box
-        className="pulse"
-        widthRequest={550}
-        vertical
-        valign={Gtk.Align.START}
-      >
+      <box className="pulse" widthRequest={550} vertical valign={Gtk.Align.START}>
         <box className={bind(state, "query").as((q) => (q ? "inactive" : ""))}>
           <icon className="start-icon" icon="system-search" />
           <TextEntry

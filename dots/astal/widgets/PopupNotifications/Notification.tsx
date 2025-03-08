@@ -28,10 +28,7 @@ export function Notification({ notification }: Props) {
   };
 
   return (
-    <Revealer
-      revealChild={reveal()}
-      transitionDuration={options.theme.transition()}
-    >
+    <Revealer revealChild={reveal()} transitionDuration={options.theme.transition()}>
       <button
         className="notification"
         onClick={handleDismiss}

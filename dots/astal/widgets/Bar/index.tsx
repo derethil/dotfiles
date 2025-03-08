@@ -15,10 +15,7 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
       layer={Astal.Layer.TOP}
       exclusivity={Astal.Exclusivity.IGNORE}
       anchor={options.bar.position(
-        (p) =>
-          Astal.WindowAnchor.TOP |
-          Astal.WindowAnchor.BOTTOM |
-          Astal.WindowAnchor[p],
+        (p) => Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor[p],
       )}
       application={App}
     >

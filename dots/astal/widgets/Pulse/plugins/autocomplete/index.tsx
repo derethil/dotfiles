@@ -28,8 +28,6 @@ export class PulseAutocomplete implements PulsePlugin {
       selector: (p) => `${p.command} ${p.description}`,
     });
 
-    return fzf
-      .find(args.join(" "))
-      .map(({ item }) => <PluginEntry plugin={item} />);
+    return fzf.find(args.join(" ")).map(({ item }) => <PluginEntry plugin={item} />);
   }
 }
