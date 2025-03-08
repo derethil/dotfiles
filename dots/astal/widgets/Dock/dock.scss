@@ -1,0 +1,36 @@
+@use "mixins";
+@use "layout";
+@use "color";
+
+window.Dock .content {
+  @include mixins.widget;
+
+  .indicator {
+    min-width: 32px;
+    min-height: #{layout.$border-width * 1.5}px;
+    background-color: color.$background-highlight;
+    border-radius: #{layout.$radius}px;
+    margin-bottom: #{layout.$padding / -4}px;
+
+    &.focused {
+      background-color: color.$background;
+    }
+  }
+
+  button {
+    all: unset;
+    icon {
+      padding: #{layout.$padding / 2}px #{layout.$padding}px;
+    }
+    border-radius: #{layout.$radius}px;
+    transition: background-color 0.1s ease-in-out;
+
+    &:hover {
+      background-color: color.$background-surface;
+    }
+
+    &:hover .indicator {
+      background-color: color.$background;
+    }
+  }
+}

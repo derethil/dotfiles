@@ -58,6 +58,21 @@ export const options = constructOptions(OPTIONS_CACHE, {
     radius: Opt(16),
     color: Opt("#000000"),
   },
+  dock: {
+    pinned: Opt<string[]>([
+      "footclient",
+      "firefox",
+      "chromium",
+      "discord",
+      "mattermost",
+      "insomnia",
+      "obsidian",
+      "spotify",
+      "steam",
+      "stremio",
+    ]),
+    size: Opt(42),
+  },
   bar: {
     position: Opt<"LEFT" | "RIGHT">("LEFT"),
     modules: {
