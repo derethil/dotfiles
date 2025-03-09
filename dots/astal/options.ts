@@ -71,7 +71,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
       "steam",
       "stremio",
     ]),
-    size: Opt(42),
+    size: Opt(36),
   },
   bar: {
     position: Opt<"LEFT" | "RIGHT">("LEFT"),
