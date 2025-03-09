@@ -1,4 +1,4 @@
-import { bind, Variable } from "astal";
+import { Variable } from "astal";
 import { Astal, Gdk, Gtk } from "astal/gtk3";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import { options } from "options";
@@ -8,21 +8,21 @@ export function Dock(monitor: Gdk.Monitor) {
   const hypr = AstalHyprland.get_default();
   const reveal = Variable(false);
 
-  const handleReveal = (shouldReveal: boolean) => {
+  const setRevealState = (shouldReveal: boolean) => {
     const workspace = hypr.focusedWorkspace;
     if (workspace?.clients.length === 0 && !shouldReveal) return;
     reveal.set(shouldReveal);
   };
 
-  const checkReveal = () => {
+  const onClientUpdate = () => {
     if (hypr.focusedMonitor.model !== monitor.model) return;
-    if ((hypr.focusedWorkspace?.clients.length ?? 0) === 0) handleReveal(true);
+    if ((hypr.focusedWorkspace?.clients.length ?? 0) === 0) setRevealState(true);
   };
 
-  const disconnects = [
-    () => hypr.disconnect(hypr.connect("client-added", checkReveal)),
-    () => hypr.disconnect(hypr.connect("client-removed", checkReveal)),
-    bind(hypr, "focusedWorkspace").subscribe(() => checkReveal()),
+  const connections = [
+    hypr.connect("client-added", onClientUpdate),
+    hypr.connect("client-removed", onClientUpdate),
+    hypr.connect("notify::focusedWorkspace", onClientUpdate),
   ];
 
   return (
@@ -33,12 +33,12 @@ export function Dock(monitor: Gdk.Monitor) {
       anchor={Astal.WindowAnchor.BOTTOM}
       onDestroy={() => {
         reveal.drop();
-        disconnects.forEach((disconnect) => disconnect());
+        connections.forEach((c) => hypr.disconnect(c));
       }}
     >
-      <eventbox onHoverLost={() => handleReveal(false)}>
+      <eventbox onHoverLost={() => setRevealState(false)}>
         <box vertical>
-          <eventbox onHover={() => handleReveal(true)}>
+          <eventbox onHover={() => setRevealState(true)}>
             <revealer
               revealChild={reveal()}
               transitionType={Gtk.RevealerTransitionType.SLIDE_UP}

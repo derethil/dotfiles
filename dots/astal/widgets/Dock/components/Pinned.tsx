@@ -4,7 +4,7 @@ import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import { options } from "options";
 import { createClickHandler } from "utils/binds";
 import { AppButton } from "./AppButton";
-import { matchClient } from "./matchClient";
+import { matchClient } from "../util/matchClient";
 
 export function Pinned() {
   const hypr = AstalHyprland.get_default();

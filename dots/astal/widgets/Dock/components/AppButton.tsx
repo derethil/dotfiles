@@ -31,18 +31,15 @@ export function AppButton(props: Props) {
       className="dock-button"
       cursor="pointer"
       setup={(self) => {
-        rest.setup?.(self);
-
-        // Initial indicator update
-        onClientUpdate(self);
-
         const conns = [
           hypr.connect("client-added", () => onClientUpdate(self)),
           hypr.connect("client-removed", () => onClientUpdate(self)),
           hypr.connect("notify::focused-client", () => onClientUpdate(self)),
         ];
 
+        onClientUpdate(self); // Initial indicator visibility
         self.connect("destroy", () => conns.forEach((c) => hypr.disconnect(c)));
+        rest.setup?.(self);
       }}
     >
       <overlay
@@ -50,15 +47,7 @@ export function AppButton(props: Props) {
         overlay={
           pinned ? (
             <box valign={Gtk.Align.END} halign={Gtk.Align.CENTER}>
-              <box
-                className="indicator"
-                visible={indicatorVisible()}
-                setup={(self) => {
-                  self.connect("visibility-notify-event", (_, visible) => {
-                    console.log(visible.state);
-                  });
-                }}
-              />
+              <box className="indicator" visible={indicatorVisible()} />
             </box>
           ) : undefined
         }
