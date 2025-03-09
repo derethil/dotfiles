@@ -1,9 +1,9 @@
 import { Gtk } from "astal/gtk3";
+import { Separator as SeparatorElement } from "elements";
 import { options } from "options";
 import { Backlight } from "./Backlight";
 import { Battery } from "./Battery";
 import { DateTime } from "./DateTime";
-import { Divider } from "./Divider";
 import { Media } from "./Media";
 import { SystemMonitor } from "./SystemMonitor";
 import { Tools } from "./Tools";
@@ -14,12 +14,14 @@ import { Workspaces } from "./Workspaces";
 
 export type BarModule = keyof typeof modules;
 
+const Separator = () => <SeparatorElement />;
+
 const modules = {
   Backlight,
   Battery,
   DateTime,
-  Divider,
   Media,
+  Separator,
   SystemMonitor,
   Tray,
   Tools,

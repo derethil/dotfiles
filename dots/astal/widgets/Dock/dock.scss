@@ -4,6 +4,7 @@
 
 window.Dock .content {
   @include mixins.widget;
+  @include mixins.separator;
 
   .indicator {
     min-width: 32px;

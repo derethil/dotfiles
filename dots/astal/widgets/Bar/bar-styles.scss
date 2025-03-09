@@ -6,6 +6,8 @@
 @use "mixins";
 
 window.Bar {
+  @include mixins.separator;
+
   .bar-wrapper {
     @include mixins.widget;
     font-family: font.$mono-family;

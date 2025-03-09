@@ -1,6 +1,8 @@
 import { bind, Variable } from "astal";
+import { Gtk } from "astal/gtk3";
 import AstalApps from "gi://AstalApps";
 import AstalHyprland from "gi://AstalHyprland";
+import { Separator } from "elements";
 import { options } from "options";
 import { AppClient, ButtonGroup } from "./ButtonGroup";
 import { matchClient } from "../util/matchClient";
@@ -30,5 +32,13 @@ export function Taskbar() {
 
   const filtered = apps.as((apps) => apps.filter((app) => app) as AppClient[]);
 
-  return <ButtonGroup apps={filtered} />;
+  return (
+    <>
+      <Separator
+        orientation={Gtk.Orientation.VERTICAL}
+        visible={filtered.as((filtered) => filtered.length > 0)}
+      />
+      <ButtonGroup apps={filtered} />
+    </>
+  );
 }

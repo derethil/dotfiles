@@ -1,0 +1,11 @@
+@use "layout";
+
+@mixin separator($padding: layout.$padding) {
+  separator.vertical {
+    margin: #{$padding / 2} #{$padding}px;
+  }
+
+  separator.horizontal {
+    margin: #{$padding}px #{$padding / 2};
+  }
+}

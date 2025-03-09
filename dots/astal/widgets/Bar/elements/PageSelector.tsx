@@ -1,8 +1,7 @@
 import { Gtk } from "astal/gtk3";
-import { FlowBox } from "elements";
+import { FlowBox, Separator } from "elements";
 import { CircleButton } from "./CircleButton";
 import { DashboardState } from "../dashboardState";
-import { Divider } from "../modules/Divider";
 
 interface PageButtonProps {
   page: string;
@@ -30,7 +29,7 @@ export function PageSelector() {
       >
         <PageButton icon="audio-volume-high-symbolic" page="audio" />
       </FlowBox>
-      <Divider />
+      <Separator />
     </>
   );
 }
