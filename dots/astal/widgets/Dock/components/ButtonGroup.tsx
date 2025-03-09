@@ -12,12 +12,11 @@ export interface AppClient {
 }
 
 interface Props {
-  pinned?: boolean;
   apps: Binding<AppClient[]>;
 }
 
 export function ButtonGroup(props: Props) {
-  const { apps, pinned } = props;
+  const { apps } = props;
 
   const hypr = AstalHyprland.get_default();
 
@@ -37,7 +36,6 @@ export function ButtonGroup(props: Props) {
       {apps.as((apps) =>
         apps.map(({ app, term }) => (
           <AppButton
-            pinned={pinned}
             term={term}
             icon={app.iconName ?? ""}
             tooltipText={app.name}
