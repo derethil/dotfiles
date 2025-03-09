@@ -3,7 +3,7 @@ import { Gtk, Widget } from "astal/gtk3";
 import { ButtonProps } from "astal/gtk3/widget";
 import AstalHyprland from "gi://AstalHyprland";
 import { options } from "options";
-import { matchClient } from "./matchClient";
+import { matchClient } from "../util/matchClient";
 
 interface Props extends ButtonProps {
   icon: string;

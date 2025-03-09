@@ -2,7 +2,8 @@ import { Variable } from "astal";
 import { Astal, Gdk, Gtk } from "astal/gtk3";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import { options } from "options";
-import { Pinned } from "./Pinned";
+import { Pinned } from "./components/Pinned";
+import { Taskbar } from "./components/Taskbar";
 
 export function Dock(monitor: Gdk.Monitor) {
   const hypr = AstalHyprland.get_default();
@@ -46,6 +47,7 @@ export function Dock(monitor: Gdk.Monitor) {
             >
               <box className="content">
                 <Pinned />
+                <Taskbar />
               </box>
             </revealer>
           </eventbox>
