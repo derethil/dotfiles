@@ -1,4 +1,4 @@
-import { bind, Variable } from "astal";
+import { Variable } from "astal";
 import { Astal, Gdk, Gtk } from "astal/gtk3";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import { Separator } from "elements";
@@ -26,9 +26,8 @@ export function Dock(monitor: Gdk.Monitor) {
   const connections = [
     hypr.connect("client-added", onClientUpdate),
     hypr.connect("client-removed", onClientUpdate),
+    hypr.connect("notify::focused-workspace", onClientUpdate),
   ];
-
-  const unsubFocusedWorkspace = bind(hypr, "focusedWorkspace").subscribe(onClientUpdate);
 
   return (
     <window
@@ -39,7 +38,6 @@ export function Dock(monitor: Gdk.Monitor) {
       onDestroy={() => {
         reveal.drop();
         connections.forEach((c) => hypr.disconnect(c));
-        unsubFocusedWorkspace();
       }}
     >
       <eventbox onHoverLost={() => setRevealState(false)}>
