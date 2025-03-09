@@ -30,7 +30,7 @@ window.Dock .content {
     }
 
     &:hover .indicator.shown {
-      background-color: color.$text-highlight;
+      background-color: color.$accent7;
     }
   }
 }
