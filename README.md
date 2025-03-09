@@ -5,7 +5,7 @@ I do not recommend installing the whole thing outright (if you are not me 🙂).
 
 ## Widgets Screenshot
 
-![Screenshot](./screenshot.png)
+![Screenshot](https://github.com/user-attachments/assets/ff728bef-9a37-43b5-869a-558b46c92728)
 
 ## Tooling
 
