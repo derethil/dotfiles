@@ -9,11 +9,10 @@ import { matchClient } from "../util/matchClient";
 interface AppButtonProps extends ButtonProps {
   icon: string;
   term: string;
-  pinned?: boolean;
 }
 
 export function AppButton(props: AppButtonProps) {
-  const { icon, term, pinned = false, ...rest } = props;
+  const { icon, term, ...rest } = props;
 
   const indicatorVisible = Variable(false);
   const hypr = AstalHyprland.get_default();
@@ -39,11 +38,8 @@ export function AppButton(props: AppButtonProps) {
   };
 
   return (
-    <button {...rest} className="dock-button" cursor="pointer" setup={handleSetup}>
-      <overlay
-        passThrough
-        overlay={<Indicator visible={indicatorVisible()} pinned={pinned} />}
-      >
+    <button {...rest} cursor="pointer" setup={handleSetup}>
+      <overlay passThrough overlay={<Indicator visible={indicatorVisible()} />}>
         <icon icon={icon} css={options.dock.size().as((px) => `font-size: ${px}px`)} />
       </overlay>
     </button>
@@ -52,13 +48,10 @@ export function AppButton(props: AppButtonProps) {
 
 interface IndicatorProps {
   visible: Binding<boolean>;
-  pinned?: boolean;
 }
 
 function Indicator(props: IndicatorProps) {
-  const { visible, pinned } = props;
-
-  if (!pinned) return <></>;
+  const { visible } = props;
 
   return (
     <box valign={Gtk.Align.END} halign={Gtk.Align.CENTER}>

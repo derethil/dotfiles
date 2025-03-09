@@ -12,5 +12,5 @@ export function Pinned() {
       .filter(({ app }) => app),
   );
 
-  return <ButtonGroup apps={apps} pinned />;
+  return <ButtonGroup apps={apps} />;
 }

@@ -7,7 +7,7 @@ export function OverviewButton() {
   };
 
   return (
-    <button className="dock-button" cursor="pointer" onClickRelease={handleOpenOverview}>
+    <button cursor="pointer" onClickRelease={handleOpenOverview}>
       <icon
         icon="view-app-grid-symbolic"
         css={options.dock.size().as((px) => `font-size: ${px}px`)}

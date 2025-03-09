@@ -5,6 +5,7 @@ import { Separator } from "elements";
 import { options } from "options";
 import { OverviewButton } from "./OverviewButton";
 import { Pinned } from "./Pinned";
+import { PulseButton } from "./PulseButton";
 import { Taskbar } from "./Taskbar";
 
 export function Dock(monitor: Gdk.Monitor) {
@@ -49,10 +50,12 @@ export function Dock(monitor: Gdk.Monitor) {
               transitionDuration={options.theme.transition()}
             >
               <box className="content">
-                <OverviewButton />
+                <PulseButton />
                 <Separator orientation={Gtk.Orientation.VERTICAL} />
                 <Pinned />
                 <Taskbar />
+                <Separator orientation={Gtk.Orientation.VERTICAL} />
+                <OverviewButton />
               </box>
             </revealer>
           </eventbox>
