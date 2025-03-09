@@ -3,6 +3,7 @@ import { Gtk, Widget } from "astal/gtk3";
 import { ButtonProps } from "astal/gtk3/widget";
 import AstalHyprland from "gi://AstalHyprland";
 import { options } from "options";
+import { attach } from "utils";
 import { matchClient } from "../util/matchClient";
 
 interface Props extends ButtonProps {
@@ -47,7 +48,14 @@ export function AppButton(props: Props) {
         overlay={
           pinned ? (
             <box valign={Gtk.Align.END} halign={Gtk.Align.CENTER}>
-              <box className="indicator" visible={indicatorVisible()} />
+              <box
+                className="indicator"
+                setup={(self) =>
+                  attach(indicatorVisible(), (visible) =>
+                    self.toggleClassName("shown", visible),
+                  )
+                }
+              />
             </box>
           ) : undefined
         }

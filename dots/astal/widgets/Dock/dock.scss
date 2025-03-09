@@ -8,11 +8,11 @@ window.Dock .content {
   .indicator {
     min-width: 32px;
     min-height: #{layout.$border-width * 1.5}px;
-    background-color: color.$text;
     border-radius: #{layout.$radius}px;
+    transition: background-color 0.1s ease-in-out;
 
-    &.focused {
-      background-color: color.$background;
+    &.shown {
+      background-color: color.$text;
     }
   }
 
@@ -28,8 +28,8 @@ window.Dock .content {
       background-color: color.$background;
     }
 
-    &:hover .indicator {
-      background-color: color.$accent1;
+    &:hover .indicator.shown {
+      background-color: color.$text-highlight;
     }
   }
 }
