@@ -2,10 +2,10 @@
 
 @mixin separator($padding: layout.$padding) {
   separator.vertical {
-    margin: #{$padding / 2} #{$padding}px;
+    margin: #{$padding / 2}px #{$padding}px;
   }
 
   separator.horizontal {
-    margin: #{$padding}px #{$padding / 2};
+    margin: #{$padding}px #{$padding / 2}px;
   }
 }
