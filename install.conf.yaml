@@ -36,7 +36,6 @@
     ~/.config/tmux: dots/tmux
     ~/.config/direnv/direnvrc: dots/direnvrc
     ~/.config/nvim: dots/nvim
-    ~/.config/ags: dots/ags
     ~/.config/astal: dots/astal
     ~/.config/yazi/: dots/yazi
     ~/.config/ghostty/: dots/ghostty

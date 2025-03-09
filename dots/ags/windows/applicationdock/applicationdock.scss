@@ -1,6 +1,0 @@
-window.floating-dock .application-dock {
-  @include dock;
-  @include floating-widget;
-  border-radius: if($radius == 0, 0, calc($radius + $spacing / 2));
-  padding: calc($padding / 2);
-}
