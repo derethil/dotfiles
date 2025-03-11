@@ -35,7 +35,13 @@ export class Applications implements PulsePlugin {
     if (args.length === 0) return [];
     this.apps.reload();
     const appResults = this.apps.fuzzy_query(args.join(" "));
-    return this.renderApps(appResults.sort());
+    return this.renderApps(
+      appResults.sort((a, b) => {
+        if (a.frequency < b.frequency) return 1;
+        if (a.frequency > b.frequency) return -1;
+        return 0;
+      }),
+    );
   }
 
   public searchAdornment(explicit?: boolean) {
