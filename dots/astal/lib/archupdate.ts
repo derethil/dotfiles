@@ -1,29 +1,35 @@
-import { exec, monitorFile, property, register } from "astal";
+import { Gio, GLib, monitorFile, property, register } from "astal";
 import GObject from "gi://GObject?version=2.0";
 import { readFileIfExists } from "utils";
 
-const ARCH_UPDATE_CACHE_PATH = "~/.local/state/arch-update";
+const STATE_DIR = `${GLib.get_user_state_dir()}/arch-update`;
 
 export enum ArchUpdateStatus {
-  UP_TO_DATE = "up-to-date",
-  UPDATES_AVAILABLE = "updates-available",
+  UP_TO_DATE,
+  UPDATES_AVAILABLE,
+}
+
+interface Update {
+  package: string;
+  currentVersion: string;
+  newVersion: string;
 }
 
 @register({ GTypeName: "ArchUpdate" })
 export class ArchUpdate extends GObject.Object {
   private static instance: ArchUpdate;
 
-  private _available = 0;
-  private _status: ArchUpdateStatus = ArchUpdateStatus.UP_TO_DATE;
+  private _updates: Update[] = [];
 
   @property(Number)
   get available() {
-    return this._available;
+    return this._updates.length;
   }
 
   @property(String)
   get status() {
-    return this._status;
+    if (this.available > 0) return ArchUpdateStatus.UPDATES_AVAILABLE;
+    return ArchUpdateStatus.UP_TO_DATE;
   }
 
   public static get_default() {
@@ -33,43 +39,40 @@ export class ArchUpdate extends GObject.Object {
 
   constructor() {
     super();
-    this.watchStatus();
     this.watchUpdates();
   }
 
-  private getCachePath(file: string): string {
-    const path = `${ARCH_UPDATE_CACHE_PATH}/${file}`;
-    return exec(`bash -c 'echo ${path}'`).trim();
-  }
-
-  private syncStatus(file: string) {
-    const status = readFileIfExists(file)?.trim();
-    if (!status) return;
-
-    const containsUpdates = status.includes("updates-available");
-    this._status = containsUpdates
-      ? ArchUpdateStatus.UPDATES_AVAILABLE
-      : ArchUpdateStatus.UP_TO_DATE;
-    this.notify("status");
-  }
-
   private syncUpdates(file: string) {
-    const contents = readFileIfExists(file)?.split("\n");
+    const contents = readFileIfExists(file)?.trim().split("\n");
+    const updates = contents?.map((line) => this.parsePackage(line));
     if (!contents) return;
 
-    this._available = contents.filter((l) => l).length;
+    this._updates = (updates?.filter((l) => l) as Update[]) ?? [];
     this.notify("available");
   }
 
-  private watchStatus() {
-    const path = this.getCachePath("tray_icon");
-    this.syncStatus(path);
-    monitorFile(path, (file) => this.syncStatus(file));
+  private parsePackage(line: string): Update | null {
+    const cleaned = line.replace(
+      // eslint-disable-next-line no-control-regex
+      /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
+      "",
+    );
+
+    const match = /^(\S+)\s+([0-9.-]+)\s+->\s+([0-9.-]+)$/.exec(cleaned);
+    if (!match) return null;
+
+    const [_, packageName, currentVersion, newVersion] = match;
+    return { package: packageName, currentVersion, newVersion };
   }
 
   private watchUpdates() {
-    const path = this.getCachePath("last_updates_check");
-    this.syncUpdates(path);
-    monitorFile(path, (file) => this.syncUpdates(file));
+    this.syncUpdates(`${STATE_DIR}/last_updates_check`);
+
+    monitorFile(STATE_DIR, (file, event) => {
+      const isChecking = file.endsWith("last_updates_check");
+      const isChanging = event === Gio.FileMonitorEvent.CHANGED;
+
+      if (isChecking && isChanging) this.syncUpdates(file);
+    });
   }
 }
