@@ -12,21 +12,20 @@ export function PackageUpdates() {
   const updates = ArchUpdate.get_default();
 
   return (
-    <box className="updates">
-      <Revealer
-        transitionType={Gtk.RevealerTransitionType.SLIDE_UP}
-        transitionDuration={options.theme.transition()}
-        revealChild={bind(updates, "available").as((available) => available > 0)}
+    <Revealer
+      className="updates list-item"
+      transitionType={Gtk.RevealerTransitionType.SLIDE_UP}
+      transitionDuration={options.theme.transition()}
+      revealChild={bind(updates, "available").as((available) => available > 0)}
+    >
+      <CircleButton
+        onClick={() => launchInTerminal(FOOT_ARGS)}
+        tooltip={bind(updates, "available").as(
+          (updates) => `${updates} available updates`,
+        )}
       >
-        <CircleButton
-          onClick={() => launchInTerminal(FOOT_ARGS)}
-          tooltip={bind(updates, "available").as(
-            (updates) => `${updates} available updates`,
-          )}
-        >
-          <icon icon="package-down-symbolic" />
-        </CircleButton>
-      </Revealer>
-    </box>
+        <icon icon="package-down-symbolic" />
+      </CircleButton>
+    </Revealer>
   );
 }

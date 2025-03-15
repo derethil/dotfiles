@@ -9,7 +9,7 @@ export function ColorPicker() {
   };
 
   return (
-    <CircleButton onClick={handleClick} className="color-picker">
+    <CircleButton onClick={handleClick} className="color-picker list-item">
       <icon icon="color-palette-symbolic" />
     </CircleButton>
   );

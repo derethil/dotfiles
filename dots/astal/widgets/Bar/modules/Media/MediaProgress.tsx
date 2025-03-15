@@ -29,6 +29,7 @@ export function MediaProgress({ player }: Props) {
 
   return (
     <CircleProgress
+      className="list-item"
       value={bind(progress)}
       color={options.theme.color.accent[1].default()}
       onClick={() => player.play_pause()}

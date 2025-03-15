@@ -12,6 +12,7 @@ export function SystemMonitor() {
   return (
     <box className="system-monitor" halign={Gtk.Align.CENTER} vertical>
       <CircleProgress
+        className="list-item"
         color={options.theme.color.accent[1].default()}
         value={bind(sr.cpu, "usage")}
       >
@@ -19,6 +20,7 @@ export function SystemMonitor() {
       </CircleProgress>
 
       <CircleProgress
+        className="list-item"
         color={options.theme.color.accent[3].default()}
         value={bind(sr.memory, "percent")}
       >
@@ -27,6 +29,7 @@ export function SystemMonitor() {
 
       {isNvidia && (
         <CircleProgress
+          className="list-item"
           color={options.theme.color.accent[6].default()}
           value={bind(sr.gpu, "percent")}
         >

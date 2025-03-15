@@ -17,10 +17,12 @@ export function Weather() {
   });
 
   return (
-    <box className="weather">
-      <CircleProgress color={options.theme.color.accent[2].default()} value={value}>
-        <icon icon={weatherIcon} />
-      </CircleProgress>
-    </box>
+    <CircleProgress
+      color={options.theme.color.accent[2].default()}
+      value={value}
+      className="weather list-item"
+    >
+      <icon icon={weatherIcon} />
+    </CircleProgress>
   );
 }

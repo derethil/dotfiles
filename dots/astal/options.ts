@@ -82,6 +82,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
         "Media",
         "Weather",
         "Volume",
+        "Separator",
         "Tools",
         "Separator",
         "DateTime",

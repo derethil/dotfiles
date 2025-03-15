@@ -22,6 +22,7 @@ export function Volume() {
 
   return (
     <CircleProgress
+      className="list-item"
       value={bind(speaker, "volume")}
       color={options.theme.color.accent[4].default()}
       disabled={bind(speaker, "mute")}

@@ -100,9 +100,8 @@ export function CircleProgress(props: Props) {
   };
 
   return (
-    <box className="circle-progress">
+    <box className={`circle-progress ${props.className}`}>
       <eventbox
-        className={props.className}
         setup={tooltipSetup}
         hasTooltip={toBinding(props.tooltip).as((text) => (text?.length ?? 0) > 0)}
         onScroll={(_, event) => props.onScroll?.(clamp(event.delta_y, -1, 1) * -1)}

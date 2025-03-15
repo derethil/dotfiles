@@ -15,7 +15,7 @@ export function ToggleDoNotDisturb() {
   };
 
   return (
-    <CircleButton onClick={handleToggle} className="dnd">
+    <CircleButton onClick={handleToggle} className="dnd list-item">
       <icon icon={icon} />
     </CircleButton>
   );
