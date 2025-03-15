@@ -1,15 +1,16 @@
 @use "color";
 @use "layout";
 @use "font";
+@use "misc";
 
 @mixin focus {
   font-weight: 700;
-  background-color: color.$background;
+  background-color: transparentize(color.$background, misc.$transparency);
   color: color.$text-highlight;
 }
 @mixin result($border-color: color.$background-surface) {
   all: unset;
-  background-color: color.$background-muted;
+  background-color: transparentize(color.$background-muted, misc.$transparency);
   font-family: font.$mono-family;
   font-size: #{font.$mono-size * 1.3}px;
   font-weight: 500;

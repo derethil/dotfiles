@@ -9,6 +9,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
   // General Options
   theme: {
     transition: Opt(200),
+    transparency: Opt(0.4),
     layout: {
       gap: Opt(9),
       padding: Opt(10),

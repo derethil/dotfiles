@@ -2,15 +2,15 @@
 @use "color";
 @use "layout";
 @use "font";
+@use "misc";
 
 window.pulse .pulse {
-  @include mixins.widget;
   background-color: transparent;
 
   > box {
     @include mixins.widget;
     margin: 0;
-    background-color: color.$background-muted;
+    background-color: transparentize(color.$background-muted, misc.$transparency);
     padding-bottom: #{layout.$padding}px;
 
     transition: all 0.2s ease-in-out;
@@ -27,6 +27,8 @@ window.pulse .pulse {
     all: unset;
     .results {
       border-radius: #{layout.$radius}px;
+      border: #{layout.$border-width} solid #{color.$border};
+      border-top: none;
     }
   }
 

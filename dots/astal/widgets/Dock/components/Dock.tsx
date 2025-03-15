@@ -34,6 +34,7 @@ export function Dock(monitor: Gdk.Monitor) {
     <window
       gdkmonitor={monitor}
       name="Dock"
+      namespace="Dock"
       className="Dock"
       anchor={Astal.WindowAnchor.BOTTOM}
       onDestroy={() => {

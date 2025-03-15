@@ -1,8 +1,9 @@
 @use "color";
 @use "layout";
 @use "font";
+@use "misc";
 
-@mixin widget($surface: false) {
+@mixin widget($surface: false, $border: true) {
   font-family: font.$mono-family;
   font-size: #{font.$mono-size}px;
   font-weight: 500;
@@ -10,8 +11,12 @@
   border-radius: #{layout.$radius}px;
   padding: #{layout.$padding}px;
 
+  @if $border == true {
+    border: #{layout.$border-width} solid #{color.$border};
+  }
+
   @if $surface == false {
-    background: #{color.$background-muted};
+    background: transparentize(color.$background-muted, misc.$transparency);
     margin: #{layout.$gap}px;
   } @else {
     background: #{color.$background};

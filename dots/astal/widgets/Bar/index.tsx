@@ -7,6 +7,7 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
   return (
     <window
       name="Bar"
+      namespace="Bar"
       className="Bar"
       gdkmonitor={gdkmonitor}
       layer={Astal.Layer.TOP}

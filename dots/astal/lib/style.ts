@@ -64,6 +64,7 @@ async function writeVariables() {
     ],
     misc: [
       $("transition", options.theme.transition),
+      $("transparency", options.theme.transparency)
     ]
   }
 
