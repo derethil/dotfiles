@@ -3,6 +3,7 @@ import { Separator as SeparatorElement } from "elements";
 import { options } from "options";
 import { Backlight } from "./Backlight";
 import { Battery } from "./Battery";
+import { DashboardButton } from "./DashboardButton";
 import { DateTime } from "./DateTime";
 import { Media } from "./Media";
 import { SystemMonitor } from "./SystemMonitor";
@@ -19,6 +20,7 @@ const Separator = () => <SeparatorElement />;
 const modules = {
   Backlight,
   Battery,
+  DashboardButton,
   DateTime,
   Media,
   Separator,

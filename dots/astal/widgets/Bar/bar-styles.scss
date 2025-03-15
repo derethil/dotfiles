@@ -37,10 +37,14 @@ window.Bar {
   .updates {
     font-size: 15px;
   }
-}
 
-window.Bar .divider {
-  border-bottom: 2px solid color.$background-highlight;
-  margin-bottom: #{layout.$gap}px;
-  margin-top: #{layout.$gap}px;
+  .dashboard-button {
+    margin-bottom: #{layout.$padding}px;
+    background-color: color.$background;
+    border-radius: #{layout.$radius}px;
+    color: color.$text;
+    icon {
+      font-size: 20px;
+    }
+  }
 }

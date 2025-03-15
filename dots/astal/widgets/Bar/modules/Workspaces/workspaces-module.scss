@@ -5,9 +5,9 @@
 
 window.Bar .workspaces .indicator {
   min-height: 1px;
-  padding: #{layout.$padding / 3}px #{layout.$padding * 0.8}px;
+  padding: #{layout.$padding / 2}px #{layout.$padding * 0.8}px;
   margin: #{layout.$gap / 2}px 0px;
-  border-radius: #{layout.$radius}px;
+  border-radius: #{layout.$radius * 0.4}px;
   transition: background-color 0.33s;
 
   &.occupied {

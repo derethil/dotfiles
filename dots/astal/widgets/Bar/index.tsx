@@ -1,12 +1,9 @@
 import { App, Astal, Gdk } from "astal/gtk3";
 import { options } from "options";
 import { Dashboard } from "./Dashboard";
-import { DashboardState } from "./dashboardState";
 import { BarModules } from "./modules";
 
 export function Bar(gdkmonitor: Gdk.Monitor) {
-  const dashboard = DashboardState.get_default();
-
   return (
     <window
       name="Bar"
@@ -19,15 +16,10 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
       )}
       application={App}
     >
-      <eventbox onHoverLost={() => (dashboard.reveal = false)}>
-        <box>
-          <eventbox onHover={() => (dashboard.reveal = true)} />
-          <box className="bar-wrapper">
-            <Dashboard />
-            <BarModules />
-          </box>
-        </box>
-      </eventbox>
+      <box className="bar-wrapper">
+        <Dashboard />
+        <BarModules />
+      </box>
     </window>
   );
 }
