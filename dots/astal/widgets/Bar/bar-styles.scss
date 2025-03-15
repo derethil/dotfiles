@@ -39,9 +39,8 @@ window.Bar {
   }
 
   .dashboard-button {
-    margin-bottom: #{layout.$padding}px;
     background-color: color.$background;
-    border-radius: #{layout.$radius}px;
+    border-radius: #{layout.$radius / 2}px;
     color: color.$text;
     icon {
       font-size: 20px;
