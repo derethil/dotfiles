@@ -43,10 +43,10 @@ export class ArchUpdate extends GObject.Object {
   }
 
   private syncUpdates(file: string) {
-    const contents = readFileIfExists(file)?.trim().split("\n");
-    const updates = contents?.map((line) => this.parsePackage(line));
-    if (!contents) return;
+    const lines = readFileIfExists(file)?.split("\n").filter(Boolean);
+    if (!lines) return;
 
+    const updates = lines?.map((line) => this.parsePackage(line));
     this._updates = (updates?.filter((l) => l) as Update[]) ?? [];
     this.notify("available");
   }
@@ -58,10 +58,9 @@ export class ArchUpdate extends GObject.Object {
       "",
     );
 
-    const match = /^(\S+)\s+([0-9.-]+)\s+->\s+([0-9.-]+)$/.exec(cleaned);
-    if (!match) return null;
+    if (cleaned === "") return null;
 
-    const [_, packageName, currentVersion, newVersion] = match;
+    const [packageName, currentVersion, , newVersion] = cleaned.split(/\s+->\s+|\s+/);
     return { package: packageName, currentVersion, newVersion };
   }
 
@@ -69,10 +68,12 @@ export class ArchUpdate extends GObject.Object {
     this.syncUpdates(`${STATE_DIR}/last_updates_check`);
 
     monitorFile(STATE_DIR, (file, event) => {
-      const isChecking = file.endsWith("last_updates_check");
-      const isChanging = event === Gio.FileMonitorEvent.CHANGED;
+      const isUpdatesFile = file.endsWith("_updates_check");
+      const doneModifying = event === Gio.FileMonitorEvent.CHANGED;
 
-      if (isChecking && isChanging) this.syncUpdates(file);
+      if (isUpdatesFile && doneModifying) {
+        this.syncUpdates(file);
+      }
     });
   }
 }
