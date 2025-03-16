@@ -8,12 +8,12 @@
 
 window.Bar .option-button {
   @include mixins.widget;
-  margin: #{layout.$gap / 2}px 0;
-  border-radius: #{layout.$radius / 2}px;
-  border: 1.5px solid transparent;
 
   &:hover {
     border-color: color.$accent4;
+    &.active {
+      color: color.$background-dim;
+    }
   }
 
   &.active {

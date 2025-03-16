@@ -1,5 +1,5 @@
 import { Binding } from "astal";
-import { Astal } from "astal/gtk3";
+import { Astal, Gtk } from "astal/gtk3";
 import { attach, toBinding } from "utils";
 import { ChildProps } from "utils/children";
 
@@ -16,7 +16,8 @@ export function OptionButton(props: Props) {
     <button
       className="option-button"
       cursor="pointer"
-      expand
+      hexpand
+      halign={Gtk.Align.FILL}
       onClick={props.onClick}
       setup={(self) => {
         const detach = attach(active, (active) => self.toggleClassName("active", active));

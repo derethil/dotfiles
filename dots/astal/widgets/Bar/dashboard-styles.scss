@@ -30,8 +30,7 @@ window.Bar .dashboard {
   .heading {
     font-weight: 600;
     font-size: #{font.$mono-size * 1.25}px;
-    margin-bottom: #{layout.$gap}px;
-    margin-top: #{layout.$gap}px;
+    margin: #{layout.$gap}px;
   }
 
   .section {

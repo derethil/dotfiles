@@ -30,10 +30,10 @@ window.Bar .hue-item {
   scale {
     trough {
       min-height: 6px;
-      background-color: #574b2b;
+      background-color: color.$background;
 
       highlight {
-        background: linear-gradient(to right, #574b2b, #9a9381);
+        background: color.$text-muted;
       }
 
       slider {
@@ -50,9 +50,14 @@ window.Bar .hue-item {
   switch {
     color: color.$text;
     transition: #{misc.$transition}ms;
+    background-color: color.$background-surface;
+
+    slider {
+      background-color: color.$text;
+    }
 
     &:checked {
-      background-color: #736643;
+      background-color: color.$background-highlight;
     }
 
     &:hover {
@@ -60,10 +65,6 @@ window.Bar .hue-item {
       slider {
         background-color: color.$text-highlight;
       }
-    }
-
-    slider {
-      background-color: color.$text;
     }
   }
 }

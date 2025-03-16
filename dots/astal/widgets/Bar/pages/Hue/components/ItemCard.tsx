@@ -30,7 +30,7 @@ export function ItemCard(props: HueItemProps) {
     <box
       className="hue-item"
       vertical
-      css={background.as((gradient) => `background: ${gradient};`)}
+      css={background.as((background) => `background: ${background};`)}
       setup={(self) => {
         const unsub = attach(bright, (bright) => self.toggleClassName("bright", bright));
         self.connect("destroy", unsub);

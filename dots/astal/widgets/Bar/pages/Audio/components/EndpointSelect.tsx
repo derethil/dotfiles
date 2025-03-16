@@ -1,9 +1,10 @@
 import { bind, Binding } from "astal";
+import { Gtk } from "astal/gtk3";
 import AstalWp from "gi://AstalWp";
 import { OptionButton } from "widgets/Bar/elements/OptionButton";
 
 function description(d: string) {
-  const max = 36;
+  const max = 30;
   return d.length > max ? d.slice(0, max) + "..." : d;
 }
 
@@ -12,14 +13,14 @@ interface Props {
   defaultEndpointId: Binding<number>;
 }
 
-export function EndpointSelector(props: Props) {
+export function EndpointSelect(props: Props) {
   const { endpoints, defaultEndpointId } = props;
 
   const audio = AstalWp.get_default()?.audio;
   if (!audio) return null;
 
   return (
-    <box vertical hexpand>
+    <box vertical hexpand halign={Gtk.Align.FILL} className="endpoint-select">
       {bind(endpoints).as((endpoints) =>
         (endpoints ?? []).map((endpoint) => (
           <OptionButton
