@@ -16,7 +16,7 @@ export function HuePage() {
     <DashboardPage name="hue">
       <box className="section" vertical hexpand>
         <label className="heading" halign={Gtk.Align.START}>
-          Groups / Rooms
+          Rooms
         </label>
 
         {bind(hue, "groups").as((groups) =>

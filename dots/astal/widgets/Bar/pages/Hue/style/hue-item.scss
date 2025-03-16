@@ -1,19 +1,69 @@
 @use "color";
 @use "layout";
 @use "mixins";
+@use "font";
+@use "misc";
 
 window.Bar .hue-item {
   @include mixins.widget;
 
-  background-color: color.$background-muted;
+  transition: all 1s ease-in-out;
   font-weight: bold;
+  color: color.$text;
 
-  icon {
-    margin-right: #{layout.$gap}px;
-    font-size: 28px;
+  &.bright {
+    color: color.$background;
   }
 
   & > box {
     margin-bottom: #{layout.$gap}px;
+    font-size: #{font.$mono-size * 1.15}px;
+
+    icon {
+      margin-right: #{layout.$gap}px;
+      font-size: 28px;
+    }
+  }
+
+  // Slider
+
+  scale {
+    trough {
+      min-height: 6px;
+      background-color: #574b2b;
+
+      highlight {
+        background: linear-gradient(to right, #574b2b, #9a9381);
+      }
+
+      slider {
+        background-color: #{color.$text};
+        &:hover {
+          background-color: #{color.$text-highlight};
+        }
+      }
+    }
+  }
+
+  // Switch
+
+  switch {
+    color: color.$text;
+    transition: #{misc.$transition}ms;
+
+    &:checked {
+      background-color: #736643;
+    }
+
+    &:hover {
+      color: color.$text-highlight;
+      slider {
+        background-color: color.$text-highlight;
+      }
+    }
+
+    slider {
+      background-color: color.$text;
+    }
   }
 }
