@@ -15,7 +15,10 @@ export function HueButton(props: HueButtonProps) {
     <PulseResult
       activate={() => item.toggle()}
       className="hue-button pulse-result-wrapper"
-      setup={(self) => attach(bind(item, "on"), (on) => self.toggleClassName("on", on))}
+      setup={(self) => {
+        const unsub = attach(bind(item, "on"), (on) => self.toggleClassName("on", on));
+        self.connect("destroy", unsub);
+      }}
     >
       <ToggleButton item={item} />
     </PulseResult>
