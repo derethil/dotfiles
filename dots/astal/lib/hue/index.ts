@@ -11,8 +11,8 @@ export class Hue extends GObject.Object {
 
   private INTERVAL = 1000 * 60;
 
-  private _lights = new Map<string, Light>();
-  private _groups = new Map<string, Group>();
+  public _lights = new Map<string, Light>();
+  public _groups = new Map<string, Group>();
 
   @property(Boolean)
   declare enabled: boolean;

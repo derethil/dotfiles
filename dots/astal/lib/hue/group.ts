@@ -1,6 +1,6 @@
 import { GObject, property, register, signal } from "astal";
 import { clamp, icon } from "utils";
-import { Hue } from ".";
+import { Hue, Light } from ".";
 
 const GroupIconMap: Record<string, string> = {
   "Living Room": "couch-symbolic",
@@ -30,7 +30,9 @@ export class Group extends GObject.Object {
 
   @property(Object)
   get lights() {
-    return this.hue.lights.filter((light) => this._lightIds.includes(light.id));
+    return this._lightIds
+      .map((id) => this.hue._lights.get(id))
+      .filter(Boolean) as Light[];
   }
 
   // Getter / Setter Pairs
