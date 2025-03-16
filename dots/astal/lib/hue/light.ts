@@ -12,6 +12,9 @@ export class Light extends GObject.Object {
   declare id: string;
 
   @property(String)
+  public readonly icon = "lamp-symbolic";
+
+  @property(String)
   get name() {
     return this._data.name;
   }

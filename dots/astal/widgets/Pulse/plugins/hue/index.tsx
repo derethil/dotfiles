@@ -1,7 +1,6 @@
 import { Fzf } from "fzf";
 import { Group, Hue, Light } from "lib/hue";
-import { GroupButton } from "./GroupButton";
-import { LightButton } from "./LightButton";
+import { HueButton } from "./HueButton";
 import { PulsePlugin, PulseCommand, PluginOptions } from "../../types";
 
 const hue = Hue.get_default();
@@ -38,9 +37,6 @@ export class HueControl implements PulsePlugin {
         if (a.item.name < b.item.name) return -1;
         return 0;
       })
-      .map(({ item }) => {
-        if (item instanceof Light) return <LightButton light={item} />;
-        return <GroupButton group={item} />;
-      });
+      .map(({ item }) => <HueButton item={item} />);
   }
 }

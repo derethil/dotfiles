@@ -1,6 +1,11 @@
 import { GObject, property, register, signal } from "astal";
-import { clamp } from "utils";
+import { clamp, icon } from "utils";
 import { Hue } from ".";
+
+const GroupIconMap: Record<string, string> = {
+  "Living Room": "couch-symbolic",
+  Bedroom: "bed-symbolic",
+};
 
 @register({ GTypeName: "HueGroup" })
 export class Group extends GObject.Object {
@@ -10,6 +15,11 @@ export class Group extends GObject.Object {
 
   @property(String)
   declare id: string;
+
+  @property(String)
+  get icon() {
+    return icon(GroupIconMap[this.name], "display-brightness-symbolic");
+  }
 
   @property(String)
   get name() {

@@ -1,5 +1,5 @@
 import { bind, Binding } from "astal";
-import { Gdk, Gtk } from "astal/gtk3";
+import { Gdk, Gtk, Widget } from "astal/gtk3";
 import { attach, toBinding } from "utils";
 import { createKeyHandler } from "utils/binds";
 import { getChildren, ChildProps } from "utils/children";
@@ -9,6 +9,7 @@ interface Props extends ChildProps {
   className?: string | Binding<string>;
   tooltip?: string;
   activate: (button: Gtk.Widget, event?: Gdk.Event) => void;
+  setup?: (self: Widget.EventBox) => void;
 }
 
 export function PulseResult(props: Props) {
@@ -34,6 +35,7 @@ export function PulseResult(props: Props) {
     <eventbox
       className={className}
       setup={(self) => {
+        props.setup?.(self);
         self.connect("click", props.activate);
         const unregister = attach(bind(state, "entryFocused"), (entryFocused) =>
           self.toggleClassName("entry-focused", entryFocused),

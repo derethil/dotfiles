@@ -5,17 +5,17 @@ import { Light } from "lib/hue";
 import { HueButtonProps } from ".";
 
 export function ToggleButton(props: HueButtonProps) {
-  const { icon, item } = props;
+  const { item } = props;
 
-  const text = `Light${item instanceof Light ? "" : "s"}`;
-  const type = item instanceof Light ? " (light)" : " (group)";
+  const suffix = `Light${item instanceof Light ? "" : "s"}`;
+  const type = item instanceof Light ? "light" : "group";
 
   return (
     <box className="label">
-      {icon}
+      <icon className={type} icon={item.icon} css="font-size: 28px;" />
       <box valign={Gtk.Align.CENTER} hexpand>
-        {item.name} {text}
-        <label className="type">{type}</label>
+        {item.name} {suffix}
+        <label className="type">{` (${type})`}</label>
       </box>
       <Switch active={bind(item, "on")} halign={Gtk.Align.END} />
     </box>

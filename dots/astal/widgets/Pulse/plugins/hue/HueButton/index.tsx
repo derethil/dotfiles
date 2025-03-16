@@ -1,27 +1,23 @@
 import { bind } from "astal";
-import { Gtk } from "astal/gtk3";
 import { Group, Light } from "lib/hue";
+import { attach } from "utils";
 import { PulseResult } from "widgets/Pulse/elements/PulseResult";
 import { ToggleButton } from "./ToggleButton";
 
 export interface HueButtonProps {
   item: Group | Light;
-  icon: Gtk.Widget;
 }
 
-export function HueButton({ icon, item }: HueButtonProps) {
-  const toggleItem = () => item.toggle();
+export function HueButton(props: HueButtonProps) {
+  const { item } = props;
 
   return (
     <PulseResult
-      activate={toggleItem}
-      className={bind(item, "on").as((on) => {
-        let className = "hue-button pulse-result-wrapper";
-        className += on ? " on" : " off";
-        return className;
-      })}
+      activate={() => item.toggle()}
+      className="hue-button pulse-result-wrapper"
+      setup={(self) => attach(bind(item, "on"), (on) => self.toggleClassName("on", on))}
     >
-      <ToggleButton icon={icon} item={item} />
+      <ToggleButton item={item} />
     </PulseResult>
   );
 }
