@@ -1,8 +1,7 @@
 import { bind } from "astal";
-import { Gdk, Gtk } from "astal/gtk3";
+import { Gtk } from "astal/gtk3";
 import { Group, Light } from "lib/hue";
-import { createKeyHandler } from "utils/binds";
-import { Details } from "./Details";
+import { PulseResult } from "widgets/Pulse/elements/PulseResult";
 import { ToggleButton } from "./ToggleButton";
 
 export interface HueButtonProps {
@@ -13,32 +12,16 @@ export interface HueButtonProps {
 export function HueButton({ icon, item }: HueButtonProps) {
   const toggleItem = () => item.toggle();
 
-  const keyHandler = createKeyHandler(
-    {
-      key: Gdk.KEY_Return,
-      action: toggleItem,
-    },
-    {
-      key: Gdk.KEY_y,
-      mod: Gdk.ModifierType.CONTROL_MASK,
-      action: toggleItem,
-    },
-  );
-
   return (
-    <eventbox
-      onKeyPressEvent={keyHandler}
-      cursor="pointer"
+    <PulseResult
+      activate={toggleItem}
       className={bind(item, "on").as((on) => {
         let className = "hue-button pulse-result-wrapper";
         className += on ? " on" : " off";
         return className;
       })}
     >
-      <box vertical>
-        <ToggleButton icon={icon} item={item} onClick={toggleItem} />
-        <Details item={item} />
-      </box>
-    </eventbox>
+      <ToggleButton icon={icon} item={item} />
+    </PulseResult>
   );
 }
