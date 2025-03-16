@@ -28,6 +28,7 @@ export function PageSelector() {
         selectionMode={Gtk.SelectionMode.NONE}
       >
         <PageButton icon="audio-volume-high-symbolic" page="audio" />
+        <PageButton icon="lamp-symbolic" page="hue" />
       </FlowBox>
       <Separator />
     </>

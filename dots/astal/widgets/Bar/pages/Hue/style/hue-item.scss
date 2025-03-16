@@ -1,0 +1,19 @@
+@use "color";
+@use "layout";
+@use "mixins";
+
+window.Bar .hue-item {
+  @include mixins.widget;
+
+  background-color: color.$background-muted;
+  font-weight: bold;
+
+  icon {
+    margin-right: #{layout.$gap}px;
+    font-size: 28px;
+  }
+
+  & > box {
+    margin-bottom: #{layout.$gap}px;
+  }
+}

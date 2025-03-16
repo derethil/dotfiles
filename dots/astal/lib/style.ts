@@ -1,4 +1,4 @@
-import { execAsync, GLib, monitorFile, writeFile, writeFileAsync } from "astal";
+import { execAsync, GLib, monitorFile, writeFileAsync } from "astal";
 import { App } from "astal/gtk3";
 import { options } from "options";
 import { bash, dependencies } from "utils";
@@ -111,7 +111,7 @@ async function resetStyles() {
   const css = await bash(`echo '${scss}' | ${bundleStyles}`);
 
   // Write compiled css for debugging
-  writeFile(`${TEMP}/compiled-debug.css`, css);
+  writeFileAsync(`${TEMP}/compiled-debug.css`, css).catch(console.error);
 
   App.apply_css(css, true);
 }

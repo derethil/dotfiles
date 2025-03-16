@@ -2,9 +2,9 @@ import { bind } from "astal";
 import { Gtk } from "astal/gtk3";
 import { options } from "options";
 import { DashboardState } from "./dashboardState";
-import { DashboardPage } from "./elements/DashboardPage";
 import { PageSelector } from "./elements/PageSelector";
 import { AudioPage } from "./pages/Audio";
+import { HuePage } from "./pages/Hue";
 
 export function Dashboard() {
   const dashboard = DashboardState.get_default();
@@ -23,7 +23,7 @@ export function Dashboard() {
           transitionDuration={options.theme.transition()}
         >
           <AudioPage />
-          <DashboardPage name="audio2">Audio 2</DashboardPage>
+          <HuePage />
         </stack>
       </box>
     </revealer>

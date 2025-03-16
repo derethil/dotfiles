@@ -89,9 +89,9 @@ export function addLineNumbers(message: string) {
   return `\n${numbered}`;
 }
 
-export function debounce(fn: (...args: unknown[]) => void, delay: number) {
+export function debounce<T>(fn: (...args: T[]) => void, delay: number) {
   let timeout: GLib.Source;
-  return (...args: unknown[]) => {
+  return (...args: T[]) => {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => fn(...args), delay);
   };

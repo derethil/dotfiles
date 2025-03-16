@@ -11,7 +11,7 @@ export function DashboardPage(props: PageProps) {
   if (dashboard.page === "") dashboard.page = props.name;
 
   return (
-    <box valign={Gtk.Align.START} halign={Gtk.Align.START} name={props.name} vertical>
+    <box valign={Gtk.Align.START} halign={Gtk.Align.FILL} name={props.name} vertical>
       {getChildrenBinds(props)}
     </box>
   );
