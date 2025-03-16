@@ -1,7 +1,7 @@
 import { execAsync, GLib, monitorFile, writeFile, writeFileAsync } from "astal";
 import { App } from "astal/gtk3";
 import { options } from "options";
-import { addLineNumbers, bash, dependencies } from "utils";
+import { bash, dependencies } from "utils";
 import { Option } from "./options";
 import { TEMP } from "./session";
 

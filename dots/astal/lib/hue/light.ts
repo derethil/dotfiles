@@ -4,47 +4,66 @@ import { Hue } from ".";
 
 @register({ GTypeName: "HueLight" })
 export class Light extends GObject.Object {
-  private POLL_INTERVAL = 1000 * 60 * 5;
   private hue: Hue;
-  private _data: HueLight;
+
+  private _on: boolean;
+  private _brightness: number;
+
+  // Public Properties
 
   @property(String)
-  declare id: string;
+  declare public readonly id: string;
+
+  @property(String)
+  declare public readonly name: string;
 
   @property(String)
   public readonly icon = "lamp-symbolic";
 
-  @property(String)
-  get name() {
-    return this._data.name;
-  }
-
-  @property(String)
+  @property(Object)
   get groups() {
     return this.hue.groups.filter((group) => group.lights.includes(this));
   }
 
-  constructor(hue: Hue, id: string, light: HueLight) {
-    // @ts-expect-error not typed properly
-    super({ id });
-    this.hue = hue;
-    this._data = light;
-    this.poll();
-  }
+  // Getter / Setter Pairs
 
   @property(Boolean)
   public get on() {
-    return this._data.state.on;
+    return this._on;
   }
 
   public set on(bool: boolean) {
     const value = bool ? "on" : "off";
-    this._data.state.on = bool;
+    this._on = bool;
     this.notify("on");
 
     this.hue.cli("light", this.id, value).catch(console.error);
-    this.reload().catch(console.error);
   }
+
+  @property(Number)
+  public get brightness() {
+    return this._brightness;
+  }
+
+  public set brightness(value: number) {
+    const clamped = clamp(Math.round(value), 0, 255);
+    this._brightness = clamped;
+    this.notify("brightness");
+
+    this.hue.cli("light", this.id, `=${clamped}`).catch(console.error);
+  }
+
+  // Constructor
+
+  constructor(hue: Hue, id: string, light: HueLight) {
+    // @ts-expect-error not typed properly
+    super({ id, name: light.name });
+    this.hue = hue;
+    this._on = light.state.on;
+    this._brightness = light.state.bri;
+  }
+
+  // Public Methods
 
   public toggle(bool?: boolean) {
     if (bool === undefined) {
@@ -54,33 +73,8 @@ export class Light extends GObject.Object {
     }
   }
 
-  @property(Number)
-  public get brightness() {
-    return this._data.state.bri;
-  }
-
-  public set brightness(value: number) {
-    const clamped = clamp(Math.round(value), 0, 255);
-    this._data.state.bri = clamped;
-    this.notify("brightness");
-
-    this.hue.cli("light", this.id, `=${clamped}`).catch(console.error);
-    this.reload().catch(console.error);
-  }
-
-  private async reload() {
-    this._data = await this.hue.cli<HueLight>("light", this.id);
-  }
-
   @signal()
   public flash() {
-    this.hue.rawCli("light", this.id, "select").catch(console.error);
-  }
-
-  private poll() {
-    setInterval(() => {
-      this.reload().catch(console.error);
-      this.notify("on");
-    }, this.POLL_INTERVAL);
+    this.hue.cliRaw("light", this.id, "select").catch(console.error);
   }
 }

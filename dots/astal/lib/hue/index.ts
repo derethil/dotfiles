@@ -8,20 +8,23 @@ const HUEADM_CONFIG_PATH = `${GLib.get_user_config_dir()}/.hueadm.json`;
 @register({ GTypeName: "Hue" })
 export class Hue extends GObject.Object {
   private static instance: Hue;
-  private _lights: Light[] = [];
-  private _groups: Group[] = [];
+
+  private INTERVAL = 1000 * 60;
+
+  private _lights = new Map<string, Light>();
+  private _groups = new Map<string, Group>();
 
   @property(Boolean)
   declare enabled: boolean;
 
   @property(Object)
   get groups() {
-    return this._groups;
+    return Array.from(this._groups.values());
   }
 
   @property(Object)
   get lights() {
-    return this._lights;
+    return Array.from(this._lights.values());
   }
 
   static get_default() {
@@ -32,8 +35,9 @@ export class Hue extends GObject.Object {
   constructor() {
     super();
     if (dependencies("hueadm")) {
-      this.fetchData().catch(console.error);
       this.enabled = true;
+      this.sync().catch(console.error);
+      setInterval(() => this.sync().catch(console.error), this.INTERVAL);
     }
   }
 
@@ -43,18 +47,42 @@ export class Hue extends GObject.Object {
     return JSON.parse(result) as T;
   }
 
-  public rawCli(subcommand: string, ...args: string[]) {
+  public cliRaw(subcommand: string, ...args: string[]) {
     // prettier-ignore
     return bash(["hueadm", "--config", HUEADM_CONFIG_PATH, subcommand, ...args]);
   }
 
-  public async fetchData() {
+  public async fetch() {
     const lights = await this.cli<HueLights>("lights");
     const groups = await this.cli<HueGroups>("groups");
+    return { lights, groups };
+  }
 
-    this._lights = Object.entries(lights).map((entry) => new Light(this, ...entry));
+  public async sync() {
+    const { lights, groups } = await this.fetch();
 
-    this._groups = Object.entries(groups).map((entry) => new Group(this, ...entry));
+    Object.entries(lights).forEach(([id, data]) => {
+      const light = this._lights.get(id);
+      if (!light) {
+        this._lights.set(id, new Light(this, id, data));
+      } else {
+        light.on = data.state.on;
+        light.brightness = data.state.bri;
+      }
+    });
+
+    Object.entries(groups).forEach(([id, data]) => {
+      const group = this._groups.get(id);
+      if (!group) {
+        this._groups.set(id, new Group(this, id, data));
+      } else {
+        group.on = data.action.on;
+        group.brightness = data.action.bri;
+      }
+    });
+
+    this.notify("lights");
+    this.notify("groups");
   }
 }
 
