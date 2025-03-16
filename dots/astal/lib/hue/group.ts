@@ -62,6 +62,9 @@ export class Group extends GObject.Object {
     this._brightness = clamped;
     this.notify("brightness");
 
+    this._on = true;
+    this.notify("on");
+
     this.hue.cli("group", this.id, `=${clamped}`).catch(console.error);
     this.lights.forEach((light) => (light.brightness = clamped));
   }

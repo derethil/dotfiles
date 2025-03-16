@@ -47,8 +47,12 @@ export class Light extends GObject.Object {
 
   public set brightness(value: number) {
     const clamped = clamp(Math.round(value), 0, 255);
+
     this._brightness = clamped;
     this.notify("brightness");
+
+    this._on = true;
+    this.notify("on");
 
     this.hue.cli("light", this.id, `=${clamped}`).catch(console.error);
   }
