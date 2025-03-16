@@ -27,7 +27,7 @@ window.pulse .pulse {
     all: unset;
     .results {
       border-radius: #{layout.$radius}px;
-      border: #{layout.$border-width} solid #{color.$border};
+      border: #{layout.$border-width}px solid #{color.$border};
       border-top: none;
     }
   }

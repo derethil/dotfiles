@@ -12,7 +12,7 @@
   padding: #{layout.$padding}px;
 
   @if $border == true {
-    border: #{layout.$border-width} solid #{color.$border};
+    border: #{layout.$border-width}px solid #{color.$border};
   }
 
   @if $surface == false {
