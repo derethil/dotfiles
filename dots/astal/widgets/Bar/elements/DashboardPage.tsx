@@ -8,7 +8,7 @@ interface PageProps extends ChildProps {
 
 export function DashboardPage(props: PageProps) {
   const dashboard = DashboardState.get_default();
-  if (dashboard.page === "") dashboard.page = props.name;
+  if (dashboard.page === "") dashboard.page = dashboard.defaultPage = props.name;
 
   return (
     <box valign={Gtk.Align.START} halign={Gtk.Align.FILL} name={props.name} vertical>

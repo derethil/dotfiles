@@ -8,12 +8,15 @@ export function DashboardButton() {
     return `view-${position.toLowerCase()}-pane-symbolic`;
   });
 
+  const handleClick = () => {
+    state.reveal = !state.reveal;
+    if (!state.reveal) {
+      state.page = state.defaultPage;
+    }
+  };
+
   return (
-    <button
-      className="dashboard-button"
-      onClick={() => (state.reveal = !state.reveal)}
-      cursor="pointer"
-    >
+    <button className="dashboard-button" onClick={handleClick} cursor="pointer">
       <icon icon={icon} />
     </button>
   );

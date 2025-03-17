@@ -14,4 +14,7 @@ export class DashboardState extends GObject.Object {
 
   @property(String)
   declare public page: string;
+
+  @property(String)
+  declare public defaultPage: string;
 }
