@@ -2,7 +2,7 @@ import { bind } from "astal";
 import { Gtk } from "astal/gtk3";
 import { Separator } from "elements";
 import { Hue } from "lib/hue";
-import { DashboardPage } from "widgets/Bar/elements/DashboardPage";
+import { DashboardPage } from "widgets/Dashboard";
 import { ItemCard } from "./ItemCard";
 
 export function HuePage() {

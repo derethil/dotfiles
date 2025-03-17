@@ -1,5 +1,5 @@
 import { options } from "options";
-import { DashboardState } from "../dashboardState";
+import { DashboardState } from "widgets/Dashboard";
 
 export function DashboardButton() {
   const state = DashboardState.get_default();

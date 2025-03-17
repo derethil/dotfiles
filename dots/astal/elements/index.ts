@@ -1,3 +1,4 @@
+import { CircleButton } from "./CircleButton";
 import { CircleProgress } from "./CircleProgress";
 import { Corner } from "./Corner";
 import { FloatingWindow } from "./FloatingWindow";
@@ -14,4 +15,5 @@ export {
   Revealer,
   FlowBox,
   Separator,
+  CircleButton,
 };

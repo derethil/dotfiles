@@ -1,7 +1,7 @@
 import { bind, Binding } from "astal";
 import { Gtk } from "astal/gtk3";
 import AstalWp from "gi://AstalWp";
-import { OptionButton } from "widgets/Bar/elements/OptionButton";
+import { OptionButton } from "widgets/Dashboard";
 
 function description(d: string) {
   const max = 30;

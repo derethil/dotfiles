@@ -1,6 +1,6 @@
 import { bind } from "astal";
 import AstalNotifd from "gi://AstalNotifd";
-import { CircleButton } from "widgets/Bar/elements";
+import { CircleButton } from "elements";
 
 export function ToggleDoNotDisturb() {
   const notifd = AstalNotifd.get_default();

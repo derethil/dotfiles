@@ -1,6 +1,6 @@
 import { Gtk } from "astal/gtk3";
 import { ChildProps, getChildrenBinds } from "utils/children";
-import { DashboardState } from "../dashboardState";
+import { DashboardState } from "..";
 
 interface PageProps extends ChildProps {
   name: string;

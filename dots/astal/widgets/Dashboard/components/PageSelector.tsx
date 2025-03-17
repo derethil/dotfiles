@@ -1,7 +1,6 @@
 import { Gtk } from "astal/gtk3";
-import { FlowBox, Separator } from "elements";
-import { CircleButton } from "./CircleButton";
-import { DashboardState } from "../dashboardState";
+import { FlowBox, Separator , CircleButton } from "elements";
+import { DashboardState } from "../state/dashboardState";
 
 interface PageButtonProps {
   page: string;

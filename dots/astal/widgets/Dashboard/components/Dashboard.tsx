@@ -1,10 +1,10 @@
 import { bind } from "astal";
 import { Gtk } from "astal/gtk3";
 import { options } from "options";
-import { DashboardState } from "./dashboardState";
-import { PageSelector } from "./elements/PageSelector";
-import { AudioPage } from "./pages/Audio";
-import { HuePage } from "./pages/Hue";
+import { PageSelector } from "./PageSelector";
+import { DashboardState } from "..";
+import { AudioPage } from "../pages/Audio";
+import { HuePage } from "../pages/Hue";
 
 export function Dashboard() {
   const dashboard = DashboardState.get_default();

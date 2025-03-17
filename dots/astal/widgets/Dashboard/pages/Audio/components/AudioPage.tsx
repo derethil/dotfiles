@@ -2,7 +2,7 @@ import { bind } from "astal";
 import { Gtk } from "astal/gtk3";
 import AstalWp from "gi://AstalWp";
 import { Separator } from "elements";
-import { DashboardPage } from "widgets/Bar/elements/DashboardPage";
+import { DashboardPage } from "widgets/Dashboard";
 import { EndpointSelect } from "./EndpointSelect";
 
 export function AudioPage() {

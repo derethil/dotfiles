@@ -1,6 +1,6 @@
+import { CircleButton } from "elements";
 import { options } from "options";
 import { bash } from "utils";
-import { CircleButton } from "widgets/Bar/elements";
 
 export function ColorPicker() {
   const handleClick = () => {
