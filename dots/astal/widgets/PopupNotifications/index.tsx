@@ -23,6 +23,7 @@ export function PopupNotifications(monitor: Gdk.Monitor) {
       application={App}
       name="PopupNotifications"
       className="PopupNotifications"
+      namespace="PopupNotifications"
       gdkmonitor={monitor}
       exclusivity={Astal.Exclusivity.IGNORE}
       anchor={Astal.WindowAnchor.TOP}
