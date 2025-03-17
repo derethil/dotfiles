@@ -81,4 +81,13 @@ export class Light extends GObject.Object {
   public flash() {
     this.hue.cliRaw("light", this.id, "select").catch(console.error);
   }
+
+  @signal(Object)
+  public sync(data: HueLight) {
+    this._on = data.state.on;
+    this._brightness = data.state.bri;
+
+    this.notify("on");
+    this.notify("brightness");
+  }
 }

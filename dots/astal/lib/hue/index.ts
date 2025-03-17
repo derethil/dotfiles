@@ -66,8 +66,7 @@ export class Hue extends GObject.Object {
       if (!light) {
         this._lights.set(id, new Light(this, id, data));
       } else {
-        light.on = data.state.on;
-        light.brightness = data.state.bri;
+        light.sync(data);
       }
     });
 
@@ -76,8 +75,7 @@ export class Hue extends GObject.Object {
       if (!group) {
         this._groups.set(id, new Group(this, id, data));
       } else {
-        group.on = data.action.on;
-        group.brightness = data.action.bri;
+        group.sync(data);
       }
     });
 

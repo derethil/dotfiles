@@ -95,4 +95,13 @@ export class Group extends GObject.Object {
   public flash() {
     this.hue.cliRaw("group", this.id, "select").catch(console.error);
   }
+
+  @signal(Object)
+  public sync(data: HueGroup) {
+    this._on = data.action.on;
+    this._brightness = data.action.bri;
+
+    this.notify("on");
+    this.notify("brightness");
+  }
 }
