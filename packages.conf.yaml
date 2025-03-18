@@ -17,6 +17,7 @@
     - fzf
     - glow
     - gnome-keyring
+    - go
     - inotify-tools
     - jq
     - libgtop
@@ -77,6 +78,9 @@
 - shell:
     - command: ./dots/builds/install.sh
       description: Installing custom packages
+
+    - command: go install bou.ke/babelfish@latest
+      description: Installing babelfish
 
     - command: rye install poetry
       description: Installing poetry
