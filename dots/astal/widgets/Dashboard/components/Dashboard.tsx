@@ -1,4 +1,4 @@
-import { bind } from "astal";
+import { bind, idle } from "astal";
 import { Gtk } from "astal/gtk3";
 import { options } from "options";
 import { PageSelector } from "./PageSelector";
@@ -13,11 +13,16 @@ export function Dashboard() {
     <revealer
       transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
       transitionDuration={options.theme.transition()}
-      revealChild={bind(dashboard, "reveal")}
+      setup={(self) => {
+        dashboard.connect("notify::reveal", () => {
+          idle(() => (self.revealChild = dashboard.reveal));
+        });
+      }}
     >
       <box vertical widthRequest={350} className="dashboard">
         <PageSelector />
         <stack
+          widthRequest={350}
           visibleChildName={bind(dashboard, "page")}
           transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
           transitionDuration={options.theme.transition()}

@@ -1,3 +1,4 @@
+import { idle } from "astal";
 import { options } from "options";
 import { DashboardState } from "widgets/Dashboard";
 
@@ -9,14 +10,16 @@ export function DashboardButton() {
   });
 
   const handleClick = () => {
-    state.reveal = !state.reveal;
-    if (!state.reveal) {
-      state.page = state.defaultPage;
-    }
+    idle(() => {
+      state.reveal = !state.reveal;
+      if (!state.reveal) {
+        state.page = state.defaultPage;
+      }
+    });
   };
 
   return (
-    <button className="dashboard-button" onClick={handleClick} cursor="pointer">
+    <button className="dashboard-button" onClickRelease={handleClick} cursor="pointer">
       <icon icon={icon} />
     </button>
   );

@@ -9,7 +9,7 @@ interface CPUDelta {
   curr: CPU;
 }
 
-const POLL_INTERVAL = 300;
+const POLL_INTERVAL = 1000;
 
 function getUsage(prev: CPU, curr: CPU) {
   const totalDiff = curr.total - prev.total;
