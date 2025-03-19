@@ -45,6 +45,7 @@
     ~/.config/mimeapps.list: dots/mimeapps.list
     ~/.config/foot/foot.ini: dots/foot.ini
     ~/.config/irb/irbrc: dots/.irbrc
+    ~/.config/arch-update/arch-update.conf: dots/arch-update.conf
 
     # Local Files
     ~/.local/share/fonts/:
