@@ -4,24 +4,18 @@
 
 - yay:
     # CLI Applications
-    - bottom
     - docker
     - docker-compose
     - docker-credential-secretservice-bin
     - downgrade
-    - duf
     - gamemode
     - hwinfo
     - lf
     - mangohud
     - needrestart
-    - ncdu
     - pnpm
     - plocate
     - proton-ge-custom-bin
-    - scc
-    - thefuck
-    - tldr
     - unrar
     - unzip
     - zip
