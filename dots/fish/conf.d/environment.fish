@@ -1,4 +1,5 @@
 # Misc. environment variables
+source "$HOME/.config/fish/conf.d/environment.fish.local"
 
 set -x MANPAGER "nvim +Man!"
 
