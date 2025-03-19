@@ -1,4 +1,4 @@
-import { bind } from "astal";
+import { bind, Variable } from "astal";
 import { Gtk } from "astal/gtk3";
 import { CircleButton, Revealer } from "elements";
 import { ArchUpdate } from "lib/archupdate";
@@ -10,12 +10,17 @@ const FOOT_ARGS = "--title 'terminal-arch-update' arch-update -d";
 export function PackageUpdates() {
   const updates = ArchUpdate.get_default();
 
+  const reveal = Variable.derive([
+    bind(updates, "available"),
+    options.bar.updates.minPackages(),
+  ])().as(([available, minimum]) => available >= minimum);
+
   return (
     <Revealer
       className="updates list-item"
       transitionType={Gtk.RevealerTransitionType.SLIDE_UP}
       transitionDuration={options.theme.transition()}
-      revealChild={bind(updates, "available").as((available) => available > 0)}
+      revealChild={reveal}
     >
       <CircleButton
         onClick={() => launchInTerminal(FOOT_ARGS)}

@@ -108,6 +108,9 @@ export const options = constructOptions(OPTIONS_CACHE, {
     tools: {
       colorPicker: Opt<string>("hyprpicker -a"),
     },
+    updates: {
+      minPackages: Opt(100),
+    },
   },
   pulse: {
     plugins: Opt<PluginOption[]>([
