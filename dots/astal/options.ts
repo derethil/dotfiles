@@ -115,11 +115,17 @@ export const options = constructOptions(OPTIONS_CACHE, {
   pulse: {
     plugins: Opt<PluginOption[]>([
       { plugin: "Applications", command: ":a" },
+      { plugin: "Games", command: ":g" },
       { plugin: "Calculate", command: ":cal" },
       { plugin: "PowerMenu", command: ":p" },
       { plugin: "HueControl", command: ":h" },
       { plugin: "Shell", command: ":e" },
       { plugin: "Sunset", command: ":s" },
     ]),
+  },
+  libs: {
+    steam: {
+      appsPath: Opt("~/.local/share/Steam/steamapps"),
+    },
   },
 });
