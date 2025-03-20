@@ -28,6 +28,7 @@
     - socat
     - starship
     - tmux
+    - uwsm
     - wezterm
     - wl-clipboard
     - wlsunset
