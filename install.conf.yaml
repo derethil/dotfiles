@@ -30,7 +30,6 @@
       force: true
 
     # Config Dirs
-    ~/.config/git: dots/git
     ~/.config/hypr: dots/hypr
     ~/.config/fish: dots/fish
     ~/.config/tmux: dots/tmux
