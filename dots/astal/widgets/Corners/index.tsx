@@ -25,23 +25,32 @@ function CornerWindow(props: CornerWindowProps) {
   );
 }
 
-export function Corners(gdkmonitor: Gdk.Monitor) {
-  CornerWindow({
+export function TopLeftCorner(gdkmonitor: Gdk.Monitor) {
+  return CornerWindow({
     location: "top-left",
     gdkmonitor,
     anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
   });
-  CornerWindow({
+}
+
+export function TopRightCorner(gdkmonitor: Gdk.Monitor) {
+  return CornerWindow({
     location: "top-right",
     gdkmonitor,
     anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
   });
-  CornerWindow({
+}
+
+export function BottomLeftCorner(gdkmonitor: Gdk.Monitor) {
+  return CornerWindow({
     location: "bottom-left",
     gdkmonitor,
     anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT,
   });
-  CornerWindow({
+}
+
+export function BottomRightCorner(gdkmonitor: Gdk.Monitor) {
+  return CornerWindow({
     location: "bottom-right",
     gdkmonitor,
     anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT,
