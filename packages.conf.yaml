@@ -26,7 +26,6 @@
     - rye
     - slurp
     - socat
-    - starship
     - tmux
     - uwsm
     - wezterm

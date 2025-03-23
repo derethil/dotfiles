@@ -40,7 +40,6 @@
     ~/.config/ghostty/: dots/ghostty
 
     # Config Files
-    ~/.config/starship.toml: dots/starship.toml
     ~/.config/mimeapps.list: dots/mimeapps.list
     ~/.config/irb/irbrc: dots/.irbrc
     ~/.config/arch-update/arch-update.conf: dots/arch-update.conf
