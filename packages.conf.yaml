@@ -8,8 +8,6 @@
     - brightnessctl
     - cliphist
     - dart-sass
-    - direnv
-    - fish
     - fzf
     - glow
     - gnome-keyring
@@ -23,12 +21,10 @@
     - noto-fonts-emoji
     - otf-geist-mono-nerd
     - ripgrep
-    - rye
     - slurp
     - socat
     - tmux
     - uwsm
-    - wezterm
     - wl-clipboard
     - wlsunset
     - wofi
@@ -39,7 +35,6 @@
     - aylurs-gtk-shell
     - bibata-cursor-theme-bin
     - bun-bin
-    - git-open
     - hyprcwd-git
     - hyprcursor
     - hyprevents-git
