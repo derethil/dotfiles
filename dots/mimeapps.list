@@ -33,3 +33,4 @@ application/pdf=zen-alpha.desktop
 application/xhtml+xml=userapp-Firefox-7MQVZ2.desktop
 x-scheme-handler/figma=figma-linux.desktop
 x-scheme-handler/ror2mm=r2modman.desktop
+x-scheme-handler/gdlauncher=GDLauncher.desktop
