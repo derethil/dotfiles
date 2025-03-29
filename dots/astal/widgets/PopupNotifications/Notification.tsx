@@ -1,8 +1,9 @@
 import { Variable } from "astal";
-import { Gtk } from "astal/gtk3";
+import { Gdk, Gtk } from "astal/gtk3";
 import AstalNotifd from "gi://AstalNotifd";
 import { CircleProgress, Revealer } from "elements";
 import { options } from "options";
+import { createClickHandler } from "utils/binds";
 import { Icon } from "./Icon";
 import { bodyText, formatTime, getUrgencyColor, processTime } from "./util";
 
@@ -10,13 +11,15 @@ interface Props {
   notification: AstalNotifd.Notification;
 }
 
-export function Notification({ notification }: Props) {
+export function Notification(props: Props) {
+  const { notification } = props;
+
   const [timeout, msLeft, startValue] = processTime(notification, 8000);
   if (timeout === null) return <></>;
 
   const reveal = Variable(true);
 
-  const handleDismiss = () => {
+  const handleDimiss = () => {
     reveal.set(false);
     setTimeout(() => notification.dismiss(), options.theme.transition.get());
   };
@@ -24,14 +27,29 @@ export function Notification({ notification }: Props) {
   const handleFinished = (value: number) => {
     // TODO: Once a notification history widget is implemented, this should not dismiss the notification
     if (value > 0 || !reveal) return;
-    handleDismiss();
+    handleDimiss();
+  };
+
+  const handleInvoke = () => {
+    const primaryAction = notification.actions[0] ?? null;
+    if (primaryAction) notification.invoke(primaryAction.id);
+    handleDimiss();
   };
 
   return (
     <Revealer revealChild={reveal()} transitionDuration={options.theme.transition()}>
       <button
         className="notification"
-        onClick={handleDismiss}
+        onClick={createClickHandler(
+          {
+            key: Gdk.BUTTON_PRIMARY,
+            action: handleInvoke,
+          },
+          {
+            key: Gdk.BUTTON_SECONDARY,
+            action: handleDimiss,
+          },
+        )}
         onDestroy={() => reveal.drop()}
         cursor="pointer"
       >

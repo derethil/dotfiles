@@ -68,6 +68,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
       "mattermost",
       "insomnia",
       "obsidian",
+      "notion",
       "spotify",
       "steam",
       "stremio",
