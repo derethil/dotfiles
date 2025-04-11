@@ -31,7 +31,6 @@
 
     # Config Dirs
     ~/.config/hypr: dots/hypr
-    ~/.config/tmux: dots/tmux
     ~/.config/direnv/direnvrc: dots/direnvrc
     ~/.config/nvim: dots/nvim
     ~/.config/astal: dots/astal
