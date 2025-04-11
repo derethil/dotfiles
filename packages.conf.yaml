@@ -13,6 +13,7 @@
     - inotify-tools
     - libgtop
     - libva-nvidia-driver
+    - lynx
     - neovim
     - netctl
     - noto-fonts-emoji
@@ -45,6 +46,7 @@
     - hyprutils
     - hyprwayland-scanner
     - icon-theme-browser-git
+    - luajit-tiktoken-bin
     - morewaita-icon-theme
     - nodejs-hueadm
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)

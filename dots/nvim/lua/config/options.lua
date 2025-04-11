@@ -6,3 +6,5 @@ vim.opt.list = false
 vim.opt.shell = "/bin/bash"
 
 vim.g.dotfiles_path = "~/.dotfiles"
+
+vim.g.completeopt = "menu,popup,noinsert,noselect"
