@@ -69,5 +69,7 @@ return {
     git_services = {
       ["gitlab.dragonarmy.rocks"] = "https://gitlab.dragonarmy.rocks/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
     },
+    -- TODO: Re-enable signs once https://github.com/NeogitOrg/neogit/issues/1691 is closed
+    disable_signs = true,
   },
 }
