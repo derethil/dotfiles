@@ -35,7 +35,6 @@
     ~/.config/nvim: dots/nvim
     ~/.config/astal: dots/astal
     ~/.config/yazi/: dots/yazi
-    ~/.config/ghostty/: dots/ghostty
 
     # Config Files
     ~/.config/mimeapps.list: dots/mimeapps.list
