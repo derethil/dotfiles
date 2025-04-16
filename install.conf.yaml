@@ -8,7 +8,6 @@
     - "~"
     - ~/.config
     - ~/.local/share/fonts/
-    - ~/.local/share/applications/
     - ~/.local/bin/
 
 - link:
@@ -44,10 +43,6 @@
     # Local Files
     ~/.local/share/fonts/:
       path: dots/fonts/*
-      glob: true
-
-    ~/.local/share/applications/:
-      path: dots/applications/*
       glob: true
 
     ~/.local/bin/:

@@ -1,8 +1,0 @@
-
-[Desktop Entry]
-Name=AGS Settings Manager
-StartupWMClass=ags-settings
-Exec=/usr/bin/ags -t 'settings'
-Icon=ags
-Type=Application
-Path=/usr/bin
