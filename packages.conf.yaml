@@ -65,12 +65,6 @@
     - command: ./dots/builds/install.sh
       description: Installing custom packages
 
-    - command: go install bou.ke/babelfish@latest
-      description: Installing babelfish
-
-    - command: rye install poetry
-      description: Installing poetry
-
     - command: cd ~/.config/hypr/scripts/ && python -m venv ~/.config/hypr/scripts/.venv && source ~/.config/hypr/scripts/.venv/bin/activate && ~/.local/bin/poetry install --no-root
       description: Creating virtual environment for hypr scripts
 
