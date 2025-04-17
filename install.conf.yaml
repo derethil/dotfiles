@@ -11,23 +11,6 @@
     - ~/.local/bin/
 
 - link:
-    # GTK Settings
-    ~/.config/gtk-3.0/:
-      path: dots/gtk/gtk-3.0/*
-      force: true
-      glob: true
-    ~/.config/xsettingsd/:
-      path: dots/gtk/xsettingsd/*
-      force: true
-      glob: true
-    ~/.local/share/icons/default/:
-      path: dots/gtk/icons/default/*
-      force: true
-      glob: true
-    ~/.config/gtk-2.0/gtkrc:
-      path: dots/gtk/gtkrc-2.0
-      force: true
-
     # Config Dirs
     ~/.config/hypr: dots/hypr
     ~/.config/direnv/direnvrc: dots/direnvrc
