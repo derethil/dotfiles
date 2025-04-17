@@ -16,7 +16,7 @@ export function SystemMonitor() {
         color={options.theme.color.accent[1].default()}
         value={bind(sr.cpu, "usage")}
       >
-        <icon icon="cpu-symbolic" css="font-size: 18px;" />
+        <icon icon="hardware-cpu-symbolic" css="font-size: 18px;" />
       </CircleProgress>
 
       <CircleProgress
@@ -24,7 +24,7 @@ export function SystemMonitor() {
         color={options.theme.color.accent[3].default()}
         value={bind(sr.memory, "percent")}
       >
-        <icon icon="memory-symbolic" css="font-size: 18px;" />
+        <icon icon="hardware-memory-symbolic" css="font-size: 18px;" />
       </CircleProgress>
 
       {isNvidia && (
@@ -33,7 +33,7 @@ export function SystemMonitor() {
           color={options.theme.color.accent[6].default()}
           value={bind(sr.gpu, "percent")}
         >
-          <icon icon="gpu-symbolic" css="font-size: 18px; padding-top: 2px;" />
+          <icon icon="hardware-gpu-symbolic" css="font-size: 18px; padding-top: 2px;" />
         </CircleProgress>
       )}
     </box>
