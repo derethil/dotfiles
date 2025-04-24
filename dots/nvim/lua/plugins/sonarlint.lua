@@ -17,6 +17,10 @@ return {
   },
   {
     "https://gitlab.com/sledigabel/sonarlint.nvim",
+    enabled = function()
+      local current_dir = vim.fn.getcwd()
+      return vim.startswith(current_dir, vim.fn.expand("~/development/dragonarmy/"))
+    end,
     ft = {
       "javascript",
       "typescript",
