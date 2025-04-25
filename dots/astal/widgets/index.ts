@@ -1,21 +1,13 @@
 import { App, Gtk } from "astal/gtk3";
 import { OverlayType } from "state/overlay";
 import { Bar } from "./Bar";
-import * as Corners from "./Corners";
+import { Corners } from "./Corners";
 import { Dock } from "./Dock";
 import { Overlay } from "./Overlay";
 import { PopupNotifications } from "./PopupNotifications";
 import { Pulse } from "./Pulse";
 
-const PerMonitorWidgets = [
-  Bar,
-  Corners.TopLeftCorner,
-  Corners.TopRightCorner,
-  Corners.BottomLeftCorner,
-  Corners.BottomRightCorner,
-  PopupNotifications,
-  Dock,
-];
+const PerMonitorWidgets = [Bar, Corners, PopupNotifications, Dock];
 
 const SingleWidgets = [
   Pulse,

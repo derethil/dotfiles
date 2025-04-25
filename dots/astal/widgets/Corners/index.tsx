@@ -25,34 +25,27 @@ function CornerWindow(props: CornerWindowProps) {
   );
 }
 
-export function TopLeftCorner(gdkmonitor: Gdk.Monitor) {
-  return CornerWindow({
-    location: "top-left",
-    gdkmonitor,
-    anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
-  });
-}
-
-export function TopRightCorner(gdkmonitor: Gdk.Monitor) {
-  return CornerWindow({
-    location: "top-right",
-    gdkmonitor,
-    anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
-  });
-}
-
-export function BottomLeftCorner(gdkmonitor: Gdk.Monitor) {
-  return CornerWindow({
-    location: "bottom-left",
-    gdkmonitor,
-    anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT,
-  });
-}
-
-export function BottomRightCorner(gdkmonitor: Gdk.Monitor) {
-  return CornerWindow({
-    location: "bottom-right",
-    gdkmonitor,
-    anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT,
-  });
+export function Corners(gdkmonitor: Gdk.Monitor) {
+  return [
+    CornerWindow({
+      location: "top-left",
+      gdkmonitor,
+      anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
+    }),
+    CornerWindow({
+      location: "top-right",
+      gdkmonitor,
+      anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
+    }),
+    CornerWindow({
+      location: "bottom-right",
+      gdkmonitor,
+      anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT,
+    }),
+    CornerWindow({
+      location: "bottom-left",
+      gdkmonitor,
+      anchor: Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT,
+    }),
+  ];
 }
