@@ -122,6 +122,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
       { plugin: "HueControl", command: ":h" },
       { plugin: "Shell", command: ":e" },
       { plugin: "Sunset", command: ":s" },
+      { plugin: "Clipboard", command: ":c" },
     ]),
   },
   libs: {
