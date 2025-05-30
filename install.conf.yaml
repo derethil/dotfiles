@@ -24,9 +24,9 @@
     ~/.config/arch-update/arch-update.conf: dots/arch-update.conf
 
     # Local Files
-    ~/.local/share/fonts/:
-      path: dots/fonts/*
-      glob: true
+    # ~/.local/share/fonts/:
+    #   path: dots/fonts/*
+    #   glob: true
 
     ~/.local/bin/:
       path: dots/bin/*
@@ -35,6 +35,9 @@
     ~/.cache/builds/:
       path: dots/builds/*
       glob: true
+
+    ~/development/dragonarmy/.golangci.yml:
+      path: dots/.golangci.yml
 
     # Miscellaneous
     ~/Pictures/wallpapers/:

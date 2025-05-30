@@ -1,0 +1,18 @@
+version: "2"
+linters:
+  enable:
+    - bodyclose
+    - sqlclosecheck
+    - iface
+    - ireturn
+    - errorlint
+    - contextcheck
+    - noctx
+    - containedctx
+    - usestdlibvars
+    - gochecknoglobals
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused

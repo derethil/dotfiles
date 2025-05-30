@@ -36,6 +36,8 @@ return {
         pyright = {},
         graphql = {},
         nil_ls = {},
+        golangci_lint_ls = {},
+
         tailwindcss = {
           settings = {
             tailwindCSS = {
