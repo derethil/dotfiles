@@ -15,7 +15,13 @@ export function HistoryButton(props: Readonly<HistoryButtonProps>) {
 
   return (
     <PulseResult className="history" activate={activate}>
-      <label className="content" label={item.content} expand halign={Gtk.Align.START} />
+      <label
+        className="content"
+        label={item.content}
+        expand
+        halign={Gtk.Align.START}
+        wrap
+      />
     </PulseResult>
   );
 }

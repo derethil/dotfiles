@@ -22,6 +22,10 @@ export class Clipboard implements PulsePlugin {
   }
 
   public process(args: string[]) {
+    if (args.join(" ").length <= 3) {
+      return [];
+    }
+
     const fzf = new Fzf(ch.history, {
       selector: (item) => item.content ?? "",
     });
