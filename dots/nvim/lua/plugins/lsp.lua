@@ -37,7 +37,13 @@ return {
         graphql = {},
         nil_ls = {},
         golangci_lint_ls = {},
-
+        vtsls = {
+          settings = {
+            vtsls = {
+              autoUseWorkspaceTsdk = true,
+            },
+          },
+        },
         tailwindcss = {
           settings = {
             tailwindCSS = {
