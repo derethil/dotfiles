@@ -81,7 +81,7 @@ export const options = constructOptions(OPTIONS_CACHE, {
       start: Opt<BarModule[]>([
         "DashboardButton",
         "Separator",
-        "SystemMonitor",
+        // "SystemMonitor",
         "Separator",
         "Tray",
       ]),
