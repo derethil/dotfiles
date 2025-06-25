@@ -12,7 +12,7 @@ return {
     },
     opts = {
       defaults = {
-        previewer = false,
+        previewer = true,
         preview_pager = "diff-so-fancy",
       },
     },
