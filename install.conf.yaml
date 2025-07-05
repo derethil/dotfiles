@@ -13,29 +13,17 @@
 - link:
     # Config Dirs
     ~/.config/hypr: dots/hypr
-    ~/.config/direnv/direnvrc: dots/direnvrc
     ~/.config/nvim: dots/nvim
     ~/.config/astal: dots/astal
-    ~/.config/yazi/: dots/yazi
 
     # Config Files
     ~/.config/mimeapps.list: dots/mimeapps.list
     ~/.config/irb/irbrc: dots/.irbrc
     ~/.config/arch-update/arch-update.conf: dots/arch-update.conf
 
-    # Local Files
-    # ~/.local/share/fonts/:
-    #   path: dots/fonts/*
-    #   glob: true
-
     ~/.local/bin/:
       path: dots/bin/*
       glob: true
-
-    ~/.cache/builds/:
-      path: dots/builds/*
-      glob: true
-
     ~/development/dragonarmy/.golangci.yml:
       path: dots/.golangci.yml
 
