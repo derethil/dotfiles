@@ -19,7 +19,6 @@
     # Config Files
     ~/.config/mimeapps.list: dots/mimeapps.list
     ~/.config/irb/irbrc: dots/.irbrc
-    ~/.config/arch-update/arch-update.conf: dots/arch-update.conf
 
     ~/.local/bin/:
       path: dots/bin/*
