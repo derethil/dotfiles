@@ -24,8 +24,3 @@
       glob: true
     ~/development/dragonarmy/.golangci.yml:
       path: dots/.golangci.yml
-
-    # Miscellaneous
-    ~/Pictures/wallpapers/:
-      path: dots/wallpapers/*
-      glob: true
