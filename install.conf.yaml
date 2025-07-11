@@ -12,7 +12,6 @@
 
 - link:
     # Config Dirs
-    ~/.config/hypr: dots/hypr
     ~/.config/nvim: dots/nvim
     ~/.config/astal: dots/astal
 

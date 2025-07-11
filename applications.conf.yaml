@@ -8,15 +8,12 @@
     - docker-compose
     - docker-credential-secretservice-bin
     - downgrade
-    - needrestart
     - pnpm
     - plocate
     - proton-ge-custom-bin
-    # GUI Applications
-    - nwg-look-bin
-    - qt6ct
-    - xwaylandvideobridge-bin
     - uv
+    # GUI Applications
+    - xwaylandvideobridge-bin
 
 - flatpak:
     - com.stremio.Stremio
