@@ -13,7 +13,6 @@
     - inotify-tools
     - libgtop
     - libva-nvidia-driver
-    - lynx
     - neovim
     - netctl
     - noto-fonts-emoji
@@ -22,14 +21,11 @@
     - socat
     - uwsm
     - wl-clipboard
-    - wlsunset
     - wofi
     - wtype
-    - yazi
     - xdg-desktop-portal-gtk
 - yay:
     - aylurs-gtk-shell
-    - bibata-cursor-theme-bin
     - bun-bin
     - hyprcursor
     - hypridle
@@ -42,13 +38,11 @@
     - hyprshot
     - hyprutils
     - hyprwayland-scanner
-    - icon-theme-browser-git
     - luajit-tiktoken-bin
     - morewaita-icon-theme
     - nodejs-hueadm
     - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
     - ttf-icomoon-feather-git
-    - ueberzugpp
     - xdg-desktop-portal-hyprland
     - yaycache
     - yaycache-hook
@@ -62,9 +56,6 @@
 - shell:
     - command: ./dots/builds/install.sh
       description: Installing custom packages
-
-    - command: cd ~/.config/hypr/scripts/ && python -m venv ~/.config/hypr/scripts/.venv && source ~/.config/hypr/scripts/.venv/bin/activate && ~/.local/bin/poetry install --no-root
-      description: Creating virtual environment for hypr scripts
 
     - command: gsettings set org.gnome.desktop.interface icon-theme 'MoreWaita'
       description: Setting icon theme to Adwaita/MoreWaita
