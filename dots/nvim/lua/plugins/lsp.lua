@@ -15,7 +15,7 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {
-      ensure_installed = { "graphql-language-service-cli" },
+      ensure_installed = { "graphql-language-service-cli", "qmlls" },
     },
   },
   {
@@ -36,6 +36,7 @@ return {
         pyright = {},
         graphql = {},
         nil_ls = {},
+        qmlls = {},
         golangci_lint_ls = {},
         vtsls = {
           settings = {
