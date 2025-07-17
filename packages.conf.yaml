@@ -2,50 +2,20 @@
 # for my dotfiles to work properly.
 
 - yay:
-    - adwaita-icon-theme
-    - arch-update
-    - bkt
-    - brightnessctl
-    - cliphist
-    - dart-sass
-    - gnome-keyring
-    - go
-    - inotify-tools
-    - libgtop
-    - libva-nvidia-driver
-    - neovim
-    - netctl
-    - noto-fonts-emoji
-    - otf-geist-mono-nerd
-    - slurp
-    - socat
-    - uwsm
-    - wl-clipboard
-    - wofi
-    - wtype
-    - xdg-desktop-portal-gtk
+    - arch-update # no
+    - bkt # no (ags dependency)
+    - brightnessctl # no (replaced with brillo)
+    - dart-sass # no (ags dependency)
+    - libgtop # no (ags dependency)
+    - libva-nvidia-driver # no (os dependency)
+    - neovim # TODO: oh god
+    - noto-fonts-emoji # no (os dependency I think?)
+    - otf-geist-mono-nerd # no (os dependency I think?)
+    - uwsm # no (os dependency I think?)
 - yay:
-    - aylurs-gtk-shell
-    - bun-bin
-    - hyprcursor
-    - hypridle
-    - hyprland
-    - hyprlang
-    - hyprpicker
-    - hyprpaper
-    - hyprland-qtutils
-    - hyprprop-git
-    - hyprshot
-    - hyprutils
-    - hyprwayland-scanner
-    - luajit-tiktoken-bin
-    - morewaita-icon-theme
-    - nodejs-hueadm
-    - otf-san-francisco # Does not include SF Mono (I want ligagurized version)
-    - ttf-icomoon-feather-git
-    - xdg-desktop-portal-hyprland
-    - yaycache
-    - yaycache-hook
+    - aylurs-gtk-shell # TODO: oh god
+    - yaycache # no
+    - yaycache-hook # no
 
 - asdf:
     - plugin: nodejs
@@ -54,14 +24,5 @@
         - latest
 
 - shell:
-    - command: ./dots/builds/install.sh
-      description: Installing custom packages
-
-    - command: gsettings set org.gnome.desktop.interface icon-theme 'MoreWaita'
-      description: Setting icon theme to Adwaita/MoreWaita
-
     - command: systemctl --user enable --now arch-update.timer
       description: Enabling arch-update timer
-
-    - command: systemctl --user enable hypridle.service
-      description: Enabling hypridle service

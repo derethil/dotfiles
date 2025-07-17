@@ -4,19 +4,11 @@
 
 - yay:
     # CLI Applications
-    - docker
-    - docker-compose
-    - docker-credential-secretservice-bin
-    - downgrade
-    - pnpm
-    - plocate
-    - proton-ge-custom-bin
-    - uv
+    - downgrade # no (pacman only)
+    - plocate # no (os dependency)
+    - proton-ge-custom-bin # no (likely needs to be system module)
+    - uv # no (will figure out python dev later)
     # GUI Applications
-    - xwaylandvideobridge-bin
-
-- flatpak:
-    - com.stremio.Stremio
 
 - shell:
     - [updatedb, Updating locate database]
