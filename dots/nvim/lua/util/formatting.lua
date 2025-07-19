@@ -72,26 +72,4 @@ function M.get_ruby_formatter()
   return { hasPlugin and "prettierd" or "rubocop" }
 end
 
--- JAVASCRIPT
-
-function M.has_eslint()
-  local json = read_packagejson()
-
-  if not json then
-    return false
-  end
-
-  return json.devDependencies and json.devDependencies.eslint
-end
-
-function M.eslint_d(formatters)
-  local hasEslint = M.has_eslint()
-
-  if hasEslint then
-    table.insert(formatters, "eslint_d")
-  end
-
-  return formatters
-end
-
 return M

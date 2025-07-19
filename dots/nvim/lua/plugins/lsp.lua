@@ -31,6 +31,7 @@ return {
         end,
       },
       servers = {
+        denols = {},
         glsl_analyzer = {},
         ruff_lsp = {},
         pyright = {},
