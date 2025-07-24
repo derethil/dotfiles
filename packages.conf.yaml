@@ -8,7 +8,6 @@
     - dart-sass # no (ags dependency)
     - libgtop # no (ags dependency)
     - libva-nvidia-driver # no (os dependency)
-    - neovim # TODO: oh god
     - noto-fonts-emoji # no (os dependency I think?)
     - otf-geist-mono-nerd # no (os dependency I think?)
     - uwsm # no (os dependency I think?)
